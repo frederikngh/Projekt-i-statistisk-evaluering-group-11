@@ -1,5 +1,6 @@
 # local notes (not published)
 *.md
+!README.md
 
 # macOS
 .DS_Store

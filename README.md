@@ -1,10 +1,13 @@
-# 02445 Group 11 — Evaluating Gemma on 02450 MCQ Exams
+# 02445 Group 11 - Evaluating Gemma on 02450 MCQ exams
 
-Statistical evaluation of the Gemma 4 language model on DTU 02450 (Intro to ML) MCQ exam questions.
+Project for DTU 02445 (Statistical Evaluation of AI), June 2026.
 
-**Deadline:** 24.06.2026 | **Seminar:** 25–26.06.2026
+We test the language model Gemma 4 on multiple choice questions from old DTU
+02450 (Intro to Machine Learning) exams. The main question: does Gemma get
+worse when it has to read a figure or table as an image, compared to getting
+the same information as text?
 
----
+Report deadline: 24.06.2026. Seminar: 25-26.06.2026.
 
 ## Setup
 
@@ -12,116 +15,110 @@ Statistical evaluation of the Gemma 4 language model on DTU 02450 (Intro to ML) 
 pip install -r requirements.txt
 ```
 
-Gemma runs locally via Transformers on Apple Silicon (MPS). Change `device="mps"` to `"cuda"` or `"cpu"` in `collect.py` if needed.
+Gemma runs locally with the transformers library on Apple Silicon (MPS).
+Change device="mps" to "cuda" or "cpu" in collect.py if needed.
 
----
-
-## Workflow
-
-```
-1. Fill in data/questions.csv   ← one row per (question, modality)
-2. python collect.py            ← Gemma answers each question, saves to data/results.csv
-3. python analyze.py            ← statistical report + figures
-```
-
----
-
-## Step 1 — Fill in data/questions.csv
-
-Run `python collect.py` once to auto-generate the template, then fill it in.
-
-| Column | Values | Notes |
-|---|---|---|
-| `exam_year` | `Fall2024`, `Dec2022`, … | Which exam set |
-| `question_id` | `Q1` … `Q27` | Question number |
-| `question_type` | `A` / `B` / `C` | See below |
-| `topic` | `PCA`, `KNN`, … | Topic label |
-| `modality` | `text` / `screenshot` / `text_desc` | See below |
-| `question_text` | Full question text + options A–D | Always required |
-| `description` | Text description of the figure/table | Required for `text_desc` modality |
-| `image_path` | Path to screenshot PNG | Required for `screenshot` modality |
-| `correct_answer` | `A` / `B` / `C` / `D` | Ground truth from solution PDF |
-
-### Question types
-| Type | Description | Modalities to test |
-|---|---|---|
-| **A** | Pure text — no figures needed | `text` only |
-| **B** | Requires reading a figure/graph | `screenshot` AND `text_desc` |
-| **C** | Requires reading a table/matrix | `screenshot` AND `text_desc` |
-
-### Modalities
-- `text` — question sent as plain text (Type A)
-- `screenshot` — question sent as a PNG image to Gemma's vision input
-- `text_desc` — the figure/table written out as text instead of an image
-
-> **Independence:** Gemma is called fresh for every (question, modality) pair — no shared conversation history.
-
----
-
-## Step 2 — Collect Gemma answers
+## How to run
 
 ```bash
-python collect.py                        # run all pending questions
-python collect.py --exam Fall2024        # only one exam set
-python collect.py --dry-run              # preview prompts without querying Gemma
-python collect.py --question Q1 --exam Fall2024 --modality screenshot
+python build_questions_csv.py   # data/encoded/*.json -> data/questions.csv
+python collect.py               # Gemma answers every question -> data/results.csv
+python run_all.py               # all statistical tests + the report figure
 ```
 
-Results are appended to `data/results.csv`. Already-completed pairs are skipped, so you can stop and resume safely.
+## The data
 
----
+The 15 exams (27 questions each) are transcribed in data/encoded/, one JSON
+file per exam. build_questions_csv.py turns them into data/questions.csv with
+one row per (question, modality). The figure/table crops in data/screenshots/
+are cut out of the exam PDFs by crop_figures.py.
 
-## Step 3 — Run statistical analysis
+Question types:
+
+| Type | Meaning | Asked as |
+|------|---------|----------|
+| A | pure text, no figure needed | text |
+| B | needs a figure/graph | screenshot (+ text_desc if the figure can be written as text) |
+| C | needs a table/matrix | screenshot + text_desc |
+
+Modalities:
+
+- text: the question as plain text (type A)
+- screenshot: the question as text plus the figure/table as a PNG image
+- text_desc: the same figure/table written out as text instead of an image
+
+Every question is sent to Gemma as a brand new call with no chat history, so
+the answers are independent of each other.
+
+## Step 1: collect Gemma's answers
 
 ```bash
-python analyze.py                        # uses data/results.csv
-python analyze.py data/example.csv       # test with example data
-python analyze.py --no-plots             # skip figure generation
+python collect.py                    # everything not done yet
+python collect.py --exam Fall2024    # one exam only
+python collect.py --modality text    # one modality only
+python collect.py --dry-run          # show the prompts without running Gemma
 ```
 
-Figures are saved to `figures/`.
+Answers are appended to data/results.csv. Questions that are already answered
+get skipped, so the script is safe to stop and rerun.
 
----
+## Step 2: run the tests
 
-## Statistical tests
+Every test is its own small script, with shared functions in helpers.py:
 
-| Test | Research question | Cheat-sheet path |
-|---|---|---|
-| **Binomial test** | Is Gemma significantly better than 25% chance? | Description of one group → proportion |
-| **McNemar's test** | Does modality (screenshot vs. text desc) affect accuracy? | Compare two groups → Paired → Nominal → McNemar |
-| **Chi-square / Fisher** | Does accuracy differ across question types A, B, C? | Compare 3+ groups → Unmatched → Proportions → Chi-square |
-| **Wilson CIs** | Uncertainty on each accuracy estimate | — |
-
-### McNemar's test — the key paired test
-
-For each Type B/C question answered in both modalities:
-
-```
-                    text_desc ✓   text_desc ✗
-screenshot ✓           a              b       ← screenshot wins (discordant)
-screenshot ✗           c              d       ← text_desc wins (discordant)
+```bash
+python run_all.py                    # everything
+python run_all.py data/example.csv   # try it out on the example data
+python mcnemar_test.py               # or run a single test
 ```
 
-H₀: b = c (both modalities equally accurate). Uses exact binomial when b+c < 25.
+| Script | Test | Question it answers |
+|--------|------|---------------------|
+| binomial_test.py | binomial test | is Gemma better than guessing (25%)? |
+| mcnemar_test.py | McNemar's test (paired) | same question, image vs text: does modality matter? (our main test) |
+| text_vs_graph_test.py | two-proportion z-test | pure text questions vs pure graph questions |
+| question_types_test.py | chi-square | does accuracy differ between types A/B/C? |
+| dont_know_test.py | chi-square 2x2 | does Gemma answer E ("don't know") more on images? |
+| power_check.py | power | how big must an effect be before our tests can detect it? |
 
----
+The outcome is simply correct/wrong, and every accuracy gets a 95% Wilson
+confidence interval.
 
-## File structure
+McNemar is the main test: every type B/C question with a faithful text version
+is asked twice (figure as image, figure as text), so only the modality changes.
+The test only uses the pairs where the two modalities disagree:
 
 ```
-collect.py          ← Query Gemma, save to results.csv
-analyze.py          ← Run statistical analysis, generate figures
-requirements.txt
+                 text right   text wrong
+image right          a            b
+image wrong          c            d
+```
+
+H0 is b = c. We use the exact (binomial) version of the test.
+
+## Files
+
+```
+collect.py               asks Gemma, saves answers to data/results.csv
+helpers.py               small functions shared by the test scripts
+binomial_test.py         test 1: better than guessing?
+mcnemar_test.py          test 2: image vs text, paired (the main test)
+text_vs_graph_test.py    test 3: pure text vs pure graph
+question_types_test.py   test 4: question types A/B/C
+dont_know_test.py        test 5: how often Gemma answers E
+power_check.py           how big an effect can we detect?
+make_figure.py           the report figure (accuracy per group)
+run_all.py               runs all of the above
+crop_figures.py          cuts the figures/tables out of the exam PDFs
+build_questions_csv.py   data/encoded/*.json -> data/questions.csv
+validate_encoded.py      sanity check of the encoded JSONs
+apply_corrections.py     fixes we made after double-checking the encodings
 data/
-  questions.csv     ← Fill this in (auto-generated on first run of collect.py)
-  results.csv       ← Auto-filled by collect.py
-  example.csv       ← Example data — try: python analyze.py data/example.csv
-  screenshots/      ← Put question screenshot PNGs here
-src/
-  loader.py         ← CSV loading + validation
-  tests.py          ← Statistical tests (binomial, McNemar, chi-square)
-  plots.py          ← All visualisations
-figures/            ← Auto-created by analyze.py
-ML-examsets/        ← Exam PDFs
-ML-solutions/       ← Solution PDFs
+  encoded/               the 15 exams as JSON (the master copy)
+  questions.csv          what collect.py reads (generated, don't edit by hand)
+  results.csv            Gemma's answers (made by collect.py)
+  example.csv            example data: python run_all.py data/example.csv
+  screenshots/           figure/table crops (made by crop_figures.py)
+ML-examsets/             the exam PDFs
+ML-solutions/            the solution PDFs
 ```

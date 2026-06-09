@@ -1,7 +1,7 @@
 """Structural validator for encoded exam JSONs (data/encoded/<Exam>.json).
 
-Checks SCHEMA + internal consistency only (not content vs. the PDFs — that's
-what the checker agents do). Safe to run anytime.
+Checks SCHEMA + internal consistency only (not content vs. the PDFs - the
+answer keys were double-checked separately). Safe to run anytime.
 
     python validate_encoded.py                      # all data/encoded/*.json
     python validate_encoded.py data/encoded/Fall2024.json

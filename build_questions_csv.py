@@ -1,9 +1,9 @@
-"""build_questions_csv.py — generate data/questions.csv from data/encoded/*.json.
+"""build_questions_csv.py - generate data/questions.csv from data/encoded/*.json.
 
 The encoded JSONs (data/encoded/<Exam>.json) are the format-neutral source of
 truth. This converter emits the manifest that collect.py consumes. Re-run after
 editing or adding any encoded JSON. If the target format changes, edit ONLY this
-file — the encodings stay put.
+file - the encodings stay put.
 
 Row rules per question:
   type A (pure text)      -> 1 row : modality=text

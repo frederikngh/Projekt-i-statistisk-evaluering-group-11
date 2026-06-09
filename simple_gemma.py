@@ -1,4 +1,4 @@
-# Minimal Gemma chat — run in the `gemma` env:  python simple_gemma.py
+# Minimal Gemma chat - run in the `gemma` env:  python simple_gemma.py
 from transformers import pipeline
 
 gemma = pipeline("image-text-to-text", model="google/gemma-4-E4B-it", dtype="auto", device="mps")

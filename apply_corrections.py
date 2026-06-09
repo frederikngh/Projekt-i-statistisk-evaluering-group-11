@@ -1,10 +1,10 @@
-"""apply_corrections.py — apply the fixes found by the checker agents.
+"""apply_corrections.py - apply the fixes we found when double-checking the encodings.
 
 Surgical raw-text edits (scoped per question) so formatting stays byte-identical
 apart from the intended changes. Re-runnable: it asserts the old value is present
 before changing it, so a second run is a no-op-or-loud-failure.
 
-Corrections (from the 15 independent checker agents):
+Corrections (found by re-checking every exam against its solution PDF):
   Fall2024  Q12 answer A -> B   (k-means cost = 50 = option B; worked solution says B)
   Fall2024  Q14 answer A -> D   (support(X) = 3/8 = option D)
   Fall2019  Q3  stem  x1=PM2.5 -> x1=MONTH   (x1 is MONTH per Table 1; PM2.5 is x2)
@@ -34,7 +34,7 @@ def patch(name: str, fn) -> None:
 
 
 def fall2024(t: str) -> str:
-    # answer_key block (top of file) — these substrings are unique to it
+    # answer_key block (top of file) - these substrings are unique to it
     assert t.count('"Q12": "A"') == 1 and t.count('"Q14": "A"') == 1
     t = t.replace('"Q12": "A"', '"Q12": "B"').replace('"Q14": "A"', '"Q14": "D"')
     # per-question correct_answer

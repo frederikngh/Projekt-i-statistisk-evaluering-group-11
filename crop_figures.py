@@ -2,7 +2,7 @@
 
 For each type-B/C question we crop every Figure/Table it references and stitch
 them vertically into data/screenshots/<Exam>_Q<N>.png. The question STEM is not
-included — it is supplied as text by collect.py; the image carries only the
+included - it is supplied as text by collect.py; the image carries only the
 figure(s)/table(s), isolating the graph-reading variable.
 
 Cropping dispatches by caption type:
@@ -23,12 +23,14 @@ import fitz
 from PIL import Image
 
 COLMID, ZOOM, GAP = 297.0, 2.0, 26.0
+CAP_GAP = 6.0  # max vertical gap (pt) between caption continuation lines
 EXAMS = "ML-examsets"
 OUT = Path("data/screenshots")
 OUT.mkdir(parents=True, exist_ok=True)
 cap_re = re.compile(r"^(Figure|Table)\s+(\d+)\b")
 q_re = re.compile(r"^Question\s+\d+\b")
 ref_re = re.compile(r"\b(Figure|Table)\s+(\d+)")
+stop_re = re.compile(r"^(Question\s+\d+|Figure\s+\d+|Table\s+\d+|[A-E]\.\s)")
 
 
 def col(x0):
@@ -48,6 +50,31 @@ def crop_exam_captions(doc):
         cx0, cx1 = (4, 296) if c == 0 else (299, 591)
         return fitz.Rect(max(reg.x0, cx0) - 4, reg.y0 - 5, min(reg.x1, cx1) + 4, reg.y1 + 5) & doc[0].rect
 
+    def caption_paragraph(pno, crect, c):
+        """Extend a caption anchor rect downward over its continuation lines.
+
+        PyMuPDF splits caption paragraphs at display math (and the line-level
+        fallback anchors a single line), so the caption text below the anchor
+        (often the class/colour legend or column semantics) would otherwise be
+        cropped away. Chain lines while the vertical gap stays small and no new
+        Question/Figure/Table/option begins.
+        """
+        lines = []
+        for blk in doc[pno].get_text("dict")["blocks"]:
+            for line in blk.get("lines", []):
+                txt = "".join(s["text"] for s in line["spans"]).strip()
+                if txt and col(line["bbox"][0]) == c:
+                    lines.append((line["bbox"][1], line["bbox"][3], fitz.Rect(line["bbox"]), txt))
+        reg, cur = fitz.Rect(crect), crect.y1
+        for y0, y1, r, txt in sorted(lines, key=lambda t: t[0]):
+            if y0 < crect.y1 - 1:
+                continue
+            if y0 - cur > CAP_GAP or stop_re.match(txt):
+                break
+            reg |= r
+            cur = max(cur, y1)
+        return reg
+
     def region_figure(pno, crect, c):
         tops = [y1 for (ap, ac, y1) in anchors if ap == pno and ac == c and y1 <= crect.y0 - 2]
         bt = max(tops) if tops else 24.0
@@ -57,6 +84,13 @@ def crop_exam_captions(doc):
             cx = (r.x0 + r.x1) / 2
             if ((c == 0 and cx < COLMID) or (c == 1 and cx > COLMID)) and r.width > 1 and r.height > 1 \
                     and r.y0 >= bt - 2 and r.y1 <= crect.y0 + 2:
+                reg |= r
+        # raster figure bodies: their bboxes often carry transparent padding that
+        # overlaps the caption or the figure above -> clip to the allowed band
+        band = fitz.Rect(4 if c == 0 else 299, bt - 2, 296 if c == 0 else 591, crect.y0 + 2)
+        for i in doc[pno].get_image_info():
+            r = fitz.Rect(i["bbox"]) & band
+            if r.width > 8 and r.height > 8:
                 reg |= r
         return clamp(reg, c)
 
@@ -92,7 +126,8 @@ def crop_exam_captions(doc):
                 continue
             kind, num = m.group(1), int(m.group(2))
             seen.add((kind, num))
-            crect, c = fitz.Rect(b[0], b[1], b[2], b[3]), col(b[0])
+            c = col(b[0])
+            crect = caption_paragraph(pno, fitz.Rect(b[0], b[1], b[2], b[3]), c)
             reg = region_figure(pno, crect, c) if kind == "Figure" else region_table(pno, crect, c)
             pix = doc[pno].get_pixmap(clip=reg, matrix=fitz.Matrix(ZOOM, ZOOM))
             crops[(kind, num)] = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
@@ -108,8 +143,8 @@ def crop_exam_captions(doc):
                     continue
                 kind, num = m.group(1), int(m.group(2))
                 seen.add((kind, num))
-                crect = fitz.Rect(line["bbox"])
-                c = col(crect.x0)
+                c = col(line["bbox"][0])
+                crect = caption_paragraph(pno, fitz.Rect(line["bbox"]), c)
                 reg = region_figure(pno, crect, c) if kind == "Figure" else region_table(pno, crect, c)
                 pix = doc[pno].get_pixmap(clip=reg, matrix=fitz.Matrix(ZOOM, ZOOM))
                 crops[(kind, num)] = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)

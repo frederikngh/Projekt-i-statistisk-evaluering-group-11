@@ -1,30 +1,31 @@
-"""
-collect.py — Automated Gemma querying for the 02450 MCQ evaluation.
+"""collect.py - ask Gemma every exam question and save its answers.
 
-Reads a question manifest (data/questions.csv), queries Gemma for each
-(question, modality) pair, and appends results to data/results.csv.
+Reads data/questions.csv (one row per question+modality), builds a prompt
+for each row, sends it to Gemma, and appends the answer to data/results.csv.
 
 Usage:
-    python collect.py                        # run all pending questions
-    python collect.py --exam Fall2024        # only one exam set
-    python collect.py --dry-run              # print prompts without querying Gemma
-    python collect.py --question Q1 --exam Fall2024 --modality screenshot
+    python collect.py                      # run everything not done yet
+    python collect.py --modality text      # only one modality
+    python collect.py --exam Fall2024      # only one exam
+    python collect.py --dry-run            # print prompts, don't run Gemma
 
-Gemma is loaded once and reused. Each question gets a FRESH pipeline call
-with no conversation history — this is required for statistical independence.
+Rows already in results.csv are skipped, so the script is safe to stop
+and rerun. Every question is sent as a NEW call with no chat history
+(the answers must be independent for our statistics to be valid), and
+greedy decoding (do_sample=False) makes the answers reproducible.
 """
 
 import argparse
 import csv
-import re
-import sys
-from pathlib import Path
+import os
 
-# ──────────────────────────────────────────────────────────────
-#  Prompt templates
-# ──────────────────────────────────────────────────────────────
+QUESTIONS = "data/questions.csv"
+RESULTS = "data/results.csv"
 
-SYSTEM_PROMPT = (
+COLUMNS = ["exam_year", "question_id", "question_type", "topic",
+           "modality", "gemma_answer", "correct_answer", "raw_response"]
+
+INSTRUCTION = (
     "You are answering a multiple-choice exam question from a university "
     "Machine Learning course. Each question has exactly one correct answer "
     "among A, B, C, D. You may also answer E if you genuinely do not know. "
@@ -32,305 +33,179 @@ SYSTEM_PROMPT = (
     "Do not explain your answer."
 )
 
-TEXT_TEMPLATE = """{system}
 
-Question:
-{question_text}
-
-Your answer (A/B/C/D/E):"""
-
-IMAGE_TEMPLATE = """{system}
-
-Question:
-{question_text}
-
-The figure(s)/table(s) this question refers to are in the attached image.
-
-Your answer (A/B/C/D/E):"""
-
-TEXT_DESC_TEMPLATE = """{system}
-
-The question includes a figure/table that has been described in text below.
-Use this description to answer the question.
-
-{question_text}
-
-Figure/Table Description:
-{description}
-
-Your answer (A/B/C/D/E):"""
-
-
-# ──────────────────────────────────────────────────────────────
-#  Gemma interface
-# ──────────────────────────────────────────────────────────────
+# ---------- Gemma ----------
 
 def load_gemma():
-    """Load Gemma once. Requires: pip install transformers torch"""
+    """Load Gemma once (takes a while the first time)."""
     from transformers import pipeline
-    print("Loading Gemma (this takes ~30s the first time)...", flush=True)
+    print("Loading Gemma...", flush=True)
     model = pipeline(
         "image-text-to-text",
         model="google/gemma-4-E4B-it",
         dtype="auto",
-        device="mps",       # Mac Apple Silicon — change to "cuda" or "cpu" if needed
+        device="mps",   # Apple Silicon - change to "cuda" or "cpu" if needed
     )
     print("Gemma loaded.", flush=True)
     return model
 
 
-def query_gemma(model, prompt_text: str, image_path: str | None = None) -> str:
-    """
-    Send one isolated query to Gemma and extract the answer letter.
-    Returns 'A', 'B', 'C', 'D', or 'E'.
-    No conversation history is passed — each call is fully independent.
-    """
+def query_gemma(model, prompt, image_path):
+    """Send ONE isolated question to Gemma. Returns (letter, raw_response)."""
     content = []
     if image_path:
-        content.append({"type": "image", "url": str(Path(image_path).resolve())})
-    content.append({"type": "text", "text": prompt_text})
-
+        content.append({"type": "image", "url": os.path.abspath(image_path)})
+    content.append({"type": "text", "text": prompt})
     messages = [{"role": "user", "content": content}]
 
-    out = model(text=messages, max_new_tokens=16)
-    raw = out[0]["generated_text"][-1]["content"].strip()
-    return _extract_letter(raw)
+    out = model(text=messages, max_new_tokens=16, do_sample=False)
+    reply = out[0]["generated_text"][-1]["content"]
+    raw = reply.strip()
+    return extract_letter(raw), raw
 
 
-def _extract_letter(text: str) -> str:
-    """Extract the first A/B/C/D/E from Gemma's response."""
-    match = re.search(r'\b([ABCDE])\b', text.upper())
-    if match:
-        return match.group(1)
-    # Fallback: first character if it's a letter
-    first = text.strip()[:1].upper()
-    return first if first in 'ABCDE' else 'E'
+def extract_letter(text):
+    """Find the answer letter in Gemma's reply (usually the reply IS just 'B').
+
+    Handles replies like 'B', 'B.', 'Answer: B'. If no letter is found we
+    count it as E ('don't know') - the raw reply is saved so we can check.
+    """
+    text = text.upper()
+    punctuation = [".", ",", ":", ";", "!", "(", ")", "*", "'", '"']
+    for ch in punctuation:
+        text = text.replace(ch, " ")
+    for word in text.split():
+        if word in ["A", "B", "C", "D", "E"]:
+            return word
+    return "E"
 
 
-# ──────────────────────────────────────────────────────────────
-#  Question manifest (data/questions.csv)
-# ──────────────────────────────────────────────────────────────
+# ---------- Prompts ----------
 
-QUESTIONS_SCHEMA = [
-    'exam_year', 'question_id', 'question_type', 'topic',
-    'modality', 'question_text', 'description', 'image_path', 'correct_answer',
-]
+def build_prompt(row):
+    """Return (prompt_text, image_path or None) for one question row."""
+    question = row["question_text"].strip()
 
-RESULTS_SCHEMA = [
-    'exam_year', 'question_id', 'question_type', 'topic',
-    'modality', 'gemma_answer', 'correct_answer',
-]
+    if row["modality"] == "text":
+        prompt = (f"{INSTRUCTION}\n\n"
+                  f"Question:\n{question}\n\n"
+                  "Your answer (A/B/C/D/E):")
+        return prompt, None
 
-QUESTIONS_PATH = Path("data/questions.csv")
-RESULTS_PATH   = Path("data/results.csv")
+    if row["modality"] == "screenshot":
+        prompt = (f"{INSTRUCTION}\n\n"
+                  f"Question:\n{question}\n\n"
+                  "The figure(s)/table(s) this question refers to are in the attached image.\n\n"
+                  "Your answer (A/B/C/D/E):")
+        return prompt, row["image_path"]
 
-
-def load_questions(exam_filter: str | None = None) -> list[dict]:
-    if not QUESTIONS_PATH.exists():
-        _create_questions_template()
-        print(f"\nCreated template: {QUESTIONS_PATH}")
-        print("Fill it in with your questions, then re-run collect.py.")
-        sys.exit(0)
-
-    rows = []
-    with open(QUESTIONS_PATH, newline='', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            if exam_filter and row.get('exam_year') != exam_filter:
-                continue
-            rows.append(row)
-    return rows
+    # modality == "text_desc": the figure/table is written out as text instead
+    prompt = (f"{INSTRUCTION}\n\n"
+              "The question includes a figure/table that has been described in text below.\n"
+              "Use this description to answer the question.\n\n"
+              f"{question}\n\n"
+              f"Figure/Table Description:\n{row['description']}\n\n"
+              "Your answer (A/B/C/D/E):")
+    return prompt, None
 
 
-def load_done_pairs() -> set[tuple]:
-    """Return set of (exam_year, question_id, modality) already in results.csv."""
-    done = set()
-    if not RESULTS_PATH.exists():
-        return done
-    with open(RESULTS_PATH, newline='', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            done.add((row['exam_year'], row['question_id'], row['modality']))
+# ---------- Results file ----------
+
+def load_done():
+    """The exam+question+modality combinations already answered."""
+    done = []
+    if os.path.exists(RESULTS):
+        with open(RESULTS, newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                key = row["exam_year"] + " " + row["question_id"] + " " + row["modality"]
+                done.append(key)
     return done
 
 
-def append_result(row: dict):
-    write_header = not RESULTS_PATH.exists()
-    with open(RESULTS_PATH, 'a', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=RESULTS_SCHEMA)
-        if write_header:
+def append_result(result):
+    """Add one answer to results.csv (creating the file if needed)."""
+    new_file = not os.path.exists(RESULTS)
+    with open(RESULTS, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=COLUMNS)
+        if new_file:
             writer.writeheader()
-        writer.writerow({k: row[k] for k in RESULTS_SCHEMA})
+        writer.writerow(result)
 
 
-# ──────────────────────────────────────────────────────────────
-#  Template for questions.csv
-# ──────────────────────────────────────────────────────────────
-
-def _create_questions_template():
-    QUESTIONS_PATH.parent.mkdir(exist_ok=True)
-    example_rows = [
-        # Type A: text only
-        {
-            'exam_year': 'Fall2024',
-            'question_id': 'Q5',
-            'question_type': 'A',
-            'topic': 'LogisticRegression',
-            'modality': 'text',
-            'question_text': (
-                'Which one of the following statements about logistic regression is correct?\n'
-                'A. The attributes of a logistic regression model cannot be modified...\n'
-                'B. In terms of bias-variance trade-off, a well-tuned model has negligible bias...\n'
-                'C. For a fixed value of lambda, there exists a closed-form solution...\n'
-                'D. If the estimated test error is approx 0.5, this indicates over-regularization.'
-            ),
-            'description': '',
-            'image_path': '',
-            'correct_answer': 'D',
-        },
-        # Type B: screenshot modality
-        {
-            'exam_year': 'Fall2024',
-            'question_id': 'Q1',
-            'question_type': 'B',
-            'topic': 'PCA',
-            'modality': 'screenshot',
-            'question_text': 'Which one of the following matrices represents the empirical correlation matrix for these attributes? A. ... B. ... C. ... D. ...',
-            'description': '',
-            'image_path': 'data/screenshots/Fall2024_Q1.png',
-            'correct_answer': 'C',
-        },
-        # Type B: text_desc modality (same question, text description of figure)
-        {
-            'exam_year': 'Fall2024',
-            'question_id': 'Q1',
-            'question_type': 'B',
-            'topic': 'PCA',
-            'modality': 'text_desc',
-            'question_text': 'Which one of the following matrices represents the empirical correlation matrix for these attributes? A. ... B. ... C. ... D. ...',
-            'description': (
-                'The scatter plot matrix shows 4 attributes: x1 (Magnitude), x2 (Depth), '
-                'x3 (Latitude), x4 (Longitude). x1 and x3 appear strongly correlated '
-                '(tight diagonal pattern). x2 and x4 show moderate correlation. '
-                'x1-x2 show negative correlation.'
-            ),
-            'image_path': '',
-            'correct_answer': 'C',
-        },
-    ]
-
-    with open(QUESTIONS_PATH, 'w', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=QUESTIONS_SCHEMA)
-        writer.writeheader()
-        writer.writerows(example_rows)
-
-
-# ──────────────────────────────────────────────────────────────
-#  Build prompt from question row
-# ──────────────────────────────────────────────────────────────
-
-def build_prompt(row: dict) -> tuple[str, str | None]:
-    """Returns (prompt_text, image_path_or_None)."""
-    modality = row['modality']
-    qtext    = row['question_text'].strip()
-    desc     = row.get('description', '').strip()
-    img      = row.get('image_path', '').strip() or None
-
-    if modality == 'text':
-        prompt = TEXT_TEMPLATE.format(system=SYSTEM_PROMPT, question_text=qtext)
-        return prompt, None
-
-    elif modality == 'screenshot':
-        if not img:
-            raise ValueError(
-                f"  {row['exam_year']} {row['question_id']}: "
-                f"modality=screenshot but image_path is empty."
-            )
-        prompt = IMAGE_TEMPLATE.format(system=SYSTEM_PROMPT, question_text=qtext)
-        return prompt, img
-
-    elif modality == 'text_desc':
-        if not desc:
-            raise ValueError(
-                f"  {row['exam_year']} {row['question_id']}: "
-                f"modality=text_desc but description is empty."
-            )
-        prompt = TEXT_DESC_TEMPLATE.format(
-            system=SYSTEM_PROMPT,
-            question_text=qtext,
-            description=desc,
-        )
-        return prompt, None
-
-    else:
-        raise ValueError(f"Unknown modality: {modality}")
-
-
-# ──────────────────────────────────────────────────────────────
-#  Main
-# ──────────────────────────────────────────────────────────────
+# ---------- Main ----------
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--exam',     help='Filter to one exam year, e.g. Fall2024')
-    parser.add_argument('--question', help='Filter to one question, e.g. Q1')
-    parser.add_argument('--modality', help='Filter to one modality')
-    parser.add_argument('--dry-run',  action='store_true', help='Print prompts, do not query Gemma')
+    parser.add_argument("--exam", help="only this exam, e.g. Fall2024")
+    parser.add_argument("--modality", help="text / screenshot / text_desc")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="print the prompts instead of running Gemma")
     args = parser.parse_args()
 
-    questions = load_questions(exam_filter=args.exam)
+    # read the manifest, applying the filters
+    questions = []
+    with open(QUESTIONS, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            if args.exam and row["exam_year"] != args.exam:
+                continue
+            if args.modality and row["modality"] != args.modality:
+                continue
+            questions.append(row)
 
-    if args.question:
-        questions = [q for q in questions if q['question_id'] == args.question]
-    if args.modality:
-        questions = [q for q in questions if q['modality'] == args.modality]
+    # skip what we already have
+    done = load_done()
+    pending = []
+    for q in questions:
+        key = q["exam_year"] + " " + q["question_id"] + " " + q["modality"]
+        if key not in done:
+            pending.append(q)
 
-    done = load_done_pairs()
-    pending = [
-        q for q in questions
-        if (q['exam_year'], q['question_id'], q['modality']) not in done
-    ]
+    print("Questions selected :", len(questions))
+    print("Already answered   :", len(done))
+    print("Still to do        :", len(pending))
 
-    print(f"Questions in manifest : {len(questions)}")
-    print(f"Already done          : {len(done)}")
-    print(f"Pending               : {len(pending)}")
-
-    if not pending:
-        print("Nothing to do. Run analyze.py to see results.")
+    if len(pending) == 0:
+        print("Nothing to do. Run run_all.py to see the results.")
         return
 
-    model = None
-    if not args.dry_run:
-        model = load_gemma()
+    if args.dry_run:
+        for row in pending:
+            prompt, image = build_prompt(row)
+            print("\n----", row["exam_year"], row["question_id"], row["modality"], "----")
+            print(prompt[:400])
+            if image:
+                print("[image:", image, "]")
+        return
 
-    for i, row in enumerate(pending, 1):
-        key = f"{row['exam_year']} {row['question_id']} [{row['modality']}]"
-        print(f"\n[{i}/{len(pending)}] {key}", flush=True)
+    model = load_gemma()
+    i = 0
+    for row in pending:
+        i = i + 1
+        print("\n[" + str(i) + "/" + str(len(pending)) + "] "
+              + row["exam_year"] + " " + row["question_id"] + " (" + row["modality"] + ")",
+              flush=True)
+        prompt, image = build_prompt(row)
+        answer, raw = query_gemma(model, prompt, image)
+        correct = row["correct_answer"].strip().upper()
+        if answer == correct:
+            verdict = "right"
+        else:
+            verdict = "wrong"
+        print("  Gemma:", answer, "  correct answer:", correct, "  ->", verdict, flush=True)
+        append_result({
+            "exam_year": row["exam_year"],
+            "question_id": row["question_id"],
+            "question_type": row["question_type"],
+            "topic": row["topic"],
+            "modality": row["modality"],
+            "gemma_answer": answer,
+            "correct_answer": correct,
+            "raw_response": raw,
+        })
 
-        try:
-            prompt, img = build_prompt(row)
-        except ValueError as e:
-            print(f"  SKIP: {e}")
-            continue
-
-        if args.dry_run:
-            print("  --- PROMPT ---")
-            print(prompt[:300] + ('...' if len(prompt) > 300 else ''))
-            if img:
-                print(f"  Image: {img}")
-            continue
-
-        answer = query_gemma(model, prompt, image_path=img)
-        correct = row['correct_answer'].strip().upper()
-        status = '✓' if answer == correct else '✗'
-        print(f"  Gemma: {answer}  Correct: {correct}  {status}", flush=True)
-
-        append_result({**row, 'gemma_answer': answer})
-
-    if not args.dry_run:
-        print(f"\nDone. Results saved to {RESULTS_PATH}")
-        print("Run: python analyze.py")
+    print("\nDone. Results saved to", RESULTS)
+    print("Next step: python run_all.py")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

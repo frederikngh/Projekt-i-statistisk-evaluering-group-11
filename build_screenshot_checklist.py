@@ -1,4 +1,4 @@
-"""build_screenshot_checklist.py — list every screenshot to capture, from data/encoded/*.json.
+"""build_screenshot_checklist.py - list every screenshot to capture, from data/encoded/*.json.
 
 Writes SCREENSHOTS.md: a checkbox list grouped by exam of the type-B/C questions
 whose `screenshot_path` you must fill. Screenshot the WHOLE question (stem +
@@ -27,7 +27,7 @@ def main():
         for q in shots:
             total += 1
             body.append(
-                f"- [ ] `{q['screenshot_path']}` — {q['question_id']} "
+                f"- [ ] `{q['screenshot_path']}` - {q['question_id']} "
                 f"[type {q['type']}] {q.get('source_location', '')}"
             )
         body.append("")
