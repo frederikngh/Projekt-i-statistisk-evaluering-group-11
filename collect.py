@@ -36,15 +36,26 @@ INSTRUCTION = (
 
 # ---------- Gemma ----------
 
+def pick_device():
+    """Use the NVIDIA GPU if there is one, otherwise Apple Silicon, otherwise CPU."""
+    import torch
+    if torch.cuda.is_available():
+        return "cuda"
+    if torch.backends.mps.is_available():
+        return "mps"
+    return "cpu"
+
+
 def load_gemma():
     """Load Gemma once (takes a while the first time)."""
     from transformers import pipeline
-    print("Loading Gemma...", flush=True)
+    device = pick_device()
+    print("Loading Gemma on " + device + "...", flush=True)
     model = pipeline(
         "image-text-to-text",
         model="google/gemma-4-E4B-it",
         dtype="auto",
-        device="mps",   # Apple Silicon - change to "cuda" or "cpu" if needed
+        device=device,
     )
     print("Gemma loaded.", flush=True)
     return model

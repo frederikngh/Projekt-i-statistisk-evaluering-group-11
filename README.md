@@ -11,12 +11,36 @@ Report deadline: 24.06.2026. Seminar: 25-26.06.2026.
 
 ## Setup
 
+Gemma runs locally through the transformers library. collect.py picks the
+device by itself: an NVIDIA GPU (cuda) if there is one, otherwise Apple
+Silicon (mps), otherwise the CPU.
+
+On a PC with an NVIDIA GPU, install the CUDA build of torch FIRST (otherwise
+pip installs the CPU-only version on Windows):
+
+```bash
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+pip install -r requirements.txt
+```
+
+On a Mac, just:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-Gemma runs locally with the transformers library on Apple Silicon (MPS).
-Change device="mps" to "cuda" or "cpu" in collect.py if needed.
+Gemma is a gated model, so the machine needs a Hugging Face login once:
+accept the licence on the google/gemma-4-E4B-it model page, then run
+
+```bash
+hf auth login
+```
+
+Quick check that the model loads and answers before the full run:
+
+```bash
+python simple_gemma.py
+```
 
 ## How to run
 

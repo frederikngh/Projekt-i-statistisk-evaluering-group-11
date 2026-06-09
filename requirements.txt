@@ -1,5 +1,8 @@
-scipy>=1.11       # analyze.py: binomial test, chi-square
-statsmodels>=0.14 # analyze.py: McNemar, two-proportion z, Wilson CIs
-matplotlib>=3.7   # analyze.py: figures
-pymupdf>=1.24     # crop_figures.py: render exam PDFs -> per-question screenshot crops
-pillow>=10        # crop_figures.py: stitch multi-figure questions
+transformers>=5    # collect.py: runs Gemma
+torch>=2.7         # needed by transformers (NVIDIA GPU: see the CUDA install in the README)
+torchvision>=0.22  # image preprocessing for Gemma's vision input
+scipy>=1.11        # binomial test, chi-square
+statsmodels>=0.14  # McNemar, two-proportion z, Wilson CIs
+matplotlib>=3.7    # make_figure.py
+pymupdf>=1.24      # crop_figures.py: render exam PDFs -> screenshot crops
+pillow>=10         # crop_figures.py: stitch multi-figure questions
