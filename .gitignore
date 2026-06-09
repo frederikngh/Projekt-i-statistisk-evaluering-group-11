@@ -16,3 +16,10 @@ venv/
 # Editors
 .vscode/
 .idea/
+
+# Generated figures (reproducible from data)
+figures/
+
+# Gemma model cache
+*.safetensors
+*.bin
