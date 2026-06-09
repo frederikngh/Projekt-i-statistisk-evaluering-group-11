@@ -41,7 +41,10 @@ Your answer (A/B/C/D/E):"""
 
 IMAGE_TEMPLATE = """{system}
 
-The question is shown in the attached image. Read it carefully and answer.
+Question:
+{question_text}
+
+The figure(s)/table(s) this question refers to are in the attached image.
 
 Your answer (A/B/C/D/E):"""
 
@@ -243,7 +246,7 @@ def build_prompt(row: dict) -> tuple[str, str | None]:
                 f"  {row['exam_year']} {row['question_id']}: "
                 f"modality=screenshot but image_path is empty."
             )
-        prompt = IMAGE_TEMPLATE.format(system=SYSTEM_PROMPT)
+        prompt = IMAGE_TEMPLATE.format(system=SYSTEM_PROMPT, question_text=qtext)
         return prompt, img
 
     elif modality == 'text_desc':
