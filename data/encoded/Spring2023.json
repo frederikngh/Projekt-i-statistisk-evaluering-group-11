@@ -1,0 +1,551 @@
+{
+  "exam": "Spring2023",
+  "course": "02450",
+  "source_pdf": "ML-examsets/Spring2023.pdf",
+  "solution_pdf": "ML-solutions/Spring2023_sol.pdf",
+  "n_questions": 27,
+  "answer_key": {
+    "Q1": "A",
+    "Q2": "A",
+    "Q3": "B",
+    "Q4": "D",
+    "Q5": "C",
+    "Q6": "D",
+    "Q7": "B",
+    "Q8": "B",
+    "Q9": "A",
+    "Q10": "C",
+    "Q11": "C",
+    "Q12": "A",
+    "Q13": "A",
+    "Q14": "B",
+    "Q15": "B",
+    "Q16": "C",
+    "Q17": "B",
+    "Q18": "C",
+    "Q19": "D",
+    "Q20": "C",
+    "Q21": "D",
+    "Q22": "D",
+    "Q23": "A",
+    "Q24": "B",
+    "Q25": "C",
+    "Q26": "C",
+    "Q27": "D"
+  },
+  "questions": [
+    {
+      "question_id": "Q1",
+      "number": 1,
+      "topic": "Descriptive statistics / histograms (mean and variance)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "The main dataset used in this exam is the Sound Classification dataset described in Table 1. Figure 1 shows the histograms of observations from the Sound Classification dataset. Which one of the following statements is true?\n\nA. Attribute x1 has an empirical mean of ~ -3.72 and attribute x6 has an empirical variance of ~ 2.34.\nB. Attribute x2 has an empirical mean of ~ 4.76 and attribute x1 has an empirical variance of ~ 0.12.\nC. Attribute x3 has an empirical mean of ~ 27.43 and attribute x1 has an empirical variance of ~ 9.6.\nD. Attribute x4 has an empirical mean of ~ 8.73 and attribute x3 has an empirical variance of ~ 0.27.",
+      "options": {
+        "A": "Attribute x1 has an empirical mean of ~ -3.72 and attribute x6 has an empirical variance of ~ 2.34.",
+        "B": "Attribute x2 has an empirical mean of ~ 4.76 and attribute x1 has an empirical variance of ~ 0.12.",
+        "C": "Attribute x3 has an empirical mean of ~ 27.43 and attribute x1 has an empirical variance of ~ 9.6.",
+        "D": "Attribute x4 has an empirical mean of ~ 8.73 and attribute x3 has an empirical variance of ~ 0.27."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q1.png",
+      "source_location": "exam p.2, Figure 1 (six histograms of attributes x1..x6 with 50% percentile lines) and Table 1 (attribute descriptions)"
+    },
+    {
+      "question_id": "Q2",
+      "number": 2,
+      "topic": "Covariance from correlation and standard deviations",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "The empirical correlation between the first 5 attributes in the Sound Classification dataset is given by the following correlation matrix\nCorr = [[1.0, 0.48, -0.14, 0.15, -0.06], [0.48, 1.0, -0.14, 0.19, 0.19], [-0.14, -0.14, 1.0, 0.12, 0.0], [0.15, 0.19, 0.12, 1.0, 0.26], [-0.06, 0.19, 0.0, 0.26, 1.0]],\nwhere element Corr[i, j] is the correlation between the two attributes x_i and x_j, e.g., Corr[x2, x5] = 0.19. Additionally, the empirical standard deviation of x1 is 1.55, and the empirical standard deviation of x4 is 3.78. Determine which one of the following statements is true.\n\nA. The covariance between x1 and x4 is ~ 0.88\nB. The covariance between x1 and x4 is ~ 0.36\nC. The covariance between x1 and x4 is ~ 1.36\nD. The covariance between x1 and x4 is ~ 0.03",
+      "options": {
+        "A": "The covariance between x1 and x4 is ~ 0.88",
+        "B": "The covariance between x1 and x4 is ~ 0.36",
+        "C": "The covariance between x1 and x4 is ~ 1.36",
+        "D": "The covariance between x1 and x4 is ~ 0.03"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 2 (correlation matrix printed inline as text)"
+    },
+    {
+      "question_id": "Q3",
+      "number": 3,
+      "topic": "PCA / SVD (orthonormality of singular vectors)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "A Principal Component Analysis (PCA) is carried out on the Sound Classification dataset in Table 1 based on the attributes x1, x2, x3, x4 and x5. The data is standardized by (i) subtracting the mean and (ii) dividing each column by its standard deviation to obtain the standardized data matrix X_tilde. A singular value decomposition (SVD) is then carried out on the standardized data matrix to obtain the decomposition U S V^T = X_tilde\nV = [[-0.5939, 0.2906, v_1,3, 0.0621, 0.6652], [-0.6521, 0.0759, 0.0004, 0.3813, v_2,5], [0.2028, -0.5105, -0.7036, 0.4508, 0.0010], [-0.3696, -0.5414, -0.1781, -0.7244, -0.1173], [-0.2102, -0.5967, 0.5973, 0.3503, 0.3467]]   (1)\nS = [[30.3832, 0, 0, 0, 0], [0, sigma_2,2, 0, 0, 0], [0, 0, 22.7730, 0, 0], [0, 0, 0, 19.7263, 0], [0, 0, 0, 0, 16.0724]]   (2)\nIt is noted that certain elements are missing in the SVD, specifically v_1,3, v_2,5 and sigma_2,2. Additionally, ||X_tilde||_F^2 = 2814.8909. Determine which one of the following statements is correct.\n\nA. v_1,3 ~ -0.1399, v_2,5 ~ -0.2116, sigma_2,2 ~ 5.1903\nB. v_1,3 ~ -0.3413, v_2,5 ~ -0.6508, sigma_2,2 ~ 26.9387\nC. v_1,3 ~ 0.3425, v_2,5 ~ -0.6506, sigma_2,2 ~ 26.9387\nD. v_1,3 ~ -1.8385, v_2,5 ~ -0.1629, sigma_2,2 ~ 5.1903",
+      "options": {
+        "A": "v_1,3 ~ -0.1399, v_2,5 ~ -0.2116, sigma_2,2 ~ 5.1903",
+        "B": "v_1,3 ~ -0.3413, v_2,5 ~ -0.6508, sigma_2,2 ~ 26.9387",
+        "C": "v_1,3 ~ 0.3425, v_2,5 ~ -0.6506, sigma_2,2 ~ 26.9387",
+        "D": "v_1,3 ~ -1.8385, v_2,5 ~ -0.1629, sigma_2,2 ~ 5.1903"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 3 (V and S matrices printed inline as text)"
+    },
+    {
+      "question_id": "Q4",
+      "number": 4,
+      "topic": "PCA / interpreting principal component loadings",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the PCA for the Sound Classification dataset, in particular the SVD of X_tilde in Equation (1):\nV = [[-0.5939, 0.2906, v_1,3, 0.0621, 0.6652], [-0.6521, 0.0759, 0.0004, 0.3813, v_2,5], [0.2028, -0.5105, -0.7036, 0.4508, 0.0010], [-0.3696, -0.5414, -0.1781, -0.7244, -0.1173], [-0.2102, -0.5967, 0.5973, 0.3503, 0.3467]].\nWhich one of the following statements is true?\n\nA. An observation with a low value of x1 (P2AR), a high value of x2 (PER), a low value of x3 (RO), a high value of x4 (FLU), and a high value of x5 (SHP) will typically have a positive value of the projection onto principal component number 1.\nB. An observation with a high value of x2 (PER), a high value of x3 (RO), a low value of x4 (FLU), and a high value of x5 (SHP) will typically have a negative value of the projection onto principal component number 4.\nC. An observation with a low value of x1 (P2AR), a high value of x3 (RO), a high value of x4 (FLU), and a high value of x5 (SHP) will typically have a positive value of the projection onto principal component number 2.\nD. An observation with a high value of x1 (P2AR), a high value of x2 (PER), a low value of x3 (RO), a high value of x4 (FLU), and a high value of x5 (SHP) will typically have a negative value of the projection onto principal component number 1.",
+      "options": {
+        "A": "An observation with a low value of x1 (P2AR), a high value of x2 (PER), a low value of x3 (RO), a high value of x4 (FLU), and a high value of x5 (SHP) will typically have a positive value of the projection onto principal component number 1.",
+        "B": "An observation with a high value of x2 (PER), a high value of x3 (RO), a low value of x4 (FLU), and a high value of x5 (SHP) will typically have a negative value of the projection onto principal component number 4.",
+        "C": "An observation with a low value of x1 (P2AR), a high value of x3 (RO), a high value of x4 (FLU), and a high value of x5 (SHP) will typically have a positive value of the projection onto principal component number 2.",
+        "D": "An observation with a high value of x1 (P2AR), a high value of x2 (PER), a low value of x3 (RO), a high value of x4 (FLU), and a high value of x5 (SHP) will typically have a negative value of the projection onto principal component number 1."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 4 (refers to V matrix from Equation (1), printed inline as text)"
+    },
+    {
+      "question_id": "Q5",
+      "number": 5,
+      "topic": "KNN density (outlier detection)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the distances in Table 2 based on 10 observations from the Sound Classification dataset. To examine if observation o1 may be an outlier, we will calculate the K-nearest neighborhood density using only the observations and distances in Table 2. For an observation o_i, recall the density is computed using the set of K nearest neighbors of observation o_i excluding the i'th observation itself, N_{X\\i}(o_i, K), and is denoted by density_{X\\i}(o_i, K). What is the density for observation o1 for K = 3 nearest neighbors?\n\nA. 0.732\nB. 0.769\nC. 0.469\nD. 0.640",
+      "options": {
+        "A": "0.732",
+        "B": "0.769",
+        "C": "0.469",
+        "D": "0.640"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 2: Pairwise Euclidean distances d(o_i, o_j) = ||x_i - x_j||_2 between 10 observations from the Sound Classification dataset (M = 6). Each observation o_i corresponds to a row of the data matrix X.\nClasses: black observations {o1, o2, o3, o4} belong to class C1 (Machine); red observations {o5, o6, o7, o8, o9, o10} belong to class C2 (Natural).\n\n         o1    o2    o3    o4    o5    o6    o7    o8    o9   o10\n o1     0.0   1.3   4.1   3.8   4.5   2.4   3.2   2.7   3.0   3.9\n o2     1.3   0.0   3.2   3.1   4.7   2.3   2.6   2.2   2.7   4.2\n o3     4.1   3.2   0.0   0.4   4.9   2.7   1.1   1.6   2.4   4.8\n o4     3.8   3.1   0.4   0.0   4.6   2.5   0.9   1.3   2.1   4.5\n o5     4.5   4.7   4.9   4.6   0.0   3.1   4.4   3.7   2.8   2.3\n o6     2.4   2.3   2.7   2.5   3.1   0.0   1.8   1.2   0.9   2.8\n o7     3.2   2.6   1.1   0.9   4.4   1.8   0.0   1.0   1.7   4.1\n o8     2.7   2.2   1.6   1.3   3.7   1.2   1.0   0.0   1.1   3.6\n o9     3.0   2.7   2.4   2.1   2.8   0.9   1.7   1.1   0.0   2.9\no10     3.9   4.2   4.8   4.5   2.3   2.8   4.1   3.6   2.9   0.0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q5.png",
+      "source_location": "exam p.4, Table 2 (10x10 pairwise Euclidean distance matrix with class colors)"
+    },
+    {
+      "question_id": "Q6",
+      "number": 6,
+      "topic": "Two-layer cross-validation (KNN generalization error)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We consider the generalization error of K-nearest neighbour (KNN) classifiers with K = [1, 3, 4] neighbors based on the observations in Table 2. We apply two-layer cross-validation (cf. Algorithm 6 in the lecture notes) to estimate the generalization error with 2 outer and 5 inner folds. Table 3 and Table 4 provides partial results of the associated two-layer cross validation. It is noted that with other things being equal, a model with the lowest value of K is preferred in this context. The specific split of the dataset in the two outer folds is also known: Outer fold i = 1 training set: o1, o2, o4, o8, o9. Outer fold i = 2 training set: o3, o5, o6, o7, o10. Determine the error rates on the test set in each of the 2 outer folds based on the information in Table 3, Table 4 and Table 2.\n\nA. E_test_{i=1} = 0.1 and E_test_{i=2} = 0.3\nB. E_test_{i=1} = 0.2 and E_test_{i=2} = 0.2\nC. E_test_{i=1} = 0.8 and E_test_{i=2} = 0.4\nD. E_test_{i=1} = 0.2 and E_test_{i=2} = 0.6",
+      "options": {
+        "A": "E_test_{i=1} = 0.1 and E_test_{i=2} = 0.3",
+        "B": "E_test_{i=1} = 0.2 and E_test_{i=2} = 0.2",
+        "C": "E_test_{i=1} = 0.8 and E_test_{i=2} = 0.4",
+        "D": "E_test_{i=1} = 0.2 and E_test_{i=2} = 0.6"
+      },
+      "correct_answer": "D",
+      "text_representation": "This question uses Table 2 (the 10x10 pairwise Euclidean distance matrix; see Q5 text_representation), plus Table 3 and Table 4 below.\n\nClasses (from Table 2): {o1, o2, o3, o4} belong to C1 (Machine); {o5, o6, o7, o8, o9, o10} belong to C2 (Natural).\nOuter fold i = 1 training set: o1, o2, o4, o8, o9  (test set: o3, o5, o6, o7, o10).\nOuter fold i = 2 training set: o3, o5, o6, o7, o10 (test set: o1, o2, o4, o8, o9).\n\nTable 3: Error rates corresponding to a specific inner fold j and model complexity K, in OUTER FOLD 1.\n          j=1   j=2   j=3   j=4   j=5\n  K=1      0     0     1     0     0\n  K=3      1     1     1     1     1\n  K=4      1     1     1     0     0\n\nTable 4: Error rates corresponding to a specific inner fold j and model complexity K, in OUTER FOLD 2.\n          j=1   j=2   j=3   j=4   j=5\n  K=1      0     0     1     0     1\n  K=3      0     0     1     0     0\n  K=4      0     0     1     0     0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q6.png",
+      "source_location": "exam p.4-6, Table 2 (distance matrix), Table 3 and Table 4 (inner-fold error-rate tables for outer fold 1 and 2)"
+    },
+    {
+      "question_id": "Q7",
+      "number": 7,
+      "topic": "Hierarchical clustering / Rand index (dendrogram cutoff)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider the dendrogram shown in Figure 2 which is based on the observations and distances in Table 2 using single linkage. Suppose we apply a cutoff (indicated by the black line in Figure 2) thereby generating three clusters. We wish to compare the quality of this clustering, Q, to the ground-truth clustering, Z, indicated by the colors in Table 2. What is the Rand index of the two clusterings?\n\nA. R(Z, Q) ~ 0.428\nB. R(Z, Q) ~ 0.444\nC. R(Z, Q) ~ 0.48\nD. R(Z, Q) ~ 0.411",
+      "options": {
+        "A": "R(Z, Q) ~ 0.428",
+        "B": "R(Z, Q) ~ 0.444",
+        "C": "R(Z, Q) ~ 0.48",
+        "D": "R(Z, Q) ~ 0.411"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q7.png",
+      "source_location": "exam p.5, Figure 2 (single-linkage dendrogram with dashed cutoff line generating 3 clusters) plus Table 2 class colors"
+    },
+    {
+      "question_id": "Q8",
+      "number": 8,
+      "topic": "Rand index vs Jaccard similarity (single-cluster partition)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider the ten observations in Table 2 and denote the partition implied by the ground truth classification by Z. We also consider an alternative partition Q, where all ten observations are placed in the same cluster. Let R(Z, Q) denote the Rand index and J(Z, Q) the Jaccard similarity between Z and Q. Which one of the following statements is true?\n\nA. R(Z, Q) > J(Z, Q)\nB. R(Z, Q) = J(Z, Q)\nC. R(Z, Q) < J(Z, Q)\nD. R(Z, Q) and J(Z, Q) are not defined in this case",
+      "options": {
+        "A": "R(Z, Q) > J(Z, Q)",
+        "B": "R(Z, Q) = J(Z, Q)",
+        "C": "R(Z, Q) < J(Z, Q)",
+        "D": "R(Z, Q) and J(Z, Q) are not defined in this case"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.8, Question 8 (conceptual; answer follows from Q being a single cluster so D=0, giving R=J, independent of the Table 2 values)"
+    },
+    {
+      "question_id": "Q9",
+      "number": 9,
+      "topic": "K-means clustering (total cost after first iteration)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We consider a synthetic 1-dimensional dataset with the following N = 5 observations:\nX = [2, 5, 8, 12, 13]^T.\nSuppose we want to perform K-means clustering with K = 2 centroids. The centroids are initialized at locations mu_1 = 4 and mu_2 = 10. What will be the total cost (sum of squared distances), E, after the first iteration of K-means?\n\nA. E ~ 18.5\nB. E ~ 9.0\nC. E ~ 3.7\nD. E ~ 299.75",
+      "options": {
+        "A": "E ~ 18.5",
+        "B": "E ~ 9.0",
+        "C": "E ~ 3.7",
+        "D": "E ~ 299.75"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.5, Question 9 (data vector printed inline as text)"
+    },
+    {
+      "question_id": "Q10",
+      "number": 10,
+      "topic": "Probabilistic inference (marginalization and Bayes)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the Sound Classification dataset from Table 1. Suppose the attributes have been binarized such that x2_hat = 0 corresponds to x2 <= -0.405 (and otherwise x2_hat = 1) and x4_hat = 0 corresponds to x4 <= -0.456 (and otherwise x4_hat = 1). Suppose the probability for each of the configurations of x2_hat, x4_hat and y are as given in Table 5. What is then the probability y corresponds to Machine given an observation has x2_hat = 1?\n\nA. p(y = Machine | x2_hat = 1) = 0.18\nB. p(y = Machine | x2_hat = 1) = 0.34\nC. p(y = Machine | x2_hat = 1) = 0.36\nD. p(y = Machine | x2_hat = 1) = 0.261",
+      "options": {
+        "A": "p(y = Machine | x2_hat = 1) = 0.18",
+        "B": "p(y = Machine | x2_hat = 1) = 0.34",
+        "C": "p(y = Machine | x2_hat = 1) = 0.36",
+        "D": "p(y = Machine | x2_hat = 1) = 0.261"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 5: Probability of observing particular values of x2_hat, x4_hat, and y.\n\n p(x2_hat, x4_hat, y)        y = Machine    y = Natural\n  x2_hat=0, x4_hat=0            0.18           0.08\n  x2_hat=0, x4_hat=1            0.17           0.07\n  x2_hat=1, x4_hat=0            0.08           0.16\n  x2_hat=1, x4_hat=1            0.10           0.16",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q10.png",
+      "source_location": "exam p.6, Table 5 (joint probability table over x2_hat, x4_hat, y)"
+    },
+    {
+      "question_id": "Q11",
+      "number": 11,
+      "topic": "Naive Bayes (number of density evaluations)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We wish to predict which of the two classes an observation x belongs to in the Sound Classification dataset described in Table 1. To accomplish this we apply a Naive-Bayes classifier where we model each of the M = 6 features using a 1-dimensional normal distribution. The classifier will be used in an embedded setting where model prediction speed is paramount. Therefore, consider a single model evaluation: p(y = Machine | x). What is the minimum number of evaluations of the normal density function N(x | mu, sigma^2) we have to perform to compute this quantity?\n\nA. 14\nB. 21\nC. 12\nD. 18",
+      "options": {
+        "A": "14",
+        "B": "21",
+        "C": "12",
+        "D": "18"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 11 (pure text/conceptual)"
+    },
+    {
+      "question_id": "Q12",
+      "number": 12,
+      "topic": "McNemar's test (paired model comparison)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the comparison of a classification model, M_A, with two alternative models, M_B and M_C, using McNemar's test as defined in Section 11.3.3 of the lecture notes. The test is based on the output of three-fold cross-validation on the Sound Classification dataset with the relevant results of the cross-validation shown in Table 6. The comparison between M_A and M_B results in a p-value (p_AB) and the difference in accuracy (theta_hat_AB). Similarly, the comparison between M_A and M_C results in a p-value (p_AC) and the difference in accuracy (theta_hat_AC). Determine which one of the following statements is correct. Hint: The problem can be solved without evaluating complicated mathematical functions.\n\nA. p_AB = p_AC and theta_hat_AB = -theta_hat_AC.\nB. p_AB != p_AC and theta_hat_AB = theta_hat_AC.\nC. p_AB = p_AC and theta_hat_AB = theta_hat_AC.\nD. p_AB != p_AC and theta_hat_AB = -theta_hat_AC.",
+      "options": {
+        "A": "p_AB = p_AC and theta_hat_AB = -theta_hat_AC.",
+        "B": "p_AB != p_AC and theta_hat_AB = theta_hat_AC.",
+        "C": "p_AB = p_AC and theta_hat_AB = theta_hat_AC.",
+        "D": "p_AB != p_AC and theta_hat_AB = -theta_hat_AC."
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 6: Outcome of cross-validation with paired test observations. The values indicate the number of times where two models both classify correctly, both classify incorrectly (i.e., both wrong), or one classifies correctly and the other one incorrectly.\n\n                M_A correct    M_A wrong\n M_B correct       416            42\n M_B wrong          38            68\n M_C correct        68            38\n M_C wrong          42           416",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q12.png",
+      "source_location": "exam p.6, Table 6 (paired cross-validation contingency table for M_A vs M_B and M_A vs M_C)"
+    },
+    {
+      "question_id": "Q13",
+      "number": 13,
+      "topic": "Classifier decision boundaries / model identification",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider a subset of the Sound Classification dataset (described in Table 1) after it has been projected onto the first two principal components, thereby giving rise to a two-dimensional dataset with each observation having two coordinates, b1 and b2. We will consider the following four classifiers: LR: Logistic regression. ANN: Artificial neural network with 5 hidden units. CT: Classification tree with regular axis-aligned splits. KNN: K-nearest neighbours with K = 3. Suppose the classifiers are trained on the two-dimensional dataset and the decision boundary for each of the four classifiers is given in Figure 3. Which one of the following statements is correct?\n\nA. Classifier 1 corresponds to LR, Classifier 2 corresponds to ANN, Classifier 3 corresponds to KNN, Classifier 4 corresponds to CT.\nB. Classifier 1 corresponds to ANN, Classifier 2 corresponds to KNN, Classifier 3 corresponds to LR, Classifier 4 corresponds to CT.\nC. Classifier 1 corresponds to KNN, Classifier 2 corresponds to CT, Classifier 3 corresponds to ANN, Classifier 4 corresponds to LR.\nD. Classifier 1 corresponds to LR, Classifier 2 corresponds to KNN, Classifier 3 corresponds to ANN, Classifier 4 corresponds to CT.",
+      "options": {
+        "A": "Classifier 1 corresponds to LR, Classifier 2 corresponds to ANN, Classifier 3 corresponds to KNN, Classifier 4 corresponds to CT.",
+        "B": "Classifier 1 corresponds to ANN, Classifier 2 corresponds to KNN, Classifier 3 corresponds to LR, Classifier 4 corresponds to CT.",
+        "C": "Classifier 1 corresponds to KNN, Classifier 2 corresponds to CT, Classifier 3 corresponds to ANN, Classifier 4 corresponds to LR.",
+        "D": "Classifier 1 corresponds to LR, Classifier 2 corresponds to KNN, Classifier 3 corresponds to ANN, Classifier 4 corresponds to CT."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q13.png",
+      "source_location": "exam p.7, Figure 3 (four decision-boundary plots over PCA1/PCA2 for Classifier 1..4)"
+    },
+    {
+      "question_id": "Q14",
+      "number": 14,
+      "topic": "Two-layer cross-validation (counting trainings/tests)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Determine which one of the following statements is always true about two-layer cross-validation with K1 outer folds, K2 inner folds, S model complexities, and a dataset of size N (cf. Algorithm 6 in the lecture notes).\n\nA. The total number of times each observation is used for testing is K1 x (K2 x S + 1).\nB. The total number of times each observation is used for training is (K1 - 1) x ((K2 - 1) x S + 1).\nC. The total number of models needed to be trained is K2 x S x (K1 + 1).\nD. The size of the test set in each of the K1 outer folds is always greater than the test set in the K2 inner folds.",
+      "options": {
+        "A": "The total number of times each observation is used for testing is K1 x (K2 x S + 1).",
+        "B": "The total number of times each observation is used for training is (K1 - 1) x ((K2 - 1) x S + 1).",
+        "C": "The total number of models needed to be trained is K2 x S x (K1 + 1).",
+        "D": "The size of the test set in each of the K1 outer folds is always greater than the test set in the K2 inner folds."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.7, Question 14 (pure text/conceptual)"
+    },
+    {
+      "question_id": "Q15",
+      "number": 15,
+      "topic": "Decision tree / classification boundary rule assignment",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider an artificial dataset of N = 4000 observations. The dataset is classified according to a decision tree of the form shown in Figure 4 (a classification tree with internal nodes A, B, C, D, leaves labelled Class 1 / Class 2, and True/False branches) resulting in a partition into classes indicated by the colors/markers in Figure 5 (the classification boundary scatter). What is the correct rule assignment to the nodes in the decision tree?\n\nA. A: ||[x1; x2] - [2; 4]||_1 < 3, B: ||[x1; x2] - [6; 2]||_2 < 3, C: ||[x1; x2] - [2; 4]||_2 < 2, D: ||[x1; x2] - [2; 6]||_1 < 3\nB. A: ||[x1; x2] - [6; 2]||_2 < 3, B: ||[x1; x2] - [2; 6]||_1 < 3, C: ||[x1; x2] - [2; 4]||_1 < 3, D: ||[x1; x2] - [2; 4]||_2 < 2\nC. A: ||[x1; x2] - [2; 4]||_1 < 3, B: ||[x1; x2] - [2; 6]||_2 < 3, C: ||[x1; x2] - [6; 2]||_2 < 3, D: ||[x1; x2] - [2; 4]||_2 < 2\nD. A: ||[x1; x2] - [2; 4]||_1 < 2, B: ||[x1; x2] - [2; 6]||_2 < 3, C: ||[x1; x2] - [6; 2]||_2 < 3, D: ||[x1; x2] - [2; 4]||_1 < 3",
+      "options": {
+        "A": "A: ||[x1; x2] - [2; 4]||_1 < 3, B: ||[x1; x2] - [6; 2]||_2 < 3, C: ||[x1; x2] - [2; 4]||_2 < 2, D: ||[x1; x2] - [2; 6]||_1 < 3",
+        "B": "A: ||[x1; x2] - [6; 2]||_2 < 3, B: ||[x1; x2] - [2; 6]||_1 < 3, C: ||[x1; x2] - [2; 4]||_1 < 3, D: ||[x1; x2] - [2; 4]||_2 < 2",
+        "C": "A: ||[x1; x2] - [2; 4]||_1 < 3, B: ||[x1; x2] - [2; 6]||_2 < 3, C: ||[x1; x2] - [6; 2]||_2 < 3, D: ||[x1; x2] - [2; 4]||_2 < 2",
+        "D": "A: ||[x1; x2] - [2; 4]||_1 < 2, B: ||[x1; x2] - [2; 6]||_2 < 3, C: ||[x1; x2] - [6; 2]||_2 < 3, D: ||[x1; x2] - [2; 4]||_1 < 3"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q15.png",
+      "source_location": "exam p.8, Figure 4 (classification tree) and Figure 5 (2D classification boundary scatter with heart-shaped Class 2 region)"
+    },
+    {
+      "question_id": "Q16",
+      "number": 16,
+      "topic": "Linear regression (effect of scaling the data matrix)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider standard linear regression (no regularization) with the prediction rule f(x_i; w) = x_bar_i^T w. Here x_bar_i^T = [1, x_i^T] is the i'th observation, x_i, concatenated with a constant with a value of 1. Suppose the weights, w = [w0, w1, ..., wM]^T (including the intercept term w0), were learned by predicting y_r from X_bar = [x_bar_1, x_bar_2, ..., x_bar_N]^T (N is the number of observations) and minimizing the sum-of-squares error function, as usual. What solution, w_scaled, do you obtain if you scale all elements in X_bar by a factor of 1/beta, with beta in R being a constant, before learning the weights?\n\nA. w_scaled = (1/beta) w\nB. w_scaled = w^beta\nC. w_scaled = beta w\nD. w_scaled = beta^2 w",
+      "options": {
+        "A": "w_scaled = (1/beta) w",
+        "B": "w_scaled = w^beta",
+        "C": "w_scaled = beta w",
+        "D": "w_scaled = beta^2 w"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.8, Question 16 (pure text/math)"
+    },
+    {
+      "question_id": "Q17",
+      "number": 17,
+      "topic": "Two-layer cross-validation (total training time)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Suppose a neural network is trained to classify sounds. As part of training the network, we wish to select between eight different ways to transform the attributes (i.e., S = 8 models) and estimate the generalization error of the optimal choice. In the outer loop we opt for K1 = 3-fold cross-validation, and in the inner K2 = 5-fold cross-validation. The time taken to train a single model is 20 minutes, and this can be assumed constant for each fold. If the time taken to test a model is negligible, what is the total time required for the 2-level cross-validation procedure?\n\nA. 360 minutes\nB. 2460 minutes\nC. 4920 minutes\nD. 2400 minutes",
+      "options": {
+        "A": "360 minutes",
+        "B": "2460 minutes",
+        "C": "4920 minutes",
+        "D": "2400 minutes"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.9, Question 17 (pure text/computation)"
+    },
+    {
+      "question_id": "Q18",
+      "number": 18,
+      "topic": "Logistic regression (iso-probability lines / decision geometry)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Suppose a logistic regression model has been trained on a two-dimensional dataset based on two attributes from the Sound Classification dataset. Now consider four test observations:\nx1 = [1, 1]^T\nx2 = [-1.0, 0.6]^T\nx3 = [-0.5, -0.5]^T\nx4 = [-0.91, -0.16]^T\nAdditionally, the following probabilities are known:\np(y = Machine | x1) = 0.73\np(y = Machine | x2) = 0.47\np(y = Machine | x3) = 0.73\nDetermine which one of the following statements is true. Hint: The problem can be solved without complicated numerical computation.\n\nA. p(y = Machine | x4) < p(y = Machine | x2)\nB. p(y = Machine | x4) = p(y = Machine | x1)\nC. p(y = Machine | x4) > p(y = Machine | x2)\nD. p(y = Machine | x4) > p(y = Machine | x1)",
+      "options": {
+        "A": "p(y = Machine | x4) < p(y = Machine | x2)",
+        "B": "p(y = Machine | x4) = p(y = Machine | x1)",
+        "C": "p(y = Machine | x4) > p(y = Machine | x2)",
+        "D": "p(y = Machine | x4) > p(y = Machine | x1)"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.9, Question 18 (test points and probabilities printed inline as text)"
+    },
+    {
+      "question_id": "Q19",
+      "number": 19,
+      "topic": "Ridge regression (identifying the feature transformation)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider once again the Sound Classification dataset, but this time we limit ourselves to N = 4 observations and a single attribute from the full dataset with the i'th observation denoted by x_i. In particular, we consider transformations of the i'th observation, x_i, resulting in x_bar_i (a column vector). The goal is to predict y_r, and to achieve this; we will apply ridge regression with the prediction rule f(x_bar_i; w0, w) = w0 + x_bar_i^T w. Ridge regression determines the constant offset, w0, and weights w = [w1, w2, ..., wM]^T (M is the dimensionality of x_bar_i), by minimizing a cost function of the form:\nE_lambda = sum_{i=1}^{N} (y_r,i - f(x_bar_i; w0, w))^2 + lambda ||w||_2^2\nSuppose w0 and w were learned based on the dataset in Table 7 using a specific transformation of x. The weights were learned with lambda = 0.25 resulting in E_{lambda=0.25} ~ 0.2, w0 = 0.0 and w = [0.39, 0.77]^T. Standardization was performed on the data matrix with the transformed observations, X_bar = [x_bar_1, x_bar_2, x_bar_3, x_bar_4]^T, prior to learning the parameters by subtracting the column-wise mean and dividing by the unbiased estimate of the column-wise standard deviation. Which one of the following transformations was used when learning w0 and w?\n\nA. x_bar_i = [x_i, x_i^3]^T\nB. x_bar_i = [x_i, sin(x_i), x_i^2]^T\nC. x_bar_i = [x_i, sin(x_i)]^T\nD. x_bar_i = [x_i, x_i^2]^T",
+      "options": {
+        "A": "x_bar_i = [x_i, x_i^3]^T",
+        "B": "x_bar_i = [x_i, sin(x_i), x_i^2]^T",
+        "C": "x_bar_i = [x_i, sin(x_i)]^T",
+        "D": "x_bar_i = [x_i, x_i^2]^T"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 7: A subset of the Sound Classification dataset.\n\n            i=1     i=2     i=3     i=4\n  x_i      -0.5    0.39    1.19   -1.08\n  y_r,i    -0.86   -0.61   1.37    0.1",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q19.png",
+      "source_location": "exam p.9, Table 7 (4-observation dataset with x_i and y_r,i)"
+    },
+    {
+      "question_id": "Q20",
+      "number": 20,
+      "topic": "Neural networks / activation function identification from output plots",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider a two-layer neural network f : R -> R for regression with two hidden units (i.e. z^(1) in R^2) and of the form\nz^(1) = h^(1)(x_bar W^(1)),\nf(x) = h^(2)(z_bar^(1) W^(2)),\nwhere x_bar = [1, x], z_bar^(1) = [1, z1^(1), z2^(1)], h^(1)(x) is the activation function for the hidden layer that is applied elementwise, and h^(2)(x) is the activation function of the output layer. Assume that h^(2)(x) is the hyperbolic tangent activation function and the network's weights are given by\nW^(1) = [[0, 0], [1, -2]] and W^(2) = [0, 1, 1]^T.\nFigure 6 shows f(x) for four different choices of the activation function h^(1) (the four plots A, B, C, D show f(x) versus x on the interval [-0.5, 0.5]). Which one of the following statements is correct?\n\nA. For f_A, h^(1) is the rectified linear unit; For f_B, h^(1) is the identity function; For f_C, h^(1) is the hyperbolic tangent; For f_D, h^(1) is the logistic sigmoid.\nB. For f_A, h^(1) is the identity function; For f_B, h^(1) is the logistic sigmoid; For f_C, h^(1) is the hyperbolic tangent; For f_D, h^(1) is the rectified linear unit.\nC. For f_A, h^(1) is the identity function; For f_B, h^(1) is the hyperbolic tangent; For f_C, h^(1) is the logistic sigmoid; For f_D, h^(1) is the rectified linear unit.\nD. For f_A, h^(1) is the hyperbolic tangent; For f_B, h^(1) is the identity function; For f_C, h^(1) is the logistic sigmoid; For f_D, h^(1) is the rectified linear unit.",
+      "options": {
+        "A": "For f_A, h^(1) is the rectified linear unit; For f_B, h^(1) is the identity function; For f_C, h^(1) is the hyperbolic tangent; For f_D, h^(1) is the logistic sigmoid.",
+        "B": "For f_A, h^(1) is the identity function; For f_B, h^(1) is the logistic sigmoid; For f_C, h^(1) is the hyperbolic tangent; For f_D, h^(1) is the rectified linear unit.",
+        "C": "For f_A, h^(1) is the identity function; For f_B, h^(1) is the hyperbolic tangent; For f_C, h^(1) is the logistic sigmoid; For f_D, h^(1) is the rectified linear unit.",
+        "D": "For f_A, h^(1) is the hyperbolic tangent; For f_B, h^(1) is the identity function; For f_C, h^(1) is the logistic sigmoid; For f_D, h^(1) is the rectified linear unit."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q20.png",
+      "source_location": "exam p.10, Figure 6 (four plots A/B/C/D of network output f(x) vs x for different hidden activations) plus weight matrices printed inline"
+    },
+    {
+      "question_id": "Q21",
+      "number": 21,
+      "topic": "ROC curve identification (from TP/TN/FN/FP vs threshold)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We wish to predict whether an observation from the Sound Classification dataset (see Table 1) belongs to the Machine class (or not). To accomplish this, we fit a logistic regression model to the dataset, and for each observation x_i, y_i obtain a class-probability prediction y_hat_i in [0, 1]. We threshold the class-probability at different values theta thereby obtaining, for each value of theta, the true positives (TP), true negatives (TN), false positives (FP) and false negatives (FN). These are plotted as functions of theta in Figure 8. Which of the receiver-operator characteristic (ROC) plots shown in Figure 7 corresponds to these graphs?\n\nA. ROC curve 1\nB. ROC curve 2\nC. ROC curve 3\nD. ROC curve 4",
+      "options": {
+        "A": "ROC curve 1",
+        "B": "ROC curve 2",
+        "C": "ROC curve 3",
+        "D": "ROC curve 4"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q21.png",
+      "source_location": "exam p.11, Figure 7 (four candidate ROC curves) and Figure 8 (TP/TN/FN/FP as functions of threshold theta)"
+    },
+    {
+      "question_id": "Q22",
+      "number": 22,
+      "topic": "Association mining (confidence of association rule)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "In a market basket problem, we consider two item sets X and Y. Assume that the support of X is 3/5, the support of Y is 8/15, and the confidence of the association rule X -> Y is 1/6. What is the confidence of Y -> X?\n\nA. conf(Y -> X) = 1/10\nB. conf(Y -> X) = 4/27\nC. conf(Y -> X) = 1/6\nD. conf(Y -> X) = 3/16",
+      "options": {
+        "A": "conf(Y -> X) = 1/10",
+        "B": "conf(Y -> X) = 4/27",
+        "C": "conf(Y -> X) = 1/6",
+        "D": "conf(Y -> X) = 3/16"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.11, Question 22 (pure text/math)"
+    },
+    {
+      "question_id": "Q23",
+      "number": 23,
+      "topic": "Paired test for regression models (estimate, CI, p-value)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider a statistical procedure to determine if there is a difference between two regression models, M1 and M2, using a paired test as described in Section 11.3.6 of the lecture notes. The distribution of the paired differences in predictions between the two models, y_M1 - y_M2, using a 5-fold cross validation setup is illustrated as a histogram in Figure 9. Determine which combination of estimated difference (z_hat), confidence interval (CI) and p-value is the only plausible answer.\n\nA. z_hat = 0.69, CI = [0.63, 0.75], p-value < 0.05\nB. z_hat = -1.05, CI = [-1.29, -0.81], p-value < 0.05\nC. z_hat = 0.63, CI = [0.57, 0.69], p-value < -0.05\nD. z_hat = 0.76, CI = [0.59, 0.76], p-value < 0.05",
+      "options": {
+        "A": "z_hat = 0.69, CI = [0.63, 0.75], p-value < 0.05",
+        "B": "z_hat = -1.05, CI = [-1.29, -0.81], p-value < 0.05",
+        "C": "z_hat = 0.63, CI = [0.57, 0.69], p-value < -0.05",
+        "D": "z_hat = 0.76, CI = [0.59, 0.76], p-value < 0.05"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q23.png",
+      "source_location": "exam p.12, Figure 9 (histogram of paired differences y_M1 - y_M2; center/spread must be read off the figure)"
+    },
+    {
+      "question_id": "Q24",
+      "number": 24,
+      "topic": "AdaBoost (classifier importance alpha)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider again the Sound Classification dataset. Suppose we wish to predict the class label y using a decision tree model, and to improve performance, we wish to apply AdaBoost. We apply AdaBoost (as described in Algorithm 7 of the lecture notes) to the binarized version of the dataset in Table 8. Suppose that the classifier learned on dataset D1 in the first round of boosting is\nf1(b1, b2, b3, b4, b5, b6) = C1 if b3 = 1 and b4 = 1, else C2.\nWhat is the importance of the classifier f1?\n\nA. alpha_1 ~ 0.84\nB. alpha_1 ~ 0.42\nC. alpha_1 ~ 0.70\nD. alpha_1 ~ 0.30",
+      "options": {
+        "A": "alpha_1 ~ 0.84",
+        "B": "alpha_1 ~ 0.42",
+        "C": "alpha_1 ~ 0.70",
+        "D": "alpha_1 ~ 0.30"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 8: Binarized version of the Sound Classification dataset. Each feature b_i is obtained by taking a feature x_i and letting b_i = 1 correspond to a value x_i greater than the median (otherwise b_i = 0).\nClasses: black observations {o1, o2, o3, o4} belong to class C1 (Machine); red observations {o5, o6, o7, o8, o9, o10} belong to class C2 (Natural).\n\n        b1  b2  b3  b4  b5  b6\n o1      1   1   0   1   0   0\n o2      1   0   1   1   0   0\n o3      0   0   1   1   1   1\n o4      0   1   1   1   1   1\n o5      1   1   0   1   1   0\n o6      1   1   0   1   1   1\n o7      0   1   1   1   0   1\n o8      0   1   0   1   1   1\n o9      0   1   0   1   1   1\no10      1   1   1   1   1   0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q24.png",
+      "source_location": "exam p.12, Table 8 (10x6 binarized market-basket matrix with class colors)"
+    },
+    {
+      "question_id": "Q25",
+      "number": 25,
+      "topic": "Gaussian Mixture Model / principal component directions",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "A Gaussian Mixture Model with K = 3 components has been trained on a centered dataset (i.e., the column-wise mean has been subtracted) with two attributes. The model is defined as p(x) = sum_{k=1}^{3} w_k N(x | mu_k, Sigma_k). The component weights and covariance matrices are:\nw1 = 0.5, Sigma_1 = [[1.1, 2.0], [2.0, 5.5]]\nw2 = 0.49, Sigma_2 = [[1.1, 0.0], [0.0, 5.5]]\nw3 = 0.01, Sigma_3 = [[1.5, 0.0], [0.0, 1.5]]\nDetermine which one of the following options corresponds to the first principal component direction, v1, and the second principal component direction, v2, of the dataset modeled by p(x).\n\nA. v1 ~ [-0.3, -1.0]^T, v2 ~ [-1.0, 0.3]^T\nB. v1 ~ [-0.3, -1.0]^T, v2 ~ [0.0, 1.0]^T\nC. v1 ~ [0.7, -0.7]^T, v2 ~ [0.7, 0.7]^T\nD. v1 ~ [0.7, 0.7]^T, v2 ~ [0.7, -0.7]^T",
+      "options": {
+        "A": "v1 ~ [-0.3, -1.0]^T, v2 ~ [-1.0, 0.3]^T",
+        "B": "v1 ~ [-0.3, -1.0]^T, v2 ~ [0.0, 1.0]^T",
+        "C": "v1 ~ [0.7, -0.7]^T, v2 ~ [0.7, 0.7]^T",
+        "D": "v1 ~ [0.7, 0.7]^T, v2 ~ [0.7, -0.7]^T"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.13, Question 25 (component weights and covariance matrices printed inline as text; Figure 10 contour plot is illustrative only)"
+    },
+    {
+      "question_id": "Q26",
+      "number": 26,
+      "topic": "Backward selection (counting models tested)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the Sound Classification dataset in Table 1. We apply backward selection to find an interpretable linear regression model which uses a subset of the M = 6 attributes to predict the Perceived annoyance measure (PAM) y_r. Recall backward selection chooses models based on the test error as determined by cross-validation, and in our case we use the hold-out method to generate a single test/training split. Suppose backward selection ends up selecting the attributes x1, x4, x5, and x6, what is the minimal number of models which were tested in order to obtain this result?\n\nA. 15 models\nB. 19 models\nC. 16 models\nD. 10 models",
+      "options": {
+        "A": "15 models",
+        "B": "19 models",
+        "C": "16 models",
+        "D": "10 models"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.13, Question 26 (pure text/conceptual)"
+    },
+    {
+      "question_id": "Q27",
+      "number": 27,
+      "topic": "Kernel density estimation / leave-one-out generalization error",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A small 1-dimensional dataset with N = 3 observations has been subsampled from the Sound Classification dataset, specifically:\nX = [-0.82, 0.0, 2.5]^T.\nA kernel density estimator (KDE) has been fitted to the small dataset with different lambda using the standard Gaussian kernel (i.e., the individual Gaussian components in the KDE have variance sigma^2 = lambda^2). The resulting densities are illustrated in Figure 11. Consider a leave-one-out (LOO) procedure for computing the generalization error for different lambda as in Section 20.1.1 of the lecture notes. The test log likelihood for the whole dataset is defined as L(lambda) = (1/N) sum_{i=1}^{N} log[ sum_{j!=i} (1/(N-1)) N(x_i | x_j, lambda^2) ] = (1/N) sum_{i=1}^{N} log[ sum_{j!=i} (1/(N-1)) M_ij ] = (1/N) sum_{i=1}^{N} L_i, i.e. L_i corresponds to the log density log p(x) of the KDE constructed without x_i and evaluated at x_i. Determine which value of lambda in Figure 11 results in L = [-2.3, -2.3, -13.91].\n\nA. lambda = 1.15\nB. lambda = 0.15\nC. lambda = 0.21\nD. lambda = 0.49",
+      "options": {
+        "A": "lambda = 1.15",
+        "B": "lambda = 0.15",
+        "C": "lambda = 0.21",
+        "D": "lambda = 0.49"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2023_Q27.png",
+      "source_location": "exam p.14, Figure 11 (four KDE density plots for lambda = 0.15, 0.21, 0.49, 1.15; component-density values at the observations must be read off the curves) plus data vector printed inline"
+    }
+  ]
+}

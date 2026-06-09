@@ -1,0 +1,551 @@
+{
+  "exam": "Spring2025",
+  "course": "02450",
+  "source_pdf": "ML-examsets/Spring2025.pdf",
+  "solution_pdf": "ML-solutions/Spring2025_sol.pdf",
+  "n_questions": 27,
+  "answer_key": {
+    "Q1": "A",
+    "Q2": "B",
+    "Q3": "C",
+    "Q4": "C",
+    "Q5": "D",
+    "Q6": "B",
+    "Q7": "D",
+    "Q8": "A",
+    "Q9": "B",
+    "Q10": "B",
+    "Q11": "B",
+    "Q12": "A",
+    "Q13": "C",
+    "Q14": "D",
+    "Q15": "C",
+    "Q16": "B",
+    "Q17": "B",
+    "Q18": "D",
+    "Q19": "A",
+    "Q20": "D",
+    "Q21": "A",
+    "Q22": "B",
+    "Q23": "A",
+    "Q24": "D",
+    "Q25": "B",
+    "Q26": "B",
+    "Q27": "C"
+  },
+  "questions": [
+    {
+      "question_id": "Q1",
+      "number": 1,
+      "topic": "PCA / correlation matrix",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "The main dataset used in this exam is the Welding robot dataset described in Table 1. We consider the first four attributes of the Welding robot dataset in Table 1. A scatter plot matrix for these attributes is given in Figure 1. Which one of the following matrices represents the empirical correlation matrix for these attributes?\n\nA. C_hat ~ [[1.0, 0.01, -0.15, 0.01], [0.01, 1.0, 0.18, 0.27], [-0.15, 0.18, 1.0, 0.82], [0.01, 0.27, 0.82, 1.0]]\nB. C_hat ~ [[1.0, 0.01, -0.15, 0.01], [0.01, 1.0, 0.18, 0.27], [-0.15, 0.18, 1.0, 0.16], [0.01, 0.27, 0.16, 1.0]]\nC. C_hat ~ [[1.0, 0.01, -0.85, 0.01], [0.01, 1.0, 0.18, 0.27], [-0.85, 0.18, 1.0, 0.82], [0.01, 0.27, 0.82, 1.0]]\nD. C_hat ~ [[1.0, 0.01, -0.15, 0.01], [0.01, 1.0, 0.18, 0.27], [-0.15, 0.18, 1.0, -0.82], [0.01, 0.27, -0.82, 1.0]]",
+      "options": {
+        "A": "C_hat ~ [[1.0, 0.01, -0.15, 0.01], [0.01, 1.0, 0.18, 0.27], [-0.15, 0.18, 1.0, 0.82], [0.01, 0.27, 0.82, 1.0]]",
+        "B": "C_hat ~ [[1.0, 0.01, -0.15, 0.01], [0.01, 1.0, 0.18, 0.27], [-0.15, 0.18, 1.0, 0.16], [0.01, 0.27, 0.16, 1.0]]",
+        "C": "C_hat ~ [[1.0, 0.01, -0.85, 0.01], [0.01, 1.0, 0.18, 0.27], [-0.85, 0.18, 1.0, 0.82], [0.01, 0.27, 0.82, 1.0]]",
+        "D": "C_hat ~ [[1.0, 0.01, -0.15, 0.01], [0.01, 1.0, 0.18, 0.27], [-0.15, 0.18, 1.0, -0.82], [0.01, 0.27, -0.82, 1.0]]"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q1.png",
+      "source_location": "exam p.1, Figure 1 (scatter plot matrix with density coloring)"
+    },
+    {
+      "question_id": "Q2",
+      "number": 2,
+      "topic": "Histograms vs scatter plot / distributions",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We consider the histograms of the four attributes in Figure 2. Match the histograms to the attributes by using the information regarding the distributions of the points from Figure 1. Which one of the following statements is correct?\n\nA. Histogram 1: x1, Histogram 2: x2, Histogram 3: x4, Histogram 4: x3.\nB. Histogram 1: x4, Histogram 2: x2, Histogram 3: x3, Histogram 4: x1.\nC. Histogram 1: x3, Histogram 2: x1, Histogram 3: x2, Histogram 4: x4.\nD. Histogram 1: x4, Histogram 2: x1, Histogram 3: x2, Histogram 4: x3.",
+      "options": {
+        "A": "Histogram 1: x1, Histogram 2: x2, Histogram 3: x4, Histogram 4: x3.",
+        "B": "Histogram 1: x4, Histogram 2: x2, Histogram 3: x3, Histogram 4: x1.",
+        "C": "Histogram 1: x3, Histogram 2: x1, Histogram 3: x2, Histogram 4: x4.",
+        "D": "Histogram 1: x4, Histogram 2: x1, Histogram 3: x2, Histogram 4: x3."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q2.png",
+      "source_location": "exam p.1, Figure 1 (scatter plot matrix) and Figure 2 (four histograms)"
+    },
+    {
+      "question_id": "Q3",
+      "number": 3,
+      "topic": "kNN / leave-one-out cross-validation",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the distances in Table 2 based on 10 observations from the Welding robot dataset. The class labels C1, C2 (see table caption for details) will be predicted using a k-nearest neighbour classifier based on the distances given in Table 2. Suppose we use leave-one-out cross validation (i.e., the observation that is being predicted is left out) and a 1-nearest neighbour classifier (i.e., k = 1). What is the error rate computed for all N = 10 observations?\n\nA. error rate = 1\nB. error rate = 9/10\nC. error rate = 2/5\nD. error rate = 1/5",
+      "options": {
+        "A": "error rate = 1",
+        "B": "error rate = 9/10",
+        "C": "error rate = 2/5",
+        "D": "error rate = 1/5"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 2: Pairwise Euclidean distances d(o_i, o_j) between 10 observations (M = 5 attributes).\nClasses: black observations {o1, o2, o3} belong to class C1 (Ideal); red observations {o4, o5, o6, o7, o8, o9, o10} belong to class C2 (Normal).\n\n          o1     o2     o3     o4     o5     o6     o7     o8     o9    o10\n o1      0.0   10.0   11.8    8.1    9.9    6.6   10.7    2.3    7.5    7.4\n o2     10.0    0.0   13.7    4.3    9.5    7.0    8.7    8.4    5.4    6.2\n o3     11.8   13.7    0.0   11.3    5.8   10.2    7.0   10.9    9.0    8.4\n o4      8.1    4.3   11.3    0.0    8.7    3.3    7.5    5.9    2.5    3.0\n o5      9.9    9.5    5.8    8.7    0.0    8.4    3.4    9.0    6.5    6.3\n o6      6.6    7.0   10.2    3.3    8.4    0.0    7.9    4.5    3.0    2.9\n o7     10.7    8.7    7.0    7.5    3.4    7.9    0.0    9.3    5.9    5.7\n o8      2.3    8.4   10.9    5.9    9.0    4.5    9.3    0.0    5.5    5.4\n o9      7.5    5.4    9.0    2.5    6.5    3.0    5.9    5.5    0.0    0.8\no10      7.4    6.2    8.4    3.0    6.3    2.9    5.7    5.4    0.8    0.0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q3.png",
+      "source_location": "exam p.2, Table 2 (10x10 pairwise Euclidean distance matrix)"
+    },
+    {
+      "question_id": "Q4",
+      "number": 4,
+      "topic": "Hierarchical clustering / dendrograms (minimum linkage)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A hierarchical clustering is applied to the 10 observations in Table 2 using minimum linkage. Which one of the dendrograms shown in Figure 3 corresponds to the distances given in Table 2?\n\nA. Dendrogram 1\nB. Dendrogram 2\nC. Dendrogram 3\nD. Dendrogram 4",
+      "options": {
+        "A": "Dendrogram 1",
+        "B": "Dendrogram 2",
+        "C": "Dendrogram 3",
+        "D": "Dendrogram 4"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q4.png",
+      "source_location": "exam p.2, Figure 3 (four candidate dendrograms; answer options are the plots) plus Table 2 distances"
+    },
+    {
+      "question_id": "Q5",
+      "number": 5,
+      "topic": "PCA / variance of projection (unbiased estimator)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider the Principal Component Analysis (PCA) of the Welding robot dataset represented by the N x M data matrix X with the observations as row vectors, i.e., the i'th row in X is x_i^T. The Singular Value Decomposition (SVD) is given by X_tilde = U S V^T, where X_tilde is the centered data matrix obtained from X by subtracting the column-wise mean. The projection of X onto a principal component results in N scalar values denoted by b = {b1, b2, ..., bN}. Determine which one of the following options results in an unbiased estimate of the variance of b when projecting X onto the second principal component.\n\nA. Var[b] is always 1\nB. Var[b] = (1/N) sum_{i=1}^{N} (x_i^T u_2)^2\nC. Var[b] = (1/(N-1)) v_2^T X_tilde^T v_2\nD. Var[b] = (1/(N-1)) sum_{i=1}^{N} [ (x_i^T - (1/N) sum_{j=1}^{N} x_j^T) v_2 ]^2",
+      "options": {
+        "A": "Var[b] is always 1",
+        "B": "Var[b] = (1/N) sum_{i=1}^{N} (x_i^T u_2)^2",
+        "C": "Var[b] = (1/(N-1)) v_2^T X_tilde^T v_2",
+        "D": "Var[b] = (1/(N-1)) sum_{i=1}^{N} [ (x_i^T - (1/N) sum_{j=1}^{N} x_j^T) v_2 ]^2"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 5 (pure text/math)"
+    },
+    {
+      "question_id": "Q6",
+      "number": 6,
+      "topic": "PCA / interpreting V loadings",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the Principal Component Analysis of the Welding robot dataset, and in particular the SVD decomposition of the centered data matrix X_tilde = U S V^T, and the corresponding matrix\nV = [[0.01, 0.03, -0.95, -0.22, 0.23], [0.31, -0.67, -0.07, 0.57, 0.35], [0.64, 0.05, 0.25, -0.55, 0.47], [0.68, 0.06, -0.19, 0.11, -0.7], [0.19, 0.74, -0.02, 0.56, 0.33]].\nWhich one of the following statements is correct?\n\nA. An observation with a low value of x2 (FORCE), a low value of x3 (VIB), and a low value of x4 (SPEED) will typically have a positive value of the projection onto principal component number 1.\nB. An observation with a high value of x2 (FORCE), and a low value of x5 (ATEMP) will typically have a negative value of the projection onto principal component number 2.\nC. An observation with a high value of x1 (MTEMP), a low value of x2 (FORCE), a high value of x3 (VIB), and a low value of x5 (ATEMP) will typically have a positive value of the projection onto principal component number 4.\nD. An observation with a high value of x1 (MTEMP), and a low value of x3 (VIB) will typically have a positive value of the projection onto principal component number 3.",
+      "options": {
+        "A": "An observation with a low value of x2 (FORCE), a low value of x3 (VIB), and a low value of x4 (SPEED) will typically have a positive value of the projection onto principal component number 1.",
+        "B": "An observation with a high value of x2 (FORCE), and a low value of x5 (ATEMP) will typically have a negative value of the projection onto principal component number 2.",
+        "C": "An observation with a high value of x1 (MTEMP), a low value of x2 (FORCE), a high value of x3 (VIB), and a low value of x5 (ATEMP) will typically have a positive value of the projection onto principal component number 4.",
+        "D": "An observation with a high value of x1 (MTEMP), and a low value of x3 (VIB) will typically have a positive value of the projection onto principal component number 3."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 6 (V matrix printed inline as text)"
+    },
+    {
+      "question_id": "Q7",
+      "number": 7,
+      "topic": "Association mining / itemset support",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We consider the binary matrix from Table 3 as a market basket problem consisting of N = 10 transactions o1, ..., o10 and M = 5 items f1, ..., f5. Determine how many itemsets that have support epsilon > 0.55.\n\nA. 32\nB. 9\nC. 6\nD. 3",
+      "options": {
+        "A": "32",
+        "B": "9",
+        "C": "6",
+        "D": "3"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 3: Binarized version of the Welding robot dataset. f_i = 1 if attribute x_i is greater than the median, else 0.\nClasses: black observations {o1, o2, o3} belong to class C1; red observations {o4, o5, o6, o7, o8, o9, o10} belong to class C2.\n\n        f1  f2  f3  f4  f5\n o1      0   1   1   0   1\n o2      0   1   0   0   1\n o3      1   1   1   0   1\n o4      0   0   0   0   1\n o5      0   1   1   1   1\n o6      0   0   1   1   1\n o7      0   0   0   1   1\n o8      0   0   1   1   1\n o9      0   1   0   0   1\no10      0   0   1   1   1",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q7.png",
+      "source_location": "exam p.3, Table 3 (10x5 binary market-basket matrix)"
+    },
+    {
+      "question_id": "Q8",
+      "number": 8,
+      "topic": "Naive Bayes / conditional probabilities",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider a Naive Bayes classifier for determining if y = 1 (Ideal operation) or y = 2 (Normal operation) based on the binarized version of the Welding robot dataset shown in Table 3. Determine which one of the following statements is correct.\n\nA. p(y = 2 | f2 = 1) = p(y = 2 | f2 = 1, f5 = 1)\nB. p(y = 1 | f1 = 0, f2 = 1, f3 = 1, f4 = 0) = 0.0\nC. p(y = 2 | f2 = 1) = 1/5\nD. p(y = 2 | f2 = 1) = p(y = 2 | f2 = 0)",
+      "options": {
+        "A": "p(y = 2 | f2 = 1) = p(y = 2 | f2 = 1, f5 = 1)",
+        "B": "p(y = 1 | f1 = 0, f2 = 1, f3 = 1, f4 = 0) = 0.0",
+        "C": "p(y = 2 | f2 = 1) = 1/5",
+        "D": "p(y = 2 | f2 = 1) = p(y = 2 | f2 = 0)"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 3: Binarized version of the Welding robot dataset. f_i = 1 if attribute x_i is greater than the median, else 0.\nClasses: black observations {o1, o2, o3} belong to class C1 (y=1, Ideal); red observations {o4, o5, o6, o7, o8, o9, o10} belong to class C2 (y=2, Normal).\n\n        f1  f2  f3  f4  f5\n o1      0   1   1   0   1\n o2      0   1   0   0   1\n o3      1   1   1   0   1\n o4      0   0   0   0   1\n o5      0   1   1   1   1\n o6      0   0   1   1   1\n o7      0   0   0   1   1\n o8      0   0   1   1   1\n o9      0   1   0   0   1\no10      0   0   1   1   1",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q8.png",
+      "source_location": "exam p.3, Table 3 (10x5 binary matrix with class labels)"
+    },
+    {
+      "question_id": "Q9",
+      "number": 9,
+      "topic": "k-means clustering / convergence",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider a small dataset comprised of N = 7 observations\nx = [3, 4, 6, 13, 16, 18, 20].\nSuppose a k-means algorithm is applied to the dataset with K = 3 clusters and using Euclidean distances. At a given stage of the algorithm the data is partitioned into the blocks:\n{3, 4}, {6, 13, 16}, {18, 20}\nWhat clustering will the k-means algorithm eventually converge to?\n\nA. {}, {3, 4, 6, 13, 16}, {18, 20}\nB. {3, 4, 6}, {13}, {16, 18, 20}\nC. {3, 4}, {6, 13, 16, 18}, {20}\nD. {3, 4}, {6, 13}, {16, 18, 20}",
+      "options": {
+        "A": "{}, {3, 4, 6, 13, 16}, {18, 20}",
+        "B": "{3, 4, 6}, {13}, {16, 18, 20}",
+        "C": "{3, 4}, {6, 13, 16, 18}, {20}",
+        "D": "{3, 4}, {6, 13}, {16, 18, 20}"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.4, Question 9 (pure text, data vector printed inline)"
+    },
+    {
+      "question_id": "Q10",
+      "number": 10,
+      "topic": "Decision tree / classification boundary mapping",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We consider an artificial dataset of N = 4000 observations. The dataset is classified according to a decision tree of the form shown in Figure 4 resulting in a partition into classes indicated by the colors/markers in Figure 5. What is the correct rule assignment to the nodes in the decision tree?\n\nA. A: ||[x1; x2] - [4; 0]||_1 < 3, B: ||[x1; x2] - [4; 4]||_2 < 2, C: ||[x1; x2] - [2; 0]||_inf < 3\nB. A: ||[x1; x2] - [4; 4]||_2 < 2, B: ||[x1; x2] - [4; 0]||_1 < 3, C: ||[x1; x2] - [2; 0]||_inf < 3\nC. A: ||[x1; x2] - [2; 0]||_inf < 3, B: ||[x1; x2] - [4; 4]||_2 < 2, C: ||[x1; x2] - [4; 0]||_1 < 3\nD. A: ||[x1; x2] - [4; 0]||_1 < 3, B: ||[x1; x2] - [2; 0]||_inf < 3, C: ||[x1; x2] - [4; 4]||_2 < 2",
+      "options": {
+        "A": "A: ||[x1; x2] - [4; 0]||_1 < 3, B: ||[x1; x2] - [4; 4]||_2 < 2, C: ||[x1; x2] - [2; 0]||_inf < 3",
+        "B": "A: ||[x1; x2] - [4; 4]||_2 < 2, B: ||[x1; x2] - [4; 0]||_1 < 3, C: ||[x1; x2] - [2; 0]||_inf < 3",
+        "C": "A: ||[x1; x2] - [2; 0]||_inf < 3, B: ||[x1; x2] - [4; 4]||_2 < 2, C: ||[x1; x2] - [4; 0]||_1 < 3",
+        "D": "A: ||[x1; x2] - [4; 0]||_1 < 3, B: ||[x1; x2] - [2; 0]||_inf < 3, C: ||[x1; x2] - [4; 4]||_2 < 2"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q10.png",
+      "source_location": "exam p.4, Figure 4 (classification tree) and Figure 5 (2D classification boundary scatter)"
+    },
+    {
+      "question_id": "Q11",
+      "number": 11,
+      "topic": "Kernel density estimation / leave-one-out",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Figure 6 shows a kernel density estimator (KDE) on five datapoints using the standard formulation of the KDE, i.e., p(x) = (1/N) sum_{n=1}^{N} N(x | mu_n, Sigma = 2 I). Table 4 shows the evaluation of each individual component/kernel at each of the five observations. Compute the leave-one-out (LOO) estimate of p(x2).\n\nA. p(x2) ~ 0.016\nB. p(x2) ~ 0.020\nC. p(x2) ~ 0.053\nD. p(x2) ~ 0.080",
+      "options": {
+        "A": "p(x2) ~ 0.016",
+        "B": "p(x2) ~ 0.020",
+        "C": "p(x2) ~ 0.053",
+        "D": "p(x2) ~ 0.080"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 4: Evaluation of each individual component/kernel at each observation.\n\n         Component\n Obs.      1       2       3       4       5\n  x1     0.13    0.06    0.00    0.00    0.00\n  x2     0.06    0.13    0.02    0.00    0.00\n  x3     0.00    0.02    0.13    0.00    0.00\n  x4     0.00    0.00    0.00    0.13    0.02\n  x5     0.00    0.00    0.00    0.02    0.13",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q11.png",
+      "source_location": "exam p.5, Table 4 (5x5 kernel-evaluation matrix); Figure 6 (KDE contour) is illustrative only"
+    },
+    {
+      "question_id": "Q12",
+      "number": 12,
+      "topic": "Gaussian Mixture Model / responsibilities",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A Gaussian Mixture Model with K = 3 components has been trained on a dataset with two attributes. The trained model is defined as p(x) = sum_{k=1}^{3} p(z = k) N(x | mu_k, Sigma_k), with the following covariance matrices: Sigma_1 = [[0.7, -0.62], [-0.62, 0.95]], Sigma_2 = [[1.4, 0.45], [0.45, 1.0]], Sigma_3 = [[0.1, 0], [0, 0.9]]. The prior probability of the components are equal, i.e., p(z = 1) = p(z = 2) = p(z = 3) = 1/3. The contour lines of the densities corresponding to the individual mixture components are shown in Figure 7. Given a test point x = [0, 0]^T, determine which component the test point is most likely to belong to, i.e., the component that maximizes p(z = k | x).\n\nA. Component 1\nB. Component 2\nC. Component 3\nD. The point has equal probability of belonging to the three components",
+      "options": {
+        "A": "Component 1",
+        "B": "Component 2",
+        "C": "Component 3",
+        "D": "The point has equal probability of belonging to the three components"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q12.png",
+      "source_location": "exam p.5, Figure 7 (contour lines of the three components; component means/centers only readable from the figure)"
+    },
+    {
+      "question_id": "Q13",
+      "number": 13,
+      "topic": "Classifier decision boundaries / model identification",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider a subset of the Welding robot dataset (described in Table 1) after it has been projected onto the first two principal components b1 and b2, thereby giving rise to a smaller two-dimensional dataset. We will consider the following four classifiers: LREG: Logistic regression. ANN: Artificial neural network with 5 hidden units. DT: Decision tree with regular axis-aligned splits (b_i < c). KNN: K-nearest neighbours with K = 3. The classifiers are trained on a two-dimensional dataset and the decision boundary for each of the four classifiers is given in Figure 8. Which one of the following statements is correct?\n\nA. Classifier 1 corresponds to LREG, Classifier 2 corresponds to KNN, Classifier 3 corresponds to ANN, Classifier 4 corresponds to DT.\nB. Classifier 1 corresponds to DT, Classifier 2 corresponds to LREG, Classifier 3 corresponds to KNN, Classifier 4 corresponds to ANN.\nC. Classifier 1 corresponds to LREG, Classifier 2 corresponds to ANN, Classifier 3 corresponds to KNN, Classifier 4 corresponds to DT.\nD. Classifier 1 corresponds to ANN, Classifier 2 corresponds to DT, Classifier 3 corresponds to KNN, Classifier 4 corresponds to LREG.",
+      "options": {
+        "A": "Classifier 1 corresponds to LREG, Classifier 2 corresponds to KNN, Classifier 3 corresponds to ANN, Classifier 4 corresponds to DT.",
+        "B": "Classifier 1 corresponds to DT, Classifier 2 corresponds to LREG, Classifier 3 corresponds to KNN, Classifier 4 corresponds to ANN.",
+        "C": "Classifier 1 corresponds to LREG, Classifier 2 corresponds to ANN, Classifier 3 corresponds to KNN, Classifier 4 corresponds to DT.",
+        "D": "Classifier 1 corresponds to ANN, Classifier 2 corresponds to DT, Classifier 3 corresponds to KNN, Classifier 4 corresponds to LREG."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q13.png",
+      "source_location": "exam p.6, Figure 8 (four decision-boundary scatter plots)"
+    },
+    {
+      "question_id": "Q14",
+      "number": 14,
+      "topic": "Regularization / bias-variance",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider a regularized linear regression model trained with the regularization parameter/strength lambda = 1.49 on the Welding robot dataset using the five attributes in addition to third-order polynomial terms as input, i.e. x_bar = [1, x1, x2, ..., x5, x1^3, x2^3, ..., x5^3]^T. The model performs poorly on a held-out test set and has been confirmed to have low bias but very high variance. Which one of the following actions is most likely to improve the generalization performance on unseen data?\n\nA. Add forth-order polynomial transformations of the data.\nB. Decrease the amount of regularization applied to the model.\nC. Train only on half the training set with lambda = 1.49.\nD. Increase the value of lambda.",
+      "options": {
+        "A": "Add forth-order polynomial transformations of the data.",
+        "B": "Decrease the amount of regularization applied to the model.",
+        "C": "Train only on half the training set with lambda = 1.49.",
+        "D": "Increase the value of lambda."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 14 (pure text)"
+    },
+    {
+      "question_id": "Q15",
+      "number": 15,
+      "topic": "Cross-validation / conceptual",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements about cross-validation (CV) is correct?\n\nA. In hold-out cross-validation, using the same test set for learning the complexity of the model and for the final evaluation of the performance gives an accurate estimate of the generalization error.\nB. In K-fold cross-validation the trained models are more similar to each other compared to those in leave-one-out cross-validation because the overlap between the training sets is larger.\nC. For a given dataset, leave-one-out cross-validation typically gives a better estimate of the generalization error than K-fold cross-validation and hold-out cross-validation.\nD. The two-layer cross-validation procedure can be used only for supervised and not unsupervised learning problems.",
+      "options": {
+        "A": "In hold-out cross-validation, using the same test set for learning the complexity of the model and for the final evaluation of the performance gives an accurate estimate of the generalization error.",
+        "B": "In K-fold cross-validation the trained models are more similar to each other compared to those in leave-one-out cross-validation because the overlap between the training sets is larger.",
+        "C": "For a given dataset, leave-one-out cross-validation typically gives a better estimate of the generalization error than K-fold cross-validation and hold-out cross-validation.",
+        "D": "The two-layer cross-validation procedure can be used only for supervised and not unsupervised learning problems."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 15 (pure text)"
+    },
+    {
+      "question_id": "Q16",
+      "number": 16,
+      "topic": "Rand index / cluster comparison",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider clustering N = 4 observations with the ground-truth given by each observation belonging to its own cluster such that the partition Q becomes: Q = [1, 2, 3, 4]. The elements in the vector indicate the cluster index for a specific observation. We use the Rand index to compare two partitions, Q and Z, i.e., Rand(Q, Z) = (S + D) / ((1/2) N (N - 1)), where S is the number of times Z and Q agree that two observations are in the same cluster in both partitions. D is the number of times Z and Q agree that two observations are not in the same cluster in both partitions. Determine which one of the following options for the Z partition that results in the highest Rand index when compared to Q.\n\nA. Z(A) = [1, 1, 2, 2]\nB. Z(B) = [1, 2, 3, 2]\nC. Z(C) = [1, 2, 1, 2]\nD. Z(D) = [1, 2, 2, 2]",
+      "options": {
+        "A": "Z(A) = [1, 1, 2, 2]",
+        "B": "Z(B) = [1, 2, 3, 2]",
+        "C": "Z(C) = [1, 2, 1, 2]",
+        "D": "Z(D) = [1, 2, 2, 2]"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.7, Question 16 (pure text, partition vectors inline)"
+    },
+    {
+      "question_id": "Q17",
+      "number": 17,
+      "topic": "Bayes theorem from histogram counts",
+      "type": "B",
+      "text_faithful": true,
+      "question_text": "Consider the Welding robot dataset from Table 1. The attributes have been binarized to produce new features denoted x1_hat, x2_hat, ..., xM_hat. A summary of the binarised dataset is given in Figure 9 for a subset of the (binarized) attributes and label, namely x1_hat, x2_hat and y. Determine the probability of y = 2 given an observation has x1_hat = 1 and x2_hat = 0 using Bayes theorem (without applying the Naive Bayes assumption).\n\nA. 0.691\nB. 0.909\nC. 0.263\nD. 0.379",
+      "options": {
+        "A": "0.691",
+        "B": "0.909",
+        "C": "0.263",
+        "D": "0.379"
+      },
+      "correct_answer": "B",
+      "text_representation": "Figure 9: Histogram of a binarized version of the Welding robot dataset. Counts of observations by (x1_hat, x2_hat) within each class.\n\nClass y = 1 (N_{y=1} = 120 out of N = 500 observations):\n  x1_hat=0, x2_hat=0, y=1 : 40\n  x1_hat=0, x2_hat=1, y=1 : 50\n  x1_hat=1, x2_hat=0, y=1 : 10\n  x1_hat=1, x2_hat=1, y=1 : 20\n\nClass y = 2 (N_{y=2} = 380 out of N = 500 observations):\n  x1_hat=0, x2_hat=0, y=2 : 110\n  x1_hat=0, x2_hat=1, y=2 : 120\n  x1_hat=1, x2_hat=0, y=2 : 100\n  x1_hat=1, x2_hat=1, y=2 : 50",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q17.png",
+      "source_location": "exam p.7, Figure 9 (two bar histograms with printed counts per bin)"
+    },
+    {
+      "question_id": "Q18",
+      "number": 18,
+      "topic": "Two-layer cross-validation / generalization error",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider evaluating three regression models (M_{s=1}, M_{s=2}, and M_{s=3}) of different complexity, based on a dataset with 1200 observations. We use two-layer cross-validation with K1 = 4 outer folds and K2 = 2 inner folds. The error is computed using the mean squared error. The result of the procedure is shown in Figure 10. E^test_{M_s,i} denotes the performance of model s on the test set in the i'th outer fold. E^val_{M_s,j} denotes the performance of model s on the validation set in the j'th inner fold. Hence, we do not just choose the optimal model, M_{s*}, based on the result of the inner fold, but compute the error for all three models on the test set in each of the outer folds. Determine the value of the estimated generalization error E_gen_hat.\n\nA. E_gen_hat ~ 0.3\nB. E_gen_hat ~ 0.1\nC. E_gen_hat ~ 0.25\nD. E_gen_hat ~ 0.225",
+      "options": {
+        "A": "E_gen_hat ~ 0.3",
+        "B": "E_gen_hat ~ 0.1",
+        "C": "E_gen_hat ~ 0.25",
+        "D": "E_gen_hat ~ 0.225"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q18.png",
+      "source_location": "exam p.8, Figure 10 (bar charts of outer-fold test errors and inner-fold validation errors; heights must be read off the axes)"
+    },
+    {
+      "question_id": "Q19",
+      "number": 19,
+      "topic": "McNemar's test / classifier comparison",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider a generic binary classification problem on which two classifiers, Model A and Model B, have been trained to predict if an observation, x_i, belongs to Class 0 or Class 1. We wish to compare the two models using McNemar's test to determine if there is a significant difference between them. The probabilities p(y = 1 | x_i) for the two models on a test set of n = 10 points are shown in Figure 11, together with the true test label. Our null hypothesis is that the classifiers perform similarly. Determine which combination of estimated difference in accuracy theta_hat, confidence interval (CI) with alpha = 0.05, and p-value is the only plausible answer.\n\nA. theta_hat = 0.2, CI = [-0.16, 0.54], p-value > 0.5\nB. theta_hat = -0.36, CI = [-0.16, 0.54], p-value < 0.63\nC. theta_hat = 0.2, CI = [-0.16, 0.54], p-value < 0.01\nD. theta_hat = -0.4, CI = [-1.0, 0.33], p-value < 0.63",
+      "options": {
+        "A": "theta_hat = 0.2, CI = [-0.16, 0.54], p-value > 0.5",
+        "B": "theta_hat = -0.36, CI = [-0.16, 0.54], p-value < 0.63",
+        "C": "theta_hat = 0.2, CI = [-0.16, 0.54], p-value < 0.01",
+        "D": "theta_hat = -0.4, CI = [-1.0, 0.33], p-value < 0.63"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q19.png",
+      "source_location": "exam p.8, Figure 11 (grouped bar chart of p(y=1|x_i) for Model A, Model B, and true labels over 10 points; heights must be read)"
+    },
+    {
+      "question_id": "Q20",
+      "number": 20,
+      "topic": "Regularized regression / heatmap matching",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Figure 12 shows the output of four different regularized linear regression models. We use the mean squared error to measure the discrepancy between predictions and target values. The weights are penalized using the Euclidean norm and regularization parameter/strength lambda. The weight corresponding to the intercept/offset term is not regularized. The models are trained to predict the output based on transformations of x1 and x2 and using the standard prediction rule f(x) = w^T x_bar. The models are given by: Model A: x_bar = [1, x1, x2]^T and lambda = 0.5. Model B: x_bar = [1, x1^2, x2^2]^T and lambda = 1e6. Model C: x_bar = [1, x1, x2^2]^T and lambda = 0.0. Model D: x_bar = [1, x1^2, x2^2, x1^3, x2^3]^T and lambda = 0.5. Determine which of the following options is correct.\n\nA. Model A corresponds to Output 1, Model B corresponds to Output 2, Model C corresponds to Output 3, Model D corresponds to Output 4.\nB. Model A corresponds to Output 2, Model B corresponds to Output 3, Model C corresponds to Output 4, Model D corresponds to Output 1.\nC. Model A corresponds to Output 2, Model B corresponds to Output 1, Model C corresponds to Output 3, Model D corresponds to Output 4.\nD. Model A corresponds to Output 4, Model B corresponds to Output 3, Model C corresponds to Output 1, Model D corresponds to Output 2.",
+      "options": {
+        "A": "Model A corresponds to Output 1, Model B corresponds to Output 2, Model C corresponds to Output 3, Model D corresponds to Output 4.",
+        "B": "Model A corresponds to Output 2, Model B corresponds to Output 3, Model C corresponds to Output 4, Model D corresponds to Output 1.",
+        "C": "Model A corresponds to Output 2, Model B corresponds to Output 1, Model C corresponds to Output 3, Model D corresponds to Output 4.",
+        "D": "Model A corresponds to Output 4, Model B corresponds to Output 3, Model C corresponds to Output 1, Model D corresponds to Output 2."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q20.png",
+      "source_location": "exam p.9, Figure 12 (four function heatmaps with contour lines)"
+    },
+    {
+      "question_id": "Q21",
+      "number": 21,
+      "topic": "AdaBoost / weight updates",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider again the Welding robot dataset of Table 1. We limit ourselves to N = 6 arbitrary observations from the original dataset and only the features x1 and x3 to predict the class y = 1 or y = 2. We use a KNN classification model (K = 1) and apply the AdaBoost algorithm. We run AdaBoost for three rounds, initally with equal weights for each data point, i.e., w(t = 1) = [1/6, 1/6, 1/6, 1/6, 1/6, 1/6], resulting in the predictions tabulated in Table 5 alongside the actual/true labels. Given this information, determine the (unnormalized) weights after round t = 2 of AdaBoost. (Hint: weighted error rate eps_t = sum_i w_i(t)(1 - delta_{f(x_i),y_i}); update w_i(t+1) = w_i(t) e^{-alpha_t} if f(x_i)=y_i else w_i(t) e^{alpha_t}; alpha_t = (1/2) log((1 - eps_t)/eps_t); log is natural log.)\n\nA. w(t = 3) ~ (1/6) [sqrt(2), sqrt(2), 1/sqrt(2), 1/sqrt(2), 1/sqrt(2), 1/sqrt(2)]\nB. w(t = 3) ~ (1/6) [1/6, 1/6, 1/6, 1/6, 1/6, 1/6]\nC. w(t = 3) ~ (1/6) [1/2, 1/2, 2, 2, 2, 2]\nD. w(t = 3) ~ (1/6) [1/sqrt(2), 1/sqrt(2), sqrt(2), sqrt(2), sqrt(2), sqrt(2)]",
+      "options": {
+        "A": "w(t = 3) ~ (1/6) [sqrt(2), sqrt(2), 1/sqrt(2), 1/sqrt(2), 1/sqrt(2), 1/sqrt(2)]",
+        "B": "w(t = 3) ~ (1/6) [1/6, 1/6, 1/6, 1/6, 1/6, 1/6]",
+        "C": "w(t = 3) ~ (1/6) [1/2, 1/2, 2, 2, 2, 2]",
+        "D": "w(t = 3) ~ (1/6) [1/sqrt(2), 1/sqrt(2), sqrt(2), sqrt(2), sqrt(2), sqrt(2)]"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 5: For each of the N = 6 observations (first column), the true class labels y^actual (second column) and the predicted outputs of the AdaBoost classifier y_hat_t for the first three rounds t = {1, 2, 3} of boosting.\n\n Obs.    y^actual   y_hat(t=1)   y_hat(t=2)   y_hat(t=3)\n  x1        1           2            2            1\n  x2        2           2            1            2\n  x3        1           1            1            1\n  x4        1           2            1            1\n  x5        2           1            2            2\n  x6        2           2            2            1",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q21.png",
+      "source_location": "exam p.9, Table 5 (6 observations x true label + 3 rounds of predictions)"
+    },
+    {
+      "question_id": "Q22",
+      "number": 22,
+      "topic": "ANN / output activation for regression",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider an artificial neural network (ANN) for predicting the standardized variable, y_r, measuring the power consumption in the Welding robot dataset. The ANN uses attributes x1, x2, ..., x5, and has one hidden layer with 256 hidden units and one output neuron. The parameters in the ANN are optimized based on the mean squared error loss function. Figure 13 shows the distribution of the standardized y_r attribute to be predicted. Determine which one of the following activation functions would be the most suitable to use for the output neuron/unit in the ANN.\n\nA. A constant function: h(z) = c where c in R is a constant.\nB. Linear function: h(z) = z.\nC. Rectified linear unit (ReLU): h(z) = max(0, z).\nD. Logistic sigmoid: h(z) = 1/(1 + e^{-z}).",
+      "options": {
+        "A": "A constant function: h(z) = c where c in R is a constant.",
+        "B": "Linear function: h(z) = z.",
+        "C": "Rectified linear unit (ReLU): h(z) = max(0, z).",
+        "D": "Logistic sigmoid: h(z) = 1/(1 + e^{-z})."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.10, Question 22 (conceptual; Figure 13 histogram is illustrative, answer is determined by reasoning about a regression output neuron)"
+    },
+    {
+      "question_id": "Q23",
+      "number": 23,
+      "topic": "ANN / parameter counting",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We will consider an artificial neural network (ANN) trained on the Welding robot dataset described in Table 1 to predict the class label y based on attributes x1, ..., x5. The neural network has a single hidden layer containing n_h = 4 units, and uses the sigmoid activation function to predict the class label y. For the hidden layer we will use the tanh non-linear activation function. How many parameters including those related to bias/offset terms has to be trained to fit the neural network?\n\nA. Network contains 29 parameters\nB. Network contains 28 parameters\nC. Network contains 32 parameters\nD. Network contains 34 parameters",
+      "options": {
+        "A": "Network contains 29 parameters",
+        "B": "Network contains 28 parameters",
+        "C": "Network contains 32 parameters",
+        "D": "Network contains 34 parameters"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.10, Question 23 (pure text)"
+    },
+    {
+      "question_id": "Q24",
+      "number": 24,
+      "topic": "Decision trees / Hunt's algorithm",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Determine which one of the following statements is correct about Hunt's algorithm for a general classification problem using the Gini, Entropy or ClassError impurity measures and axis-aligned splits. It is evaluated using hold-out cross-validation.\n\nA. Hunt's algorithm always guarantees learning the decision tree with the lowest possible error on the test data.\nB. Hunt's algorithm is strictly limited to binary classification tasks.\nC. The Gini impurity is calculated using the variance of the attributes' values at each split.\nD. Hunt's algorithm determines the impurity gain based on a weighted sum of the impurity measures of the resulting branches after a split.",
+      "options": {
+        "A": "Hunt's algorithm always guarantees learning the decision tree with the lowest possible error on the test data.",
+        "B": "Hunt's algorithm is strictly limited to binary classification tasks.",
+        "C": "The Gini impurity is calculated using the variance of the attributes' values at each split.",
+        "D": "Hunt's algorithm determines the impurity gain based on a weighted sum of the impurity measures of the resulting branches after a split."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.10, Question 24 (pure text)"
+    },
+    {
+      "question_id": "Q25",
+      "number": 25,
+      "topic": "Paired t-test / model comparison",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider a statistical procedure to determine if there is a difference in the predictions of two regression models, M1 and M2. We use the paired t-test for this purpose with the null hypothesis that there is no difference. The paired differences in the predictions of the two models, y_M1 - y_M2, is calculated based on the test sets in a 5-fold cross-validation setup and illustrated as a histogram in Figure 14. Determine which combination of estimated difference (z_hat), confidence interval (CI) and p-value provide the only plausible answer.\n\nA. z_hat = -0.71, CI = [-0.87, -0.71], p-value < 0.05\nB. z_hat = -0.77, CI = [-0.84, -0.7], p-value < 0.05\nC. z_hat = -0.92, CI = [-0.99, -0.85], p-value < -0.05\nD. z_hat = 0.45, CI = [0.17, 0.74], p-value < 0.05",
+      "options": {
+        "A": "z_hat = -0.71, CI = [-0.87, -0.71], p-value < 0.05",
+        "B": "z_hat = -0.77, CI = [-0.84, -0.7], p-value < 0.05",
+        "C": "z_hat = -0.92, CI = [-0.99, -0.85], p-value < -0.05",
+        "D": "z_hat = 0.45, CI = [0.17, 0.74], p-value < 0.05"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q25.png",
+      "source_location": "exam p.11, Figure 14 (histogram of paired differences y_M1 - y_M2; center/spread must be read off the figure)"
+    },
+    {
+      "question_id": "Q26",
+      "number": 26,
+      "topic": "Confusion matrices / precision-recall-accuracy",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Table 6 shows the confusion matrices related to a Logistic Regression model (LR) and a Decision Tree classifier (DT) trained on a particular instance of the Welding robot dataset to predict STATUS. The number of observations is N = 400. We define y = 1 to indicate a positive outcome and y = 2 to be a negative outcome. Which one of the following statements is correct?\n\nA. Model 1 has lower error rate than Model 2.\nB. Model 2 has higher precision than Model 1.\nC. Predicting everything as Negative gives worse accuracy than Model 1.\nD. Model 2 has higher recall than Model 1.",
+      "options": {
+        "A": "Model 1 has lower error rate than Model 2.",
+        "B": "Model 2 has higher precision than Model 1.",
+        "C": "Predicting everything as Negative gives worse accuracy than Model 1.",
+        "D": "Model 2 has higher recall than Model 1."
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 6: Confusion matrices (positive outcome = Class 1, negative outcome = Class 2). Rows are Actual, columns are Predicted.\n\nModel 1: Logistic Regression (LR)\n                  Predicted Class 1   Predicted Class 2\n Actual Class 1          60                  73\n Actual Class 2         148                 119\n\nModel 2: Decision Tree (DT)\n                  Predicted Class 1   Predicted Class 2\n Actual Class 1          55                  78\n Actual Class 2         100                 167",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q26.png",
+      "source_location": "exam p.11, Table 6 (two 2x2 confusion matrices)"
+    },
+    {
+      "question_id": "Q27",
+      "number": 27,
+      "topic": "ROC curve identification",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We wish to predict whether an observation from the Welding robot dataset (see Table 1) belongs to the Ideal class (or not). To accomplish this, we fit a logistic regression model to the dataset, and for each observation x_i, y_i obtain a class-probability prediction y_hat_i in [1, 2]. We consider y = 1 the positive outcome and y = 2 the negative outcome. We threshold the class-probability at different values theta thereby obtaining, for each value of theta, the true positives (TP), true negatives (TN), false positives (FP) and false negatives (FN). These are plotted as functions of theta in Figure 16. Which of the receiver-operator characteristic (ROC) plots shown in Figure 15 corresponds to these graphs?\n\nA. ROC curve 1\nB. ROC curve 2\nC. ROC curve 3\nD. ROC curve 4",
+      "options": {
+        "A": "ROC curve 1",
+        "B": "ROC curve 2",
+        "C": "ROC curve 3",
+        "D": "ROC curve 4"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2025_Q27.png",
+      "source_location": "exam p.12, Figure 15 (four candidate ROC curves) and Figure 16 (TP/TN/FN/FP vs threshold theta)"
+    }
+  ]
+}

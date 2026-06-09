@@ -1,0 +1,551 @@
+{
+  "exam": "Fall2018",
+  "course": "02450",
+  "source_pdf": "ML-examsets/Fall2018.pdf",
+  "solution_pdf": "ML-solutions/Fall2018_sol.pdf",
+  "n_questions": 27,
+  "answer_key": {
+    "Q1": "C",
+    "Q2": "A",
+    "Q3": "B",
+    "Q4": "B",
+    "Q5": "C",
+    "Q6": "C",
+    "Q7": "B",
+    "Q8": "D",
+    "Q9": "B",
+    "Q10": "D",
+    "Q11": "D",
+    "Q12": "A",
+    "Q13": "C",
+    "Q14": "C",
+    "Q15": "B",
+    "Q16": "B",
+    "Q17": "C",
+    "Q18": "D",
+    "Q19": "A",
+    "Q20": "D",
+    "Q21": "B",
+    "Q22": "B",
+    "Q23": "A",
+    "Q24": "A",
+    "Q25": "B",
+    "Q26": "C",
+    "Q27": "B"
+  },
+  "questions": [
+    {
+      "question_id": "Q1",
+      "number": 1,
+      "topic": "Matching percentile plots to boxplots",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "The main dataset used in this exam is the Avila Bible dataset shown in Table 1. The Avila Bible dataset has N = 525 observations described by attributes x1 = intercolumnar distance (interdist), x2 = upper margin (upperm), x3 = lower margin (lowerm), x4 = exploitation (exploit), x5 = row number (row nr.), x6 = modular ratio (modular), x7 = interlinear spacing (interlin), x8 = weight, x9 = peak number (peak nr.), x10 = modular ratio/interlinear spacing (mr/is), and a discrete copyist label y taking values 1, 2, 3.\nIn Figure 1 and Figure 2 are shown respectively percentile plots and boxplots of the Avila Bible dataset based on the attributes x2, x3, x9, x10 found in Table 1. Which percentile plots match which boxplots?\n\nA. Boxplot 1 is mr/is, Boxplot 2 is lowerm, Boxplot 3 is upperm and Boxplot 4 is peak nr.\nB. Boxplot 1 is upperm, Boxplot 2 is lowerm, Boxplot 3 is peak nr. and Boxplot 4 is mr/is\nC. Boxplot 1 is upperm, Boxplot 2 is peak nr., Boxplot 3 is mr/is and Boxplot 4 is lowerm\nD. Boxplot 1 is mr/is, Boxplot 2 is lowerm, Boxplot 3 is peak nr. and Boxplot 4 is upperm",
+      "options": {
+        "A": "Boxplot 1 is mr/is, Boxplot 2 is lowerm, Boxplot 3 is upperm and Boxplot 4 is peak nr.",
+        "B": "Boxplot 1 is upperm, Boxplot 2 is lowerm, Boxplot 3 is peak nr. and Boxplot 4 is mr/is",
+        "C": "Boxplot 1 is upperm, Boxplot 2 is peak nr., Boxplot 3 is mr/is and Boxplot 4 is lowerm",
+        "D": "Boxplot 1 is mr/is, Boxplot 2 is lowerm, Boxplot 3 is peak nr. and Boxplot 4 is upperm"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q1.png",
+      "source_location": "exam p.2, Figure 1 (percentile plots of x2,x3,x9,x10) and Figure 2 (four boxplots)"
+    },
+    {
+      "question_id": "Q2",
+      "number": 2,
+      "topic": "PCA / variance explained from singular values",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "A Principal Component Analysis (PCA) is carried out on the Avila Bible dataset in Table 1 based on the attributes x1, x3, x5, x6, x7. The data is standardized by (i) subtracting the mean and (ii) dividing each column by its standard deviation to obtain the standardized matrix X_tilde. A singular value decomposition is then carried out on the standardized matrix to obtain the decomposition U S V^T = X_tilde, where\nV = [[0.04, -0.12, -0.14, 0.35, 0.92], [0.06, 0.13, 0.05, -0.92, 0.37], [-0.03, -0.98, 0.08, -0.16, -0.05], [-0.99, 0.03, 0.06, -0.02, 0.07], [-0.07, -0.05, -0.98, -0.11, -0.11]]\nand\nS = [[14.4, 0.0, 0.0, 0.0, 0.0], [0.0, 8.19, 0.0, 0.0, 0.0], [0.0, 0.0, 7.83, 0.0, 0.0], [0.0, 0.0, 0.0, 6.91, 0.0], [0.0, 0.0, 0.0, 0.0, 6.01]].\nWhich one of the following statements is true?\n\nA. The variance explained by the first principal component is greater than 0.45\nB. The variance explained by the first four principal components is less than 0.85\nC. The variance explained by the last four principal components is greater than 0.56\nD. The variance explained by the first three principal components is less than 0.75",
+      "options": {
+        "A": "The variance explained by the first principal component is greater than 0.45",
+        "B": "The variance explained by the first four principal components is less than 0.85",
+        "C": "The variance explained by the last four principal components is greater than 0.56",
+        "D": "The variance explained by the first three principal components is less than 0.75"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 2 (V and S matrices printed inline)"
+    },
+    {
+      "question_id": "Q3",
+      "number": 3,
+      "topic": "PCA / matching projection plot",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider again the PCA analysis of the Avila Bible dataset. In Figure 3 the features x5 and x7 from Table 1 are plotted as black dots. We have indicated two special observations as colored markers (Point A and Point B). We can imagine that the dataset, along with the two special observations, is projected onto the first two principal component directions given in V as computed earlier (see Equation (1)). Which one of the four plots in Figure 4 shows the correct PCA projection?\n\nA. Plot A\nB. Plot B\nC. Plot C\nD. Plot D",
+      "options": {
+        "A": "Plot A",
+        "B": "Plot B",
+        "C": "Plot C",
+        "D": "Plot D"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q3.png",
+      "source_location": "exam p.3, Figure 3 (scatter of x5 vs x7 with Points A,B) and Figure 4 (four candidate PCA-projection plots A-D)"
+    },
+    {
+      "question_id": "Q4",
+      "number": 4,
+      "topic": "KNN average relative density (outlier score)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "To examine if observation o4 may be an outlier, we will calculate the average relative density based on euclidean distance and the observations given in Table 2 only. We recall that the KNN density and average relative density (ard) for the observation x_i are given by\ndensity_X\\i(x_i, K) = 1 / ( (1/K) sum_{x' in N_X\\i(x_i,K)} d(x_i, x') ),\nard_X(x_i, K) = density_X\\i(x_i, K) / ( (1/K) sum_{x_j in N_X\\i(x_i,K)} density_X\\j(x_j, K) ),\nwhere N_X\\i(x_i, K) is the set of K nearest neighbors of observation x_i excluding the i'th observation, and ard_X(x_i, K) is the average relative density of x_i using K nearest neighbors. What is the average relative density for observation o4 for K = 2 nearest neighbors?\n\nA. 1.0\nB. 0.71\nC. 0.68\nD. 0.36",
+      "options": {
+        "A": "1.0",
+        "B": "0.71",
+        "C": "0.68",
+        "D": "0.36"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 2: pairwise Euclidean distances d(o_i, o_j) between 10 standardized observations (M = 10 attributes). Classes (colors): C1 = {o1,o2,o3} (copyist 1), C2 = {o4,o5,o6,o7,o8} (copyist 2), C3 = {o9,o10} (copyist 3).\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\n o1    0.0   2.91  0.63  1.88  1.02  1.82  1.92  1.58  1.08  1.43\n o2    2.91  0.0   3.23  3.9   2.88  3.27  3.48  4.02  3.08  3.47\n o3    0.63  3.23  0.0   2.03  1.06  2.15  2.11  1.15  1.09  1.65\n o4    1.88  3.9   2.03  0.0   2.52  1.04  2.25  2.42  2.18  2.17\n o5    1.02  2.88  1.06  2.52  0.0   2.44  2.38  1.53  1.71  1.94\n o6    1.82  3.27  2.15  1.04  2.44  0.0   1.93  2.72  1.98  1.8\n o7    1.92  3.48  2.11  2.25  2.38  1.93  0.0   2.53  2.09  1.66\n o8    1.58  4.02  1.15  2.42  1.53  2.72  2.53  0.0   1.68  2.06\n o9    1.08  3.08  1.09  2.18  1.71  1.98  2.09  1.68  0.0   1.48\n o10   1.43  3.47  1.65  2.17  1.94  1.8   1.66  2.06  1.48  0.0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q4.png",
+      "source_location": "exam p.4, Table 2 (10x10 pairwise Euclidean distance matrix)"
+    },
+    {
+      "question_id": "Q5",
+      "number": 5,
+      "topic": "Gaussian Mixture Model density evaluation",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Suppose a GMM model is applied to the Avila Bible dataset in the processed version shown in Table 2. The GMM is constructed as having K = 3 components, and each component k of the GMM is fitted by letting its mean vectors mu_k be equal to the location of the observations o7, o8, o9 (i.e. each observation corresponds to exactly one mean vector) and setting the covariance matrix equal to Sigma_k = sigma^2 I where I is the identity matrix:\nN(o_i; mu_k, Sigma_k) = 1 / sqrt(|2 pi Sigma_k|) * exp( -d(o_i, mu_k)^2 / (2 sigma^2) ),\nwhere | . | is the determinant. The components of the GMM are weighted evenly. If sigma = 0.5, and denoting the density of the GMM as p(x), what is the density as evaluated at observation o3? (Recall M = 10 attributes; distances are read from Table 2.)\n\nA. p(o3) = 0.048402\nB. p(o3) = 0.076\nC. p(o3) = 0.005718\nD. p(o3) = 0.114084",
+      "options": {
+        "A": "p(o3) = 0.048402",
+        "B": "p(o3) = 0.076",
+        "C": "p(o3) = 0.005718",
+        "D": "p(o3) = 0.114084"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 2: pairwise Euclidean distances d(o_i, o_j) between 10 standardized observations (M = 10 attributes). Classes (colors): C1 = {o1,o2,o3} (copyist 1), C2 = {o4,o5,o6,o7,o8} (copyist 2), C3 = {o9,o10} (copyist 3).\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\n o1    0.0   2.91  0.63  1.88  1.02  1.82  1.92  1.58  1.08  1.43\n o2    2.91  0.0   3.23  3.9   2.88  3.27  3.48  4.02  3.08  3.47\n o3    0.63  3.23  0.0   2.03  1.06  2.15  2.11  1.15  1.09  1.65\n o4    1.88  3.9   2.03  0.0   2.52  1.04  2.25  2.42  2.18  2.17\n o5    1.02  2.88  1.06  2.52  0.0   2.44  2.38  1.53  1.71  1.94\n o6    1.82  3.27  2.15  1.04  2.44  0.0   1.93  2.72  1.98  1.8\n o7    1.92  3.48  2.11  2.25  2.38  1.93  0.0   2.53  2.09  1.66\n o8    1.58  4.02  1.15  2.42  1.53  2.72  2.53  0.0   1.68  2.06\n o9    1.08  3.08  1.09  2.18  1.71  1.98  2.09  1.68  0.0   1.48\n o10   1.43  3.47  1.65  2.17  1.94  1.8   1.66  2.06  1.48  0.0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q5.png",
+      "source_location": "exam p.4, Table 2 (10x10 pairwise Euclidean distance matrix)"
+    },
+    {
+      "question_id": "Q6",
+      "number": 6,
+      "topic": "Hierarchical clustering / matching dendrogram (minimum linkage)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A hierarchical clustering is applied to the 10 observations in Table 2 using minimum linkage. Which of the dendrograms shown in Figure 5 corresponds to the clustering?\n\nA. Dendrogram 1\nB. Dendrogram 2\nC. Dendrogram 3\nD. Dendrogram 4",
+      "options": {
+        "A": "Dendrogram 1",
+        "B": "Dendrogram 2",
+        "C": "Dendrogram 3",
+        "D": "Dendrogram 4"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q6.png",
+      "source_location": "exam p.5, Figure 5 (four candidate dendrograms 1-4 of the 10 observations in Table 2)"
+    },
+    {
+      "question_id": "Q7",
+      "number": 7,
+      "topic": "Normalized mutual information from dendrogram cutoff",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider dendrogram 1 from Figure 5. Suppose we apply a cutoff (indicated by the black line in Figure 6) thereby generating three clusters. We wish to compare the quality of this clustering, Q, to the ground-truth clustering, Z, indicated by the colors in Table 2. Recall the normalized mutual information of the two clusterings Z and Q is defined as\nNMI[Z, Q] = MI[Z, Q] / ( sqrt(H[Z]) sqrt(H[Q]) ),\nwhere MI is the mutual information and H is the entropy. Assuming we always use an entropy based on the natural logarithm, H = - sum_{i=1}^n p_i log p_i, log(e) = 1, what is the normalized mutual information of the two clusterings?\n\nA. NMI[Z, Q] ~ 0.313\nB. NMI[Z, Q] ~ 0.302\nC. NMI[Z, Q] ~ 0.32\nD. NMI[Z, Q] ~ 0.274",
+      "options": {
+        "A": "NMI[Z, Q] ~ 0.313",
+        "B": "NMI[Z, Q] ~ 0.302",
+        "C": "NMI[Z, Q] ~ 0.32",
+        "D": "NMI[Z, Q] ~ 0.274"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q7.png",
+      "source_location": "exam p.5, Figure 6 (Dendrogram 1 with dotted cutoff producing 3 clusters); ground-truth classes from Table 2 colors"
+    },
+    {
+      "question_id": "Q8",
+      "number": 8,
+      "topic": "Leave-one-out 1-nearest-neighbour error rate",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the distances in Table 2 based on 10 observations from the Avila Bible dataset. The class labels C1, C2, C3 (see table caption for details) will be predicted using a k-nearest neighbour classifier based on the distances given in Table 2. Suppose we use leave-one-out cross validation (i.e. the observation that is being predicted is left out) and a 1-nearest neighbour classifier (i.e. k = 1). What is the error rate computed for all N = 10 observations?\n\nA. error rate = 4/10\nB. error rate = 9/10\nC. error rate = 2/10\nD. error rate = 6/10",
+      "options": {
+        "A": "error rate = 4/10",
+        "B": "error rate = 9/10",
+        "C": "error rate = 2/10",
+        "D": "error rate = 6/10"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 2: pairwise Euclidean distances d(o_i, o_j) between 10 standardized observations (M = 10 attributes). Classes (colors): C1 = {o1,o2,o3} (copyist 1), C2 = {o4,o5,o6,o7,o8} (copyist 2), C3 = {o9,o10} (copyist 3).\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\n o1    0.0   2.91  0.63  1.88  1.02  1.82  1.92  1.58  1.08  1.43\n o2    2.91  0.0   3.23  3.9   2.88  3.27  3.48  4.02  3.08  3.47\n o3    0.63  3.23  0.0   2.03  1.06  2.15  2.11  1.15  1.09  1.65\n o4    1.88  3.9   2.03  0.0   2.52  1.04  2.25  2.42  2.18  2.17\n o5    1.02  2.88  1.06  2.52  0.0   2.44  2.38  1.53  1.71  1.94\n o6    1.82  3.27  2.15  1.04  2.44  0.0   1.93  2.72  1.98  1.8\n o7    1.92  3.48  2.11  2.25  2.38  1.93  0.0   2.53  2.09  1.66\n o8    1.58  4.02  1.15  2.42  1.53  2.72  2.53  0.0   1.68  2.06\n o9    1.08  3.08  1.09  2.18  1.71  1.98  2.09  1.68  0.0   1.48\n o10   1.43  3.47  1.65  2.17  1.94  1.8   1.66  2.06  1.48  0.0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q8.png",
+      "source_location": "exam p.4 + p.6, Table 2 (10x10 pairwise Euclidean distance matrix)"
+    },
+    {
+      "question_id": "Q9",
+      "number": 9,
+      "topic": "Decision tree / purity gain (classification error impurity)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Suppose we wish to build a classification tree based on Hunt's algorithm where the goal is to predict Copyist which can belong to three classes, y = 1, y = 2, y = 3. The first split we consider is a two-way split based on the value of x9 into the intervals indicated in Table 3. For each interval, we count how many observations belong to each of the three classes and the result is indicated in Table 3. Suppose we use the classification error impurity measure, what is then the purity gain Delta?\n\nTable 3 (2-way split on x9; counts of observations per class):\n  x9-interval   y=1   y=2   y=3\n  x9 <= 0.13    108   112    56\n  0.13 < x9      58    75   116\n\nA. Delta ~ 0.485\nB. Delta ~ 0.078\nC. Delta ~ 0.566\nD. Delta ~ 1.128",
+      "options": {
+        "A": "Delta ~ 0.485",
+        "B": "Delta ~ 0.078",
+        "C": "Delta ~ 0.566",
+        "D": "Delta ~ 1.128"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 3: proposed 2-way split of the Avila Bible dataset on attribute x9. For each interval, the number of observations belonging to each class y is counted.\n  x9-interval   y=1   y=2   y=3\n  x9 <= 0.13    108   112    56\n  0.13 < x9      58    75   116",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q9.png",
+      "source_location": "exam p.6, Table 3 (class counts for 2-way split on x9)"
+    },
+    {
+      "question_id": "Q10",
+      "number": 10,
+      "topic": "Decision tree / training accuracy of a single split",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the split in Table 3. Suppose we build a classification tree with only this split and evaluate it on the same data it was trained on. What is the accuracy?\n\nTable 3 (2-way split on x9; counts of observations per class):\n  x9-interval   y=1   y=2   y=3\n  x9 <= 0.13    108   112    56\n  0.13 < x9      58    75   116\n\nA. Accuracy is: 0.64\nB. Accuracy is: 0.29\nC. Accuracy is: 0.35\nD. Accuracy is: 0.43",
+      "options": {
+        "A": "Accuracy is: 0.64",
+        "B": "Accuracy is: 0.29",
+        "C": "Accuracy is: 0.35",
+        "D": "Accuracy is: 0.43"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 3: proposed 2-way split of the Avila Bible dataset on attribute x9. For each interval, the number of observations belonging to each class y is counted.\n  x9-interval   y=1   y=2   y=3\n  x9 <= 0.13    108   112    56\n  0.13 < x9      58    75   116",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q10.png",
+      "source_location": "exam p.6, Table 3 (class counts for 2-way split on x9)"
+    },
+    {
+      "question_id": "Q11",
+      "number": 11,
+      "topic": "Bag-of-words / cosine similarity of two documents",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Suppose s1 and s2 are two text documents containing the text:\ns1 = { the bag of words representation should not give you a hard time }\ns2 = { remember the representation should be a vector }\nThe documents are encoded using a bag-of-words encoding assuming a total vocabulary size of M = 10000. No stopwords lists or stemming is applied to the dataset. What is the cosine similarity between documents s1 and s2?\n\nA. cosine similarity of s1 and s2 is 0.047619\nB. cosine similarity of s1 and s2 is 0.000044\nC. cosine similarity of s1 and s2 is 0.000400\nD. cosine similarity of s1 and s2 is 0.436436",
+      "options": {
+        "A": "cosine similarity of s1 and s2 is 0.047619",
+        "B": "cosine similarity of s1 and s2 is 0.000044",
+        "C": "cosine similarity of s1 and s2 is 0.000400",
+        "D": "cosine similarity of s1 and s2 is 0.436436"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 11 (document texts printed inline)"
+    },
+    {
+      "question_id": "Q12",
+      "number": 12,
+      "topic": "Logistic regression / reading weights from output curve",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider again the Avila Bible dataset. We are particularly interested in predicting whether a bible copy was written by copyist 1, and we therefore wish to train a logistic regression classifier to distinguish between copyist one vs. copyist two and three. To simplify the setup further, we select just 7 observations and train a logistic regression classifier using only the feature x8 as input (as usual, we apply a simple feature transformation to the inputs to add a constant feature in the first coordinate to handle the intercept term). To be consistent with the lecture notes, we label the output as y = 0 (corresponding to copyist one) and y = 1 (corresponding to copyist two and three). In Figure 7 is shown the predicted output probability an observation belongs to the positive class, p(y = 1|x8). What are the weights?\n\nA. [-0.93, 1.72]^T\nB. [-2.82, 0.0]^T\nC. [1.36, 0.4]^T\nD. [-0.65, 0.0]^T",
+      "options": {
+        "A": "[-0.93, 1.72]^T",
+        "B": "[-2.82, 0.0]^T",
+        "C": "[1.36, 0.4]^T",
+        "D": "[-0.65, 0.0]^T"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q12.png",
+      "source_location": "exam p.7, Figure 7 (logistic regression output curve p(y=1|x8) with 7 observations)"
+    },
+    {
+      "question_id": "Q13",
+      "number": 13,
+      "topic": "ROC curve / matching ROC to classifier",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "To evaluate the classifier Figure 7, we will use the area under curve (AUC) of the receiver operator characteristic (ROC) curve as computed on the 7 observations in Figure 7. In Figure 8 is given four proposed ROC curves, which one of the curves corresponds to the classifier?\n\nA. ROC curve 1\nB. ROC curve 2\nC. ROC curve 3\nD. ROC curve 4",
+      "options": {
+        "A": "ROC curve 1",
+        "B": "ROC curve 2",
+        "C": "ROC curve 3",
+        "D": "ROC curve 4"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q13.png",
+      "source_location": "exam p.7, Figure 7 (logistic regression output with 7 observations) and Figure 8 (four candidate ROC curves 1-4)"
+    },
+    {
+      "question_id": "Q14",
+      "number": 14,
+      "topic": "Naive Bayes classifier on binary features",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We again consider the Avila Bible dataset from Table 1 and the N = 10 observations we already encountered in Table 2. The data is processed to produce 10 new, binary features such that f_i = 1 corresponds to a value x_i greater than the median, and we thereby arrive at the N x M = 10 x 10 binary matrix in Table 4. Suppose we train a naive-Bayes classifier to predict the class label y from only the features f1, f2, f6. If for an observation we observe\nf1 = 1, f2 = 1, f6 = 0\nwhat is then the probability that y = 1 according to the Naive-Bayes classifier?\n\nTable 4 (binarized Avila Bible dataset; rows o1..o10, columns f1..f10). Classes: C1 = {o1,o2,o3}, C2 = {o4,o5,o6,o7,o8}, C3 = {o9,o10}.\n        f1  f2  f3  f4  f5  f6  f7  f8  f9  f10\n o1      1   1   0   0   0   1   0   0   0   1\n o2      1   0   0   0   0   0   0   0   0   0\n o3      1   1   0   0   0   1   0   0   0   1\n o4      0   1   1   1   0   0   0   1   1   0\n o5      1   1   0   0   0   1   0   0   0   1\n o6      0   1   1   1   0   0   1   1   1   0\n o7      1   1   1   0   0   1   1   1   1   0\n o8      0   1   1   1   0   1   1   0   0   1\n o9      0   0   0   0   1   1   1   0   1   1\n o10     1   0   0   0   0   1   1   1   1   0\n\nA. p_NB(y = 1 | f1 = 1, f2 = 1, f6 = 0) = 50/77\nB. p_NB(y = 1 | f1 = 1, f2 = 1, f6 = 0) = 25/43\nC. p_NB(y = 1 | f1 = 1, f2 = 1, f6 = 0) = 5/11\nD. p_NB(y = 1 | f1 = 1, f2 = 1, f6 = 0) = 10/19",
+      "options": {
+        "A": "p_NB(y = 1 | f1 = 1, f2 = 1, f6 = 0) = 50/77",
+        "B": "p_NB(y = 1 | f1 = 1, f2 = 1, f6 = 0) = 25/43",
+        "C": "p_NB(y = 1 | f1 = 1, f2 = 1, f6 = 0) = 5/11",
+        "D": "p_NB(y = 1 | f1 = 1, f2 = 1, f6 = 0) = 10/19"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 4: binarized version of the Avila Bible dataset (f_i = 1 if x_i is greater than the median, else 0). Rows o1..o10, columns f1..f10. Classes (colors): C1 = {o1,o2,o3} (copyist 1), C2 = {o4,o5,o6,o7,o8} (copyist 2), C3 = {o9,o10} (copyist 3).\n        f1  f2  f3  f4  f5  f6  f7  f8  f9  f10\n o1      1   1   0   0   0   1   0   0   0   1\n o2      1   0   0   0   0   0   0   0   0   0\n o3      1   1   0   0   0   1   0   0   0   1\n o4      0   1   1   1   0   0   0   1   1   0\n o5      1   1   0   0   0   1   0   0   0   1\n o6      0   1   1   1   0   0   1   1   1   0\n o7      1   1   1   0   0   1   1   1   1   0\n o8      0   1   1   1   0   1   1   0   0   1\n o9      0   0   0   0   1   1   1   0   1   1\n o10     1   0   0   0   0   1   1   1   1   0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q14.png",
+      "source_location": "exam p.8, Table 4 (10x10 binarized observation matrix)"
+    },
+    {
+      "question_id": "Q15",
+      "number": 15,
+      "topic": "Association mining / frequent itemsets by support",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the binarized version of the Avila Bible dataset shown in Table 4. The matrix can be considered as representing N = 10 transactions o1, o2, ..., o10 and M = 10 items f1, f2, ..., f10. Which of the following options represents all (non-empty) itemsets with support greater than 0.55 (and only itemsets with support greater than 0.55)?\n\nTable 4 (binarized Avila Bible dataset; rows o1..o10, columns f1..f10):\n        f1  f2  f3  f4  f5  f6  f7  f8  f9  f10\n o1      1   1   0   0   0   1   0   0   0   1\n o2      1   0   0   0   0   0   0   0   0   0\n o3      1   1   0   0   0   1   0   0   0   1\n o4      0   1   1   1   0   0   0   1   1   0\n o5      1   1   0   0   0   1   0   0   0   1\n o6      0   1   1   1   0   0   1   1   1   0\n o7      1   1   1   0   0   1   1   1   1   0\n o8      0   1   1   1   0   1   1   0   0   1\n o9      0   0   0   0   1   1   1   0   1   1\n o10     1   0   0   0   0   1   1   1   1   0\n\nA. {f1}, {f2}, {f6}, {f7}, {f9}, {f10}, {f1,f6}, {f2,f6}, {f6,f10}\nB. {f1}, {f2}, {f6}\nC. {f1}, {f2}, {f3}, {f4}, {f6}, {f7}, {f8}, {f9}, {f10}, {f1,f2}, {f2,f3}, {f2,f4}, {f3,f4}, {f1,f6}, {f2,f6}, {f2,f7}, {f3,f7}, {f6,f7}, {f2,f8}, {f3,f8}, {f7,f8}, {f2,f9}, {f3,f9}, {f6,f9}, {f7,f9}, {f8,f9}, {f1,f10}, {f2,f10}, {f6,f10}, {f2,f3,f4}, {f1,f2,f6}, {f2,f3,f7}, {f2,f3,f8}, {f2,f8,f9}, {f3,f8,f9}, {f7,f8,f9}, {f1,f2,f10}, {f1,f6,f10}, {f2,f6,f10}, {f2,f3,f8,f9}, {f1,f2,f6,f10}\nD. {f1}, {f2}, {f3}, {f6}, {f7}, {f8}, {f9}, {f10}, {f1,f2}, {f2,f3}, {f1,f6}, {f2,f6}, {f6,f7}, {f7,f9}, {f8,f9}, {f2,f10}, {f6,f10}, {f1,f2,f6}, {f2,f6,f10}",
+      "options": {
+        "A": "{f1}, {f2}, {f6}, {f7}, {f9}, {f10}, {f1,f6}, {f2,f6}, {f6,f10}",
+        "B": "{f1}, {f2}, {f6}",
+        "C": "{f1}, {f2}, {f3}, {f4}, {f6}, {f7}, {f8}, {f9}, {f10}, {f1,f2}, {f2,f3}, {f2,f4}, {f3,f4}, {f1,f6}, {f2,f6}, {f2,f7}, {f3,f7}, {f6,f7}, {f2,f8}, {f3,f8}, {f7,f8}, {f2,f9}, {f3,f9}, {f6,f9}, {f7,f9}, {f8,f9}, {f1,f10}, {f2,f10}, {f6,f10}, {f2,f3,f4}, {f1,f2,f6}, {f2,f3,f7}, {f2,f3,f8}, {f2,f8,f9}, {f3,f8,f9}, {f7,f8,f9}, {f1,f2,f10}, {f1,f6,f10}, {f2,f6,f10}, {f2,f3,f8,f9}, {f1,f2,f6,f10}",
+        "D": "{f1}, {f2}, {f3}, {f6}, {f7}, {f8}, {f9}, {f10}, {f1,f2}, {f2,f3}, {f1,f6}, {f2,f6}, {f6,f7}, {f7,f9}, {f8,f9}, {f2,f10}, {f6,f10}, {f1,f2,f6}, {f2,f6,f10}"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 4: binarized version of the Avila Bible dataset (f_i = 1 if x_i is greater than the median, else 0). N = 10 transactions o1..o10, M = 10 items f1..f10.\n        f1  f2  f3  f4  f5  f6  f7  f8  f9  f10\n o1      1   1   0   0   0   1   0   0   0   1\n o2      1   0   0   0   0   0   0   0   0   0\n o3      1   1   0   0   0   1   0   0   0   1\n o4      0   1   1   1   0   0   0   1   1   0\n o5      1   1   0   0   0   1   0   0   0   1\n o6      0   1   1   1   0   0   1   1   1   0\n o7      1   1   1   0   0   1   1   1   1   0\n o8      0   1   1   1   0   1   1   0   0   1\n o9      0   0   0   0   1   1   1   0   1   1\n o10     1   0   0   0   0   1   1   1   1   0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q15.png",
+      "source_location": "exam p.8, Table 4 (10x10 binarized observation matrix)"
+    },
+    {
+      "question_id": "Q16",
+      "number": 16,
+      "topic": "Association mining / confidence of a rule",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We again consider the binary matrix from Table 4 as a market basket problem consisting of N = 10 transactions o1, ..., o10 and M = 10 items f1, ..., f10. What is the confidence of the rule {f1, f3, f8, f9} -> {f2, f6, f7}?\n\nTable 4 (binarized Avila Bible dataset; rows o1..o10, columns f1..f10):\n        f1  f2  f3  f4  f5  f6  f7  f8  f9  f10\n o1      1   1   0   0   0   1   0   0   0   1\n o2      1   0   0   0   0   0   0   0   0   0\n o3      1   1   0   0   0   1   0   0   0   1\n o4      0   1   1   1   0   0   0   1   1   0\n o5      1   1   0   0   0   1   0   0   0   1\n o6      0   1   1   1   0   0   1   1   1   0\n o7      1   1   1   0   0   1   1   1   1   0\n o8      0   1   1   1   0   1   1   0   0   1\n o9      0   0   0   0   1   1   1   0   1   1\n o10     1   0   0   0   0   1   1   1   1   0\n\nA. Confidence is 1/10\nB. Confidence is 1\nC. Confidence is 1/2\nD. Confidence is 3/20",
+      "options": {
+        "A": "Confidence is 1/10",
+        "B": "Confidence is 1",
+        "C": "Confidence is 1/2",
+        "D": "Confidence is 3/20"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 4: binarized version of the Avila Bible dataset (f_i = 1 if x_i is greater than the median, else 0). N = 10 transactions o1..o10, M = 10 items f1..f10.\n        f1  f2  f3  f4  f5  f6  f7  f8  f9  f10\n o1      1   1   0   0   0   1   0   0   0   1\n o2      1   0   0   0   0   0   0   0   0   0\n o3      1   1   0   0   0   1   0   0   0   1\n o4      0   1   1   1   0   0   0   1   1   0\n o5      1   1   0   0   0   1   0   0   0   1\n o6      0   1   1   1   0   0   1   1   1   0\n o7      1   1   1   0   0   1   1   1   1   0\n o8      0   1   1   1   0   1   1   0   0   1\n o9      0   0   0   0   1   1   1   0   1   1\n o10     1   0   0   0   0   1   1   1   1   0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q16.png",
+      "source_location": "exam p.8, Table 4 (10x10 binarized observation matrix)"
+    },
+    {
+      "question_id": "Q17",
+      "number": 17,
+      "topic": "Decision tree / matching split rules to classification boundary",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider again the Avila Bible dataset. Suppose we train a decision tree to classify which of the 3 classes, Copyist 1, Copyist 2, Copyist 3, an observation belongs to. Since the attributes of the dataset are continuous, we will consider binary splits of the form x_i >= z for different values of i and z, and for simplicity we limit ourselves to the attributes x7 and x9. Suppose the trained decision tree has the form shown in Figure 9, and that according to the tree the predicted label assignment for the N = 525 observations are as given in Figure 10, what is then the correct rule assignment to the nodes in the decision tree?\n\nA. A: x7 >= 0.5, B: x9 >= 0.54, C: x9 >= 0.35, D: x9 >= 0.26\nB. A: x7 >= 0.5, B: x9 >= 0.26, C: x9 >= 0.54, D: x9 >= 0.35\nC. A: x9 >= 0.54, B: x7 >= 0.5, C: x9 >= 0.35, D: x9 >= 0.26\nD. A: x9 >= 0.26, B: x7 >= 0.5, C: x9 >= 0.35, D: x9 >= 0.54",
+      "options": {
+        "A": "A: x7 >= 0.5, B: x9 >= 0.54, C: x9 >= 0.35, D: x9 >= 0.26",
+        "B": "A: x7 >= 0.5, B: x9 >= 0.26, C: x9 >= 0.54, D: x9 >= 0.35",
+        "C": "A: x9 >= 0.54, B: x7 >= 0.5, C: x9 >= 0.35, D: x9 >= 0.26",
+        "D": "A: x9 >= 0.26, B: x7 >= 0.5, C: x9 >= 0.35, D: x9 >= 0.54"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q17.png",
+      "source_location": "exam p.9, Figure 9 (decision-tree structure with nodes A,B,C,D) and Figure 10 (classification boundary scatter over x7,x9)"
+    },
+    {
+      "question_id": "Q18",
+      "number": 18,
+      "topic": "Apriori algorithm / downward closure pruning",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We will again consider the binarized version of the Avila Bible dataset already encountered in Table 4, however we will now only consider the first M = 6 features f1, f2, f3, f4, f5, f6. We wish to apply the Apriori algorithm (the specific variant encountered in chapter 19 of the lecture notes) to find all itemsets with support greater than epsilon = 0.15. Suppose at iteration k = 3 we know that\nL2 = [[1, 1, 0, 0, 0, 0], [1, 0, 0, 0, 0, 1], [0, 1, 1, 0, 0, 0], [0, 1, 0, 1, 0, 0], [0, 1, 0, 0, 0, 1], [0, 0, 1, 1, 0, 0], [0, 0, 1, 0, 0, 1]]\n(each row is an itemset of L2 over items f1..f6). Recall the key step in the Apriori algorithm is to construct L3 by first considering a large number of candidate itemsets C3', and then rule out some of them using the downwards-closure principle thereby saving many (potentially costly) evaluations of support. Suppose L2 is given as above, which of the following itemsets does the Apriori algorithm not have to evaluate the support of?\n\nA. {f2, f3, f4}\nB. {f1, f2, f6}\nC. {f2, f3, f6}\nD. {f1, f3, f4}",
+      "options": {
+        "A": "{f2, f3, f4}",
+        "B": "{f1, f2, f6}",
+        "C": "{f2, f3, f6}",
+        "D": "{f1, f3, f4}"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.9, Question 18 (L2 binary matrix printed inline)"
+    },
+    {
+      "question_id": "Q19",
+      "number": 19,
+      "topic": "Variable selection / forward and backward selection",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider again the Avila Bible dataset in Table 1. We would like to predict the copyist using a linear regression, and since we would like the model to be as interpretable as possible we will use variable selection to obtain a parsimonious model. We limit ourselves to the 5 features x1, x5, x6, x8, x9 and in Table 5 we have pre-computed the estimated training and test error for different variable combinations of the dataset. Which of the following statements is correct?\n\nTable 5 (RMSE for training and test set using least squares regression to predict y from combinations of x1, x5, x6, x8, x9):\n  Feature(s)            Training RMSE   Test RMSE\n  none                  3.429           4.163\n  x1                    3.043           3.252\n  x5                    3.303           4.52\n  x6                    3.424           4.274\n  x8                    3.399           4.429\n  x9                    2.866           5.016\n  x1, x5                3.001           3.44\n  x1, x6                3.031           3.423\n  x5, x6                3.297           4.641\n  x1, x8                3.017           3.42\n  x5, x8                3.299           4.485\n  x6, x8                3.396           4.519\n  x1, x9                2.644           4.267\n  x5, x9                2.645           5.495\n  x6, x9                2.787           5.956\n  x8, x9                2.71            5.536\n  x1, x5, x6            2.988           3.607\n  x1, x5, x8            3.0             3.453\n  x1, x6, x8            3.007           3.574\n  x5, x6, x8            3.292           4.61\n  x1, x5, x9            2.523           4.704\n  x1, x6, x9            2.562           5.184\n  x5, x6, x9            2.544           6.552\n  x1, x8, x9            2.517           4.686\n  x5, x8, x9            2.628           5.532\n  x6, x8, x9            2.629           6.569\n  x1, x5, x6, x8        2.988           3.614\n  x1, x5, x6, x9        2.425           5.725\n  x1, x5, x8, x9        2.491           4.734\n  x1, x6, x8, x9        2.433           5.687\n  x5, x6, x8, x9        2.53            6.597\n  x1, x5, x6, x8, x9    2.398           5.766\n\nA. Backward selection will select attributes x1\nB. Backward selection will select attributes x1, x5, x6, x8\nC. Forward selection will select attributes x1, x8\nD. Forward selection will select attributes x1, x5, x6, x8",
+      "options": {
+        "A": "Backward selection will select attributes x1",
+        "B": "Backward selection will select attributes x1, x5, x6, x8",
+        "C": "Forward selection will select attributes x1, x8",
+        "D": "Forward selection will select attributes x1, x5, x6, x8"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 5: root-mean-square error (RMSE) for the training and test set when using least squares regression to predict y in the Avila dataset using different combinations of the features x1, x5, x6, x8, x9.\n  Feature(s)            Training RMSE   Test RMSE\n  none                  3.429           4.163\n  x1                    3.043           3.252\n  x5                    3.303           4.52\n  x6                    3.424           4.274\n  x8                    3.399           4.429\n  x9                    2.866           5.016\n  x1, x5                3.001           3.44\n  x1, x6                3.031           3.423\n  x5, x6                3.297           4.641\n  x1, x8                3.017           3.42\n  x5, x8                3.299           4.485\n  x6, x8                3.396           4.519\n  x1, x9                2.644           4.267\n  x5, x9                2.645           5.495\n  x6, x9                2.787           5.956\n  x8, x9                2.71            5.536\n  x1, x5, x6            2.988           3.607\n  x1, x5, x8            3.0             3.453\n  x1, x6, x8            3.007           3.574\n  x5, x6, x8            3.292           4.61\n  x1, x5, x9            2.523           4.704\n  x1, x6, x9            2.562           5.184\n  x5, x6, x9            2.544           6.552\n  x1, x8, x9            2.517           4.686\n  x5, x8, x9            2.628           5.532\n  x6, x8, x9            2.629           6.569\n  x1, x5, x6, x8        2.988           3.614\n  x1, x5, x6, x9        2.425           5.725\n  x1, x5, x8, x9        2.491           4.734\n  x1, x6, x8, x9        2.433           5.687\n  x5, x6, x8, x9        2.53            6.597\n  x1, x5, x6, x8, x9    2.398           5.766",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q19.png",
+      "source_location": "exam p.10, Table 5 (training/test RMSE for feature subsets)"
+    },
+    {
+      "question_id": "Q20",
+      "number": 20,
+      "topic": "Bayes' theorem on binarized attributes",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the Avila Bible dataset from Table 1. We wish to predict the copyist based on the attributes upperm and mr/is. Therefore, suppose the attributes have been binarized such that x2_tilde = 0 corresponds to x2 <= -0.056 (and otherwise x2_tilde = 1) and x10_tilde = 0 corresponds to x10 <= -0.002 (and otherwise x10_tilde = 1). Suppose the probability for each of the configurations of x2_tilde and x10_tilde conditional on the copyist y are as given in Table 6 and the prior probability of the copyists is\np(y = 1) = 0.316, p(y = 2) = 0.356, p(y = 3) = 0.328.\nUsing this, what is then the probability an observation was authored by copyist 1 given that x2_tilde = 1 and x10_tilde = 0?\n\nTable 6 (p(x2_tilde, x10_tilde | y)):\n  p(x2_tilde, x10_tilde | y)       y=1    y=2    y=3\n  x2_tilde=0, x10_tilde=0          0.19   0.3    0.19\n  x2_tilde=0, x10_tilde=1          0.22   0.3    0.26\n  x2_tilde=1, x10_tilde=0          0.25   0.2    0.35\n  x2_tilde=1, x10_tilde=1          0.34   0.2    0.2\n\nA. p(y = 1 | x2_tilde = 1, x10_tilde = 0) = 0.25\nB. p(y = 1 | x2_tilde = 1, x10_tilde = 0) = 0.313\nC. p(y = 1 | x2_tilde = 1, x10_tilde = 0) = 0.262\nD. p(y = 1 | x2_tilde = 1, x10_tilde = 0) = 0.298",
+      "options": {
+        "A": "p(y = 1 | x2_tilde = 1, x10_tilde = 0) = 0.25",
+        "B": "p(y = 1 | x2_tilde = 1, x10_tilde = 0) = 0.313",
+        "C": "p(y = 1 | x2_tilde = 1, x10_tilde = 0) = 0.262",
+        "D": "p(y = 1 | x2_tilde = 1, x10_tilde = 0) = 0.298"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 6: probability of observing particular values of x2_tilde and x10_tilde conditional on y.\n  p(x2_tilde, x10_tilde | y)       y=1    y=2    y=3\n  x2_tilde=0, x10_tilde=0          0.19   0.3    0.19\n  x2_tilde=0, x10_tilde=1          0.22   0.3    0.26\n  x2_tilde=1, x10_tilde=0          0.25   0.2    0.35\n  x2_tilde=1, x10_tilde=1          0.34   0.2    0.2\nPriors: p(y=1) = 0.316, p(y=2) = 0.356, p(y=3) = 0.328.",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q20.png",
+      "source_location": "exam p.10, Table 6 (conditional probability table for binarized x2,x10)"
+    },
+    {
+      "question_id": "Q21",
+      "number": 21,
+      "topic": "AdaBoost / combining weak classifiers to classify test points",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider again the Avila Bible dataset of Table 1. Suppose we limit ourselves to N = 12 observations from the original dataset and furthermore suppose we limit ourselves to class y = 1 or y = 2 and only consider the features x6 and x8. We wish to apply a KNN classification model (K = 2) to this dataset and apply AdaBoost to improve the performance. During the first T = 4 rounds of boosting, we obtain the decision boundaries shown in Figure 11. The figure also contains two test observations (marked by a cross and a square). The prediction of the intermediate AdaBoost classifiers, as well as the values of alpha_t and epsilon_t, are given in Table 7. Given this information, how will the AdaBoost classifier, as obtained by combining the T = 4 weak classifiers, classify the two test observations?\n\nTable 7 (predicted outputs of each weak classifier for t=1..4; y1..y12 are training observations, y1_test and y2_test are the two test points; epsilon_t and alpha_t are the AdaBoost intermediate values):\n  Variable    t=1    t=2    t=3    t=4\n  y1          1      2      2      2\n  y2          1      2      2      1\n  y3          2      2      2      1\n  y4          1      1      1      2\n  y5          1      1      1      1\n  y6          2      2      2      1\n  y7          1      2      2      1\n  y8          2      1      1      2\n  y9          2      2      2      2\n  y10         1      1      2      2\n  y11         2      2      1      2\n  y12         2      1      1      2\n  y1_test     2      1      1      2\n  y2_test     2      2      1      2\n  epsilon_t   0.583  0.657  0.591  0.398\n  alpha_t     -0.168 -0.325 -0.185 0.207\n\nA. [y1_test, y2_test] = [1, 1]\nB. [y1_test, y2_test] = [2, 1]\nC. [y1_test, y2_test] = [1, 2]\nD. [y1_test, y2_test] = [2, 2]",
+      "options": {
+        "A": "[y1_test, y2_test] = [1, 1]",
+        "B": "[y1_test, y2_test] = [2, 1]",
+        "C": "[y1_test, y2_test] = [1, 2]",
+        "D": "[y1_test, y2_test] = [2, 2]"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 7: tabulation of the predicted outputs of each AdaBoost weak classifier for t=1..4, with intermediate values alpha_t and epsilon_t (T = 4 steps). y1..y12 are training observations; y1_test, y2_test are the two test points from Figure 11.\n  Variable    t=1    t=2    t=3    t=4\n  y1          1      2      2      2\n  y2          1      2      2      1\n  y3          2      2      2      1\n  y4          1      1      1      2\n  y5          1      1      1      1\n  y6          2      2      2      1\n  y7          1      2      2      1\n  y8          2      1      1      2\n  y9          2      2      2      2\n  y10         1      1      2      2\n  y11         2      2      1      2\n  y12         2      1      1      2\n  y1_test     2      1      1      2\n  y2_test     2      2      1      2\n  epsilon_t   0.583  0.657  0.591  0.398\n  alpha_t     -0.168 -0.325 -0.185 0.207",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q21.png",
+      "source_location": "exam p.11, Table 7 (AdaBoost predictions, epsilon_t, alpha_t); Figure 11 (KNN decision boundaries for t=1..4 with two test points)"
+    },
+    {
+      "question_id": "Q22",
+      "number": 22,
+      "topic": "ANN / matching activation curve to weights",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider an artificial neural network (ANN) applied to the Avila Bible dataset described in Table 1 and trained to predict based on just the feature x7; that is, the neural network is a function that maps from a single real number to a single real number: f(x7) = y. Suppose the neural network takes the form\nf(x, w) = w0^(2) + sum_{j=1}^2 wj^(2) h^(1)([1 x] wj^(1)),\nwhere h^(1)(x) = max(x, 0) is the rectified linear function used as activation function in the hidden layer and the weights are given as\nw1^(1) = [-1.8, -1.1]^T, w2^(1) = [-0.6, 3.8]^T, w^(2) = [-0.1, 2.1]^T, w0^(2) = -0.8.\nWhich of the curves in Figure 12 will then correspond to the function f?\n\nA. ANN output 4\nB. ANN output 1\nC. ANN output 3\nD. ANN output 2",
+      "options": {
+        "A": "ANN output 4",
+        "B": "ANN output 1",
+        "C": "ANN output 3",
+        "D": "ANN output 2"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q22.png",
+      "source_location": "exam p.12, Figure 12 (four candidate ANN activation curves 1-4 of f(x7))"
+    },
+    {
+      "question_id": "Q23",
+      "number": 23,
+      "topic": "Two-level cross-validation / total training time",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Suppose a neural network is trained to translate documents. As part of training the network, we wish to select between four different ways to encode the documents (i.e., S = 4 models) and estimate the generalization error of the optimal choice. In the outer loop we opt for K1 = 3-fold cross-validation, and in the inner K2 = 4-fold cross-validation. The time taken to train a single model is 20 minutes, and this can be assumed constant for each fold. If the time taken to test a model is negligible, what is the total time required for the 2-level cross-validation procedure?\n\nA. 1020 minutes\nB. 2040 minutes\nC. 300 minutes\nD. 960 minutes",
+      "options": {
+        "A": "1020 minutes",
+        "B": "2040 minutes",
+        "C": "300 minutes",
+        "D": "960 minutes"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.12, Question 23 (pure text/math)"
+    },
+    {
+      "question_id": "Q24",
+      "number": 24,
+      "topic": "EM algorithm / responsibility from GMM densities",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We wish to apply the EM algorithm to fit a 1D GMM mixture model to the single feature x3 from the Avila Bible dataset. At the first step of the EM algorithm, the K = 3 mixture components has densities as indicated by each of the curves in Figure 13 (i.e. each curve is a normalized, Gaussian density N(x; mu_k, sigma_k)). In the figure, we have indicated the x3-value of a single observation i from the dataset as a black cross. Suppose we wish to apply the EM algorithm to this mixture model beginning with the E-step. We assume the weights of the components are\npi = [0.15, 0.53, 0.32]\nand the mean/variances of the components are those indicated in the figure. According to the EM algorithm, what is the (approximate) probability the black cross is assigned to mixture component 3 (gamma_ik)?\n\nA. 0.4\nB. 0.86\nC. 0.28\nD. 0.58",
+      "options": {
+        "A": "0.4",
+        "B": "0.86",
+        "C": "0.28",
+        "D": "0.58"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q24.png",
+      "source_location": "exam p.13, Figure 13 (three GMM component density curves with a marked test observation)"
+    },
+    {
+      "question_id": "Q25",
+      "number": 25,
+      "topic": "Multivariate normal / matching covariance matrix to scatter plots",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider a multivariate normal distribution with covariance matrix Sigma and mean mu and suppose we generate 1000 random samples from it:\nx = [x1, x2, x3]^T ~ N(mu, Sigma)\nPlots of each pair of coordinates of the draws x is shown in Figure 14. What is the most plausible covariance matrix?\n\nA. Sigma = [[1.0, 0.65, -0.65], [0.65, 1.0, 0.0], [-0.65, 0.0, 1.0]]\nB. Sigma = [[1.0, 0.0, 0.65], [0.0, 1.0, -0.65], [0.65, -0.65, 1.0]]\nC. Sigma = [[1.0, -0.65, 0.0], [-0.65, 1.0, 0.65], [0.0, 0.65, 1.0]]\nD. Sigma = [[1.0, 0.0, -0.65], [0.0, 1.0, 0.65], [-0.65, 0.65, 1.0]]",
+      "options": {
+        "A": "Sigma = [[1.0, 0.65, -0.65], [0.65, 1.0, 0.0], [-0.65, 0.0, 1.0]]",
+        "B": "Sigma = [[1.0, 0.0, 0.65], [0.0, 1.0, -0.65], [0.65, -0.65, 1.0]]",
+        "C": "Sigma = [[1.0, -0.65, 0.0], [-0.65, 1.0, 0.65], [0.0, 0.65, 1.0]]",
+        "D": "Sigma = [[1.0, 0.0, -0.65], [0.0, 1.0, 0.65], [-0.65, 0.65, 1.0]]"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q25.png",
+      "source_location": "exam p.13, Figure 14 (three pairwise scatter plots of x1,x2,x3)"
+    },
+    {
+      "question_id": "Q26",
+      "number": 26,
+      "topic": "KNN / matching p-norm to decision boundary",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We consider a K-nearest neighbor (KNN) classifier with K = 1. Recall in a KNN classifier, we find the nearest neighbors by computing the distances using a distance measure d(x, y). For this problem, we will consider KNN classifiers based on different distance measures based on p-norms\nd_p(x, y) = ( sum_{j=1}^M |x_j - y_j|^p )^(1/p), p >= 1\nand what decision surfaces they induce. In Figure 15 are shown four different decision boundaries obtained by training the KNN (K = 1) classifiers using the training observations (marked by the two circles in the figure): x1 = [0.301, 0.514]^T, x2 = [0.34, 0.672]^T, and with corresponding class labels y1 = 0 and y2 = 1, but with distance measures based on p = 1, 2, 4, infinity (not necessarily plotted in that order). Which norms were used in the four KNN classifiers?\n\nA. KNN classifier 1 corresponds to p = infinity, KNN classifier 2 corresponds to p = 2, KNN classifier 3 corresponds to p = 4, KNN classifier 4 corresponds to p = 1\nB. KNN classifier 1 corresponds to p = 4, KNN classifier 2 corresponds to p = 2, KNN classifier 3 corresponds to p = 1, KNN classifier 4 corresponds to p = infinity\nC. KNN classifier 1 corresponds to p = 4, KNN classifier 2 corresponds to p = 1, KNN classifier 3 corresponds to p = 2, KNN classifier 4 corresponds to p = infinity\nD. KNN classifier 1 corresponds to p = infinity, KNN classifier 2 corresponds to p = 1, KNN classifier 3 corresponds to p = 2, KNN classifier 4 corresponds to p = 4",
+      "options": {
+        "A": "KNN classifier 1 corresponds to p = infinity, KNN classifier 2 corresponds to p = 2, KNN classifier 3 corresponds to p = 4, KNN classifier 4 corresponds to p = 1",
+        "B": "KNN classifier 1 corresponds to p = 4, KNN classifier 2 corresponds to p = 2, KNN classifier 3 corresponds to p = 1, KNN classifier 4 corresponds to p = infinity",
+        "C": "KNN classifier 1 corresponds to p = 4, KNN classifier 2 corresponds to p = 1, KNN classifier 3 corresponds to p = 2, KNN classifier 4 corresponds to p = infinity",
+        "D": "KNN classifier 1 corresponds to p = infinity, KNN classifier 2 corresponds to p = 1, KNN classifier 3 corresponds to p = 2, KNN classifier 4 corresponds to p = 4"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2018_Q26.png",
+      "source_location": "exam p.14, Figure 15 (four KNN K=1 decision boundaries for different p-norms)"
+    },
+    {
+      "question_id": "Q27",
+      "number": 27,
+      "topic": "k-means clustering / convergence",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider a small dataset comprised of N = 9 observations\nx = [0.1, 0.3, 0.5, 1.0, 2.2, 3.0, 4.1, 4.4, 4.7].\nSuppose a k-means algorithm is applied to the dataset with K = 4 and using Euclidian distances. At a given stage of the algorithm the data is partitioned into the blocks:\n{0.1, 0.3}, {0.5, 1}, {2.2, 3, 4.1}, {4.4, 4.7}\nWhat clustering will the k-means algorithm eventually converge to?\n\nA. {0.1, 0.3, 0.5, 1}, {2.2}, {}, {3, 4.1, 4.4, 4.7}\nB. {0.1, 0.3}, {0.5, 1}, {2.2, 3}, {4.1, 4.4, 4.7}\nC. {0.1, 0.3}, {0.5}, {1, 2.2}, {3, 4.1, 4.4, 4.7}\nD. {0.1, 0.3}, {0.5, 1, 2.2, 3}, {4.1, 4.4}, {4.7}",
+      "options": {
+        "A": "{0.1, 0.3, 0.5, 1}, {2.2}, {}, {3, 4.1, 4.4, 4.7}",
+        "B": "{0.1, 0.3}, {0.5, 1}, {2.2, 3}, {4.1, 4.4, 4.7}",
+        "C": "{0.1, 0.3}, {0.5}, {1, 2.2}, {3, 4.1, 4.4, 4.7}",
+        "D": "{0.1, 0.3}, {0.5, 1, 2.2, 3}, {4.1, 4.4}, {4.7}"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.14, Question 27 (1D dataset and partition printed inline)"
+    }
+  ]
+}

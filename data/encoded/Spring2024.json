@@ -1,0 +1,551 @@
+{
+  "exam": "Spring2024",
+  "course": "02450",
+  "source_pdf": "ML-examsets/Spring2024.pdf",
+  "solution_pdf": "ML-solutions/Spring2024_sol.pdf",
+  "n_questions": 27,
+  "answer_key": {
+    "Q1": "B",
+    "Q2": "A",
+    "Q3": "B",
+    "Q4": "D",
+    "Q5": "A",
+    "Q6": "D",
+    "Q7": "B",
+    "Q8": "D",
+    "Q9": "D",
+    "Q10": "C",
+    "Q11": "C",
+    "Q12": "B",
+    "Q13": "A",
+    "Q14": "C",
+    "Q15": "C",
+    "Q16": "A",
+    "Q17": "B",
+    "Q18": "C",
+    "Q19": "D",
+    "Q20": "C",
+    "Q21": "D",
+    "Q22": "C",
+    "Q23": "A",
+    "Q24": "B",
+    "Q25": "C",
+    "Q26": "A",
+    "Q27": "D"
+  },
+  "questions": [
+    {
+      "question_id": "Q1",
+      "number": 1,
+      "topic": "PCA / standardization / histograms / percentiles",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We consider the standardized version of the Electronic Device Quality dataset described in Table 1, i.e., each attribute has a mean of zero and a standard deviation of one. The dataset contains 900 measurements of an electronic device for amplifying an input signal, with attributes x1 = Input voltage (VIN), x2 = Input frequency (FIN), x3 = Amplification factor in [0.10-2.30] (AMP), x4 = Power consumption (PWR), x5 = Electromagnetic radiance (EMR).\n\nFigure 1 shows a histogram plot of two unidentified attributes A and B from the Electronic Device Quality dataset. In Table 2, specific percentiles of all the attributes are listed.\n\nTable 2 (percentiles for all attributes):\n        x1     x2     x3     x4     x5\n1pct  -1.19  -1.6   -1.76  -0.7   -1.21\n5pct  -1.19  -1.36  -1.57  -0.7   -1.21\n25pct -1.11  -0.78  -0.84  -0.68  -0.87\n50pct -0.08  -0.13   0.03  -0.5   -0.23\n75pct  1.13   0.65   0.89   0.31   0.7\n95pct  1.21   1.77   1.48   2.43   1.93\n99pct  1.21   2.59   1.48   3.21   2.25\n\nWhich one of the following statements is true?\n\nA. Histogram A corresponds to attribute x3, and histogram B corresponds to attribute x1.\nB. Histogram A corresponds to attribute x1, and histogram B corresponds to attribute x4.\nC. Histogram A corresponds to attribute x4, and histogram B corresponds to attribute x2.\nD. Histogram A corresponds to attribute x2, and histogram B corresponds to attribute x1.",
+      "options": {
+        "A": "Histogram A corresponds to attribute x3, and histogram B corresponds to attribute x1.",
+        "B": "Histogram A corresponds to attribute x1, and histogram B corresponds to attribute x4.",
+        "C": "Histogram A corresponds to attribute x4, and histogram B corresponds to attribute x2.",
+        "D": "Histogram A corresponds to attribute x2, and histogram B corresponds to attribute x1."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q1.png",
+      "source_location": "exam p.2, Figure 1 (two histograms A and B) + Table 2 (percentiles)"
+    },
+    {
+      "question_id": "Q2",
+      "number": 2,
+      "topic": "Empirical correlation from covariance matrix",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the Electronic Device Quality dataset. The empirical covariance matrix of the first 4 attributes x1,...,x4 is given by:\n\nSigma_hat =\n[ 1.0     0.036   -0.077   0.643 ]\n[ 0.036   1.0     -0.03   -0.029 ]\n[-0.077  -0.03     1.0     0.459 ]\n[ 0.643  -0.029    0.459   1.0   ]\n\nWhat is the empirical correlation of x1 (VIN) and x4 (PWR)?\n\nA. approx 0.643\nB. approx 0.8019\nC. approx -0.8019\nD. approx 0.4134",
+      "options": {
+        "A": "approx 0.643",
+        "B": "approx 0.8019",
+        "C": "approx -0.8019",
+        "D": "approx 0.4134"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.2, Question 2 (covariance matrix inline)"
+    },
+    {
+      "question_id": "Q3",
+      "number": 3,
+      "topic": "PCA / SVD projection onto subspace",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider a PCA analysis of the Electronic Device Quality dataset in the N x M matrix X, where N = 900 is the number of observations and M = 5 is the number of attributes. We standardize the X matrix column-wise by subtracting the mean and dividing by the standard deviation to obtain X_tilde. With this matrix, we perform principal component analysis via singular value decomposition, obtaining U Sigma V^T = X_tilde. The three matrices are found to be:\n\nU =\n[ 0.000  -0.041  -0.032  -0.045  -0.003 ]\n[-0.048   0.044  -0.030  -0.016   0.058 ]\n[ 0.010  -0.055  -0.026  -0.027  -0.054 ]\n[-0.017  -0.039   0.013  -0.021  -0.037 ]\n[-0.065   0.018  -0.030   0.038  -0.016 ]\n[  ...      ...     ...     ...     ...  ]   (1)\n\nSigma =\n[ 49.164   0.000   0.000    0.000   0.000 ]\n[  0.000  31.401   0.000    0.000   0.000 ]\n[  0.000   0.000  29.678    0.000   0.000 ]\n[  0.000   0.000   0.000   12.436   0.000 ]\n[  0.000   0.000   0.000    0.000   7.837 ]   (2)\n\nV =\n[-0.47   0.52  -0.24   0.54   0.40 ]\n[ 0.00   0.44   0.90  -0.04   0.02 ]\n[-0.31  -0.73   0.37   0.41   0.27 ]\n[-0.58  -0.04  -0.01  -0.73   0.36 ]\n[-0.60   0.01   0.01   0.08  -0.80 ]   (3)\n\nWith the SVD result in hand, the aim is to obtain a principal component representation with the fewest possible components retaining at least 90% of the total variance. For the first observation in X_tilde, x_tilde_1 = [1.21, 0.05, -1.43, -0.43, -0.59]^T, what would the coordinates, b1, be when x_tilde_1 is projected onto the relevant subspace?\n\nA. b1^T = [0.021, -1.298, -0.953, -0.560]\nB. Part of the first row in the matrix X_tilde V.\nC. b1^T = [0, -0.048, 0.010]\nD. b1^T = [-0.466, -0.522, -0.243, -0.536]",
+      "options": {
+        "A": "b1^T = [0.021, -1.298, -0.953, -0.560]",
+        "B": "Part of the first row in the matrix X_tilde V.",
+        "C": "b1^T = [0, -0.048, 0.010]",
+        "D": "b1^T = [-0.466, -0.522, -0.243, -0.536]"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 3 (U, Sigma, V matrices inline)"
+    },
+    {
+      "question_id": "Q4",
+      "number": 4,
+      "topic": "PCA / interpretation of principal component projections",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the PCA analysis for the Electronic Device Quality dataset, in particular the SVD decomposition of X_tilde in Equation (3). The V matrix is:\n\nV =\n[-0.47   0.52  -0.24   0.54   0.40 ]\n[ 0.00   0.44   0.90  -0.04   0.02 ]\n[-0.31  -0.73   0.37   0.41   0.27 ]\n[-0.58  -0.04  -0.01  -0.73   0.36 ]\n[-0.60   0.01   0.01   0.08  -0.80 ]\n\nWhich one of the following statements is true?\n\nA. An observation with a low value of x1 (VIN), a low value of x3 (AMP), a low value of x4 (PWR), and high value of x5 (EMR) will typically have a positive value of the projection onto principal component number 5.\nB. An observation with a high value of x1 (VIN), a high value of x3 (AMP), a high value of x4 (PWR), and high value of x5 (EMR) will typically have a positive value of the projection onto principal component number 1.\nC. An observation with a high value of x1 (VIN), a high value of x2 (FIN), and a low value of x3 (AMP) will typically have a negative value of the projection onto principal component number 2.\nD. An observation with a low value of x1 (VIN), a high value of x2 (FIN), and a high value of x3 (AMP) will typically have a positive value of the projection onto principal component number 3.",
+      "options": {
+        "A": "An observation with a low value of x1 (VIN), a low value of x3 (AMP), a low value of x4 (PWR), and high value of x5 (EMR) will typically have a positive value of the projection onto principal component number 5.",
+        "B": "An observation with a high value of x1 (VIN), a high value of x3 (AMP), a high value of x4 (PWR), and high value of x5 (EMR) will typically have a positive value of the projection onto principal component number 1.",
+        "C": "An observation with a high value of x1 (VIN), a high value of x2 (FIN), and a low value of x3 (AMP) will typically have a negative value of the projection onto principal component number 2.",
+        "D": "An observation with a low value of x1 (VIN), a high value of x2 (FIN), and a high value of x3 (AMP) will typically have a positive value of the projection onto principal component number 3."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 4 (refers to V matrix in Eq. 3)"
+    },
+    {
+      "question_id": "Q5",
+      "number": 5,
+      "topic": "Kernel Density Estimation / leave-one-out CV / outliers",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider the application of Kernel Density Estimation (KDE) to a synthetic 1D problem based on three observed data points X = {-0.7, 1.1, 1.8}. Two possible kernel widths lambda = {0.5, 1} are considered with the final choice to be made based on leave-one-out cross-validation on X. Determine which one of the following test points is most likely to be a potential outlier using the KDE approach.\n\nA. x* = -0.9\nB. x* = -0.3\nC. x* = 0.6\nD. x* = 1.2",
+      "options": {
+        "A": "x* = -0.9",
+        "B": "x* = -0.3",
+        "C": "x* = 0.6",
+        "D": "x* = 1.2"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 5 (data points inline)"
+    },
+    {
+      "question_id": "Q6",
+      "number": 6,
+      "topic": "KNN density / outlier detection from distance matrix",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the pairwise Euclidean distances between 10 observations from the Electronic Device Quality dataset (M = 5) shown in Table 3. The black observations {o1, o2, o3, o4, o5, o6, o7} belong to class C1 (Deactivated) and the red observations {o8, o9, o10} belong to class C2 (Activated). The dataset was standardized.\n\nTable 3 (pairwise Euclidean distances d(oi, oj)):\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\no1     0.0   3.7   3.4   2.3   1.8   1.6   2.4   2.6   2.5   4.3\no2     3.7   0.0   3.2   5.1   3.5   2.9   4.4   4.6   4.0   7.2\no3     3.4   3.2   0.0   4.1   2.6   4.0   2.7   5.3   2.9   6.1\no4     2.3   5.1   4.1   0.0   3.7   3.2   1.7   2.7   1.9   2.6\no5     1.8   3.5   2.6   3.7   0.0   2.8   3.2   4.4   3.4   5.6\no6     1.6   2.9   4.0   3.2   2.8   0.0   3.4   2.1   3.1   5.3\no7     2.4   4.4   2.7   1.7   3.2   3.4   0.0   3.8   0.8   4.1\no8     2.6   4.6   5.3   2.7   4.4   2.1   3.8   0.0   3.5   4.0\no9     2.5   4.0   2.9   1.9   3.4   3.1   0.8   3.5   0.0   4.4\no10    4.3   7.2   6.1   2.6   5.6   5.3   4.1   4.0   4.4   0.0\n\nTo examine if observation o1 may be an outlier, we will calculate the K-nearest neighborhood density using only the observations and distances in Table 3. For an observation oi, the density is computed using the set of K nearest neighbors of observation oi excluding the i-th observation itself, N_{X\\i}(oi, K), and is denoted by density_{X\\i}(oi, K). The density is defined as density_{X\\i}(oi, K) = 1 / ( (1/K) * sum over o' in N_{X\\i}(oi,K) of d(oi, o') ). What is the density for observation o1 for K = 3 nearest neighbors?\n\nA. 0.625\nB. 0.462\nC. 1.139\nD. 0.526",
+      "options": {
+        "A": "0.625",
+        "B": "0.462",
+        "C": "1.139",
+        "D": "0.526"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 3 (pairwise Euclidean distances d(oi, oj) between 10 observations; symmetric matrix, diagonal = 0):\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\no1     0.0   3.7   3.4   2.3   1.8   1.6   2.4   2.6   2.5   4.3\no2     3.7   0.0   3.2   5.1   3.5   2.9   4.4   4.6   4.0   7.2\no3     3.4   3.2   0.0   4.1   2.6   4.0   2.7   5.3   2.9   6.1\no4     2.3   5.1   4.1   0.0   3.7   3.2   1.7   2.7   1.9   2.6\no5     1.8   3.5   2.6   3.7   0.0   2.8   3.2   4.4   3.4   5.6\no6     1.6   2.9   4.0   3.2   2.8   0.0   3.4   2.1   3.1   5.3\no7     2.4   4.4   2.7   1.7   3.2   3.4   0.0   3.8   0.8   4.1\no8     2.6   4.6   5.3   2.7   4.4   2.1   3.8   0.0   3.5   4.0\no9     2.5   4.0   2.9   1.9   3.4   3.1   0.8   3.5   0.0   4.4\no10    4.3   7.2   6.1   2.6   5.6   5.3   4.1   4.0   4.4   0.0\nClasses: C1 (Deactivated) = {o1,o2,o3,o4,o5,o6,o7}; C2 (Activated) = {o8,o9,o10}.",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q6.png",
+      "source_location": "exam p.4, Table 3 (10x10 pairwise distance matrix)"
+    },
+    {
+      "question_id": "Q7",
+      "number": 7,
+      "topic": "Hierarchical clustering / linkage function from dendrogram",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider the observations and the pairwise distances in Table 3 along with the dendrogram in Figure 2. The dendrogram shows a hierarchical clustering of the 10 observations o1..o10 with merge heights on the vertical axis (ranging roughly 0.6 to 4.8), and leaf order along the horizontal axis: o7, o9, o4, o1, o6, o5, o8, o2, o3, o10. Determine which linkage function was used to produce the dendrogram.\n\nA. Minimum linkage.\nB. Average linkage.\nC. Maximum linkage.\nD. The linkage function can not be determined from the available information.",
+      "options": {
+        "A": "Minimum linkage.",
+        "B": "Average linkage.",
+        "C": "Maximum linkage.",
+        "D": "The linkage function can not be determined from the available information."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q7.png",
+      "source_location": "exam p.4, Figure 2 (dendrogram) + Table 3 (distance matrix)"
+    },
+    {
+      "question_id": "Q8",
+      "number": 8,
+      "topic": "Gaussian mixture model / PCA of generated samples",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider a Gaussian mixture model (GMM) with three components that define the density from which we draw random samples to create a dataset. We compute the principal components of this dataset. The corresponding directions are shown in Figure 3 (the first and second principal component directions plotted along with the GMM component centers in the x1-x2 plane; line lengths are arbitrary). Which one of the following GMMs was used to generate the data?\n\nA. mu1=[4.9,-2.6], Sigma1=[[1.47,1.3],[1.3,1.54]], w1=0.34; mu2=[-0.04,2.6], Sigma2=[[5.3,-0.1],[-0.1,0.32]], w2=0.12; mu3=[-1.17,-1.13], Sigma3=[[0.84,0.89],[0.89,4.4]], w3=0.54\nB. mu1=[4.9,-2.6], Sigma1=[[0.84,0.89],[0.89,4.4]], w1=0.12; mu2=[-0.04,2.6], Sigma2=[[1.47,1.3],[1.3,1.54]], w2=0.34; mu3=[-1.17,-1.13], Sigma3=[[5.3,-0.1],[-0.1,0.32]], w3=0.54\nC. mu1=[4.9,-2.6], Sigma1=[[5.3,-0.1],[-0.1,0.32]], w1=0.34; mu2=[-0.04,2.6], Sigma2=[[1.47,1.3],[1.3,1.54]], w2=0.12; mu3=[-1.17,-1.13], Sigma3=[[0.84,0.89],[0.89,4.4]], w3=0.54\nD. mu1=[4.9,-2.6], Sigma1=[[5.3,-0.1],[-0.1,0.32]], w1=0.12; mu2=[-0.04,2.6], Sigma2=[[1.47,1.3],[1.3,1.54]], w2=0.34; mu3=[-1.17,-1.13], Sigma3=[[0.84,0.89],[0.89,4.4]], w3=0.54",
+      "options": {
+        "A": "mu1=[4.9,-2.6], Sigma1=[[1.47,1.3],[1.3,1.54]], w1=0.34; mu2=[-0.04,2.6], Sigma2=[[5.3,-0.1],[-0.1,0.32]], w2=0.12; mu3=[-1.17,-1.13], Sigma3=[[0.84,0.89],[0.89,4.4]], w3=0.54",
+        "B": "mu1=[4.9,-2.6], Sigma1=[[0.84,0.89],[0.89,4.4]], w1=0.12; mu2=[-0.04,2.6], Sigma2=[[1.47,1.3],[1.3,1.54]], w2=0.34; mu3=[-1.17,-1.13], Sigma3=[[5.3,-0.1],[-0.1,0.32]], w3=0.54",
+        "C": "mu1=[4.9,-2.6], Sigma1=[[5.3,-0.1],[-0.1,0.32]], w1=0.34; mu2=[-0.04,2.6], Sigma2=[[1.47,1.3],[1.3,1.54]], w2=0.12; mu3=[-1.17,-1.13], Sigma3=[[0.84,0.89],[0.89,4.4]], w3=0.54",
+        "D": "mu1=[4.9,-2.6], Sigma1=[[5.3,-0.1],[-0.1,0.32]], w1=0.12; mu2=[-0.04,2.6], Sigma2=[[1.47,1.3],[1.3,1.54]], w2=0.34; mu3=[-1.17,-1.13], Sigma3=[[0.84,0.89],[0.89,4.4]], w3=0.54"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q8.png",
+      "source_location": "exam p.5, Figure 3 (PCA directions + GMM centers scatter)"
+    },
+    {
+      "question_id": "Q9",
+      "number": 9,
+      "topic": "AdaBoost / combined classifier accuracy",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the Electronic Device Dataset. Suppose we wish to predict the class label y using a decision tree model. To improve performance, we apply AdaBoost (the specific variant described in Chapter 17 of the lecture notes). We will use the full dataset for training, and it will be denoted by D. We run T = 3 boosting rounds, and suppose that the algorithm proceeds as follows:\n- The first classifier, f1, has a weighted error, eps_{t=1}, of 0.50 when evaluated on D.\n- The second classifier, f2, has a weighted error, eps_{t=2}, of 0.75 when evaluated on D.\n- The third classifier, f3, has a weighted error, eps_{t=3}, of 0.50 when evaluated on D.\n\nWhat is the accuracy of the combined classifier (majority voting classifier) produced by AdaBoost when evaluated on D?\n\nA. approx 0.25\nB. approx 0.50\nC. approx 0.63\nD. approx 0.75",
+      "options": {
+        "A": "approx 0.25",
+        "B": "approx 0.50",
+        "C": "approx 0.63",
+        "D": "approx 0.75"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.5, Question 9 (weighted errors inline)"
+    },
+    {
+      "question_id": "Q10",
+      "number": 10,
+      "topic": "k-means / centroid update on 1D data",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider a small dataset comprised of N = 7 one-dimensional observations shown as the filled circles in Figure 4. Figure 4 shows a 1D number line (x-axis from 0 to 14) with observations (filled circles) and initial centroid locations (crosses). Suppose a k-means algorithm is applied to the dataset with K = 2 and using Euclidean distances. We will assume the location of the centroids are initialized to the values indicated by the crosses in Figure 4. After initialization, the k-means algorithm is evaluated for one step, comprised of assigning observations to centroids and updating the location of the centroids. After the first step, what will be the new location of the centroids?\n\nA. mu1 = 3, and mu2 = 49/5.\nB. mu1 = 4, and mu2 = 43/4.\nC. mu1 = 2, and mu2 = 53/6.\nD. mu1 = 22/3, and mu2 = 11.",
+      "options": {
+        "A": "mu1 = 3, and mu2 = 49/5.",
+        "B": "mu1 = 4, and mu2 = 43/4.",
+        "C": "mu1 = 2, and mu2 = 53/6.",
+        "D": "mu1 = 22/3, and mu2 = 11."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q10.png",
+      "source_location": "exam p.6, Figure 4 (1D scatter of observations and initial centroids)"
+    },
+    {
+      "question_id": "Q11",
+      "number": 11,
+      "topic": "Regularization / bias-variance tradeoff",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider a regularized linear regression model trained using lambda = 2.23 on the Electronic Device Quality dataset using the five attributes in addition to second-order polynomial terms as input, i.e. x_tilde = [1, x1, x2, ..., x5, x1^2, x2^2, ..., x5^2]. The model performs poorly on a held-out test set and has been confirmed to have very high bias and very low variance. Which one of the following actions is most likely to improve the generalization performance on unseen data?\n\nA. Increasing the amount of regularization applied to the model.\nB. Remove the second-order polynomial transformations from the input vector.\nC. Decrease the amount of regularization applied to the model.\nD. Train on the original training dataset with lambda = 2.23 but only test on half the observations in the test set.",
+      "options": {
+        "A": "Increasing the amount of regularization applied to the model.",
+        "B": "Remove the second-order polynomial transformations from the input vector.",
+        "C": "Decrease the amount of regularization applied to the model.",
+        "D": "Train on the original training dataset with lambda = 2.23 but only test on half the observations in the test set."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 11 (all text)"
+    },
+    {
+      "question_id": "Q12",
+      "number": 12,
+      "topic": "Decision tree / purity gain with entropy impurity",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Suppose Hunt's algorithm is used to compute the purity gain for a decision tree (DT) classifier trained on the Electronic Device Quality dataset using a hold-out cross-validation procedure. The purity gain is defined as Delta = I(r) - sum_{k=1}^{K} (N(v_k)/N(r)) I(v_k), where I(z) is the impurity measure evaluated at the root, r, or a specific branch, v_k. At the root, the training set contains 400 examples from class 1 and 100 from class 2. A particular split along x4 results in two branches such that:\n- Branch v1 has 175 observations from class 1 and 75 observations from class 2.\n- Branch v2 has 225 observations from class 1 and 25 observations from class 2.\n\nDetermine which one of the following expressions correctly computes the purity gain for the provided split when using the entropy impurity measure.\n\nA. Delta = -sum_{c=1}^{2} p(c|r) log2 p(c|r) - sum_{c=1}^{2} p(c|v1) log2 p(c|v1)\nB. Delta = sum_{c=1}^{2} ( -p(c|r) log2 p(c|r) + (1/2) p(c|v1) log2 p(c|v1) + (1/2) p(c|v2) log2 p(c|v2) )\nC. Delta = -sum_{c=1}^{2} p(c|r) log2 p(c|r) + sum_{k=1}^{2} sum_{c=1}^{2} p(c|v_k) log2 p(c|v_k)\nD. Delta = -sum_{k=1}^{2} sum_{c=1}^{2} p(c|v_k) log2 p(c|v_k)",
+      "options": {
+        "A": "Delta = -sum_{c=1}^{2} p(c|r) log2 p(c|r) - sum_{c=1}^{2} p(c|v1) log2 p(c|v1)",
+        "B": "Delta = sum_{c=1}^{2} ( -p(c|r) log2 p(c|r) + (1/2) p(c|v1) log2 p(c|v1) + (1/2) p(c|v2) log2 p(c|v2) )",
+        "C": "Delta = -sum_{c=1}^{2} p(c|r) log2 p(c|r) + sum_{k=1}^{2} sum_{c=1}^{2} p(c|v_k) log2 p(c|v_k)",
+        "D": "Delta = -sum_{k=1}^{2} sum_{c=1}^{2} p(c|v_k) log2 p(c|v_k)"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 12 (all text)"
+    },
+    {
+      "question_id": "Q13",
+      "number": 13,
+      "topic": "Bayes theorem from binarized-attribute histogram counts",
+      "type": "B",
+      "text_faithful": true,
+      "question_text": "Consider the Electronic Device Quality dataset from Table 1. The attributes have been binarized to produce new features denoted x_hat_1, x_hat_2, ..., x_hat_M. A summary of the binarized dataset is given in Figure 5 for a subset of the (binarized) attributes and label, namely x_hat_1, x_hat_2 and y. The histograms give the following counts (out of N = 900 observations):\n\nFor y = 1 (706 observations):\n  x_hat_1 = 0, x_hat_2 = 0: count 175\n  x_hat_1 = 0, x_hat_2 = 1: count 198\n  x_hat_1 = 1, x_hat_2 = 0: count 149\n  x_hat_1 = 1, x_hat_2 = 1: count 184\nFor y = 2 (194 observations):\n  x_hat_1 = 0, x_hat_2 = 0: count 33\n  x_hat_1 = 0, x_hat_2 = 1: count 36\n  x_hat_1 = 1, x_hat_2 = 0: count 71\n  x_hat_1 = 1, x_hat_2 = 1: count 54\n\nDetermine the probability of y = 1 given an observation has x_hat_1 = 0 and x_hat_2 = 1 using Bayes theorem (without applying the Naive Bayes assumption).\n\nA. 0.846\nB. 0.664\nC. 0.714\nD. 0.28",
+      "options": {
+        "A": "0.846",
+        "B": "0.664",
+        "C": "0.714",
+        "D": "0.28"
+      },
+      "correct_answer": "A",
+      "text_representation": "Figure 5 (counts from the binarized dataset, total N = 900 observations):\nHistogram where y = 1 (N_{y=1} = 706):\n  x_hat_1 = 0, x_hat_2 = 0 : 175\n  x_hat_1 = 0, x_hat_2 = 1 : 198\n  x_hat_1 = 1, x_hat_2 = 0 : 149\n  x_hat_1 = 1, x_hat_2 = 1 : 184\nHistogram where y = 2 (N_{y=2} = 194):\n  x_hat_1 = 0, x_hat_2 = 0 : 33\n  x_hat_1 = 0, x_hat_2 = 1 : 36\n  x_hat_1 = 1, x_hat_2 = 0 : 71\n  x_hat_1 = 1, x_hat_2 = 1 : 54",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q13.png",
+      "source_location": "exam p.7, Figure 5 (two bar histograms with counts printed on bars)"
+    },
+    {
+      "question_id": "Q14",
+      "number": 14,
+      "topic": "Rand index / cluster assignment with missing entries",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider clustering N = 10 observations using two clustering algorithms. The resulting cluster assignments is indicated by:\nQ = [?, ?, ?, 1, 2, 1, 2, 1, 3, 1]\nZ = [?, ?, ?, 2, 3, 3, 4, 2, 1, 1]\nThe elements in the vectors indicate the cluster index for a specific observation with \"?\" representing a missing/unknown cluster assignment. We use the Rand index to compare the two results. It is known that the total number of times Q and Z agree that two observations are not in the same cluster is D = 20. Additionally, it is known that the total number of times Q and Z agree that two observations are in the same cluster is S = 7. Which one of the following options is the correct combination of missing assignments?\n\nA. Q = [3, 1, 3, 1, 2, 1, 2, 1, 3, 1], Z = [1, 3, 1, 2, 3, 3, 4, 2, 1, 1]\nB. Q = [1, 1, 2, 1, 2, 1, 2, 1, 3, 1], Z = [4, 1, 3, 2, 3, 3, 4, 2, 1, 1]\nC. Q = [1, 1, 1, 1, 2, 1, 2, 1, 3, 1], Z = [2, 3, 2, 2, 3, 3, 4, 2, 1, 1]\nD. Q = [1, 2, 2, 1, 2, 1, 2, 1, 3, 1], Z = [1, 3, 4, 2, 3, 3, 4, 2, 1, 1]",
+      "options": {
+        "A": "Q = [3, 1, 3, 1, 2, 1, 2, 1, 3, 1], Z = [1, 3, 1, 2, 3, 3, 4, 2, 1, 1]",
+        "B": "Q = [1, 1, 2, 1, 2, 1, 2, 1, 3, 1], Z = [4, 1, 3, 2, 3, 3, 4, 2, 1, 1]",
+        "C": "Q = [1, 1, 1, 1, 2, 1, 2, 1, 3, 1], Z = [2, 3, 2, 2, 3, 3, 4, 2, 1, 1]",
+        "D": "Q = [1, 2, 2, 1, 2, 1, 2, 1, 3, 1], Z = [1, 3, 4, 2, 3, 3, 4, 2, 1, 1]"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.7, Question 14 (cluster vectors inline)"
+    },
+    {
+      "question_id": "Q15",
+      "number": 15,
+      "topic": "Model comparison / paired test on squared errors",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider comparing three regression models (A, B, and C) using hold-out cross-validation and the setup presented in Section 11.3.6 of the lecture notes. The squared error on each of the five observations for all three models is shown in Table 4.\n\nTable 4 (squared error from three regression models for n = 5 observations):\ni   z_i^A   z_i^B   z_i^C\n1    17      21      17\n2    21      21      22\n3    19      23      18\n4    20      21      20\n5    22      22      53\n\nDetermine which one of the following statements is correct.\n\nA. Model A's losses are always lower or equal to Model B's losses, thus a paired test on the difference in performance between the models is guaranteed to show that Model A is better than Model B with a p-value < 0.05.\nB. The confidence interval for the estimated difference in performance between Model A and Model C is approx [17.0, 53.0].\nC. The losses of Model C seem far from being normally distributed due to the outlier (z_5^C = 53), so one should be careful with any application and interpretation of the usual paired test.\nD. When comparing Model A's and Model B's losses using a paired test, the degrees of freedom parameter nu in the test will be nu = (n - 1) x n = 20.",
+      "options": {
+        "A": "Model A's losses are always lower or equal to Model B's losses, thus a paired test on the difference in performance between the models is guaranteed to show that Model A is better than Model B with a p-value < 0.05.",
+        "B": "The confidence interval for the estimated difference in performance between Model A and Model C is approx [17.0, 53.0].",
+        "C": "The losses of Model C seem far from being normally distributed due to the outlier (z_5^C = 53), so one should be careful with any application and interpretation of the usual paired test.",
+        "D": "When comparing Model A's and Model B's losses using a paired test, the degrees of freedom parameter nu in the test will be nu = (n - 1) x n = 20."
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 4 (squared error from three regression models for n = 5 observations):\ni   z_i^A   z_i^B   z_i^C\n1    17      21      17\n2    21      21      22\n3    19      23      18\n4    20      21      20\n5    22      22      53",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q15.png",
+      "source_location": "exam p.8, Table 4 (squared errors for 3 models, 5 observations)"
+    },
+    {
+      "question_id": "Q16",
+      "number": 16,
+      "topic": "Regularized linear regression / recover weight from residuals",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider a regularized linear regression model on the (non-standardized) attribute, y_r, using three of the standardized attributes x3, x4, x5. We use a standard regression function defined as f(x_hat, w_hat) = x_hat^T w_hat, where w_hat is the weight vector including the intercept term as the first element and x_hat^T contains the standardized attributes augmented with a constant for the intercept term, i.e., x_hat = [1, x_tilde]^T. Consider an error function for the regularized linear regression problem defined as E(w_hat) = (1/N) sum_{i=1}^{N} L(y_{r,i}, f(x_hat_i, w_hat)) + lambda ||w||_2^2, where the function L(y_{r,i}, y_hat_{r,i}) is the squared difference between the actual observation, y_{r,i}, and the prediction, y_hat_{r,i}. w is the weight vector excluding the intercept term. The model parameters are estimated based on five observations with the relevant information shown in Table 5, resulting in w_hat = [0.0318, 0.04, 0.000197, w5]^T and E(w_hat) approx 0.00025757. lambda = 0.02 was used in the estimation.\n\nTable 5 (regression result, residuals y_{r,i} - f(x_hat_i, w_hat)):\ni:                       1         2         3        4         5\ny_{r,i} - f(x_hat_i, w_hat): 0.00162  -0.00756  -0.0161  0.0248  -0.00274\n\nDetermine which value of w5 was estimated.\n\nA. w5 approx -0.043\nB. w5 approx 0.018\nC. w5 approx 0.22\nD. w5 approx 0.60",
+      "options": {
+        "A": "w5 approx -0.043",
+        "B": "w5 approx 0.018",
+        "C": "w5 approx 0.22",
+        "D": "w5 approx 0.60"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 5 (regression result, residuals y_{r,i} - f(x_hat_i, w_hat) for i = 1..5):\ni:                            1         2         3        4         5\ny_{r,i} - f(x_hat_i, w_hat):  0.00162  -0.00756  -0.0161   0.0248   -0.00274",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q16.png",
+      "source_location": "exam p.8, Table 5 (regression residuals for 5 observations)"
+    },
+    {
+      "question_id": "Q17",
+      "number": 17,
+      "topic": "Naive Bayes classifier with continuous attributes",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider the task of classifying the label y from two continuous attributes, namely x1 and x2 using Bayes rule. We use a normal distribution to model the class conditional distribution of x = [x1, x2]^T, i.e. in general p(x | mu_{y=k}, Sigma_{y=k}). The specific distributions are illustrated in Figure 6 (a contour plot of the joint p(x|y) for y=1 and y=2, and the marginal class-conditional densities p(x1|y) and p(x2|y) for y=1 and y=2). Additionally, it is noted that p(y = 1) = 0.784 and p(y = 2) = 0.216. Determine the value of p(y = 1 | x = [-1, 0]^T) using a Naive Bayes classifier.\n\nA. approx 0.675\nB. approx 0.784\nC. approx 0.864\nD. approx 0.5",
+      "options": {
+        "A": "approx 0.675",
+        "B": "approx 0.784",
+        "C": "approx 0.864",
+        "D": "approx 0.5"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q17.png",
+      "source_location": "exam p.9, Figure 6 (contour plot + marginal class-conditional density curves)"
+    },
+    {
+      "question_id": "Q18",
+      "number": 18,
+      "topic": "KNN regression / determine number of neighbors K",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Suppose a K-nearest neighbors regression model is fitted to a small 1-dimensional dataset with N = 10 observations. The predicted response is shown in Figure 7, where the red line (a step function) is fitted to the data points (scatter of x2 vs y). How many neighbors (i.e. K) was used?\n\nA. K = 5\nB. K = 2\nC. K = 3\nD. K = 4",
+      "options": {
+        "A": "K = 5",
+        "B": "K = 2",
+        "C": "K = 3",
+        "D": "K = 4"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q18.png",
+      "source_location": "exam p.9, Figure 7 (KNN regression scatter + step-function fit)"
+    },
+    {
+      "question_id": "Q19",
+      "number": 19,
+      "topic": "Forward/backward feature selection / number of models",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the Electronic Device Quality dataset in Table 1. We apply forward or backward selection to find an interpretable linear regression model which uses a subset of the M = 5 attributes to predict the y_r attribute. Recall that backward and forward selection chooses models based on the test error as determined by cross-validation. In our case we use the hold-out method to generate a single test/training split. Suppose backward selection ends up selecting the attributes x1 and x5. Determine which one of the following statements is correct.\n\nA. Forward selection is garanteed to also select x1 and x5.\nB. Backward selection will always result in fewer attributes being selected compared to forward selection.\nC. Backward selection requires testing 13 models if the procedure selects x1 and x5.\nD. Forward selection requires training 13 models if the procedure selects two attributes.",
+      "options": {
+        "A": "Forward selection is garanteed to also select x1 and x5.",
+        "B": "Backward selection will always result in fewer attributes being selected compared to forward selection.",
+        "C": "Backward selection requires testing 13 models if the procedure selects x1 and x5.",
+        "D": "Forward selection requires training 13 models if the procedure selects two attributes."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.10, Question 19 (all text)"
+    },
+    {
+      "question_id": "Q20",
+      "number": 20,
+      "topic": "Logistic regression / prediction with sigmoid",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Suppose we fit three different logistic regression models (A, B and C) on the Electronic Device Quality dataset.\nModel A uses x1.\nModel B uses x1 and x2.\nModel C uses all five attributes x1,...,x5.\nWe standardize the input attributes and add an intercept column with ones in front of the attribute columns. The estimated parameters/weights are:\nw^A = [-1.332, 0.378]^T\nw^B = [-1.346, 0.387, -0.222]^T\nw^C = [-15.913, 9.028, -0.273, 18.852, 2.133, -5.583]^T\nwhere the first element in each vector corresponds to the intercept/bias term. We consider the (already standardized) observation x3 = [1.209, -0.303, -1.070, -0.459, 0.013]^T and the prediction y_hat_i = sigma(x_i^T w) where sigma(z) is the logistic sigmoid function. Determine which one of the following statements is correct.\n\nA. Model A's prediction is y_hat_3^A approx -0.87\nB. Model A's prediction is y_hat_3^A approx 0.15\nC. Model B's prediction is y_hat_3^B approx 0.31\nD. It is not possible to make a prediction using w^C as the dimension of w^C does not match the input.",
+      "options": {
+        "A": "Model A's prediction is y_hat_3^A approx -0.87",
+        "B": "Model A's prediction is y_hat_3^A approx 0.15",
+        "C": "Model B's prediction is y_hat_3^B approx 0.31",
+        "D": "It is not possible to make a prediction using w^C as the dimension of w^C does not match the input."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.10, Question 20 (weights and observation inline)"
+    },
+    {
+      "question_id": "Q21",
+      "number": 21,
+      "topic": "Classifier comparison from confusion matrices (precision/recall/FPR)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Table 6 shows the confusion matrices related to a neural network (ANN) classifier and a decision tree (DT) classifier trained on a particular instance of the Electronic Device Quality dataset to predict y (PROT). The dataset has been resampled to almost balance the number of observations from the two classes, but the number of observations is still N = 900.\n\nTable 6 (confusion matrices; rows = Actual, columns = Predicted):\nDT:\n                Predicted Activated   Predicted Deactivated\nActual Activated        373                  110\nActual Deactivated       82                  335\nANN:\n                Predicted Activated   Predicted Deactivated\nActual Activated        355                  128\nActual Deactivated       64                  353\n\nWe define y = 1 to mean a negative outcome (i.e., PROT is Deactivated), and y = 2 to be a positive outcome (i.e., PROT is Activated). On the particular instance of the dataset, the goal is to have low error rate and simultaneously avoid misclassifying a device as having its protection mode Deactivated when it is actually Activated. Determine which one of the following statements is true.\n\nA. It is not possible to determine which classification model is better based on the provided information.\nB. The DT is preferred over the ANN because the DT's precision is higher than the ANN's precision.\nC. The DT is preferred over the ANN because the DT's false positive rate is lower than the ANN's false positive rate.\nD. The DT is preferred over the ANN because the DT's recall is higher than the ANN's recall.",
+      "options": {
+        "A": "It is not possible to determine which classification model is better based on the provided information.",
+        "B": "The DT is preferred over the ANN because the DT's precision is higher than the ANN's precision.",
+        "C": "The DT is preferred over the ANN because the DT's false positive rate is lower than the ANN's false positive rate.",
+        "D": "The DT is preferred over the ANN because the DT's recall is higher than the ANN's recall."
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 6 (confusion matrices; rows = Actual class, columns = Predicted class):\nDT classifier:\n                     Predicted Activated   Predicted Deactivated\nActual Activated             373                   110\nActual Deactivated            82                   335\nANN classifier:\n                     Predicted Activated   Predicted Deactivated\nActual Activated             355                   128\nActual Deactivated            64                   353\n(y = 2 = positive = Activated; y = 1 = negative = Deactivated.)",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q21.png",
+      "source_location": "exam p.11, Table 6 (two 2x2 confusion matrices)"
+    },
+    {
+      "question_id": "Q22",
+      "number": 22,
+      "topic": "Two-layer neural network / forward pass (ReLU + tanh)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider a two layer neural network f : R^2 -> R for regression with two hidden units (i.e. z^(1) in R^2) and of the form z^(1) = h^(1)((W^(1))^T x_tilde), f(x; W^(1), W^(2)) = h^(2)((W^(2))^T z_tilde^(1)), with a schematic provided in Figure 8. The schematic (Figure 8) shows: an input layer with x1 and x2 plus a bias term (1); a hidden layer with two ReLU units plus a bias term (1); and an output layer with a single Tanh unit. The edge weights shown are: from bias to first ReLU = 0, from bias to second ReLU = 0, from x1 to first ReLU = -2, from x1 to second ReLU = 4 (x1 edges labelled -2 and 4), from x2 to first ReLU = -1, from x2 to second ReLU = -0.5 (x2 edges labelled -1 and -0.5); from hidden bias (1) to Tanh = -1, from first ReLU to Tanh = 3, from second ReLU to Tanh = -0.5. Given an input x = [x1, x2]^T = [0, -1]^T determine the corresponding output.\n\nA. approx -1.00\nB. approx -0.85\nC. approx 0.94\nD. approx 1.75",
+      "options": {
+        "A": "approx -1.00",
+        "B": "approx -0.85",
+        "C": "approx 0.94",
+        "D": "approx 1.75"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q22.png",
+      "source_location": "exam p.11, Figure 8 (ANN schematic with edge weights)"
+    },
+    {
+      "question_id": "Q23",
+      "number": 23,
+      "topic": "Two-layer cross-validation / generalization error estimate",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider evaluating three regression models (M_{s=1}, M_{s=2} and M_{s=3}), based on a dataset with 1200 observations. We use two-layer cross-validation (Algorithm 6 in the lecture notes) with K1 = 4 outer folds and K2 = 2 inner folds. The error is computed using the mean squared error. The result of the procedure is shown in Figure 9. Figure 9 contains bar charts: the top chart shows E^test_{i,M_s}, the test-set performance of the three models (complexities s = 1,2,3) for each outer fold i in [1,K1]; the bottom charts show the inner-fold validation errors E^val_{M_s,j} per outer fold. E^test_{i,M_s} denotes the performance of the models with complexities s = {1,2,3} on the test set in the outer fold. Hence, we do not just evaluate the optimal model, M_{s*}, chosen based on the result of the inner fold, but compute the error for all three models on the test set in each of the outer folds. Determine the value of the estimated generalization error E_hat^gen.\n\nA. E_hat^gen approx 0.2\nB. E_hat^gen approx 0.3\nC. E_hat^gen approx 0.1\nD. E_hat^gen approx 0.25",
+      "options": {
+        "A": "E_hat^gen approx 0.2",
+        "B": "E_hat^gen approx 0.3",
+        "C": "E_hat^gen approx 0.1",
+        "D": "E_hat^gen approx 0.25"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q23.png",
+      "source_location": "exam p.12, Figure 9 (bar charts of two-layer CV errors)"
+    },
+    {
+      "question_id": "Q24",
+      "number": 24,
+      "topic": "Association rules / confidence from binary market-basket matrix",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the binary matrix from Table 7 as a market basket problem consisting of N = 10 transactions o1,...,o10 and M = 5 items f1,...,f5.\n\nTable 7 (binarized version of the Electronic Device Quality dataset; f_i = 1 if x_i greater than median, else 0):\n      f1  f2  f3  f4  f5\no1     1   1   0   1   1\no2     0   1   0   1   0\no3     0   0   0   1   0\no4     1   0   1   1   1\no5     1   0   0   1   0\no6     1   1   0   1   1\no7     0   0   1   1   1\no8     1   1   1   1   1\no9     0   0   1   1   1\no10    1   0   1   1   1\nClasses: C1 (Deactivated) = {o1..o7}; C2 (Activated) = {o8,o9,o10}.\n\nWhat is the confidence of the rule {f2, f3, f4} -> {f1, f5}?\n\nA. The confidence is 3/10\nB. The confidence is 1\nC. The confidence is 1/5\nD. The confidence is 1/10",
+      "options": {
+        "A": "The confidence is 3/10",
+        "B": "The confidence is 1",
+        "C": "The confidence is 1/5",
+        "D": "The confidence is 1/10"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 7 (binary market-basket matrix; rows = transactions o1..o10, columns = items f1..f5; entry 1 means item present):\n      f1  f2  f3  f4  f5\no1     1   1   0   1   1\no2     0   1   0   1   0\no3     0   0   0   1   0\no4     1   0   1   1   1\no5     1   0   0   1   0\no6     1   1   0   1   1\no7     0   0   1   1   1\no8     1   1   1   1   1\no9     0   0   1   1   1\no10    1   0   1   1   1",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q24.png",
+      "source_location": "exam p.12, Table 7 (10x5 binary matrix)"
+    },
+    {
+      "question_id": "Q25",
+      "number": 25,
+      "topic": "ROC curve / threshold from predicted-probability densities",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider the ROC curve shown in Figure 10 originating from evaluating a logistic regression model. Figure 10 shows an ROC curve (TPR vs FPR) with a red cross marked at approximately (FPR, TPR) = (0.41, 0.945). Figure 11 shows the density of the predicted probabilities p(y=2 | w, x), with one curve for observations whose actual label is y=1 (concentrated at low probabilities) and one for y=2 (concentrated at high probabilities). Based on the density of the predictions shown in Figure 11, determine which threshold corresponds to the (FPR, TPR)-point indicated by the red cross in Figure 10.\n\nA. approx 0.01\nB. approx 0.1\nC. approx 0.3\nD. approx 0.7",
+      "options": {
+        "A": "approx 0.01",
+        "B": "approx 0.1",
+        "C": "approx 0.3",
+        "D": "approx 0.7"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q25.png",
+      "source_location": "exam p.13, Figure 10 (ROC curve with red cross) + Figure 11 (predicted-probability densities)"
+    },
+    {
+      "question_id": "Q26",
+      "number": 26,
+      "topic": "McNemar's test / matched-pair matrix consistency",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider two classifiers evaluated on the Electronic Device Quality dataset with (N = 900) observations:\nModel A: A logistic regression model with the complexity controlled by the regularization parameter lambda.\nModel B: A neural network with the complexity controlled by the number of hidden layers.\nThe models were compared using two-layer cross-validation (Algorithm 6 in the lecture notes) with K1 = 10 outer folds and K2 = 3 inner folds, and a correct/ideal application of McNemar's test. McNemar's test resulted in an estimated difference in accuracy of theta_hat = -0.097 along with an undisclosed confidence interval and p-value. McNemar's test relies on a 2x2 matched-pair matrix, [[n11, n12], [n21, n22]], where n11 = number of times both classifiers are correct, n12 = number of times A is correct and B is wrong, n21 = number of times A is wrong and B is correct, n22 = number of times both classifiers are wrong. Determine which one of the following matrices was used in the estimation.\n\nA. [[707, 13], [100, 80]]\nB. [[71, 1], [10, 8]]\nC. [[236, 4], [33, 27]]\nD. [[77, 104], [17, 702]]",
+      "options": {
+        "A": "[[707, 13], [100, 80]]",
+        "B": "[[71, 1], [10, 8]]",
+        "C": "[[236, 4], [33, 27]]",
+        "D": "[[77, 104], [17, 702]]"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.13, Question 26 (matched-pair matrices as text options)"
+    },
+    {
+      "question_id": "Q27",
+      "number": 27,
+      "topic": "Decision tree rules / matching tree to classification boundary",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We consider an artificial dataset of N = 4000 observations. The dataset is classified according to a decision tree of the form shown in Figure 12 resulting in a partition into classes indicated by the colors/markers in Figure 13. Figure 12 is a classification tree: node A (False -> node B, True -> Class 2), node B (False -> node C, True -> Class 1), node C (False -> Class 1, True -> Class 2). Figure 13 is a scatter plot of the resulting classification boundary in the (x1, x2) plane (x1, x2 each roughly in [0, 6]), with Class 1 and Class 2 regions. What is the correct rule assignment to the nodes in the decision tree?\n\nA. A: ||[x1, x2] - [6, 6]||_2 < 3, B: ||[x1, x2] - [2, 6]||_1 < 2, C: ||[x1, x2] - [2, 0]||_1 < 2\nB. A: ||[x1, x2] - [2, 0]||_1 < 2, B: ||[x1, x2] - [6, 6]||_2 < 3, C: ||[x1, x2] - [2, 6]||_1 < 2\nC. A: ||[x1, x2] - [6, 6]||_2 < 3, B: ||[x1, x2] - [2, 0]||_1 < 2, C: ||[x1, x2] - [2, 6]||_1 < 2\nD. A: ||[x1, x2] - [2, 0]||_1 < 2, B: ||[x1, x2] - [2, 6]||_1 < 2, C: ||[x1, x2] - [6, 6]||_2 < 3",
+      "options": {
+        "A": "A: ||[x1, x2] - [6, 6]||_2 < 3, B: ||[x1, x2] - [2, 6]||_1 < 2, C: ||[x1, x2] - [2, 0]||_1 < 2",
+        "B": "A: ||[x1, x2] - [2, 0]||_1 < 2, B: ||[x1, x2] - [6, 6]||_2 < 3, C: ||[x1, x2] - [2, 6]||_1 < 2",
+        "C": "A: ||[x1, x2] - [6, 6]||_2 < 3, B: ||[x1, x2] - [2, 0]||_1 < 2, C: ||[x1, x2] - [2, 6]||_1 < 2",
+        "D": "A: ||[x1, x2] - [2, 0]||_1 < 2, B: ||[x1, x2] - [2, 6]||_1 < 2, C: ||[x1, x2] - [6, 6]||_2 < 3"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2024_Q27.png",
+      "source_location": "exam p.14, Figure 12 (decision tree) + Figure 13 (classification boundary scatter)"
+    }
+  ]
+}

@@ -1,0 +1,528 @@
+{
+  "exam": "Spring2019",
+  "course": "02450",
+  "source_pdf": "ML-examsets/Spring2019.pdf",
+  "solution_pdf": "ML-solutions/Spring2019_sol.pdf",
+  "n_questions": 27,
+  "answer_key": {
+    "Q1": "D", "Q2": "C", "Q3": "A", "Q4": "D", "Q5": "C", "Q6": "B", "Q7": "B",
+    "Q8": "B", "Q9": "A", "Q10": "D", "Q11": "A", "Q12": "C", "Q13": "A", "Q14": "A",
+    "Q15": "B", "Q16": "B", "Q17": "B", "Q18": "D", "Q19": "B", "Q20": "A", "Q21": "A",
+    "Q22": "A", "Q23": "B", "Q24": "A", "Q25": "A", "Q26": "A", "Q27": "A"
+  },
+  "questions": [
+    {
+      "question_id": "Q1",
+      "number": 1,
+      "topic": "Boxplots / data exploration",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "The main dataset used in this exam is the travel review dataset described in Table 1. In Figure 1 is shown a scatter plot of the two attributes x2 and x9 from the travel review dataset and in Figure 2 boxplots of the attributes x2, x7, x8, x9 (not in that order). Which one of the following statements is true?\n\nA. Attribute x2 corresponds to boxplot 3 and x9 corresponds to boxplot 2\nB. Attribute x2 corresponds to boxplot 2 and x9 corresponds to boxplot 4\nC. Attribute x2 corresponds to boxplot 1 and x9 corresponds to boxplot 4\nD. Attribute x2 corresponds to boxplot 2 and x9 corresponds to boxplot 1",
+      "options": {
+        "A": "Attribute x2 corresponds to boxplot 3 and x9 corresponds to boxplot 2",
+        "B": "Attribute x2 corresponds to boxplot 2 and x9 corresponds to boxplot 4",
+        "C": "Attribute x2 corresponds to boxplot 1 and x9 corresponds to boxplot 4",
+        "D": "Attribute x2 corresponds to boxplot 2 and x9 corresponds to boxplot 1"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q1.png",
+      "source_location": "exam p.2, Figure 1 (scatter plot x2 vs x9) and Figure 2 (four boxplots)"
+    },
+    {
+      "question_id": "Q2",
+      "number": 2,
+      "topic": "PCA variance explained",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "A Principal Component Analysis (PCA) is carried out on the travel review dataset in Table 1 based on the attributes x5, x6, x7, x8, x9. The data is standardized by (i) subtracting the mean and (ii) dividing each column by its standard deviation to obtain the standardized data matrix X~. A singular value decomposition is then carried out on the standardized data matrix to obtain the decomposition U S V^T = X~.\n\nV =\n[ 0.94  -0.12   0.32  -0.0    0.0 ]\n[ 0.01   0.0   -0.02   0.0   -1.0 ]\n[-0.01   0.07   0.07   0.99  -0.0 ]\n[ 0.11   0.99   0.06  -0.08   0.0 ]\n[-0.33  -0.02   0.94  -0.07  -0.02]\n\nS =\n[14.14   0.0    0.0    0.0    0.0 ]\n[ 0.0   11.41   0.0    0.0    0.0 ]\n[ 0.0    0.0    9.46   0.0    0.0 ]\n[ 0.0    0.0    0.0    4.19   0.0 ]\n[ 0.0    0.0    0.0    0.0    0.17]\n\nWhich one of the following statements is true?\n\nA. The variance explained by the first two principal components is greater than 0.815\nB. The variance explained by the first principal component is greater than 0.51\nC. The variance explained by the last four principal components is less than 0.56\nD. The variance explained by the first three principal components is less than 0.9",
+      "options": {
+        "A": "The variance explained by the first two principal components is greater than 0.815",
+        "B": "The variance explained by the first principal component is greater than 0.51",
+        "C": "The variance explained by the last four principal components is less than 0.56",
+        "D": "The variance explained by the first three principal components is less than 0.9"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Equation (1) (V and S matrices printed inline)"
+    },
+    {
+      "question_id": "Q3",
+      "number": 3,
+      "topic": "PCA projections / sign interpretation",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the PCA analysis for the travel review dataset, in particular the SVD decomposition of X~ in Equation (1). The matrix V (rows correspond to attributes x5, x6, x7, x8, x9) is:\n\nV =\n[ 0.94  -0.12   0.32  -0.0    0.0 ]\n[ 0.01   0.0   -0.02   0.0   -1.0 ]\n[-0.01   0.07   0.07   0.99  -0.0 ]\n[ 0.11   0.99   0.06  -0.08   0.0 ]\n[-0.33  -0.02   0.94  -0.07  -0.02]\n\nWhich one of the following statements is true?\n\nA. An observation with a low value of museums, and a high value of religious will typically have a negative value of the projection onto principal component number 1.\nB. An observation with a low value of museums, and a low value of religious will typically have a positive value of the projection onto principal component number 3.\nC. An observation with a low value of museums, and a high value of religious will typically have a positive value of the projection onto principal component number 1.\nD. An observation with a high value of parks will typically have a positive value of the projection onto principal component number 5.",
+      "options": {
+        "A": "An observation with a low value of museums, and a high value of religious will typically have a negative value of the projection onto principal component number 1.",
+        "B": "An observation with a low value of museums, and a low value of religious will typically have a positive value of the projection onto principal component number 3.",
+        "C": "An observation with a low value of museums, and a high value of religious will typically have a positive value of the projection onto principal component number 1.",
+        "D": "An observation with a high value of parks will typically have a positive value of the projection onto principal component number 5."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Equation (1) V matrix (printed inline); attributes x5=museums, x6=parks, x7=beaches, x8=theaters, x9=religious"
+    },
+    {
+      "question_id": "Q4",
+      "number": 4,
+      "topic": "Average relative density (KNN outlier)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "To examine if observation o7 may be an outlier, we will calculate the average relative density using the cityblock distance and the observations given in Table 2 only. We recall that the KNN density and average relative density (ard) for the observation x_i are given by:\n\ndensity(x_i, K) = 1 / ( (1/K) sum_{x' in N(x_i,K)} d(x_i, x') )\nard(x_i, K) = density(x_i, K) / ( (1/K) sum_{x_j in N(x_i,K)} density(x_j, K) )\n\nwhere N(x_i, K) is the set of K nearest neighbors of observation x_i excluding the i'th observation, and ard(x_i, K) is the average relative density of x_i using K nearest neighbors. What is the average relative density for observation o7 for K = 2 nearest neighbors?\n\nA. 0.41\nB. 1.0\nC. 0.51\nD. 0.83",
+      "options": {
+        "A": "0.41",
+        "B": "1.0",
+        "C": "0.51",
+        "D": "0.83"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 2: Pairwise cityblock distances d(o_i,o_j) = sum_k |x_ik - x_jk| between 10 observations (M=9). Symmetric matrix, rows/cols o1..o10. Classes: C1={o1,o2}, C2={o3,o4,o5}, C3={o6,o7,o8,o9,o10}.\n\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\no1     0.0   2.0   5.7   0.9   2.9   1.8   2.7   3.7   5.3   5.1\no2     2.0   0.0   5.6   2.4   2.5   3.0   3.5   4.3   6.0   6.2\no3     5.7   5.6   0.0   5.0   5.1   4.0   3.3   5.4   1.2   1.8\no4     0.9   2.4   5.0   0.0   2.7   2.1   2.2   3.5   4.6   4.4\no5     2.9   2.5   5.1   2.7   0.0   3.5   3.7   4.0   5.8   5.7\no6     1.8   3.0   4.0   2.1   3.5   0.0   1.7   5.3   3.8   3.7\no7     2.7   3.5   3.3   2.2   3.7   1.7   0.0   4.2   3.1   3.2\no8     3.7   4.3   5.4   3.5   4.0   5.3   4.2   0.0   5.5   6.0\no9     5.3   6.0   1.2   4.6   5.8   3.8   3.1   5.5   0.0   2.1\no10    5.1   6.2   1.8   4.4   5.7   3.7   3.2   6.0   2.1   0.0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q4.png",
+      "source_location": "exam p.4, Table 2 (pairwise cityblock distance matrix)"
+    },
+    {
+      "question_id": "Q5",
+      "number": 5,
+      "topic": "KNN leave-one-out error rate",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the distances in Table 2 based on 10 observations from the travel review dataset. The class labels C1, C2, C3 (see table caption for details) will be predicted using a k-nearest neighbour classifier based on the distances given in Table 2 (ties are broken in the usual manner by considering the nearest observation from the tied classes). Suppose we use leave-one-out cross validation (i.e. the observation that is being predicted is left out) and a 3-nearest neighbour classifier (i.e. k = 3). What is the error rate computed for all N = 10 observations?\n\nA. error rate = 3/10\nB. error rate = 5/10\nC. error rate = 6/10\nD. error rate = 7/10",
+      "options": {
+        "A": "error rate = 3/10",
+        "B": "error rate = 5/10",
+        "C": "error rate = 6/10",
+        "D": "error rate = 7/10"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 2: Pairwise cityblock distances d(o_i,o_j) = sum_k |x_ik - x_jk| between 10 observations (M=9). Symmetric matrix, rows/cols o1..o10. Classes: C1={o1,o2} (poor), C2={o3,o4,o5} (average), C3={o6,o7,o8,o9,o10} (high).\n\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\no1     0.0   2.0   5.7   0.9   2.9   1.8   2.7   3.7   5.3   5.1\no2     2.0   0.0   5.6   2.4   2.5   3.0   3.5   4.3   6.0   6.2\no3     5.7   5.6   0.0   5.0   5.1   4.0   3.3   5.4   1.2   1.8\no4     0.9   2.4   5.0   0.0   2.7   2.1   2.2   3.5   4.6   4.4\no5     2.9   2.5   5.1   2.7   0.0   3.5   3.7   4.0   5.8   5.7\no6     1.8   3.0   4.0   2.1   3.5   0.0   1.7   5.3   3.8   3.7\no7     2.7   3.5   3.3   2.2   3.7   1.7   0.0   4.2   3.1   3.2\no8     3.7   4.3   5.4   3.5   4.0   5.3   4.2   0.0   5.5   6.0\no9     5.3   6.0   1.2   4.6   5.8   3.8   3.1   5.5   0.0   2.1\no10    5.1   6.2   1.8   4.4   5.7   3.7   3.2   6.0   2.1   0.0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q5.png",
+      "source_location": "exam p.4, Table 2 (pairwise cityblock distance matrix)"
+    },
+    {
+      "question_id": "Q6",
+      "number": 6,
+      "topic": "Hierarchical clustering (maximum linkage)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A hierarchical clustering is applied to the 10 observations in Table 2 using maximum linkage. Which one of the dendrograms shown in Figure 3 corresponds to the distances given in Table 2?\n\nA. Dendrogram 1\nB. Dendrogram 2\nC. Dendrogram 3\nD. Dendrogram 4",
+      "options": {
+        "A": "Dendrogram 1",
+        "B": "Dendrogram 2",
+        "C": "Dendrogram 3",
+        "D": "Dendrogram 4"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q6.png",
+      "source_location": "exam p.5, Figure 3 (four proposed dendrograms 1-4); distances in Table 2 (exam p.4)"
+    },
+    {
+      "question_id": "Q7",
+      "number": 7,
+      "topic": "Jaccard similarity of clusterings",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider dendrogram 1 from Figure 3. Suppose we apply a cutoff (indicated by the black line) thereby generating three clusters. We wish to compare the quality of this clustering, Q, to the ground-truth clustering, Z, indicated by the colors in Table 2. Recall the Jaccard similarity of the two clusters is\n\nJ[Z,Q] = S / ( (1/2) N (N-1) - D )\n\nin the notation of the lecture notes. What is the Jaccard similarity of the two clusterings?\n\nA. J[Z,Q] ~= 0.104\nB. J[Z,Q] ~= 0.143\nC. J[Z,Q] ~= 0.174\nD. J[Z,Q] ~= 0.153",
+      "options": {
+        "A": "J[Z,Q] ~= 0.104",
+        "B": "J[Z,Q] ~= 0.143",
+        "C": "J[Z,Q] ~= 0.174",
+        "D": "J[Z,Q] ~= 0.153"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q7.png",
+      "source_location": "exam p.5, Figure 4 (dendrogram 1 with cutoff line giving 3 clusters); ground-truth classes from Table 2 colors"
+    },
+    {
+      "question_id": "Q8",
+      "number": 8,
+      "topic": "Classification tree impurity gain (classification error)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Suppose we wish to build a classification tree based on Hunt's algorithm where the goal is to predict Resort's rating which can belong to three classes, y = 1, y = 2, y = 3. The number of observations in each of the classes are: n_{y=1} = 263, n_{y=2} = 359, n_{y=3} = 358. We consider binary splits based on the value of x4 of the form x4 < z for two different values of z. In Table 3 we have indicated the number of observations in each of the three classes for different values of z. Suppose we use the classification error as impurity measure, which one of the following statements is true?\n\nA. The impurity gain of the split x4 <= 0.43 is Delta ~= 0.1045\nB. The impurity gain of the split x4 <= 0.43 is Delta ~= 0.0898\nC. The best split is x4 <= 0.55\nD. The impurity gain of the split x4 <= 0.55 is Delta ~= 0.1589",
+      "options": {
+        "A": "The impurity gain of the split x4 <= 0.43 is Delta ~= 0.1045",
+        "B": "The impurity gain of the split x4 <= 0.43 is Delta ~= 0.0898",
+        "C": "The best split is x4 <= 0.55",
+        "D": "The impurity gain of the split x4 <= 0.55 is Delta ~= 0.1589"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 3: Proposed split of the travel review dataset based on attribute x4. Two-way split; for each interval the count of observations of each class label.\n\n           x4 <= 0.43    x4 <= 0.55\ny = 1         143           223\ny = 2         137           251\ny = 3          54           197\n\n(Note: the column x4 <= 0.43 holds counts for the interval x4 <= 0.43; the column x4 <= 0.55 holds counts for the interval x4 <= 0.55. Total observations N = 980; n_{y=1}=263, n_{y=2}=359, n_{y=3}=358.)",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q8.png",
+      "source_location": "exam p.6, Table 3 (split counts by class for x4 thresholds)"
+    },
+    {
+      "question_id": "Q9",
+      "number": 9,
+      "topic": "Classification tree accuracy",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the splits in Table 3. Suppose we build a classification tree considering only the split x4 <= 0.55 and evaluate it on the same data it was trained upon. What is the accuracy?\n\nA. The accuracy is: 0.42\nB. The accuracy is: 0.685\nC. The accuracy is: 0.338\nD. The accuracy is: 0.097",
+      "options": {
+        "A": "The accuracy is: 0.42",
+        "B": "The accuracy is: 0.685",
+        "C": "The accuracy is: 0.338",
+        "D": "The accuracy is: 0.097"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 3: Proposed split of the travel review dataset based on attribute x4. Two-way split; for each interval the count of observations of each class label.\n\n           x4 <= 0.43    x4 <= 0.55\ny = 1         143           223\ny = 2         137           251\ny = 3          54           197\n\nThe two intervals of the split x4 <= 0.55 are {x4 <= 0.55} with counts (223, 251, 197) and its complement {x4 > 0.55} with counts (263-223, 359-251, 358-197) = (40, 108, 161). Total observations N = 980.",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q9.png",
+      "source_location": "exam p.6, Table 3 (split counts by class for x4 thresholds)"
+    },
+    {
+      "question_id": "Q10",
+      "number": 10,
+      "topic": "ANN decision surface",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider an artificial neural network (ANN) trained on the travel review dataset described in Table 1 to predict y from the two attributes x1 and x2. Suppose the neural network takes the form:\n\nf(x, w) = h2( w0_2 + sum_{j=1}^{2} wj_2 * h1( [1 x1 x2] wj_1 ) ).\n\nwhere the activation functions are selected as h1(x) = sigma(x) (the sigmoid activation function) and h2(x) = x (the linear activation function) and the weights are given as:\n\nw1_1 = [-1.2, -1.3, 0.6]^T,  w2_1 = [-1.0, -0.0, 0.9]^T,\nw_2 = [-0.3, 0.5]^T,  w0_2 = 2.2.\n\nWhich one of the curves in Figure 5 will then correspond to the function f?\n\nA. ANN output 1\nB. ANN output 2\nC. ANN output 3\nD. ANN output 4",
+      "options": {
+        "A": "ANN output 1",
+        "B": "ANN output 2",
+        "C": "ANN output 3",
+        "D": "ANN output 4"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q10.png",
+      "source_location": "exam p.6, Figure 5 (four ANN output decision surfaces over x1,x2)"
+    },
+    {
+      "question_id": "Q11",
+      "number": 11,
+      "topic": "Multinomial regression decision boundary",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider again the travel review dataset. We consider a multinomial regression model applied to the dataset projected onto the first two principal directions, giving the two coordinates b1 and b2 for each observation. Multinomial regression then computes the per-class probability by first computing the numbers:\n\ny_hat1 = [1, b1, b2]^T w1,   y_hat2 = [1, b1, b2]^T w2,\n\nand then use the softmax transformation in the form:\n\nP(y = k | x) = exp(y_hat_k) / (1 + sum_{k'=1}^{2} exp(y_hat_k'))   if k <= 2,\nP(y = k | x) = 1 / (1 + sum_{k'=1}^{2} exp(y_hat_k'))   if k = 3.\n\nSuppose the resulting decision boundary is as shown in Figure 6, what are the weights?\n\nA. w1 = [-0.77, -5.54, 0.01], w2 = [0.26, -2.09, -0.03]\nB. w1 = [0.51, 1.65, 0.01], w2 = [0.1, 3.8, 0.04]\nC. w1 = [-0.9, -4.39, -0.0], w2 = [-0.09, -2.45, -0.04]\nD. w1 = [-1.22, -9.88, -0.01], w2 = [-0.28, -2.9, -0.01]",
+      "options": {
+        "A": "w1 = [-0.77, -5.54, 0.01], w2 = [0.26, -2.09, -0.03]",
+        "B": "w1 = [0.51, 1.65, 0.01], w2 = [0.1, 3.8, 0.04]",
+        "C": "w1 = [-0.9, -4.39, -0.0], w2 = [-0.09, -2.45, -0.04]",
+        "D": "w1 = [-1.22, -9.88, -0.01], w2 = [-0.28, -2.9, -0.01]"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q11.png",
+      "source_location": "exam p.7, Figure 6 (logistic/multinomial regression decision boundary with class regions over b1,b2)"
+    },
+    {
+      "question_id": "Q12",
+      "number": 12,
+      "topic": "k-means clustering convergence",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider a small dataset comprised of N = 10 observations\n\nx = [1.0  1.2  1.8  2.3  2.6  3.4  4.0  4.1  4.2  4.6].\n\nSuppose a k-means algorithm is applied to the dataset with K = 3 and using Euclidian distances. The algorithm is initialized with K cluster centers located at\n\nmu1 = 1.8,  mu2 = 3.3,  mu3 = 3.6\n\nWhat will the location of the cluster centers be after the k-means algorithm has converged?\n\nA. mu1 = 2.05, mu2 = 4, mu3 = 4.3\nB. mu1 = 1.58, mu2 = 3.33, mu3 = 4.3\nC. mu1 = 1.33, mu2 = 2.77, mu3 = 4.22\nD. mu1 = 1.58, mu2 = 3.53, mu3 = 4.4",
+      "options": {
+        "A": "mu1 = 2.05, mu2 = 4, mu3 = 4.3",
+        "B": "mu1 = 1.58, mu2 = 3.33, mu3 = 4.3",
+        "C": "mu1 = 1.33, mu2 = 2.77, mu3 = 4.22",
+        "D": "mu1 = 1.58, mu2 = 3.53, mu3 = 4.4"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.7, data vector and initial centers printed inline"
+    },
+    {
+      "question_id": "Q13",
+      "number": 13,
+      "topic": "Naive Bayes classifier",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We again consider the travel review dataset from Table 1 and the N = 10 observations we already encountered in Table 2. The data is processed to produce 9 new, binary features such that f_i = 1 corresponds to a value x_i greater than the median, and we thereby arrive at the N x M = 10 x 9 binary matrix in Table 4. Suppose we train a naive-Bayes classifier to predict the class label y from only the features f2, f4, f5. If for an observation we observe\n\nf2 = 0, f4 = 1, f5 = 0\n\nwhat is then the probability it has average rating (y = 2) according to the Naive-Bayes classifier?\n\nA. p_NB(y=2 | f2=0, f4=1, f5=0) = 200/533\nB. p_NB(y=2 | f2=0, f4=1, f5=0) = 25/79\nC. p_NB(y=2 | f2=0, f4=1, f5=0) = 2000/6023\nD. p_NB(y=2 | f2=0, f4=1, f5=0) = 125/287",
+      "options": {
+        "A": "p_NB(y=2 | f2=0, f4=1, f5=0) = 200/533",
+        "B": "p_NB(y=2 | f2=0, f4=1, f5=0) = 25/79",
+        "C": "p_NB(y=2 | f2=0, f4=1, f5=0) = 2000/6023",
+        "D": "p_NB(y=2 | f2=0, f4=1, f5=0) = 125/287"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 4: Binarized version of the travel review dataset. f_i = 1 if feature x_i is greater than the median (else 0). Classes: C1={o1,o2} (poor, y=1), C2={o3,o4,o5} (average, y=2), C3={o6,o7,o8,o9,o10} (high, y=3).\n\n        f1  f2  f3  f4  f5  f6  f7  f8  f9\no1      0   0   0   1   0   0   0   0   0\no2      0   0   0   0   0   0   0   0   1\no3      0   1   1   1   1   1   0   0   0\no4      1   0   0   0   0   0   0   0   0\no5      1   0   0   1   0   0   0   0   0\no6      0   0   1   1   0   0   0   1   0\no7      0   0   1   1   1   0   0   0   0\no8      0   0   0   0   1   0   0   0   0\no9      0   1   1   0   1   0   0   0   0\no10     0   0   1   1   1   0   1   0   0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q13.png",
+      "source_location": "exam p.8, Table 4 (10x9 binary feature matrix)"
+    },
+    {
+      "question_id": "Q14",
+      "number": 14,
+      "topic": "Association mining / itemset support",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the binarized version of the travel review dataset shown in Table 4. The matrix can be considered as representing N = 10 transactions o1, o2, ..., o10 and M = 9 items f1, f2, ..., f9. Which of the following options represents all (non-empty) itemsets with support greater than 0.15 (and only itemsets with support greater than 0.15)?\n\nA. {f1}, {f2}, {f3}, {f4}, {f5}, {f2,f3}, {f2,f5}, {f3,f4}, {f3,f5}, {f4,f5}, {f2,f3,f5}, {f3,f4,f5}\nB. {f3}, {f4}, {f5}, {f3,f4}, {f3,f5}\nC. {f3}, {f4}, {f5}, {f3,f4}, {f3,f5}, {f4,f5}, {f3,f4,f5}\nD. {f1}, {f2}, {f3}, {f4}, {f5}",
+      "options": {
+        "A": "{f1}, {f2}, {f3}, {f4}, {f5}, {f2,f3}, {f2,f5}, {f3,f4}, {f3,f5}, {f4,f5}, {f2,f3,f5}, {f3,f4,f5}",
+        "B": "{f3}, {f4}, {f5}, {f3,f4}, {f3,f5}",
+        "C": "{f3}, {f4}, {f5}, {f3,f4}, {f3,f5}, {f4,f5}, {f3,f4,f5}",
+        "D": "{f1}, {f2}, {f3}, {f4}, {f5}"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 4: Binarized version of the travel review dataset. N = 10 transactions (rows o1..o10), M = 9 items f1..f9. f_i = 1 if x_i greater than median (else 0).\n\n        f1  f2  f3  f4  f5  f6  f7  f8  f9\no1      0   0   0   1   0   0   0   0   0\no2      0   0   0   0   0   0   0   0   1\no3      0   1   1   1   1   1   0   0   0\no4      1   0   0   0   0   0   0   0   0\no5      1   0   0   1   0   0   0   0   0\no6      0   0   1   1   0   0   0   1   0\no7      0   0   1   1   1   0   0   0   0\no8      0   0   0   0   1   0   0   0   0\no9      0   1   1   0   1   0   0   0   0\no10     0   0   1   1   1   0   1   0   0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q14.png",
+      "source_location": "exam p.8, Table 4 (10x9 binary feature matrix)"
+    },
+    {
+      "question_id": "Q15",
+      "number": 15,
+      "topic": "Association rule confidence",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We again consider the binary matrix from Table 4 as a market basket problem consisting of N = 10 transactions o1, ..., o10 and M = 9 items f1, ..., f9. What is the confidence of the rule {f2} -> {f3, f4, f5, f6}?\n\nA. The confidence is 3/20\nB. The confidence is 1/2\nC. The confidence is 1\nD. The confidence is 1/10",
+      "options": {
+        "A": "The confidence is 3/20",
+        "B": "The confidence is 1/2",
+        "C": "The confidence is 1",
+        "D": "The confidence is 1/10"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 4: Binarized version of the travel review dataset. N = 10 transactions (rows o1..o10), M = 9 items f1..f9. f_i = 1 if x_i greater than median (else 0).\n\n        f1  f2  f3  f4  f5  f6  f7  f8  f9\no1      0   0   0   1   0   0   0   0   0\no2      0   0   0   0   0   0   0   0   1\no3      0   1   1   1   1   1   0   0   0\no4      1   0   0   0   0   0   0   0   0\no5      1   0   0   1   0   0   0   0   0\no6      0   0   1   1   0   0   0   1   0\no7      0   0   1   1   1   0   0   0   0\no8      0   0   0   0   1   0   0   0   0\no9      0   1   1   0   1   0   0   0   0\no10     0   0   1   1   1   0   1   0   0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q15.png",
+      "source_location": "exam p.8, Table 4 (10x9 binary feature matrix)"
+    },
+    {
+      "question_id": "Q16",
+      "number": 16,
+      "topic": "A-priori algorithm candidate generation",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We will again consider the binarized version of the travel review dataset already encountered in Table 4, however, we will now only consider the first M = 4 features f1, f2, f3, f4. We wish to apply the a-priori algorithm (the specific variant encountered in chapter 19 of the lecture notes) to find all itemsets with support greater than epsilon = 0.35. Suppose at iteration k = 2 we know that:\n\nL1 = [ 0 0 1 0 ]\n     [ 0 0 0 1 ]\n\nWhat, in the notation of the lecture notes, is C2?\n\nA. C2 = [0 0 1 1; 1 0 1 0; 0 1 1 0; 0 1 0 1; 1 0 0 1]\nB. C2 = [0 0 1 1]\nC. C2 = [0 1 1 0]\nD. C2 = [1 0 1 0; 1 0 0 1; 0 0 1 1]",
+      "options": {
+        "A": "C2 = [0 0 1 1; 1 0 1 0; 0 1 1 0; 0 1 0 1; 1 0 0 1]",
+        "B": "C2 = [0 0 1 1]",
+        "C": "C2 = [0 1 1 0]",
+        "D": "C2 = [1 0 1 0; 1 0 0 1; 0 0 1 1]"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.9, L1 matrix printed inline (a-priori at k=2)"
+    },
+    {
+      "question_id": "Q17",
+      "number": 17,
+      "topic": "Similarity measures (cosine, Jaccard, SMC)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the observations in Table 4. We consider these as 9-dimensional binary vectors and wish to compute the pairwise similarity. Which of the following statements are true?\n\nA. Cos(o1, o3) ~= 0.132\nB. J(o2, o3) ~= 0.0\nC. SMC(o1, o3) ~= 0.268\nD. SMC(o2, o4) ~= 0.701",
+      "options": {
+        "A": "Cos(o1, o3) ~= 0.132",
+        "B": "J(o2, o3) ~= 0.0",
+        "C": "SMC(o1, o3) ~= 0.268",
+        "D": "SMC(o2, o4) ~= 0.701"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 4: Binarized version of the travel review dataset, as 9-dimensional binary vectors (rows o1..o10, items f1..f9). f_i = 1 if x_i greater than median (else 0).\n\n        f1  f2  f3  f4  f5  f6  f7  f8  f9\no1      0   0   0   1   0   0   0   0   0\no2      0   0   0   0   0   0   0   0   1\no3      0   1   1   1   1   1   0   0   0\no4      1   0   0   0   0   0   0   0   0\no5      1   0   0   1   0   0   0   0   0\no6      0   0   1   1   0   0   0   1   0\no7      0   0   1   1   1   0   0   0   0\no8      0   0   0   0   1   0   0   0   0\no9      0   1   1   0   1   0   0   0   0\no10     0   0   1   1   1   0   1   0   0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q17.png",
+      "source_location": "exam p.9, Table 4 (10x9 binary feature matrix)"
+    },
+    {
+      "question_id": "Q18",
+      "number": 18,
+      "topic": "ROC curve / AUC",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A neural network classifier is trained to distinguish between two classes y in {0,1} in a small dataset consisting of N = 7 observations. Suppose the true class label y and predicted probability an observation belongs to class 1, y_hat, is as given in Table 5. To evaluate the classifier, we will use the area under curve (AUC) of the reciever operator characteristic (ROC) curve. In Figure 7 is given four proposed ROC curves, which one of the curves corresponds to the classifier?\n\nA. ROC curve 1\nB. ROC curve 2\nC. ROC curve 3\nD. ROC curve 4",
+      "options": {
+        "A": "ROC curve 1",
+        "B": "ROC curve 2",
+        "C": "ROC curve 3",
+        "D": "ROC curve 4"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q18.png",
+      "source_location": "exam p.9, Figure 7 (four proposed ROC curves) and Table 5 (N=7 true labels y and predicted probabilities y_hat)"
+    },
+    {
+      "question_id": "Q19",
+      "number": 19,
+      "topic": "Forward/backward variable selection",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider again the travel review dataset in Table 1. We would like to predict a resort's rating using a linear regression, and since we would like the model to be as interpretable as possible we will use variable selection to obtain a parsimonious model. We limit ourselves to the five features x1, x6, x7, x8, x9 and in Table 6 we have pre-computed the estimated training and test error for different variable combinations of the dataset. Which of the following statements is correct?\n\nA. Forward selection will select attributes x6\nB. Forward selection will select attributes x1, x6, x7, x8\nC. Backward selection will select attributes x1, x6\nD. Forward selection will select attributes x1, x6",
+      "options": {
+        "A": "Forward selection will select attributes x6",
+        "B": "Forward selection will select attributes x1, x6, x7, x8",
+        "C": "Backward selection will select attributes x1, x6",
+        "D": "Forward selection will select attributes x1, x6"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 6: Root-mean-square error (RMSE) for the training and test set using least squares regression to predict y, for different combinations of the features x1, x6, x7, x8, x9.\n\nFeature(s)              Training RMSE    Test RMSE\nnone                    5.25             5.528\nx1                      4.794            5.566\nx6                      4.563            4.57\nx7                      5.246            5.52\nx8                      5.245            5.475\nx9                      4.683            5.185\nx1, x6                  3.344            4.213\nx1, x7                  4.794            5.565\nx6, x7                  4.561            4.591\nx1, x8                  4.742            5.481\nx6, x8                  4.559            4.614\nx7, x8                  5.242            5.473\nx1, x9                  3.945            4.967\nx6, x9                  4.552            4.643\nx7, x9                  4.679            5.223\nx8, x9                  4.674            5.284\nx1, x6, x7              3.338            4.165\nx1, x6, x8              3.325            4.161\nx1, x7, x8              4.741            5.494\nx6, x7, x8              4.557            4.648\nx1, x6, x9              3.314            4.258\nx1, x7, x9              3.945            4.958\nx6, x7, x9              4.55             4.67\nx1, x8, x9              3.942            4.93\nx6, x8, x9              4.546            4.717\nx7, x8, x9              4.667            5.354\nx1, x6, x7, x8          3.315            4.098\nx1, x6, x7, x9          3.307            4.218\nx1, x6, x8, x9          3.282            4.234\nx1, x7, x8, x9          3.942            4.911\nx6, x7, x8, x9          4.542            4.767\nx1, x6, x7, x8, x9      3.266            4.195",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q19.png",
+      "source_location": "exam p.10, Table 6 (training/test RMSE for feature combinations)"
+    },
+    {
+      "question_id": "Q20",
+      "number": 20,
+      "topic": "Bayes classifier (binarized attributes)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the travel review dataset from Table 1. We wish to predict the resort's rating based on the attributes dance clubs and juice bars using a Bayes classifier. Therefore, suppose the attributes have been binarized such that x2_hat = 0 corresponds to x2 <= 1.28 (and otherwise x2_hat = 1) and x3_hat = 0 corresponds to x3 <= 0.82 (and otherwise x3_hat = 1). Suppose the probability for each of the configurations of x2_hat and x3_hat conditional on the resort's rating y are as given in Table 7. and the prior probability of the resort's ratings are\n\np(y = 1) = 0.268, p(y = 2) = 0.366, p(y = 3) = 0.365.\n\nUsing this, what is then the probability an observation had poor rating given that x2_hat = 0 and x3_hat = 1?\n\nA. p(y=1 | x2_hat=0, x3_hat=1) = 0.17\nB. p(y=1 | x2_hat=0, x3_hat=1) = 0.411\nC. p(y=1 | x2_hat=0, x3_hat=1) = 0.218\nD. p(y=1 | x2_hat=0, x3_hat=1) = 0.046",
+      "options": {
+        "A": "p(y=1 | x2_hat=0, x3_hat=1) = 0.17",
+        "B": "p(y=1 | x2_hat=0, x3_hat=1) = 0.411",
+        "C": "p(y=1 | x2_hat=0, x3_hat=1) = 0.218",
+        "D": "p(y=1 | x2_hat=0, x3_hat=1) = 0.046"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 7: Probability p(x2_hat, x3_hat | y) of observing particular values of x2_hat and x3_hat conditional on y.\n\n                              y = 1    y = 2    y = 3\nx2_hat = 0, x3_hat = 0        0.41     0.28     0.15\nx2_hat = 0, x3_hat = 1        0.17     0.28     0.33\nx2_hat = 1, x3_hat = 0        0.33     0.25     0.15\nx2_hat = 1, x3_hat = 1        0.09     0.19     0.37\n\nPriors: p(y=1)=0.268, p(y=2)=0.366, p(y=3)=0.365.",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q20.png",
+      "source_location": "exam p.10, Table 7 (conditional probabilities of binarized attributes)"
+    },
+    {
+      "question_id": "Q21",
+      "number": 21,
+      "topic": "Decision tree rules / classification boundary",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We consider an artificial dataset of N = 4000 observations. The dataset is classified according to a decision tree of the form shown in Figure 8 resulting in a partition into classes indicated by the colors/markers in Figure 9. What is the correct rule assignment to the nodes in the decision tree?\n\nA. A: ||[x1;x2] - [2;4]||_1 < 2, B: ||[x1;x2] - [6;0]||_2 < 3, C: ||[x1;x2] - [4;2]||_2 < 2\nB. A: ||[x1;x2] - [2;4]||_1 < 2, B: ||[x1;x2] - [4;2]||_2 < 2, C: ||[x1;x2] - [6;0]||_2 < 3\nC. A: ||[x1;x2] - [4;2]||_2 < 2, B: ||[x1;x2] - [6;0]||_2 < 3, C: ||[x1;x2] - [2;4]||_1 < 2\nD. A: ||[x1;x2] - [4;2]||_2 < 2, B: ||[x1;x2] - [2;4]||_1 < 2, C: ||[x1;x2] - [6;0]||_2 < 3",
+      "options": {
+        "A": "A: ||[x1;x2] - [2;4]||_1 < 2, B: ||[x1;x2] - [6;0]||_2 < 3, C: ||[x1;x2] - [4;2]||_2 < 2",
+        "B": "A: ||[x1;x2] - [2;4]||_1 < 2, B: ||[x1;x2] - [4;2]||_2 < 2, C: ||[x1;x2] - [6;0]||_2 < 3",
+        "C": "A: ||[x1;x2] - [4;2]||_2 < 2, B: ||[x1;x2] - [6;0]||_2 < 3, C: ||[x1;x2] - [2;4]||_1 < 2",
+        "D": "A: ||[x1;x2] - [4;2]||_2 < 2, B: ||[x1;x2] - [2;4]||_1 < 2, C: ||[x1;x2] - [6;0]||_2 < 3"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q21.png",
+      "source_location": "exam p.11, Figure 8 (decision tree structure with nodes A,B,C) and Figure 9 (classification boundary scatter over x1,x2)"
+    },
+    {
+      "question_id": "Q22",
+      "number": 22,
+      "topic": "Two-level cross-validation model count",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Suppose we wish to compare a neural network model and a regularized logistic regression model on the travel review dataset. For the neural network, we wish to find the optimal number of hidden neurons n_h, and for the regression model the optimal value of lambda. We therefore opt for a two-level cross-validation approach where for each outer fold, we train the model on the training split, and use the test split to find the optimal number of hidden units (or regularization strength) using cross-validation with K2 = 5 folds. The tested values are:\n\nlambda : {0.01, 0.1, 0.5, 1, 10}\nn_h : {1, 2, 3, 4, 5}.\n\nThen, given this optimal number of hidden units n_h* or regularization strength lambda*, the model is trained and evaluated on the current outer test split. This produces Table 8 which shows the optimal number of hidden units/lambda as well as the (outer) test classification errors E1_test (neural network model) and E2_test (logistic regression model). Note these errors are averaged over the number of observations in the (outer) test splits. How many models were trained to compose the table?\n\nA. 208 models\nB. 100 models\nC. 200 models\nD. 104 models",
+      "options": {
+        "A": "208 models",
+        "B": "100 models",
+        "C": "200 models",
+        "D": "104 models"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 8: Result of applying two-level cross-validation to a neural network model and a logistic regression model. Optimally selected parameters from each outer fold (n_h*, hidden units, and lambda*, regularization strength) and corresponding test errors E1_test and E2_test on the current outer split. There are 4 outer folds.\n\n                ANN                  Log.reg.\n              n_h*   E1_test       lambda*   E2_test\nOuter fold 1    1    0.561         0.1       0.439\nOuter fold 2    1    0.513         0.1       0.487\nOuter fold 3    1    0.564         0.1       0.436\nOuter fold 4    1    0.671         0.1       0.329\n\n(K1 = 4 outer folds; K2 = 5 inner folds; S = 5 tested values per model; two models.)",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q22.png",
+      "source_location": "exam p.12, Table 8 (two-level CV results, gives K1 = 4 outer folds)"
+    },
+    {
+      "question_id": "Q23",
+      "number": 23,
+      "topic": "GMM posterior responsibility",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We fit a GMM to a single feature x6 from the travel review dataset. Recall the density of a 1D GMM is\n\np(x) = sum_{k=1}^{K} w_k * N(x | mu_k, sigma_k^2)\n\nand suppose that the identified values of the mixture weights are\n\nw1 = 0.19, w2 = 0.34, w3 = 0.48\n\nand the parameters of the multivariate normal densities:\n\nmu1 = 3.177, mu2 = 3.181, mu3 = 3.184\nsigma1 = 0.0062, sigma2 = 0.0076, sigma3 = 0.0075.\n\nAccording to the GMM, what is the probability an observation at x0 = 3.19 is assigned to cluster k = 2?\n\nA. 0.49\nB. 0.31\nC. 0.08\nD. 0.68",
+      "options": {
+        "A": "0.49",
+        "B": "0.31",
+        "C": "0.08",
+        "D": "0.68"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.12, GMM weights and parameters printed inline"
+    },
+    {
+      "question_id": "Q24",
+      "number": 24,
+      "topic": "AdaBoost weight update",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider again the travel review dataset of Table 1. Suppose we limit ourselves to N = 7 observations from the original dataset and furthermore suppose we limit ourselves to class y = 1 or y = 2 and only consider the features x4 and x6. We use a KNN classification model (K = 1) to this dataset and apply AdaBoost to improve the performance. After the first T = 1 round of boosting, we obtain the decision boundaries shown in Figure 10 (the predictions of the T = 1 weaker classifiers and the true class labels is also tabulated in Table 9). Given this information, how will the AdaBoost update the weights w?\n\nA. [0.25  0.1  0.1  0.1  0.25  0.1  0.1]\nB. [0.388  0.045  0.045  0.045  0.388  0.045  0.045]\nC. [0.126  0.15  0.15  0.15  0.126  0.15  0.15]\nD. [0.066  0.173  0.173  0.173  0.066  0.173  0.173]",
+      "options": {
+        "A": "[0.25  0.1  0.1  0.1  0.25  0.1  0.1]",
+        "B": "[0.388  0.045  0.045  0.045  0.388  0.045  0.045]",
+        "C": "[0.126  0.15  0.15  0.15  0.126  0.15  0.15]",
+        "D": "[0.066  0.173  0.173  0.173  0.066  0.173  0.173]"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 9: For each of the N = 7 observations (first column), the true class labels y^true (second column) and the predicted outputs of the AdaBoost classifier at t = 1 (third column).\n\nVariable   y^true   t = 1\ny1         1        1\ny2         2        1\ny3         2        1\ny4         1        2\ny5         1        1\ny6         1        2\ny7         2        1\n\n(Initial AdaBoost weights are uniform, w_i = 1/N = 1/7. Observations y2, y3, y4, y6, y7 are misclassified at t = 1.)",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q24.png",
+      "source_location": "exam p.13, Table 9 (true labels y^true and t=1 predictions); Figure 10 (KNN AdaBoost decision boundary, illustrative)"
+    },
+    {
+      "question_id": "Q25",
+      "number": 25,
+      "topic": "KDE leave-one-out cross-validation",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider the following N = 4 observations from a one-dimensional dataset:\n\n{3.918, -6.35, -2.677, -3.003}.\n\nSuppose we apply a Kernel Density Estimator (KDE) to the dataset with kernel width sigma (i.e., sigma is the standard deviation of the Gaussian kernels), and we wish to find sigma by using leave-one-out (LOO) cross-validation using the average (per observation) negative log-likelihood\n\nE(sigma) = (-1/4) sum_{i=1}^{4} log p_sigma(x_i).\n\nWhich of the curves in Figure 11 shows the LOO estimate of the generalization error E(sigma)?\n\nA. LOO curve 1\nB. LOO curve 2\nC. LOO curve 3\nD. LOO curve 4",
+      "options": {
+        "A": "LOO curve 1",
+        "B": "LOO curve 2",
+        "C": "LOO curve 3",
+        "D": "LOO curve 4"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q25.png",
+      "source_location": "exam p.14, Figure 11 (four LOO error curves E(sigma) vs sigma)"
+    },
+    {
+      "question_id": "Q26",
+      "number": 26,
+      "topic": "Correlation from covariance / scatter plots",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider a multivariate normal distribution with covariance matrix Sigma and mean mu and suppose we generate 1000 random samples from it:\n\nx = [x1, x2, x3]^T ~ N(mu, Sigma)\n\nPlots of each pair of coordinates of the draws x is shown in Figure 12. One of the following covariance matrices was used to generate the data:\n\nSigma_1 = [0.5, 0.56, 0.0; 0.56, 1.5, -1.12; 0.0, -1.12, 2.0]\nSigma_2 = [2.0, -1.12, 0.0; -1.12, 1.5, 0.56; 0.0, 0.56, 0.5]\n\nWhat is the correlation between variables x1 and x2?\n\nA. The correlation between x1 and x2 is 0.647\nB. The correlation between x1 and x2 is -0.611\nC. The correlation between x1 and x2 is 0.747\nD. The correlation between x1 and x2 is 0.56",
+      "options": {
+        "A": "The correlation between x1 and x2 is 0.647",
+        "B": "The correlation between x1 and x2 is -0.611",
+        "C": "The correlation between x1 and x2 is 0.747",
+        "D": "The correlation between x1 and x2 is 0.56"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q26.png",
+      "source_location": "exam p.14, Figure 12 (scatter plots of each pair of coordinates; needed to choose Sigma_1 vs Sigma_2)"
+    },
+    {
+      "question_id": "Q27",
+      "number": 27,
+      "topic": "GMM density identification",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Let N(x | mu, Sigma) denote the multivariate normal distribution with mean mu and covariance matrix Sigma. In Figure 13 is given 1000 observations drawn from a density defined by a Gaussian Mixture Model (GMM) with three clusters. Each observation is colored and marked in terms of which cluster it came from in the Gaussian Mixture. Which one of the following GMM densities was used to generate the data?\n\nA. p(x) = (1/4) N(x | [-7.2;10.0], [2.4,-0.4; -0.4,1.7]) + (1/4) N(x | [-13.8;-0.8], [1.7,-0.3; -0.3,2.3]) + (1/2) N(x | [-6.8;6.4], [1.6,0.9; 0.9,1.5])\nB. p(x) = (1/2) N(x | [-7.2;10.0], [1.6,0.9; 0.9,1.5]) + (1/4) N(x | [-13.8;-0.8], [1.7,-0.3; -0.3,2.3]) + (1/4) N(x | [-6.8;6.4], [2.4,-0.4; -0.4,1.7])\nC. p(x) = (1/4) N(x | [-7.2;10.0], [1.6,0.9; 0.9,1.5]) + (1/2) N(x | [-13.8;-0.8], [2.4,-0.4; -0.4,1.7]) + (1/4) N(x | [-6.8;6.4], [1.7,-0.3; -0.3,2.3])\nD. p(x) = (1/4) N(x | [-7.2;10.0], [2.4,-0.4; -0.4,1.7]) + (1/4) N(x | [-13.8;-0.8], [1.6,0.9; 0.9,1.5]) + (1/2) N(x | [-6.8;6.4], [1.7,-0.3; -0.3,2.3])",
+      "options": {
+        "A": "p(x) = (1/4) N(x | [-7.2;10.0], [2.4,-0.4; -0.4,1.7]) + (1/4) N(x | [-13.8;-0.8], [1.7,-0.3; -0.3,2.3]) + (1/2) N(x | [-6.8;6.4], [1.6,0.9; 0.9,1.5])",
+        "B": "p(x) = (1/2) N(x | [-7.2;10.0], [1.6,0.9; 0.9,1.5]) + (1/4) N(x | [-13.8;-0.8], [1.7,-0.3; -0.3,2.3]) + (1/4) N(x | [-6.8;6.4], [2.4,-0.4; -0.4,1.7])",
+        "C": "p(x) = (1/4) N(x | [-7.2;10.0], [1.6,0.9; 0.9,1.5]) + (1/2) N(x | [-13.8;-0.8], [2.4,-0.4; -0.4,1.7]) + (1/4) N(x | [-6.8;6.4], [1.7,-0.3; -0.3,2.3])",
+        "D": "p(x) = (1/4) N(x | [-7.2;10.0], [2.4,-0.4; -0.4,1.7]) + (1/4) N(x | [-13.8;-0.8], [1.6,0.9; 0.9,1.5]) + (1/2) N(x | [-6.8;6.4], [1.7,-0.3; -0.3,2.3])"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2019_Q27.png",
+      "source_location": "exam p.15, Figure 13 (1000 GMM observations colored by cluster over x1,x2)"
+    }
+  ]
+}

@@ -1,0 +1,551 @@
+{
+  "exam": "Fall2024",
+  "course": "02450",
+  "source_pdf": "ML-examsets/Fall2024.pdf",
+  "solution_pdf": "ML-solutions/Fall2024_sol.pdf",
+  "n_questions": 27,
+  "answer_key": {
+    "Q1": "C",
+    "Q2": "B",
+    "Q3": "B",
+    "Q4": "A",
+    "Q5": "D",
+    "Q6": "B",
+    "Q7": "A",
+    "Q8": "C",
+    "Q9": "D",
+    "Q10": "B",
+    "Q11": "C",
+    "Q12": "B",
+    "Q13": "B",
+    "Q14": "D",
+    "Q15": "C",
+    "Q16": "D",
+    "Q17": "D",
+    "Q18": "B",
+    "Q19": "B",
+    "Q20": "C",
+    "Q21": "A",
+    "Q22": "D",
+    "Q23": "A",
+    "Q24": "B",
+    "Q25": "D",
+    "Q26": "A",
+    "Q27": "C"
+  },
+  "questions": [
+    {
+      "question_id": "Q1",
+      "number": 1,
+      "topic": "PCA / empirical correlation matrix",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "The main dataset used in this exam is the Earthquakes in Romania dataset described in Table 1. We consider the four attributes of the Earthquakes in Romania dataset in Table 1. A scatter plot matrix for these attributes is given in Figure 1.\nWhich one of the following matrices represents the empirical correlation matrix for these attributes?\n\nA. C_hat ~ [[1.0, 0.48, 0.98, 0.21], [0.48, 1.0, 0.02, 0.46], [0.98, 0.02, 1.0, 0.07], [0.21, 0.46, 0.07, 1.0]]\nB. C_hat ~ [[1.0, -0.48, 0.02, 0.21], [-0.48, 1.0, 0.02, 0.46], [0.02, 0.02, 1.0, 0.07], [0.21, 0.46, 0.07, 1.0]]\nC. C_hat ~ [[1.0, 0.48, 0.02, 0.21], [0.48, 1.0, 0.02, 0.46], [0.02, 0.02, 1.0, 0.07], [0.21, 0.46, 0.07, 1.0]]\nD. C_hat ~ [[1.0, 0.02, 0.02, 0.21], [0.02, 1.0, 0.02, 0.46], [0.02, 0.02, 1.0, 0.07], [0.21, 0.46, 0.07, 1.0]]",
+      "options": {
+        "A": "C_hat ~ [[1.0, 0.48, 0.98, 0.21], [0.48, 1.0, 0.02, 0.46], [0.98, 0.02, 1.0, 0.07], [0.21, 0.46, 0.07, 1.0]]",
+        "B": "C_hat ~ [[1.0, -0.48, 0.02, 0.21], [-0.48, 1.0, 0.02, 0.46], [0.02, 0.02, 1.0, 0.07], [0.21, 0.46, 0.07, 1.0]]",
+        "C": "C_hat ~ [[1.0, 0.48, 0.02, 0.21], [0.48, 1.0, 0.02, 0.46], [0.02, 0.02, 1.0, 0.07], [0.21, 0.46, 0.07, 1.0]]",
+        "D": "C_hat ~ [[1.0, 0.02, 0.02, 0.21], [0.02, 1.0, 0.02, 0.46], [0.02, 0.02, 1.0, 0.07], [0.21, 0.46, 0.07, 1.0]]"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q1.png",
+      "source_location": "exam p.1, Figure 1 (scatter plot matrix of x1-x4)"
+    },
+    {
+      "question_id": "Q2",
+      "number": 2,
+      "topic": "Matching histograms to attributes",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We consider the histograms of the four attributes in Figure 2. Match the histograms to the attributes by using the information regarding the distributions of the points from Figure 1.\nWhich one of the following statements is correct?\n\nA. Histogram 1: x3, Histogram 2: x4, Histogram 3: x2, Histogram 4: x1.\nB. Histogram 1: x1, Histogram 2: x4, Histogram 3: x3, Histogram 4: x2.\nC. Histogram 1: x2, Histogram 2: x1, Histogram 3: x3, Histogram 4: x4.\nD. Histogram 1: x3, Histogram 2: x2, Histogram 3: x4, Histogram 4: x1.",
+      "options": {
+        "A": "Histogram 1: x3, Histogram 2: x4, Histogram 3: x2, Histogram 4: x1.",
+        "B": "Histogram 1: x1, Histogram 2: x4, Histogram 3: x3, Histogram 4: x2.",
+        "C": "Histogram 1: x2, Histogram 2: x1, Histogram 3: x3, Histogram 4: x4.",
+        "D": "Histogram 1: x3, Histogram 2: x2, Histogram 3: x4, Histogram 4: x1."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q2.png",
+      "source_location": "exam p.1-2, Figure 1 (scatter matrix) and Figure 2 (four histograms)"
+    },
+    {
+      "question_id": "Q3",
+      "number": 3,
+      "topic": "PCA / interpreting SVD V matrix and projections",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider the PCA analysis for the Earthquakes in Romania dataset, in particular the SVD decomposition of the centered data matrix X_tilde, and the corresponding matrix\nV = [[0.54, -0.13, 0.68, -0.48], [0.65, -0.08, 0.0, 0.76], [0.07, 0.98, 0.16, 0.04], [0.53, 0.09, -0.72, -0.44]].\nThe attributes are x1 = Magnitude, x2 = Depth, x3 = Latitude, x4 = Longitude.\nWhich one of the following statements is correct?\n\nA. An observation with a high value of x1 (Magnitude), a high value of x2 (Depth), and a high value of x4 (Longitude) will typically have a negative value of the projection onto principal component number 1.\nB. An observation with a low value of x1 (Magnitude), and a high value of x4 (Longitude) will typically have a negative value of the projection onto principal component number 3.\nC. An observation with a low value of x3 (Latitude) will typically have a positive value of the projection onto principal component number 2.\nD. An observation with a low value of x1 (Magnitude), a high value of x2 (Depth), and a low value of x4 (Longitude) will typically have a negative value of the projection onto principal component number 4.",
+      "options": {
+        "A": "An observation with a high value of x1 (Magnitude), a high value of x2 (Depth), and a high value of x4 (Longitude) will typically have a negative value of the projection onto principal component number 1.",
+        "B": "An observation with a low value of x1 (Magnitude), and a high value of x4 (Longitude) will typically have a negative value of the projection onto principal component number 3.",
+        "C": "An observation with a low value of x3 (Latitude) will typically have a positive value of the projection onto principal component number 2.",
+        "D": "An observation with a low value of x1 (Magnitude), a high value of x2 (Depth), and a low value of x4 (Longitude) will typically have a negative value of the projection onto principal component number 4."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.2, Question 3 (V matrix printed inline)"
+    },
+    {
+      "question_id": "Q4",
+      "number": 4,
+      "topic": "Bayes classifier on binary attributes",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We consider the dataset in Table 2 with the binary attributes x_j for j = 1, ..., 4. We construct a Bayes classifier relying on the attributes x2 and x4.\n\nTable 2 (observations o_i with binary attributes x_j and label y):\n      x1  x2  x3  x4 | y\n o1    0   0   0   0 | 1\n o2    0   0   1   1 | 1\n o3    1   1   0   0 | 1\n o4    0   1   1   1 | 1\n o5    1   1   0   1 | 2\n o6    0   0   0   0 | 2\n o7    1   1   0   1 | 2\n o8    0   0   0   0 | 2\n\nWhich one of the following probabilities is correct?\n\nA. p(y = 2 | x2 = 1, x4 = 1) ~ 0.67\nB. p(y = 2 | x2 = 1, x4 = 1) ~ 0.5\nC. p(y = 2 | x2 = 1, x4 = 1) ~ 0.39\nD. p(y = 2 | x2 = 1, x4 = 1) ~ 0.92",
+      "options": {
+        "A": "p(y = 2 | x2 = 1, x4 = 1) ~ 0.67",
+        "B": "p(y = 2 | x2 = 1, x4 = 1) ~ 0.5",
+        "C": "p(y = 2 | x2 = 1, x4 = 1) ~ 0.39",
+        "D": "p(y = 2 | x2 = 1, x4 = 1) ~ 0.92"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 2: observations o_i with binary attributes x_j and label y.\n      x1  x2  x3  x4 | y\n o1    0   0   0   0 | 1\n o2    0   0   1   1 | 1\n o3    1   1   0   0 | 1\n o4    0   1   1   1 | 1\n o5    1   1   0   1 | 2\n o6    0   0   0   0 | 2\n o7    1   1   0   1 | 2\n o8    0   0   0   0 | 2",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q4.png",
+      "source_location": "exam p.2, Table 2 (binary observation table)"
+    },
+    {
+      "question_id": "Q5",
+      "number": 5,
+      "topic": "Logistic regression properties",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements about logistic regression is correct?\n\nA. The attributes of a logistic regression model cannot be modified in order to construct classifiers with nonlinear decision boundaries.\nB. In terms of a bias-variance trade-off, a logistic regression model with a well-tuned regularization parameter has a negligible bias but a fairly high variance.\nC. Consider a regularized logistic regression classifier. For a fixed value of lambda, there exists a closed-form solution for the parameters w, obtained by differentiating the objective function and setting the derivative to zero.\nD. Consider a regularized logistic regression model for a binary classification problem with a balanced dataset. If the estimated test error is approximately 0.5, this typically indicates over-regularization.",
+      "options": {
+        "A": "The attributes of a logistic regression model cannot be modified in order to construct classifiers with nonlinear decision boundaries.",
+        "B": "In terms of a bias-variance trade-off, a logistic regression model with a well-tuned regularization parameter has a negligible bias but a fairly high variance.",
+        "C": "Consider a regularized logistic regression classifier. For a fixed value of lambda, there exists a closed-form solution for the parameters w, obtained by differentiating the objective function and setting the derivative to zero.",
+        "D": "Consider a regularized logistic regression model for a binary classification problem with a balanced dataset. If the estimated test error is approximately 0.5, this typically indicates over-regularization."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.2, Question 5 (pure text)"
+    },
+    {
+      "question_id": "Q6",
+      "number": 6,
+      "topic": "PCA / matching projections to principal directions",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Suppose a PCA analysis is carried out on a two dimensional dataset presented in Figure 3 where two classes can be distinguished. In Figure 4 the projections of the dataset onto four different directions are presented, one per panel. Two of these plots correspond to the projection on the first and the second principal component.\nWhich one of the options below is correct?\n\nA. First principal direction corresponds to Plot 3; Second principal direction corresponds to Plot 4.\nB. First principal direction corresponds to Plot 1; Second principal direction corresponds to Plot 4.\nC. First principal direction corresponds to Plot 1; Second principal direction corresponds to Plot 2.\nD. First principal direction corresponds to Plot 2; Second principal direction corresponds to Plot 1.",
+      "options": {
+        "A": "First principal direction corresponds to Plot 3; Second principal direction corresponds to Plot 4.",
+        "B": "First principal direction corresponds to Plot 1; Second principal direction corresponds to Plot 4.",
+        "C": "First principal direction corresponds to Plot 1; Second principal direction corresponds to Plot 2.",
+        "D": "First principal direction corresponds to Plot 2; Second principal direction corresponds to Plot 1."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q6.png",
+      "source_location": "exam p.3, Figure 3 (2D scatter of two classes) and Figure 4 (four projection density plots)"
+    },
+    {
+      "question_id": "Q7",
+      "number": 7,
+      "topic": "Naive Bayes decision rule (Gaussian class-conditionals)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We consider a binary classification problem where the input has two attributes x = [x1, x2]^T. We model the class conditional distributions with the following multivariate normal distributions\np(x | y = j) = N(x | mu^(j), Sigma^(j)), with mu^(j) = [mu_1^(j), mu_2^(j)]^T and Sigma^(j) = [[Sigma_11^(j), Sigma_12^(j)], [Sigma_21^(j), Sigma_22^(j)]], for j = 1, 2.\nWe use the Naive Bayes approach to derive a decision rule for classifying a point x in Class 1.\nWhich one of the following statements is correct? Hint: Consider the ratio of the probabilities.\n\nA. (x1 - mu_1^(2))^2 / Sigma_11^(2) + (x2 - mu_2^(2))^2 / Sigma_22^(2) - (x1 - mu_1^(1))^2 / Sigma_11^(1) - (x2 - mu_2^(1))^2 / Sigma_22^(1) + log Sigma_11^(2) + log Sigma_22^(2) - log Sigma_11^(1) - log Sigma_22^(1) > 2 log( p(y=2) / p(y=1) )\nB. (x1 - mu_1^(2))^2 / Sigma_11^(2) + (x2 - mu_2^(2))^2 / Sigma_22^(2) - (x1 - mu_1^(1))^2 / Sigma_11^(1) - (x2 - mu_2^(1))^2 / Sigma_22^(1) + log Sigma_11^(2) + log Sigma_22^(2) - log Sigma_11^(1) - log Sigma_22^(1) > 2 log( p(y=1) / p(y=2) )\nC. (x - mu^(2))^T (Sigma^(2))^-1 (x - mu^(2)) + log|Sigma^(2)| - (x - mu^(1))^T (Sigma^(1))^-1 (x - mu^(1)) - log|Sigma^(1)| > 2 log( p(y=2) / p(y=1) )\nD. (x - mu^(2))^T (Sigma^(2))^-1 (x - mu^(2)) + log|Sigma^(2)| - (x - mu^(1))^T (Sigma^(1))^-1 (x - mu^(1)) - log|Sigma^(1)| > 2 log( p(y=1) / p(y=2) )",
+      "options": {
+        "A": "(x1 - mu_1^(2))^2 / Sigma_11^(2) + (x2 - mu_2^(2))^2 / Sigma_22^(2) - (x1 - mu_1^(1))^2 / Sigma_11^(1) - (x2 - mu_2^(1))^2 / Sigma_22^(1) + log Sigma_11^(2) + log Sigma_22^(2) - log Sigma_11^(1) - log Sigma_22^(1) > 2 log( p(y=2) / p(y=1) )",
+        "B": "(x1 - mu_1^(2))^2 / Sigma_11^(2) + (x2 - mu_2^(2))^2 / Sigma_22^(2) - (x1 - mu_1^(1))^2 / Sigma_11^(1) - (x2 - mu_2^(1))^2 / Sigma_22^(1) + log Sigma_11^(2) + log Sigma_22^(2) - log Sigma_11^(1) - log Sigma_22^(1) > 2 log( p(y=1) / p(y=2) )",
+        "C": "(x - mu^(2))^T (Sigma^(2))^-1 (x - mu^(2)) + log|Sigma^(2)| - (x - mu^(1))^T (Sigma^(1))^-1 (x - mu^(1)) - log|Sigma^(1)| > 2 log( p(y=2) / p(y=1) )",
+        "D": "(x - mu^(2))^T (Sigma^(2))^-1 (x - mu^(2)) + log|Sigma^(2)| - (x - mu^(1))^T (Sigma^(1))^-1 (x - mu^(1)) - log|Sigma^(1)| > 2 log( p(y=1) / p(y=2) )"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 7 (pure text/math)"
+    },
+    {
+      "question_id": "Q8",
+      "number": 8,
+      "topic": "Regularization / bias-variance from learning curves",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We are given a dataset with N observations for a regression problem and we fit a regularized linear regression model f(x; w) with nonlinear transformation of the attributes and parameters w. The cost function is written as E(w) = (1/N) sum_{i=1}^N L(f(x_i; w), y_i) + lambda Omega(w), where the loss L(f(x; w), y) >= 0 measures the distance between the true label y and the corresponding predicted value f(x; w), and the regularizer Omega(w) >= 0 penalizes monotonically the weights i.e., the higher the weights, the higher the Omega(w). We apply K-fold cross-validation to estimate the generalization error, and the learning curves are shown in Figure 5 with the corresponding learned models in Figure 6.\nWhich one of the statements below is correct?\n\nA. Considering Figure 6, Plot 1 corresponds to low values of lambda and Plot 4 to high values of lambda.\nB. In Figure 5 the dashed blue curve represents the train error and the continuous red the test error.\nC. Plot 3 corresponds to a solution with higher variance compared to Plot 2.\nD. When the cost function has the form as above, for any loss and regularizer, we can always compute the optimal weights as w* = (X_hat^T X_hat)^-1 X_hat^T y_hat.",
+      "options": {
+        "A": "Considering Figure 6, Plot 1 corresponds to low values of lambda and Plot 4 to high values of lambda.",
+        "B": "In Figure 5 the dashed blue curve represents the train error and the continuous red the test error.",
+        "C": "Plot 3 corresponds to a solution with higher variance compared to Plot 2.",
+        "D": "When the cost function has the form as above, for any loss and regularizer, we can always compute the optimal weights as w* = (X_hat^T X_hat)^-1 X_hat^T y_hat."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q8.png",
+      "source_location": "exam p.4, Figure 5 (train/test error vs lambda) and Figure 6 (four learned-function plots)"
+    },
+    {
+      "question_id": "Q9",
+      "number": 9,
+      "topic": "Linear regression / cross-validation general statements",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the statements is correct?\n\nA. For least squares linear regression the test error will always decrease as we include more nonlinear transformation of attributes in the model.\nB. Consider a dataset with N observations. Leave-one-out cross-validation will require fitting N models in total to find the best value of lambda in [0, 10].\nC. Regularized linear regression always results in a better test error than unregularized linear regression regardless of the lambda-value.\nD. Apart from regularization we can apply a bagging style approach to reduce the variance and increase the bias of a linear regression model with nonlinear transformation on the attributes.",
+      "options": {
+        "A": "For least squares linear regression the test error will always decrease as we include more nonlinear transformation of attributes in the model.",
+        "B": "Consider a dataset with N observations. Leave-one-out cross-validation will require fitting N models in total to find the best value of lambda in [0, 10].",
+        "C": "Regularized linear regression always results in a better test error than unregularized linear regression regardless of the lambda-value.",
+        "D": "Apart from regularization we can apply a bagging style approach to reduce the variance and increase the bias of a linear regression model with nonlinear transformation on the attributes."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.4, Question 9 (pure text)"
+    },
+    {
+      "question_id": "Q10",
+      "number": 10,
+      "topic": "Regularized linear regression prediction (standardization)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "A regularized linear regression model is trained using the regularization term ||w||_2^2 with parameter lambda = 9. We learn the parameters of the model based on the standardized training data X_hat, where the mean and standard deviation of the training data are given by mu = [1, 1]^T and sigma = [2, 6]^T, respectively. The learned parameters are w* = [-6, -9]^T and w0* = 9. What is the output of the trained linear regression model for a new test point x_test = [2, 3]^T?\n\nA. 1056\nB. 3\nC. -30\nD. 1023",
+      "options": {
+        "A": "1056",
+        "B": "3",
+        "C": "-30",
+        "D": "1023"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.4, Question 10 (pure text/math)"
+    },
+    {
+      "question_id": "Q11",
+      "number": 11,
+      "topic": "Confusion matrices / precision, recall, error rate",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Table 3 shows the confusion matrices related to a Logistic Regression model (LR) and a Decision Tree classifier (DT) trained on a particular instance of the Earthquakes in Romania dataset to predict Earthquake level. The number of observations is N = 464. We define y = 1 to indicate a positive outcome and y = 2 to be a negative outcome.\n\nTable 3 (confusion matrices):\nModel 1: Logistic Regression (LR)\n                  Predicted Class 1   Predicted Class 2\n Actual Class 1          52                  64\n Actual Class 2         244                 104\n\nModel 2: Decision Tree (DT)\n                  Predicted Class 1   Predicted Class 2\n Actual Class 1          60                  56\n Actual Class 2         110                 238\n\nWhich one of the following statements is correct?\n\nA. Predicting everything as Negative gives worse accuracy than Model 1.\nB. Model 1 has higher recall than Model 2.\nC. Model 2 has higher precision than Model 1.\nD. Model 1 has lower error rate than Model 2.",
+      "options": {
+        "A": "Predicting everything as Negative gives worse accuracy than Model 1.",
+        "B": "Model 1 has higher recall than Model 2.",
+        "C": "Model 2 has higher precision than Model 1.",
+        "D": "Model 1 has lower error rate than Model 2."
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 3: confusion matrices. y=1 is positive, y=2 is negative. N = 464.\nModel 1: Logistic Regression (LR)\n                  Predicted Class 1   Predicted Class 2\n Actual Class 1          52                  64\n Actual Class 2         244                 104\n\nModel 2: Decision Tree (DT)\n                  Predicted Class 1   Predicted Class 2\n Actual Class 1          60                  56\n Actual Class 2         110                 238",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q11.png",
+      "source_location": "exam p.5, Table 3 (two confusion matrices)"
+    },
+    {
+      "question_id": "Q12",
+      "number": 12,
+      "topic": "k-means clustering cost",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We consider a synthetic 1-dimensional dataset with the following five points: X = {-1, 5, 8, 12, 16}. Suppose you want to perform k-means clustering with K = 2 centroids. The centroids are initialized at mu_1 = 6 and mu_2 = 11. What will be the total cost, E, (i.e. the sum of squared distances from the observations to their nearest centroid) after the second iteration of k-means?\n\nA. 12\nB. 50\nC. 58\nD. 70",
+      "options": {
+        "A": "12",
+        "B": "50",
+        "C": "58",
+        "D": "70"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.5, Question 12 (pure text/math)"
+    },
+    {
+      "question_id": "Q13",
+      "number": 13,
+      "topic": "Logistic regression with nonlinear transform / decision boundary shape",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A logistic regression model was trained on a two dimensional dataset using nonlinear transformations of the two attributes x1 and x2 such that for each observation o = [x1, x2]^T the p(y = 1|o) = sigma([1, x1^2, x2^2] w), where sigma is the logistic sigmoid. Consider four test observations presented in Figure 7. We know for the associated weights w = [w0, w1, w2]^T that the condition w1 = w2 holds.\nAdditionally, the following probabilities are known: p(y = 1 | o1) ~ 0.62, p(y = 1 | o2) ~ 0.62, p(y = 1 | o3) ~ 0.85.\nWhich one of the following statements is correct? Hint: The problem can be solved without complex computations; consider the shape of the decision boundary.\n\nA. p(y = 1 | o4) > p(y = 1 | o1)\nB. p(y = 1 | o4) < p(y = 1 | o1)\nC. p(y = 1 | o4) = p(y = 1 | o3)\nD. p(y = 1 | o4) > p(y = 1 | o3)",
+      "options": {
+        "A": "p(y = 1 | o4) > p(y = 1 | o1)",
+        "B": "p(y = 1 | o4) < p(y = 1 | o1)",
+        "C": "p(y = 1 | o4) = p(y = 1 | o3)",
+        "D": "p(y = 1 | o4) > p(y = 1 | o3)"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q13.png",
+      "source_location": "exam p.5, Figure 7 (four test observations o1-o4 in the x1-x2 plane)"
+    },
+    {
+      "question_id": "Q14",
+      "number": 14,
+      "topic": "Association rules / support and confidence",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "In a market basket problem, we consider an association rule X -> Y. Assume that the support of X union Y is 3/10 and the confidence of X -> Y is 4/5. What is the support of X?\n\nA. support(X) = 2/10\nB. support(X) = 1/2\nC. support(X) = 4/10\nD. support(X) = 3/8",
+      "options": {
+        "A": "support(X) = 2/10",
+        "B": "support(X) = 1/2",
+        "C": "support(X) = 4/10",
+        "D": "support(X) = 3/8"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.5, Question 14 (pure text/math)"
+    },
+    {
+      "question_id": "Q15",
+      "number": 15,
+      "topic": "Matching classifiers to decision boundaries",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider a subset of the Earthquakes in Romania dataset (described in Table 1) after it has been projected onto the first two principal components b1 and b2, thereby giving rise to a smaller two-dimensional dataset. We will consider the following four classifiers: LREG: Logistic regression. ANN: Artificial neural network with 5 hidden units. DT: Decision tree with regular axis-aligned splits (b_i < c). KNN: K-nearest neighbours with K = 3. Suppose the classifiers are trained on the two-dimensional dataset and the decision boundary for each of the four classifiers is given in Figure 8. Which one of the following statements is correct?\n\nA. Classifier 1 corresponds to DT, Classifier 2 corresponds to KNN, Classifier 3 corresponds to ANN, Classifier 4 corresponds to LREG.\nB. Classifier 1 corresponds to DT, Classifier 2 corresponds to LREG, Classifier 3 corresponds to ANN, Classifier 4 corresponds to KNN.\nC. Classifier 1 corresponds to DT, Classifier 2 corresponds to ANN, Classifier 3 corresponds to LREG, Classifier 4 corresponds to KNN.\nD. Classifier 1 corresponds to KNN, Classifier 2 corresponds to DT, Classifier 3 corresponds to LREG, Classifier 4 corresponds to ANN.",
+      "options": {
+        "A": "Classifier 1 corresponds to DT, Classifier 2 corresponds to KNN, Classifier 3 corresponds to ANN, Classifier 4 corresponds to LREG.",
+        "B": "Classifier 1 corresponds to DT, Classifier 2 corresponds to LREG, Classifier 3 corresponds to ANN, Classifier 4 corresponds to KNN.",
+        "C": "Classifier 1 corresponds to DT, Classifier 2 corresponds to ANN, Classifier 3 corresponds to LREG, Classifier 4 corresponds to KNN.",
+        "D": "Classifier 1 corresponds to KNN, Classifier 2 corresponds to DT, Classifier 3 corresponds to LREG, Classifier 4 corresponds to ANN."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q15.png",
+      "source_location": "exam p.6, Figure 8 (four classifier decision-boundary plots over PCA1/PCA2)"
+    },
+    {
+      "question_id": "Q16",
+      "number": 16,
+      "topic": "Ensemble methods (AdaBoost / bagging)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements about ensemble methods is correct?\n\nA. If the weighted error rate of a classifier in AdaBoost is epsilon_t = 0.5, then this classifier will have an influence on the result.\nB. In AdaBoost we can prevent overfitting when increasing the iterations if we use a regularized logistic regression classifier with fixed lambda as the weak learner.\nC. In bagging and boosting observations are sampled without replacement, but in boosting misclassified observations are given a higher probability of being sampled in the next round.\nD. In AdaBoost, the more errors a classifier makes in a given round of boosting, the less the relative increase of the weights for the misclassified observations.",
+      "options": {
+        "A": "If the weighted error rate of a classifier in AdaBoost is epsilon_t = 0.5, then this classifier will have an influence on the result.",
+        "B": "In AdaBoost we can prevent overfitting when increasing the iterations if we use a regularized logistic regression classifier with fixed lambda as the weak learner.",
+        "C": "In bagging and boosting observations are sampled without replacement, but in boosting misclassified observations are given a higher probability of being sampled in the next round.",
+        "D": "In AdaBoost, the more errors a classifier makes in a given round of boosting, the less the relative increase of the weights for the misclassified observations."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 16 (pure text)"
+    },
+    {
+      "question_id": "Q17",
+      "number": 17,
+      "topic": "AdaBoost / identifying weak classifier from weighted error (options are plots)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We consider the dataset in Figure 9 and the weights in Table 4 after two iterations of the AdaBoost algorithm. The predictions for a test point x_test for the two weak classifiers are f1(x_test) = 0 and f2(x_test) = 1. The final prediction using these two weak classifiers is f*(x_test) = 0.\nWhich one of the options in Figure 9 corresponds to the classifier f2? Hint: Consider the weighted error rates of f1 and f2.\n\nA. Option 1\nB. Option 2\nC. Option 3\nD. Option 4",
+      "options": {
+        "A": "Option 1",
+        "B": "Option 2",
+        "C": "Option 3",
+        "D": "Option 4"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q17.png",
+      "source_location": "exam p.7, Figure 9 (four candidate decision-boundary plots Option 1-4) and Table 4 (observations and weights w1, w2)"
+    },
+    {
+      "question_id": "Q18",
+      "number": 18,
+      "topic": "Two-level cross-validation / generalization error estimate",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We consider a subset of N = 120 points from the Earthquakes in Romania dataset and two different classifiers (Model 1 and Model 2). We apply two-level cross-validation to estimate the generalization error, with 2 outer folds and 3 inner folds. In Table 5 the information for each outer fold, model, and inner fold is given, together with the performance of each model on the test partition of the outer fold.\n\nTable 5 (misclassification counts; inner folds j=1..3 are on validation sets, Test column is on the outer test partition):\nOuter fold i = 1\n           j=1  j=2  j=3  | Test\n Model 1    1    9    4   |  55\n Model 2    6    4   19   |  43\n\nOuter fold i = 2\n           j=1  j=2  j=3  | Test\n Model 1   18    4    8   |  47\n Model 2   15    4    9   |  29\n\nWhich one of the following options is a correct estimate of the generalization error?\n\nA. E_hat^gen = 0.6\nB. E_hat^gen = 0.7\nC. E_hat^gen = 0.85\nD. E_hat^gen = 0.35",
+      "options": {
+        "A": "E_hat^gen = 0.6",
+        "B": "E_hat^gen = 0.7",
+        "C": "E_hat^gen = 0.85",
+        "D": "E_hat^gen = 0.35"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 5: two-level cross-validation, N = 120, 2 outer folds, 3 inner folds. Each entry under j=1,2,3 is the number of misclassified points on that inner validation set; the Test column is the number of misclassified points on the outer test partition (each outer test partition has 120/2 = 60 points).\nOuter fold i = 1\n           j=1  j=2  j=3  | Test\n Model 1    1    9    4   |  55\n Model 2    6    4   19   |  43\n\nOuter fold i = 2\n           j=1  j=2  j=3  | Test\n Model 1   18    4    8   |  47\n Model 2   15    4    9   |  29",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q18.png",
+      "source_location": "exam p.7, Table 5 (two-level CV misclassification counts)"
+    },
+    {
+      "question_id": "Q19",
+      "number": 19,
+      "topic": "Cross-validation general statements",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements about cross-validation (CV) is correct?\n\nA. Ideally, the same test set should be used for estimating the parameters of the model and for the final evaluation of the model's performance.\nB. In K-fold cross-validation the trained models are less similar to each other compared to those in leave-one-out cross-validation because the overlap between the training sets is smaller.\nC. Two-fold cross-validation is the same as the hold-out method when 50% is hold-out.\nD. The cross-validation technique is exclusively used for supervised learning problems to estimate the generalization error.",
+      "options": {
+        "A": "Ideally, the same test set should be used for estimating the parameters of the model and for the final evaluation of the model's performance.",
+        "B": "In K-fold cross-validation the trained models are less similar to each other compared to those in leave-one-out cross-validation because the overlap between the training sets is smaller.",
+        "C": "Two-fold cross-validation is the same as the hold-out method when 50% is hold-out.",
+        "D": "The cross-validation technique is exclusively used for supervised learning problems to estimate the generalization error."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.7, Question 19 (pure text)"
+    },
+    {
+      "question_id": "Q20",
+      "number": 20,
+      "topic": "Decision tree / matching split rules to classification boundary",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We consider the Earthquakes in Romania dataset projected onto the first two principal directions. Suppose we train a decision tree to predict which of the two classes an observation belongs to. Since the attributes are continuous, we will consider binary splits of the form b_i >= z for different values of i and z, where b1, b2 refer to the coordinates of the observations when projected onto principal directions. Suppose the trained decision tree has the form shown in Figure 10, and that according to the tree the predicted label assignment for a subset of the observations is as given in Figure 11, what is then the correct rule assignment to the nodes in the decision tree?\n\nA. B: b2 >= -1.27, C: b2 >= -0.07, D: b1 >= -2.38, E: b1 >= 0.83\nB. B: b1 >= 0.83, C: b2 >= -0.07, D: b2 >= -1.27, E: b1 >= -2.38\nC. B: b1 >= 0.83, C: b2 >= -1.27, D: b2 >= -0.07, E: b1 >= -2.38\nD. B: b2 >= -0.07, C: b1 >= -2.38, D: b2 >= -1.27, E: b1 >= 0.83",
+      "options": {
+        "A": "B: b2 >= -1.27, C: b2 >= -0.07, D: b1 >= -2.38, E: b1 >= 0.83",
+        "B": "B: b1 >= 0.83, C: b2 >= -0.07, D: b2 >= -1.27, E: b1 >= -2.38",
+        "C": "B: b1 >= 0.83, C: b2 >= -1.27, D: b2 >= -0.07, E: b1 >= -2.38",
+        "D": "B: b2 >= -0.07, C: b1 >= -2.38, D: b2 >= -1.27, E: b1 >= 0.83"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q20.png",
+      "source_location": "exam p.8, Figure 10 (decision-tree structure with nodes B,C,D,E) and Figure 11 (classification boundary scatter over PCA1/PCA2)"
+    },
+    {
+      "question_id": "Q21",
+      "number": 21,
+      "topic": "KNN (K=3) decision boundary identification",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider a two-dimensional dataset comprised of N = 9 observations shown in Figure 12. The dataset consists of three classes indicated by the blue squares (class 1), red triangles (class 2) and yellow circles (class 3). In the figure, the decision boundaries for four K-nearest neighbor classifiers (KNN) are shown. Which one of the plots correspond to the K = 3 nearest-neighbour classifier assuming ties are broken by assigning the point to the nearest neighbour's class?\n\nA. KNN decision boundary A\nB. KNN decision boundary B\nC. KNN decision boundary C\nD. KNN decision boundary D",
+      "options": {
+        "A": "KNN decision boundary A",
+        "B": "KNN decision boundary B",
+        "C": "KNN decision boundary C",
+        "D": "KNN decision boundary D"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q21.png",
+      "source_location": "exam p.8, Figure 12 (four KNN decision-boundary strips A-D)"
+    },
+    {
+      "question_id": "Q22",
+      "number": 22,
+      "topic": "Artificial neural networks properties",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements about artificial neural networks (ANNs) is correct?\n\nA. In a regression problem, an ANN with linear activation functions (h^(i)(x) = x) results in a complex model that tends to overfit if output depends on the input in a non-linear manner.\nB. Randomly initializing two ANNs with identical activation functions and number of hidden units, and training them with the same data, will always converge to the same model.\nC. The advantage of ANNs is that they require less data for training and are more interpretable and explainable compared to related techniques, such as linear regression.\nD. Increasing the number of hidden units in an ANN can lead to overfitting if not properly controlled through regularization.",
+      "options": {
+        "A": "In a regression problem, an ANN with linear activation functions (h^(i)(x) = x) results in a complex model that tends to overfit if output depends on the input in a non-linear manner.",
+        "B": "Randomly initializing two ANNs with identical activation functions and number of hidden units, and training them with the same data, will always converge to the same model.",
+        "C": "The advantage of ANNs is that they require less data for training and are more interpretable and explainable compared to related techniques, such as linear regression.",
+        "D": "Increasing the number of hidden units in an ANN can lead to overfitting if not properly controlled through regularization."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.9, Question 22 (pure text)"
+    },
+    {
+      "question_id": "Q23",
+      "number": 23,
+      "topic": "Cluster quality / count matrix from dendrogram vs ground truth",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider the dendrogram from Figure 13. Suppose we apply a cutoff (indicated by the black line in Figure 13) thereby generating three clusters. We wish to compare the quality of this clustering, Q, to the ground-truth clustering, Z, indicated by the colors in Table 6. Recall, n is the count matrix where element n_km indicates the number of observations assigned to cluster k in Z and m in Q. S is the number of times Z and Q agree that two observations are in the same cluster. D the number of times Z and Q agree that two observations are not in the same cluster. Determine which one of the following set of intermediate calculations is correct.\n\nThe ground-truth classes (colors in Table 6): observations o1,o2,o3,o4,o5,o6 belong to class C1 (Low strength), and observations o7,o8,o9,o10 belong to class C2 (High strength).\n\nA. n = [[1, 3, 2], [0, 4, 0]], S = 10, D = 12\nB. n = [[0, 4, 0], [0, 0, 1], [1, 1, 3]], S = 9, D = 22\nC. n = [[3, 1, 2], [0, 0, 4]], S = 10, D = 16\nD. n = [[2, 4], [1, 0], [3, 0]], S = 10, D = 16",
+      "options": {
+        "A": "n = [[1, 3, 2], [0, 4, 0]], S = 10, D = 12",
+        "B": "n = [[0, 4, 0], [0, 0, 1], [1, 1, 3]], S = 9, D = 22",
+        "C": "n = [[3, 1, 2], [0, 0, 4]], S = 10, D = 16",
+        "D": "n = [[2, 4], [1, 0], [3, 0]], S = 10, D = 16"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q23.png",
+      "source_location": "exam p.9, Figure 13 (dendrogram of 10 observations with dotted cutoff) and Table 6 (pairwise Euclidean distance matrix with class colors)"
+    },
+    {
+      "question_id": "Q24",
+      "number": 24,
+      "topic": "McNemar's test / theta, CI, p-value plausibility",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We consider a statistical procedure to determine if there is a significant difference between two classifiers, Model A and Model B, using McNemar's test. The probabilities p(y = 1 | x_i) for the two models on a test set of 10 points are shown in Figure 14, together with the true test label. Our null hypothesis is that the classifiers perform similarly. If p(y = 1|x_i) > 0.5, then x_i is classified to Class 1. Determine which combination of estimated difference in accuracy theta_hat, confidence interval (CI) with alpha = 0.05, and p-value is the only plausible answer.\n\nA. theta_hat = 0.4, CI = [-0.33, 1.0], p-value < 0.63\nB. theta_hat = -0.2, CI = [-0.54, 0.16], p-value > 0.5\nC. theta_hat = 0.36, CI = [-0.54, 0.16], p-value < 0.63\nD. theta_hat = -0.2, CI = [-0.54, 0.16], p-value < 0.01",
+      "options": {
+        "A": "theta_hat = 0.4, CI = [-0.33, 1.0], p-value < 0.63",
+        "B": "theta_hat = -0.2, CI = [-0.54, 0.16], p-value > 0.5",
+        "C": "theta_hat = 0.36, CI = [-0.54, 0.16], p-value < 0.63",
+        "D": "theta_hat = -0.2, CI = [-0.54, 0.16], p-value < 0.01"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q24.png",
+      "source_location": "exam p.10, Figure 14 (grouped bar chart of p(y=1|x_i) for Model A, Model B and the true 0/1 label over 10 points)"
+    },
+    {
+      "question_id": "Q25",
+      "number": 25,
+      "topic": "ROC curve / matching predictions to ROC",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A neural network classifier is trained to distinguish between two classes y in {1, 2} and produce class-probability y_hat and the receiver operator characteristic (ROC) curve of the network when evaluated on a test set with N = 8 observations is shown in Figure 16. Suppose we plot the predictions on the N = 8 test observations by their y_hat value along the x-axis and indicate the class labels by either a black circle (negative class y = 1) or red cross (positive class y = 2), which one of the subplots in Figure 16 then corresponds to the ROC curve in Figure 15?\n\nA. Prediction A\nB. Prediction B\nC. Prediction C\nD. Prediction D",
+      "options": {
+        "A": "Prediction A",
+        "B": "Prediction B",
+        "C": "Prediction C",
+        "D": "Prediction D"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q25.png",
+      "source_location": "exam p.10, Figure 15 (ROC curve) and Figure 16 (four 1D prediction plots A-D with y_hat positions and class markers)"
+    },
+    {
+      "question_id": "Q26",
+      "number": 26,
+      "topic": "ANN forward pass with ReLU",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We consider an artificial neural network with the following first layer weights w1^(1) = [-3, -1]^T and b1^(1) = 3 and w2^(1) = [1, 0]^T and b2^(1) = 2, and the second layer w^(2) = [-2, -2]^T and b^(2) = 1. We consider the ReLU activation h^(1)(x) = max{0, x} in the first layer and the identity activation in the second layer h^(2)(x) = x, and a test point x_test = [3, 3]^T. What is the correct output of the neural network?\n\nA. f(x_test; w) = -9\nB. f(x_test; w) = 9\nC. f(x_test; w) = 1\nD. f(x_test; w) = -27",
+      "options": {
+        "A": "f(x_test; w) = -9",
+        "B": "f(x_test; w) = 9",
+        "C": "f(x_test; w) = 1",
+        "D": "f(x_test; w) = -27"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.11, Question 26 (pure text/math)"
+    },
+    {
+      "question_id": "Q27",
+      "number": 27,
+      "topic": "Gaussian Mixture Model / matching density to samples",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Let N(x|mu, Sigma) denote the multivariate normal distribution with mean mu and covariance matrix Sigma. In Figure 17 is given 500 observations drawn from a density defined by a Gaussian Mixture Model (GMM) with three clusters. Each observation is colored in terms of which cluster it came from in the Gaussian Mixture model. Which one of the following GMM densities was used to generate the data?\n\nA. p(x) = (1/10) N(x | [0.2, 8.2], [[1.4, -0.4], [-0.4, 2.0]]) + (4/5) N(x | [-9.3, 9.3], [[2.4, 1.0], [1.0, 1.4]]) + (1/10) N(x | [-13.3, 11.8], [[1.0, 0.4], [0.4, 2.5]])\nB. p(x) = (4/5) N(x | [0.2, 8.2], [[1.0, 0.4], [0.4, 2.5]]) + (1/10) N(x | [-9.3, 9.3], [[2.4, 1.0], [1.0, 1.4]]) + (1/10) N(x | [-13.3, 11.8], [[1.4, -0.4], [-0.4, 2.0]])\nC. p(x) = (1/10) N(x | [0.2, 8.2], [[2.4, 1.0], [1.0, 1.4]]) + (4/5) N(x | [-9.3, 9.3], [[1.0, 0.4], [0.4, 2.5]]) + (1/10) N(x | [-13.3, 11.8], [[1.4, -0.4], [-0.4, 2.0]])\nD. p(x) = (1/10) N(x | [0.2, 8.2], [[1.0, 0.4], [0.4, 2.5]]) + (1/10) N(x | [-9.3, 9.3], [[1.4, -0.4], [-0.4, 2.0]]) + (4/5) N(x | [-13.3, 11.8], [[2.4, 1.0], [1.0, 1.4]])",
+      "options": {
+        "A": "p(x) = (1/10) N(x | [0.2, 8.2], [[1.4, -0.4], [-0.4, 2.0]]) + (4/5) N(x | [-9.3, 9.3], [[2.4, 1.0], [1.0, 1.4]]) + (1/10) N(x | [-13.3, 11.8], [[1.0, 0.4], [0.4, 2.5]])",
+        "B": "p(x) = (4/5) N(x | [0.2, 8.2], [[1.0, 0.4], [0.4, 2.5]]) + (1/10) N(x | [-9.3, 9.3], [[2.4, 1.0], [1.0, 1.4]]) + (1/10) N(x | [-13.3, 11.8], [[1.4, -0.4], [-0.4, 2.0]])",
+        "C": "p(x) = (1/10) N(x | [0.2, 8.2], [[2.4, 1.0], [1.0, 1.4]]) + (4/5) N(x | [-9.3, 9.3], [[1.0, 0.4], [0.4, 2.5]]) + (1/10) N(x | [-13.3, 11.8], [[1.4, -0.4], [-0.4, 2.0]])",
+        "D": "p(x) = (1/10) N(x | [0.2, 8.2], [[1.0, 0.4], [0.4, 2.5]]) + (1/10) N(x | [-9.3, 9.3], [[1.4, -0.4], [-0.4, 2.0]]) + (4/5) N(x | [-13.3, 11.8], [[2.4, 1.0], [1.0, 1.4]])"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2024_Q27.png",
+      "source_location": "exam p.11, Figure 17 (scatter of 500 GMM samples in 3 colored clusters)"
+    }
+  ]
+}

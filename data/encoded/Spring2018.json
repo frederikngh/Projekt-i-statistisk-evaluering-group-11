@@ -1,0 +1,551 @@
+{
+  "exam": "Spring2018",
+  "course": "02450",
+  "source_pdf": "ML-examsets/Spring2018.pdf",
+  "solution_pdf": "ML-solutions/Spring2018_sol.pdf",
+  "n_questions": 27,
+  "answer_key": {
+    "Q1": "C",
+    "Q2": "A",
+    "Q3": "B",
+    "Q4": "B",
+    "Q5": "D",
+    "Q6": "A",
+    "Q7": "C",
+    "Q8": "D",
+    "Q9": "A",
+    "Q10": "C",
+    "Q11": "B",
+    "Q12": "B",
+    "Q13": "D",
+    "Q14": "A",
+    "Q15": "B",
+    "Q16": "D",
+    "Q17": "C",
+    "Q18": "C",
+    "Q19": "B",
+    "Q20": "C",
+    "Q21": "C",
+    "Q22": "A",
+    "Q23": "B",
+    "Q24": "D",
+    "Q25": "A",
+    "Q26": "D",
+    "Q27": "C"
+  },
+  "questions": [
+    {
+      "question_id": "Q1",
+      "number": 1,
+      "topic": "Attribute types / scatter-plot matrix",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider the airline safety dataset consisting of 56 airline companies and their number of flights as quantified by number of seats times kilometers per week as well as incidences, fatal accidents, and fatalities quantified for the period of 1985-1999 and 2000-2014 respectively. The attributes are: x1 = number of seats times kilometers per week (S*KM/Week), x2 = incidences 1985-1999 (Inc. 85-99), x3 = fatal accidents 1985-1999 (FA 85-99), x4 = fatalities 1985-1999 (Fat. 85-99), x5 = incidences 2000-2014 (Inc. 00-14), x6 = fatal accidents 2000-2014 (FA 00-14), and output y = fatalities 2000-2014 (Fat. 00-14). In Figure 1 is shown a matrix plot of the six attributes x1-x6, with the histogram of each attribute along the diagonal. Considering the attributes described in Table 1 and the matrix plot in Figure 1 which one of the following statements regarding the attributes x1-x6 is correct?\n\nA. At least one of the attributes appears to be normal distributed.\nB. x2 corresponding to Inc. 85-99 and x3 corresponding to FA 85-99 are negatively correlated.\nC. All the six attributes are ratio.\nD. All the attributes are continuous.",
+      "options": {
+        "A": "At least one of the attributes appears to be normal distributed.",
+        "B": "x2 corresponding to Inc. 85-99 and x3 corresponding to FA 85-99 are negatively correlated.",
+        "C": "All the six attributes are ratio.",
+        "D": "All the attributes are continuous."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q1.png",
+      "source_location": "exam p.2, Table 1 (attribute descriptions) + Figure 1 (matrix scatter plot with diagonal histograms)"
+    },
+    {
+      "question_id": "Q2",
+      "number": 2,
+      "topic": "PCA variance explained curve",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A principal component analysis (PCA) is carried out on the standardized attributes x1-x6, forming the standardized matrix X_tilde (each attribute has been subtracted its mean and divided by its standard deviation). A singular value decomposition is applied to the standardized data matrix, i.e. X_tilde = U S V^T and we find the following solution in terms of the S and V matrices:\nS = diag(13.5, 7.6, 6.5, 5.8, 3.5, 2.0)  (a 6x6 diagonal matrix with these singular values on the diagonal and 0 elsewhere).\nV = [[0.38, -0.51, 0.23, 0.47, -0.55, 0.11], [0.41, 0.41, -0.53, 0.24, 0.00, 0.58], [0.50, 0.34, -0.13, 0.15, -0.05, -0.77], [0.29, 0.48, 0.78, -0.17, 0.00, 0.23], [0.45, -0.42, 0.09, 0.03, 0.78, 0.04], [0.39, -0.23, -0.20, -0.82, -0.30, 0.04]].\nIn Figure 2 is given the pct. of variance explained by retaining the first k principal components as a function of k. Which one of the four curves corresponds to the correct curve of variance explained as function of the number of principal components retained?\n\nA. Variance Explained Curve 1.\nB. Variance Explained Curve 2.\nC. Variance Explained Curve 3.\nD. Variance Explained Curve 4.",
+      "options": {
+        "A": "Variance Explained Curve 1.",
+        "B": "Variance Explained Curve 2.",
+        "C": "Variance Explained Curve 3.",
+        "D": "Variance Explained Curve 4."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q2.png",
+      "source_location": "exam p.3, Figure 2 (four variance-explained curves)"
+    },
+    {
+      "question_id": "Q3",
+      "number": 3,
+      "topic": "PCA projection onto principal components",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "According to the extracted PCA directions given by the matrix V in question 2 what will be the coordinate of the standardized observation x_tilde* = [-0.1, 0.2, 0.1, -0.3, 1, 0.5] when projected onto the first two principal components? (V = [[0.38, -0.51, 0.23, 0.47, -0.55, 0.11], [0.41, 0.41, -0.53, 0.24, 0.00, 0.58], [0.50, 0.34, -0.13, 0.15, -0.05, -0.77], [0.29, 0.48, 0.78, -0.17, 0.00, 0.23], [0.45, -0.42, 0.09, 0.03, 0.78, 0.04], [0.39, -0.23, -0.20, -0.82, -0.30, 0.04]]; the projection is x_tilde* times the first two columns of V.)\n\nA. (-0.753, 0.206)\nB. (0.652, -0.512)\nC. (0.680, 0.019)\nD. (0.671, -0.139)",
+      "options": {
+        "A": "(-0.753, 0.206)",
+        "B": "(0.652, -0.512)",
+        "C": "(0.680, 0.019)",
+        "D": "(0.671, -0.139)"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 3 (uses matrix V from Question 2, given inline as text)"
+    },
+    {
+      "question_id": "Q4",
+      "number": 4,
+      "topic": "Gaussian Mixture Model concepts",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements regarding Gaussian Mixture Modeling (GMM) is correct?\n\nA. The number of clusters used in the GMM can be determined by selecting the number of clusters that provides the best likelihood of the training data used for training the density.\nB. For high-dimensional data, i.e. where the number of features M is large, it can be beneficial to constrain the covariance of each cluster to be diagonal, i.e. enforcing off-diagonal terms of the covariance matrices to be zero, in order to reduce the number of parameters in the GMM model.\nC. The GMM is guaranteed to find the optimal clustering for a given dataset.\nD. Similar to the k-means algorithm that assigns observations to the cluster in closest proximity, the EM-algorithm used to estimate the parameters of the GMM considers only the cluster each observation is most likely to belong to when estimating the parameters in the M-step.",
+      "options": {
+        "A": "The number of clusters used in the GMM can be determined by selecting the number of clusters that provides the best likelihood of the training data used for training the density.",
+        "B": "For high-dimensional data, i.e. where the number of features M is large, it can be beneficial to constrain the covariance of each cluster to be diagonal, i.e. enforcing off-diagonal terms of the covariance matrices to be zero, in order to reduce the number of parameters in the GMM model.",
+        "C": "The GMM is guaranteed to find the optimal clustering for a given dataset.",
+        "D": "Similar to the k-means algorithm that assigns observations to the cluster in closest proximity, the EM-algorithm used to estimate the parameters of the GMM considers only the cluster each observation is most likely to belong to when estimating the parameters in the M-step."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.4, Question 4 (conceptual, pure text)"
+    },
+    {
+      "question_id": "Q5",
+      "number": 5,
+      "topic": "GMM density matching a contour plot",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We fit a Gaussian Mixture Model (GMM) to the standardized data projected onto the first two principal component directions using four mixture components (i.e., 4 clusters). The multivariate Gaussian density is N(x|mu,Sigma) = (2*pi)^(-M/2) * |Sigma|^(-1/2) * exp(-0.5*(x-mu)^T * Sigma^(-1) * (x-mu)), with mean mu and covariance matrix Sigma. Which one of the following GMM densities corresponds to the fitted density given in Figure 3?\n\nA. p(x) = 0.0673*N(x | mu=[1.8422,2.4306], Sigma=[[0.2639,0.0803],[0.0803,0.0615]]) + 0.3360*N(x | mu=[-1.2222,0.1830], Sigma=[[3.8237,1.7104],[1.7104,0.7672]]) + 0.2992*N(x | mu=[-0.6687,-0.7343], Sigma=[[0.1166,-0.0771],[-0.0771,0.1729]]) + 0.2975*N(x | mu=[1.6359,-0.0183], Sigma=[[4.0475,-1.5818],[-1.5818,1.1146]])\nB. p(x) = 0.0673*N(x | mu=[1.8422,2.4306], Sigma=[[3.8237,1.7104],[1.7104,0.7672]]) + 0.3360*N(x | mu=[-1.2222,0.1830], Sigma=[[0.2639,0.0803],[0.0803,0.0615]]) + 0.2992*N(x | mu=[-0.6687,-0.7343], Sigma=[[4.0475,-1.5818],[-1.5818,1.1146]]) + 0.2975*N(x | mu=[1.6359,-0.0183], Sigma=[[0.1166,-0.0771],[-0.0771,0.1729]])\nC. p(x) = 0.2975*N(x | mu=[1.8422,2.4306], Sigma=[[3.8237,1.7104],[1.7104,0.7672]]) + 0.3360*N(x | mu=[-1.2222,0.1830], Sigma=[[0.2639,0.0803],[0.0803,0.0615]]) + 0.2992*N(x | mu=[-0.6687,-0.7343], Sigma=[[0.1166,-0.0771],[-0.0771,0.1729]]) + 0.0673*N(x | mu=[1.6359,-0.0183], Sigma=[[4.0475,-1.5818],[-1.5818,1.1146]])\nD. p(x) = 0.0673*N(x | mu=[1.8422,2.4306], Sigma=[[3.8237,1.7104],[1.7104,0.7672]]) + 0.3360*N(x | mu=[-1.2222,0.1830], Sigma=[[0.2639,0.0803],[0.0803,0.0615]]) + 0.2992*N(x | mu=[-0.6687,-0.7343], Sigma=[[0.1166,-0.0771],[-0.0771,0.1729]]) + 0.2975*N(x | mu=[1.6359,-0.0183], Sigma=[[4.0475,-1.5818],[-1.5818,1.1146]])",
+      "options": {
+        "A": "p(x) = 0.0673*N(x | mu=[1.8422,2.4306], Sigma=[[0.2639,0.0803],[0.0803,0.0615]]) + 0.3360*N(x | mu=[-1.2222,0.1830], Sigma=[[3.8237,1.7104],[1.7104,0.7672]]) + 0.2992*N(x | mu=[-0.6687,-0.7343], Sigma=[[0.1166,-0.0771],[-0.0771,0.1729]]) + 0.2975*N(x | mu=[1.6359,-0.0183], Sigma=[[4.0475,-1.5818],[-1.5818,1.1146]])",
+        "B": "p(x) = 0.0673*N(x | mu=[1.8422,2.4306], Sigma=[[3.8237,1.7104],[1.7104,0.7672]]) + 0.3360*N(x | mu=[-1.2222,0.1830], Sigma=[[0.2639,0.0803],[0.0803,0.0615]]) + 0.2992*N(x | mu=[-0.6687,-0.7343], Sigma=[[4.0475,-1.5818],[-1.5818,1.1146]]) + 0.2975*N(x | mu=[1.6359,-0.0183], Sigma=[[0.1166,-0.0771],[-0.0771,0.1729]])",
+        "C": "p(x) = 0.2975*N(x | mu=[1.8422,2.4306], Sigma=[[3.8237,1.7104],[1.7104,0.7672]]) + 0.3360*N(x | mu=[-1.2222,0.1830], Sigma=[[0.2639,0.0803],[0.0803,0.0615]]) + 0.2992*N(x | mu=[-0.6687,-0.7343], Sigma=[[0.1166,-0.0771],[-0.0771,0.1729]]) + 0.0673*N(x | mu=[1.6359,-0.0183], Sigma=[[4.0475,-1.5818],[-1.5818,1.1146]])",
+        "D": "p(x) = 0.0673*N(x | mu=[1.8422,2.4306], Sigma=[[3.8237,1.7104],[1.7104,0.7672]]) + 0.3360*N(x | mu=[-1.2222,0.1830], Sigma=[[0.2639,0.0803],[0.0803,0.0615]]) + 0.2992*N(x | mu=[-0.6687,-0.7343], Sigma=[[0.1166,-0.0771],[-0.0771,0.1729]]) + 0.2975*N(x | mu=[1.6359,-0.0183], Sigma=[[4.0475,-1.5818],[-1.5818,1.1146]])"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q5.png",
+      "source_location": "exam p.4, Figure 3 (GMM density contour plot, 4 clusters)"
+    },
+    {
+      "question_id": "Q6",
+      "number": 6,
+      "topic": "Forward/backward feature selection (RMSE table)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We would like to predict the safety of a given airline company. To take into account the volume of flights when evaluating safety we define a new output variable y_tilde = y/x1 (number of fatalities divided by the number of seats times kilometers per week). A least squares linear regression model is trained using different combinations of the five attributes x2, x3, x4, x5, and x6 in order to predict y_tilde. Table 2 provides the training and test root-mean-square error (RMSE = sqrt((1/N) * sum_i (y_tilde_i - y_hat_i)^2)) performance of the least squares regression model when trained using different combinations of the five attributes. Which one of the following statements is correct?\n\nA. Forward and backward selection will result in the same features being selected.\nB. Forward selection will terminate with four features in the feature set.\nC. Backward selection will not remove any features.\nD. x4 will be among the features selected by forward selection.",
+      "options": {
+        "A": "Forward and backward selection will result in the same features being selected.",
+        "B": "Forward selection will terminate with four features in the feature set.",
+        "C": "Backward selection will not remove any features.",
+        "D": "x4 will be among the features selected by forward selection."
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 2: Training and test root-mean-square error (RMSE) for least squares regression predicting y_tilde = y/x1 using different combinations of the five attributes (x2-x6).\n\n Feature(s)            Training RMSE   Test RMSE\n none                    0.11279        0.20677\n x2                      0.10930        0.22301\n x3                      0.10974        0.21773\n x4                      0.10911        0.21362\n x5                      0.11254        0.20729\n x6                      0.09301        0.18749\n x2, x3                  0.10914        0.22247\n x2, x4                  0.10756        0.22145\n x2, x5                  0.10909        0.22513\n x2, x6                  0.09108        0.18555\n x3, x4                  0.10837        0.21768\n x3, x5                  0.10961        0.21800\n x3, x6                  0.09108        0.17624\n x4, x5                  0.10910        0.21368\n x4, x6                  0.09234        0.19121\n x5, x6                  0.08993        0.17657\n x2, x3, x4              0.10753        0.22138\n x2, x3, x5              0.10887        0.22435\n x2, x3, x6              0.09071        0.18029\n x2, x4, x5              0.10731        0.22315\n x2, x4, x6              0.08947        0.19339\n x2, x5, x6              0.08900        0.17610\n x3, x4, x5              0.10828        0.21795\n x3, x4, x6              0.08805        0.17900\n x3, x5, x6              0.08896        0.17082\n x4, x5, x6              0.08891        0.18062\n x2, x3, x4, x5          0.10730        0.22314\n x2, x3, x4, x6          0.08782        0.18371\n x2, x3, x5, x6          0.08878        0.17299\n x2, x4, x5, x6          0.08727        0.18336\n x3, x4, x5, x6          0.08603        0.17440\n x2, x3, x4, x5, x6      0.08595        0.17685",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q6.png",
+      "source_location": "exam p.5, Table 2 (RMSE for least squares regression feature subsets)"
+    },
+    {
+      "question_id": "Q7",
+      "number": 7,
+      "topic": "Regularized least squares regression concepts",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We would again like to predict y_tilde based on x2, x3, x4, x5, and x6. For this purpose, we will use the regularized least squares regression which minimizes with respect to w the cost function E(w) = sum_n (y_tilde_n - [1, x_n2, x_n3, x_n4, x_n5, x_n6] * w)^2 + lambda * w^T * w. We will consider 20 different values of lambda and use 10-fold cross-validation to select the optimal value of lambda. Which one of the following statements regarding the described regularized least squares regression procedure is correct?\n\nA. Increasing lambda will result in an increase in the 2-norm of the trained w, i.e. in an increase of the quantity ||w||_2.\nB. 10-fold cross-validation will require the fitting of 10 models in total to quantify the best value of lambda.\nC. The test error obtained for the optimal value of lambda is a biased estimate of the generalization error.\nD. When using regularization in least squares regression the model becomes more prone to overfitting.",
+      "options": {
+        "A": "Increasing lambda will result in an increase in the 2-norm of the trained w, i.e. in an increase of the quantity ||w||_2.",
+        "B": "10-fold cross-validation will require the fitting of 10 models in total to quantify the best value of lambda.",
+        "C": "The test error obtained for the optimal value of lambda is a biased estimate of the generalization error.",
+        "D": "When using regularization in least squares regression the model becomes more prone to overfitting."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.5, Question 7 (conceptual, pure text)"
+    },
+    {
+      "question_id": "Q8",
+      "number": 8,
+      "topic": "ANN output surface matching",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider an artificial neural network (ANN) trained to predict y_tilde based only on using x5 and x6 as inputs (incidences and fatal accidents during 2000-2014). The trained model is f(x,w) = w0^(2) + sum_{j=1}^{2} w_j^(2) * h^(1)([1, x5, x6] * w_j^(1)), where h^(1)(z) = 1/(1+exp(-z)) is the logistic activation function (values mapped between 0 and 1). We consider an ANN with two hidden units in the hidden layer defined by: w_1^(1) = [0.0189, 0.9159, -0.4256], w_2^(1) = [3.7336, -0.8003, 5.0741], and w0^(2) = 0.3799e-6, w1^(2) = -0.3440e-6, w2^(2) = 0.0429e-6. Which one of the resulting outputs as function of x5 and x6 given in Figure 4 corresponds to the trained network?\n\nA. Network Model 1.\nB. Network Model 2.\nC. Network Model 3.\nD. Network Model 4.",
+      "options": {
+        "A": "Network Model 1.",
+        "B": "Network Model 2.",
+        "C": "Network Model 3.",
+        "D": "Network Model 4."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q8.png",
+      "source_location": "exam p.6, Figure 4 (four ANN output image/heatmap plots over x5,x6)"
+    },
+    {
+      "question_id": "Q9",
+      "number": 9,
+      "topic": "Two-level cross-validation model count",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We would like to use two-level cross-validation to select the optimal number of hidden units in an artificial neural network (ANN) with one hidden layer as well as quantify the generalization of the selected model. We use two-level cross-validation in which the outer fold uses 5-fold cross-validation and the inner fold (which quantifies the optimal number of hidden units) uses 10-fold cross-validation. As ANNs are prone to local minima issues we will train three models for each specification of the number of hidden units based on three different random initializations and use the model out of these three with best training error. We have a computational budget of training 1000 models and would like to evaluate in steps of 1 from 1 to H hidden units (i.e., if H=3 we evaluate ANNs with 1, 2, and 3 hidden units). What is the largest value of H for which no more than 1000 models will be trained?\n\nA. 6\nB. 19\nC. 20\nD. 66",
+      "options": {
+        "A": "6",
+        "B": "19",
+        "C": "20",
+        "D": "66"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 9 (computation, pure text)"
+    },
+    {
+      "question_id": "Q10",
+      "number": 10,
+      "topic": "Bayes theorem (probability of dying by plane)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Some people are afraid of flying and thus prefer to take the car or bus. According to the economist Ian Savage the probability of dying travelling 600 km is approximately: Chance of dying travelling by car is 0.000271 %, chance of dying travelling by bus is 0.000004 %, chance of dying travelling by plane is 0.000003 %. The distance travelling from Copenhagen to Oslo is 600 km regardless of the trip being by car, bus, or plane. We assume when travelling from Copenhagen to Oslo 30 % of people take the car, 10 % of people take the bus, and 60 % of people take the plane. Given a person died travelling between Copenhagen and Oslo what is the probability it was from travelling by plane?\n\nA. 1.80e-4 %\nB. 1.08 %\nC. 2.16 %\nD. 10.0 %",
+      "options": {
+        "A": "1.80e-4 %",
+        "B": "1.08 %",
+        "C": "2.16 %",
+        "D": "10.0 %"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 10 (Bayes theorem computation, pure text)"
+    },
+    {
+      "question_id": "Q11",
+      "number": 11,
+      "topic": "Decision tree purity gain (classification error impurity)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We will predict whether an airline company is relatively safe (the positive class) or unsafe (the negative class) based on thresholding y_tilde at its median value, i.e. if y_tilde < median(y_tilde) it is considered safe otherwise unsafe. A decision tree is fitted to the data. At the root of the tree it is considered to split according to the median value of the number of incidences in 2000-2014 (i.e., x5). For impurity we use the classification error I(v) = 1 - max_c p(c|v). Before the split we have 32 safe and 24 unsafe airline companies, and after the split we have: 23 safe and 8 unsafe airline companies with relatively few incidences, and 9 safe and 16 unsafe airline companies with relatively many incidences. Which statement regarding the purity gain Delta of the split is correct?\n\nA. Delta = -0.2679\nB. Delta = 0.1250\nC. Delta = 0.2500\nD. Delta = 0.4286",
+      "options": {
+        "A": "Delta = -0.2679",
+        "B": "Delta = 0.1250",
+        "C": "Delta = 0.2500",
+        "D": "Delta = 0.4286"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.7, Question 11 (purity-gain computation, counts given inline as text)"
+    },
+    {
+      "question_id": "Q12",
+      "number": 12,
+      "topic": "Confusion matrix matching a decision-tree split",
+      "type": "B",
+      "text_faithful": true,
+      "question_text": "We will consider the decision tree given by having only the above split (defined in question 11) as a decision and classifying according to this split using the largest class (i.e., majority voting). In Figure 5 are given four different confusion matrices. Which one of the four confusion matrices corresponds to the decision tree's classification of the 56 observations?\n\nA. Confusion Matrix 1.\nB. Confusion Matrix 2.\nC. Confusion Matrix 3.\nD. Confusion Matrix 4.",
+      "options": {
+        "A": "Confusion Matrix 1.",
+        "B": "Confusion Matrix 2.",
+        "C": "Confusion Matrix 3.",
+        "D": "Confusion Matrix 4."
+      },
+      "correct_answer": "B",
+      "text_representation": "Figure 5: Four candidate confusion matrices. In each, rows are the Actual class (top row = Safe/positive, bottom row = Unsafe/negative) and columns are the Predicted class (left column = Safe/positive, right column = Unsafe/negative). Cells are listed as [[Actual-Safe&Pred-Safe, Actual-Safe&Pred-Unsafe], [Actual-Unsafe&Pred-Safe, Actual-Unsafe&Pred-Unsafe]].\n\nConfusion Matrix 1:\n                Pred Safe   Pred Unsafe\n Actual Safe       14           18\n Actual Unsafe      10           14\n\nConfusion Matrix 2:\n                Pred Safe   Pred Unsafe\n Actual Safe       23            9\n Actual Unsafe       8           16\n\nConfusion Matrix 3:\n                Pred Safe   Pred Unsafe\n Actual Safe       23            8\n Actual Unsafe       9           16\n\nConfusion Matrix 4:\n                Pred Safe   Pred Unsafe\n Actual Safe       16            8\n Actual Unsafe       9           23",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q12.png",
+      "source_location": "exam p.7, Figure 5 (four confusion matrices with printed counts)"
+    },
+    {
+      "question_id": "Q13",
+      "number": 13,
+      "topic": "Classification concepts",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which statement regarding classification is correct?\n\nA. In classification the output value is continuous.\nB. Logistic regression is not a classification approach but a regression method.\nC. The k-means algorithm is a supervised classification method.\nD. The softmax function is used to provide the probability that an observation is assigned to each class.",
+      "options": {
+        "A": "In classification the output value is continuous.",
+        "B": "Logistic regression is not a classification approach but a regression method.",
+        "C": "The k-means algorithm is a supervised classification method.",
+        "D": "The softmax function is used to provide the probability that an observation is assigned to each class."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.7, Question 13 (conceptual, pure text)"
+    },
+    {
+      "question_id": "Q14",
+      "number": 14,
+      "topic": "Classifier performance metrics from a confusion matrix",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We will consider Confusion Matrix 1 given in Figure 5 and we regard the class safe as the positive class and unsafe as the negative class. Confusion Matrix 1 has rows = Actual class and columns = Predicted class, with values: Actual-Safe & Pred-Safe = 14, Actual-Safe & Pred-Unsafe = 18, Actual-Unsafe & Pred-Safe = 10, Actual-Unsafe & Pred-Unsafe = 14. Which statement regarding a classifier having performance given by Confusion Matrix 1 is correct?\n\nA. The classifier's precision is 7/12.\nB. The classifier's recall is 1/2.\nC. The false positive rate (FPR) of the classifier is 5/14.\nD. The accuracy of the classifier is better than guessing everything to be the largest class.",
+      "options": {
+        "A": "The classifier's precision is 7/12.",
+        "B": "The classifier's recall is 1/2.",
+        "C": "The false positive rate (FPR) of the classifier is 5/14.",
+        "D": "The accuracy of the classifier is better than guessing everything to be the largest class."
+      },
+      "correct_answer": "A",
+      "text_representation": "Confusion Matrix 1 (from Figure 5), with class safe as positive and unsafe as negative. Rows = Actual class, columns = Predicted class.\n\n                Pred Safe   Pred Unsafe\n Actual Safe       14           18\n Actual Unsafe      10           14\n\nEquivalently: TP (Safe predicted Safe) = 14, FN (Safe predicted Unsafe) = 18, FP (Unsafe predicted Safe) = 10, TN (Unsafe predicted Unsafe) = 14. Totals: 32 actual safe, 24 actual unsafe, 56 observations.",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q14.png",
+      "source_location": "exam p.7, Figure 5, Confusion Matrix 1 (printed counts)"
+    },
+    {
+      "question_id": "Q15",
+      "number": 15,
+      "topic": "KNN leave-one-out error rate (distance matrix)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "To determine whether an airline company is relatively safe or unsafe we will use a k-nearest neighbor (KNN) classifier to predict each of the ten observations based on the Euclidean distances between the observations given in Table 3. We will use leave-one-out cross-validation for the KNN with K = 1 (a one nearest neighbor classifier). The analysis is based only on the data in Table 3. What will be the error rate of the classifier?\n\nA. 0 %\nB. 10 %\nC. 20 %\nD. 30 %",
+      "options": {
+        "A": "0 %",
+        "B": "10 %",
+        "C": "20 %",
+        "D": "30 %"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 3: Pairwise Euclidean distances between the first ten observations of the standardized airline safety data. Black (safe) observations: O1, O3, O4, O5, O10. Red (unsafe) observations: O2, O6, O7, O8, O9.\n\n         O1     O2     O3     O4     O5     O6     O7     O8     O9    O10\n O1     0.00   8.55   0.43   1.25   1.14   3.73   2.72   1.63   1.68   1.28\n O2     8.55   0.00   8.23   8.13   8.49   6.84   8.23   8.28   8.13   7.66\n O3     0.43   8.23   0.00   1.09   1.10   3.55   2.68   1.50   1.52   1.05\n O4     1.25   8.13   1.09   0.00   1.23   3.21   2.17   1.29   1.33   0.56\n O5     1.14   8.49   1.10   1.23   0.00   3.20   2.68   1.56   1.50   1.28\n O6     3.73   6.84   3.55   3.21   3.20   0.00   2.98   2.66   2.50   3.00\n O7     2.72   8.23   2.68   2.17   2.68   2.98   0.00   2.28   2.30   2.31\n O8     1.63   8.28   1.50   1.29   1.56   2.66   2.28   0.00   0.25   1.46\n O9     1.68   8.13   1.52   1.33   1.50   2.50   2.30   0.25   0.00   1.44\nO10     1.28   7.66   1.05   0.56   1.28   3.00   2.31   1.46   1.44   0.00",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q15.png",
+      "source_location": "exam p.8, Table 3 (10x10 pairwise Euclidean distance matrix)"
+    },
+    {
+      "question_id": "Q16",
+      "number": 16,
+      "topic": "Hierarchical clustering dendrogram matching (average linkage)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will again consider the Euclidean distances between the first ten observations given in Table 3. Agglomerative hierarchical clustering is used to cluster these ten observations based on their distances to each other using average linkage. Which one of the dendrograms given in Figure 6 corresponds to the clustering?\n\nA. Dendrogram 1.\nB. Dendrogram 2.\nC. Dendrogram 3.\nD. Dendrogram 4.",
+      "options": {
+        "A": "Dendrogram 1.",
+        "B": "Dendrogram 2.",
+        "C": "Dendrogram 3.",
+        "D": "Dendrogram 4."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q16.png",
+      "source_location": "exam p.8, Figure 6 (four dendrograms) + Table 3 distances"
+    },
+    {
+      "question_id": "Q17",
+      "number": 17,
+      "topic": "Rand index / simple matching coefficient from dendrogram cut",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will cut dendrogram 1 (Figure 6) at the level of three clusters and evaluate this clustering in terms of its correspondence with the class label information, where black observations (O1, O3, O4, O5, O10) are safe airline companies and red observations (O2, O6, O7, O8, O9) are unsafe airline companies. We recall that the Rand index, also denoted the simple matching coefficient (SMC) between the true labels and the extracted clusters, is given by R = (f11 + f00)/K, where f11 is the number of object pairs in the same class assigned to the same cluster, f00 is the number of object pairs in different classes assigned to different clusters, and K = N(N-1)/2 is the total number of object pairs (N = number of observations). What is the value of R between the true labeling of the observations and the three extracted clusters?\n\nA. 0.40\nB. 0.47\nC. 0.51\nD. 0.60",
+      "options": {
+        "A": "0.40",
+        "B": "0.47",
+        "C": "0.51",
+        "D": "0.60"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q17.png",
+      "source_location": "exam p.8, Figure 6 Dendrogram 1 (cluster assignment must be read from the dendrogram geometry)"
+    },
+    {
+      "question_id": "Q18",
+      "number": 18,
+      "topic": "KNN average relative density (outlier scoring)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We suspect that observation O2 may be an outlier. To quantify this we will calculate the average relative KNN density (ard) based on Euclidean distance and the observations given in Table 3 only. The KNN density and average relative density (ard) for observation x_i are given by: density(x_i, K) = 1 / ((1/K) * sum_{x' in N(x_i,K)} d(x_i, x')), and ard(x_i, K) = density(x_i, K) / ((1/K) * sum_{x_j in N(x_i,K)} density(x_j, K)), where N(x_i, K) is the set of K nearest neighbors of observation x_i excluding the i'th observation. What is the average relative density for observation O2 for K = 2 nearest neighbors?\n\nA. 0.085\nB. 0.138\nC. 0.169\nD. 0.356",
+      "options": {
+        "A": "0.085",
+        "B": "0.138",
+        "C": "0.169",
+        "D": "0.356"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 3: Pairwise Euclidean distances between the first ten observations of the standardized airline safety data. Black (safe) observations: O1, O3, O4, O5, O10. Red (unsafe) observations: O2, O6, O7, O8, O9.\n\n         O1     O2     O3     O4     O5     O6     O7     O8     O9    O10\n O1     0.00   8.55   0.43   1.25   1.14   3.73   2.72   1.63   1.68   1.28\n O2     8.55   0.00   8.23   8.13   8.49   6.84   8.23   8.28   8.13   7.66\n O3     0.43   8.23   0.00   1.09   1.10   3.55   2.68   1.50   1.52   1.05\n O4     1.25   8.13   1.09   0.00   1.23   3.21   2.17   1.29   1.33   0.56\n O5     1.14   8.49   1.10   1.23   0.00   3.20   2.68   1.56   1.50   1.28\n O6     3.73   6.84   3.55   3.21   3.20   0.00   2.98   2.66   2.50   3.00\n O7     2.72   8.23   2.68   2.17   2.68   2.98   0.00   2.28   2.30   2.31\n O8     1.63   8.28   1.50   1.29   1.56   2.66   2.28   0.00   0.25   1.46\n O9     1.68   8.13   1.52   1.33   1.50   2.50   2.30   0.25   0.00   1.44\nO10     1.28   7.66   1.05   0.56   1.28   3.00   2.31   1.46   1.44   0.00",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q18.png",
+      "source_location": "exam p.9, Table 3 (10x10 pairwise Euclidean distance matrix)"
+    },
+    {
+      "question_id": "Q19",
+      "number": 19,
+      "topic": "Association rule support (market basket / binarized table)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We will binarize each feature in the airline safety data according to the median value of the feature, denoting below or equal the median value using superscript L and above the median value using superscript H. In Table 4 are given the first 10 observations after this binarization, considered as a dataset for market basket analysis with observations O1-O10 corresponding to customers. What is the support for the association rule {x2^H, x3^H, x4^H, x5^H} -> {x6^H}?\n\nA. 0.0 %\nB. 20.0 %\nC. 66.7 %\nD. 100.0 %",
+      "options": {
+        "A": "0.0 %",
+        "B": "20.0 %",
+        "C": "66.7 %",
+        "D": "100.0 %"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 4: The first ten observations of the airline safety dataset binarized for attributes x1-x6. Each attribute is binarized as below-or-equal the median (superscript L) or above the median (superscript H); for each attribute exactly one of the L/H columns is 1. Safe observations: O1, O3, O4, O5, O10. Unsafe observations: O2, O6, O7, O8, O9.\n\n        x1L x1H  x2L x2H  x3L x3H  x4L x4H  x5L x5H  x6L x6H\n O1      1   0    1   0    1   0    1   0    1   0    1   0\n O2      0   1    0   1    0   1    0   1    0   1    0   1\n O3      1   0    0   1    1   0    1   0    1   0    1   0\n O4      1   0    1   0    1   0    0   1    0   1    1   0\n O5      0   1    1   0    1   0    1   0    1   0    1   0\n O6      0   1    0   1    0   1    0   1    0   1    0   1\n O7      0   1    1   0    1   0    0   1    0   1    0   1\n O8      1   0    1   0    1   0    1   0    0   1    0   1\n O9      0   1    0   1    1   0    1   0    0   1    0   1\nO10      1   0    0   1    0   1    0   1    0   1    1   0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q19.png",
+      "source_location": "exam p.9, Table 4 (10x12 binarized L/H matrix)"
+    },
+    {
+      "question_id": "Q20",
+      "number": 20,
+      "topic": "Association rule confidence (market basket / binarized table)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We consider again the data in Table 4 as a market basket problem. What is the confidence of the association rule {x2^H, x3^H, x4^H, x5^H} -> {x6^H}?\n\nA. 0.0 %\nB. 20.0 %\nC. 66.7 %\nD. 100.0 %",
+      "options": {
+        "A": "0.0 %",
+        "B": "20.0 %",
+        "C": "66.7 %",
+        "D": "100.0 %"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 4: The first ten observations of the airline safety dataset binarized for attributes x1-x6. Each attribute is binarized as below-or-equal the median (superscript L) or above the median (superscript H); for each attribute exactly one of the L/H columns is 1. Safe observations: O1, O3, O4, O5, O10. Unsafe observations: O2, O6, O7, O8, O9.\n\n        x1L x1H  x2L x2H  x3L x3H  x4L x4H  x5L x5H  x6L x6H\n O1      1   0    1   0    1   0    1   0    1   0    1   0\n O2      0   1    0   1    0   1    0   1    0   1    0   1\n O3      1   0    0   1    1   0    1   0    1   0    1   0\n O4      1   0    1   0    1   0    0   1    0   1    1   0\n O5      0   1    1   0    1   0    1   0    1   0    1   0\n O6      0   1    0   1    0   1    0   1    0   1    0   1\n O7      0   1    1   0    1   0    0   1    0   1    0   1\n O8      1   0    1   0    1   0    1   0    0   1    0   1\n O9      0   1    0   1    1   0    1   0    0   1    0   1\nO10      1   0    0   1    0   1    0   1    0   1    1   0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q20.png",
+      "source_location": "exam p.9, Table 4 (10x12 binarized L/H matrix)"
+    },
+    {
+      "question_id": "Q21",
+      "number": 21,
+      "topic": "Naive Bayes classification (binarized table)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We would like to predict whether an airline company is relatively safe or unsafe considering only the data given in Table 4. We will apply a Naive Bayes classifier that assumes independence between the attributes given the class label (the class label is given by safe airlines in black, i.e., O1, O3, O4, O5, O10, and unsafe airlines in red, i.e., O2, O6, O7, O8, O9). Given that an airline company has x2^H = 1, x3^H = 1, x4^H = 1, x5^H = 1 what is the probability that the airline company is considered safe according to the Naive Bayes classifier derived from the data in Table 4?\n\nA. 0\nB. 4/625\nC. 4/49\nD. 1/3",
+      "options": {
+        "A": "0",
+        "B": "4/625",
+        "C": "4/49",
+        "D": "1/3"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 4: The first ten observations of the airline safety dataset binarized for attributes x1-x6. Each attribute is binarized as below-or-equal the median (superscript L) or above the median (superscript H); for each attribute exactly one of the L/H columns is 1. Safe (class y=1) observations: O1, O3, O4, O5, O10. Unsafe (class y=0) observations: O2, O6, O7, O8, O9.\n\n        x1L x1H  x2L x2H  x3L x3H  x4L x4H  x5L x5H  x6L x6H\n O1      1   0    1   0    1   0    1   0    1   0    1   0\n O2      0   1    0   1    0   1    0   1    0   1    0   1\n O3      1   0    0   1    1   0    1   0    1   0    1   0\n O4      1   0    1   0    1   0    0   1    0   1    1   0\n O5      0   1    1   0    1   0    1   0    1   0    1   0\n O6      0   1    0   1    0   1    0   1    0   1    0   1\n O7      0   1    1   0    1   0    0   1    0   1    0   1\n O8      1   0    1   0    1   0    1   0    0   1    0   1\n O9      0   1    0   1    1   0    1   0    0   1    0   1\nO10      1   0    0   1    0   1    0   1    0   1    1   0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q21.png",
+      "source_location": "exam p.9, Table 4 (10x12 binarized L/H matrix)"
+    },
+    {
+      "question_id": "Q22",
+      "number": 22,
+      "topic": "ROC curve matching",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will use x5^L to determine if an airline is safe (considered the positive class) or unsafe (considered the negative class). In Figure 7 are given four different receiver operator characteristic curves (ROC). Which one of the four ROC curves corresponds to using x5^L to determine if an airline is safe (positive class) or unsafe (negative class)?\n\nA. ROC curve 1.\nB. ROC curve 2.\nC. ROC curve 3.\nD. ROC curve 4.",
+      "options": {
+        "A": "ROC curve 1.",
+        "B": "ROC curve 2.",
+        "C": "ROC curve 3.",
+        "D": "ROC curve 4."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q22.png",
+      "source_location": "exam p.10, Figure 7 (four ROC curves) + Table 4 / Table 5 context"
+    },
+    {
+      "question_id": "Q23",
+      "number": 23,
+      "topic": "AdaBoost ensemble classification (boosting rounds)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We would like to build a model for classifying whether an airline is safe or not based on the first 10 observations of the airline safety dataset. We will use the resulting classifier obtained by using the AdaBoost algorithm and a logistic regression classifier. The weights of the first four rounds of the AdaBoost procedure are given in Figure 8 and the associated sampling weights used for each round are given in Table 5. How will observation O5 and O6 be classified according to the ensemble classifier obtained by combining the four boosting rounds using the voting procedure defined by the AdaBoost algorithm?\n\nA. Observation O5 and O6 will be tied between safe and unsafe by the AdaBoost classifier.\nB. Both observation O5 and O6 will be correctly classified by the AdaBoost classifier.\nC. Only one of the two observations O5 and O6 will be correctly classified by the AdaBoost classifier.\nD. Neither of the two observations O5 and O6 will be correctly classified by the AdaBoost classifier.",
+      "options": {
+        "A": "Observation O5 and O6 will be tied between safe and unsafe by the AdaBoost classifier.",
+        "B": "Both observation O5 and O6 will be correctly classified by the AdaBoost classifier.",
+        "C": "Only one of the two observations O5 and O6 will be correctly classified by the AdaBoost classifier.",
+        "D": "Neither of the two observations O5 and O6 will be correctly classified by the AdaBoost classifier."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q23.png",
+      "source_location": "exam p.10, Figure 8 (decision boundaries for 4 boosting rounds, geometric) + Table 5 (AdaBoost weights)"
+    },
+    {
+      "question_id": "Q24",
+      "number": 24,
+      "topic": "Identifying classifier type from decision boundary",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Four different classifiers are trained on the airline safety data considering only the first 10 observations projected onto the fifth and sixth principal component to determine if an airline is relatively safe or unsafe. The decision boundary for each of the four classifiers is given in Figure 9 when only using as input the data projected onto the fifth (PCA 5) and sixth (PCA 6) principal component, i.e. each method has only these two inputs. Which one of the following statements is correct?\n\nA. Classifier 1 corresponds to a logistic regression classifier, Classifier 2 is a 3-nearest neighbor classifier using Euclidean distance, Classifier 3 is a decision tree classifier, and Classifier 4 corresponds to an artificial neural network (ANN).\nB. Classifier 1 is a Naive Bayes classifier based on the use of univariate normal distributions, Classifier 2 is a 3-nearest neighbor classifier, Classifier 3 is a Decision Tree classifier, and Classifier 4 is a 1-nearest neighbor classifier using Euclidean distance.\nC. Classifier 1 is a Naive Bayes classifier based on the use of univariate normal distributions, Classifier 2 is a 3-nearest neighbor classifier, Classifier 3 is a 1-nearest neighbor classifier, and Classifier 4 is a Decision Tree classifier.\nD. Classifier 1 is a 3-nearest neighbor classifier using Euclidean distance, Classifier 2 is a Naive Bayes classifier based on the use of univariate normal distributions, Classifier 3 is a Decision Tree classifier, and Classifier 4 is a 1-nearest neighbor classifier using Euclidean distance.",
+      "options": {
+        "A": "Classifier 1 corresponds to a logistic regression classifier, Classifier 2 is a 3-nearest neighbor classifier using Euclidean distance, Classifier 3 is a decision tree classifier, and Classifier 4 corresponds to an artificial neural network (ANN).",
+        "B": "Classifier 1 is a Naive Bayes classifier based on the use of univariate normal distributions, Classifier 2 is a 3-nearest neighbor classifier, Classifier 3 is a Decision Tree classifier, and Classifier 4 is a 1-nearest neighbor classifier using Euclidean distance.",
+        "C": "Classifier 1 is a Naive Bayes classifier based on the use of univariate normal distributions, Classifier 2 is a 3-nearest neighbor classifier, Classifier 3 is a 1-nearest neighbor classifier, and Classifier 4 is a Decision Tree classifier.",
+        "D": "Classifier 1 is a 3-nearest neighbor classifier using Euclidean distance, Classifier 2 is a Naive Bayes classifier based on the use of univariate normal distributions, Classifier 3 is a Decision Tree classifier, and Classifier 4 is a 1-nearest neighbor classifier using Euclidean distance."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q24.png",
+      "source_location": "exam p.11, Figure 9 (four decision-boundary plots over PCA5, PCA6)"
+    },
+    {
+      "question_id": "Q25",
+      "number": 25,
+      "topic": "k-means convergence on 1D data",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider a dataset with eight observations located at {1.0, 1.2, 1.5, 2.0, 2.2, 2.5, 3.0, 3.2}. We will cluster the dataset using the k-means algorithm using k = 3 clusters and initialize the clusters at the locations of the first three observations, i.e. cluster 1 initially located at 1.0, cluster 2 at 1.2 and cluster 3 at 1.5. What will be the converged clustering of the eight observations using the k-means procedure based on Euclidean distance as dissimilarity?\n\nA. {1.0}, {1.2, 1.5}, {2.0, 2.2, 2.5, 3.0, 3.2}\nB. {1.0, 1.2}, {1.5}, {2.0, 2.2, 2.5, 3.0, 3.2}\nC. {1.0, 1.2, 1.5}, {2.0, 2.2, 2.5}, {3.0, 3.2}\nD. {1.0, 1.2, 1.5}, {2.0, 2.2}, {2.5, 3.0, 3.2}",
+      "options": {
+        "A": "{1.0}, {1.2, 1.5}, {2.0, 2.2, 2.5, 3.0, 3.2}",
+        "B": "{1.0, 1.2}, {1.5}, {2.0, 2.2, 2.5, 3.0, 3.2}",
+        "C": "{1.0, 1.2, 1.5}, {2.0, 2.2, 2.5}, {3.0, 3.2}",
+        "D": "{1.0, 1.2, 1.5}, {2.0, 2.2}, {2.5, 3.0, 3.2}"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.11, Question 25 (k-means computation, data given inline as text)"
+    },
+    {
+      "question_id": "Q26",
+      "number": 26,
+      "topic": "Decision tree with distance-norm decisions (two-class separation)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider the two class classification problem given in Figure 10 in which the goal is to separate red crosses (x) from black plusses (+). Which one of the following procedures based on the decision tree given in Figure 11 will perfectly separate the two classes? (The decision tree in Figure 11 has four decision nodes A, B, C, D: if A true -> Class 1 (x); else go to B; if B true -> Class 1 (x); else go to C; if C true -> Class 2 (+); else go to D; if D true -> Class 2 (+); else Class 1 (x).)\n\nA. A = ||x - [1/2, 1/2]||_1 <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/20, C = ||x - [1/4, 1/2]||_inf <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/4.\nB. A = ||x - [1/2, 1/2]||_1 <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/4, C = ||x - [1/4, 1/2]||_inf <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/20.\nC. A = ||x - [1/2, 1/2]||_inf <= 1/4, B = ||x - [3/4, 1/2]||_1 <= 1/4, C = ||x - [1/4, 1/2]||_2 <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/20.\nD. A = ||x - [1/2, 1/2]||_inf <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/4, C = ||x - [1/4, 1/2]||_1 <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/20.",
+      "options": {
+        "A": "A = ||x - [1/2, 1/2]||_1 <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/20, C = ||x - [1/4, 1/2]||_inf <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/4.",
+        "B": "A = ||x - [1/2, 1/2]||_1 <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/4, C = ||x - [1/4, 1/2]||_inf <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/20.",
+        "C": "A = ||x - [1/2, 1/2]||_inf <= 1/4, B = ||x - [3/4, 1/2]||_1 <= 1/4, C = ||x - [1/4, 1/2]||_2 <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/20.",
+        "D": "A = ||x - [1/2, 1/2]||_inf <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/4, C = ||x - [1/4, 1/2]||_1 <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/20."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q26.png",
+      "source_location": "exam p.12, Figure 10 (scatter of red crosses vs black plusses) + Figure 11 (decision tree diagram)"
+    },
+    {
+      "question_id": "Q27",
+      "number": 27,
+      "topic": "Identifying clustering method from scatter plots",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider a dataset with two features x1 and x2 and 1000 observations that is clustered using three different clustering approaches all based on Euclidean distance as measure of distance. The clustering extracted by each of the three considered approaches are given in Figure 12. Which one of the following statements is correct?\n\nA. Cluster Method 1 corresponds to k-means, Cluster Method 2 corresponds to hierarchical clustering using single linkage, Cluster Method 3 corresponds to hierarchical clustering using complete linkage.\nB. Cluster Method 1 corresponds to hierarchical clustering using single linkage, Cluster Method 2 corresponds to k-means, Cluster Method 3 corresponds to hierarchical clustering using complete linkage.\nC. Cluster Method 1 corresponds to hierarchical clustering using single linkage, Cluster Method 2 corresponds to hierarchical clustering using complete linkage, Cluster Method 3 corresponds to k-means.\nD. Cluster Method 1 corresponds to hierarchical clustering using complete linkage, Cluster Method 2 corresponds to hierarchical clustering using single linkage, Cluster Method 3 corresponds to k-means.",
+      "options": {
+        "A": "Cluster Method 1 corresponds to k-means, Cluster Method 2 corresponds to hierarchical clustering using single linkage, Cluster Method 3 corresponds to hierarchical clustering using complete linkage.",
+        "B": "Cluster Method 1 corresponds to hierarchical clustering using single linkage, Cluster Method 2 corresponds to k-means, Cluster Method 3 corresponds to hierarchical clustering using complete linkage.",
+        "C": "Cluster Method 1 corresponds to hierarchical clustering using single linkage, Cluster Method 2 corresponds to hierarchical clustering using complete linkage, Cluster Method 3 corresponds to k-means.",
+        "D": "Cluster Method 1 corresponds to hierarchical clustering using complete linkage, Cluster Method 2 corresponds to hierarchical clustering using single linkage, Cluster Method 3 corresponds to k-means."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2018_Q27.png",
+      "source_location": "exam p.13, Figure 12 (three cluster-method scatter plots)"
+    }
+  ]
+}

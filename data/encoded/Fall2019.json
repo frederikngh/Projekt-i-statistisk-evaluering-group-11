@@ -1,0 +1,551 @@
+{
+  "exam": "Fall2019",
+  "course": "02450",
+  "source_pdf": "ML-examsets/Fall2019.pdf",
+  "solution_pdf": "ML-solutions/Fall2019_sol.pdf",
+  "n_questions": 27,
+  "answer_key": {
+    "Q1": "C",
+    "Q2": "B",
+    "Q3": "D",
+    "Q4": "C",
+    "Q5": "C",
+    "Q6": "B",
+    "Q7": "A",
+    "Q8": "B",
+    "Q9": "A",
+    "Q10": "A",
+    "Q11": "B",
+    "Q12": "A",
+    "Q13": "D",
+    "Q14": "D",
+    "Q15": "B",
+    "Q16": "C",
+    "Q17": "B",
+    "Q18": "D",
+    "Q19": "B",
+    "Q20": "A",
+    "Q21": "B",
+    "Q22": "C",
+    "Q23": "A",
+    "Q24": "B",
+    "Q25": "A",
+    "Q26": "B",
+    "Q27": "B"
+  },
+  "questions": [
+    {
+      "question_id": "Q1",
+      "number": 1,
+      "topic": "Matching boxplots to attributes from summary statistics",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "The main dataset used in this exam is the Beijing air pollution dataset described in Table 1. Table 2 contains summary statistics of four attributes from the Beijing air pollution dataset. Which boxplots in Figure 1 match which attributes?\n\nTable 2 (summary statistics; x_p=25%, x_p=50% (median), x_p=75% are the 25th, 50th, 75th percentiles):\n          Mean     Std    x_p=25%  x_p=50%  x_p=75%\n PM2.5    85.58   78.09    26       66      121.25\n PM10    113.2    85.18    48.75    97      156.25\n NO2      55.89   31.8     30       51       76.25\n O3       54.4    61.72     8       33       75\n\nA. Attribute PM2.5 corresponds to boxplot 3, PM10 corresponds to boxplot 4, NO2 corresponds to boxplot 1 and O3 corresponds to boxplot 2\nB. Attribute PM2.5 corresponds to boxplot 4, PM10 corresponds to boxplot 3, NO2 corresponds to boxplot 2 and O3 corresponds to boxplot 1\nC. Attribute PM2.5 corresponds to boxplot 3, PM10 corresponds to boxplot 4, NO2 corresponds to boxplot 2 and O3 corresponds to boxplot 1\nD. Attribute PM2.5 corresponds to boxplot 1, PM10 corresponds to boxplot 3, NO2 corresponds to boxplot 2 and O3 corresponds to boxplot 4",
+      "options": {
+        "A": "Attribute PM2.5 corresponds to boxplot 3, PM10 corresponds to boxplot 4, NO2 corresponds to boxplot 1 and O3 corresponds to boxplot 2",
+        "B": "Attribute PM2.5 corresponds to boxplot 4, PM10 corresponds to boxplot 3, NO2 corresponds to boxplot 2 and O3 corresponds to boxplot 1",
+        "C": "Attribute PM2.5 corresponds to boxplot 3, PM10 corresponds to boxplot 4, NO2 corresponds to boxplot 2 and O3 corresponds to boxplot 1",
+        "D": "Attribute PM2.5 corresponds to boxplot 1, PM10 corresponds to boxplot 3, NO2 corresponds to boxplot 2 and O3 corresponds to boxplot 4"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q1.png",
+      "source_location": "exam p.2, Table 2 (summary statistics) and Figure 1 (four boxplots)"
+    },
+    {
+      "question_id": "Q2",
+      "number": 2,
+      "topic": "PCA / variance explained from SVD",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "A Principal Component Analysis (PCA) is carried out on the Beijing air pollution dataset in Table 1 based on the attributes x1, x3, x5, x8, x10, x11. The data is standardized by (i) subtracting the mean and (ii) dividing each column by its standard deviation to obtain the standardized data matrix X_tilde. A singular value decomposition is then carried out on the standardized data matrix to obtain the decomposition U S V^T = X_tilde with\nV = [[0.1, -0.45, -0.55, 0.67, -0.2, 0.01], [-0.63, -0.02, -0.01, -0.05, -0.44, -0.64], [-0.67, 0.07, 0.03, 0.13, -0.12, 0.72], [-0.09, 0.69, 0.03, 0.6, 0.32, -0.2], [0.06, -0.35, 0.83, 0.41, -0.09, -0.03], [0.37, 0.44, 0.05, 0.04, -0.8, 0.17]]\nand S = diag(43.67, 33.47, 31.15, 30.36, 27.77, 13.86).\nWhich one of the following statements is true?\n\nA. The variance explained by the first five principal components is less than 0.9\nB. The variance explained by the first three principal components is less than 0.715\nC. The variance explained by the first principal component is less than 0.3\nD. The variance explained by the last two principal components is less than 0.15",
+      "options": {
+        "A": "The variance explained by the first five principal components is less than 0.9",
+        "B": "The variance explained by the first three principal components is less than 0.715",
+        "C": "The variance explained by the first principal component is less than 0.3",
+        "D": "The variance explained by the last two principal components is less than 0.15"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 2 (V and S matrices printed inline as text)"
+    },
+    {
+      "question_id": "Q3",
+      "number": 3,
+      "topic": "PCA / interpreting projection signs from V",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the PCA analysis for the Beijing air pollution dataset, in particular the SVD decomposition of X_tilde in Equation (1) (the matrix V given in Question 2, with attributes x1=MONTH, x3=PM10, x5=CO, x8=PRES, x10=RAIN, x11=WSPM used for the PCA). Which one of the following statements is true?\n\nA. An observation with a low value of PM10, a high value of PRES, and a low value of WSPM will typically have a negative value of the projection onto principal component number 5.\nB. An observation with a high value of PM10, a high value of CO, and a low value of WSPM will typically have a positive value of the projection onto principal component number 1.\nC. An observation with a low value of MONTH, a low value of PRES, and a low value of RAIN will typically have a positive value of the projection onto principal component number 4.\nD. An observation with a high value of MONTH, and a low value of RAIN will typically have a negative value of the projection onto principal component number 3.",
+      "options": {
+        "A": "An observation with a low value of PM10, a high value of PRES, and a low value of WSPM will typically have a negative value of the projection onto principal component number 5.",
+        "B": "An observation with a high value of PM10, a high value of CO, and a low value of WSPM will typically have a positive value of the projection onto principal component number 1.",
+        "C": "An observation with a low value of MONTH, a low value of PRES, and a low value of RAIN will typically have a positive value of the projection onto principal component number 4.",
+        "D": "An observation with a high value of MONTH, and a low value of RAIN will typically have a negative value of the projection onto principal component number 3."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.4, Question 3 (refers to V matrix from Eq (1)/Question 2)"
+    },
+    {
+      "question_id": "Q4",
+      "number": 4,
+      "topic": "PCA / matching a path in attribute space to its PCA projection (options are plots)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider again the Beijing air pollution dataset. In Figure 2 the features x8 and x11 from Table 1 are plotted as black dots. Recall the data is temporally ordered, and suppose over a period of time the measurements undergoes an evolution indicated by the path here shown as a blue line which begins at the purple square, and ends at the yellow circle and where the other features can be considered fixed. We can imagine the dataset, along with the path, is projected onto the first two principal components given in Equation (1). Which one of the four plots in Figure 3 shows the path?\n\nA. Plot A\nB. Plot B\nC. Plot C\nD. Plot D",
+      "options": {
+        "A": "Plot A",
+        "B": "Plot B",
+        "C": "Plot C",
+        "D": "Plot D"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q4.png",
+      "source_location": "exam p.4-5, Figure 2 (path in x8-x11 plane) and Figure 3 (four candidate PCA-projection plots Plot A-D)"
+    },
+    {
+      "question_id": "Q5",
+      "number": 5,
+      "topic": "Empirical correlation from covariance matrix",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider the Beijing air pollution dataset (but for this problem in the non-standardized version). The empirical covariance matrix of the first 5 attributes x1, ..., x5 is\nSigma_hat = [[12, -29, -21, -12, -317], [-29, 6104, 6026, 1557, 67964], [-21, 6026, 7263, 1701, 70892], [-12, 1557, 1701, 1012, 25415], [-317, 67964, 70892, 25415, 1212707]].\nWhat is the empirical correlation of MONTH and PM2.5?\n\nA. -5.38516\nB. -0.0199\nC. -0.10715\nD. -0.0004",
+      "options": {
+        "A": "-5.38516",
+        "B": "-0.0199",
+        "C": "-0.10715",
+        "D": "-0.0004"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.5, Question 5 (covariance matrix printed inline as text)"
+    },
+    {
+      "question_id": "Q6",
+      "number": 6,
+      "topic": "Average relative density (ARD) / outlier detection from distance matrix",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the 10 observations with pairwise Euclidean distances given in Table 3 (recall M = 11). The classes are: black observations {o1, o2} in class C1 (light pollution), red observations {o3, o4, o5, o6} in class C2 (medium pollution), blue observations {o7, o8, o9, o10} in class C3 (high pollution).\n\nTable 3 (pairwise Euclidean distances d(o_i, o_j)):\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\n o1    0.0   4.2   8.3   3.9   3.8   4.6   6.3   4.8   7.1   4.9\n o2    4.2   0.0   7.4   2.6   3.0   3.2   5.3   3.1   6.6   4.6\n o3    8.3   7.4   0.0   6.3   7.1   5.5   2.8   5.4   2.4   5.3\n o4    3.9   2.6   6.3   0.0   1.5   1.6   4.1   1.8   5.3   2.4\n o5    3.8   3.0   7.1   1.5   0.0   2.4   4.9   2.8   5.8   3.2\n o6    4.6   3.2   5.5   1.6   2.4   0.0   3.7   1.7   4.8   2.3\n o7    6.3   5.3   2.8   4.1   4.9   3.7   0.0   3.8   1.9   3.6\n o8    4.8   3.1   5.4   1.8   2.8   1.7   3.8   0.0   4.9   2.1\n o9    7.1   6.6   2.4   5.3   5.8   4.8   1.9   4.9   0.0   4.4\n o10   4.9   4.6   5.3   2.4   3.2   2.3   3.6   2.1   4.4   0.0\n\nTo examine if observation o5 may be an outlier, we will calculate the average relative density using the Euclidean distance based on the observations given in Table 3 only. The KNN density and average relative density (ard) for the observation x_i are given by:\ndensity(x_i, K) = 1 / ( (1/K) sum_{x' in N(x_i,K)} d(x_i, x') ),\nard(x_i, K) = density(x_i, K) / ( (1/K) sum_{x_j in N(x_i,K)} density(x_j, K) ),\nwhere N(x_i, K) is the set of K nearest neighbors of x_i excluding the i'th observation. What is the average relative density for observation o5 for K = 2 nearest neighbors?\n\nA. 0.41\nB. 0.82\nC. 1.0\nD. 0.51",
+      "options": {
+        "A": "0.41",
+        "B": "0.82",
+        "C": "1.0",
+        "D": "0.51"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 3: pairwise Euclidean distances d(o_i, o_j) between 10 observations (M = 11). Classes: black {o1, o2} in C1 (light pollution), red {o3, o4, o5, o6} in C2 (medium pollution), blue {o7, o8, o9, o10} in C3 (high pollution).\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\n o1    0.0   4.2   8.3   3.9   3.8   4.6   6.3   4.8   7.1   4.9\n o2    4.2   0.0   7.4   2.6   3.0   3.2   5.3   3.1   6.6   4.6\n o3    8.3   7.4   0.0   6.3   7.1   5.5   2.8   5.4   2.4   5.3\n o4    3.9   2.6   6.3   0.0   1.5   1.6   4.1   1.8   5.3   2.4\n o5    3.8   3.0   7.1   1.5   0.0   2.4   4.9   2.8   5.8   3.2\n o6    4.6   3.2   5.5   1.6   2.4   0.0   3.7   1.7   4.8   2.3\n o7    6.3   5.3   2.8   4.1   4.9   3.7   0.0   3.8   1.9   3.6\n o8    4.8   3.1   5.4   1.8   2.8   1.7   3.8   0.0   4.9   2.1\n o9    7.1   6.6   2.4   5.3   5.8   4.8   1.9   4.9   0.0   4.4\n o10   4.9   4.6   5.3   2.4   3.2   2.3   3.6   2.1   4.4   0.0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q6.png",
+      "source_location": "exam p.5, Table 3 (10x10 pairwise Euclidean distance matrix)"
+    },
+    {
+      "question_id": "Q7",
+      "number": 7,
+      "topic": "Hierarchical clustering / matching dendrogram (options are dendrograms)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A hierarchical clustering is applied to the 10 observations in Table 3 using maximum linkage. Which one of the dendrograms shown in Figure 4 corresponds to the distances given in Table 3?\n\nA. Dendrogram 1\nB. Dendrogram 2\nC. Dendrogram 3\nD. Dendrogram 4",
+      "options": {
+        "A": "Dendrogram 1",
+        "B": "Dendrogram 2",
+        "C": "Dendrogram 3",
+        "D": "Dendrogram 4"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q7.png",
+      "source_location": "exam p.5, Figure 4 (four candidate dendrograms; distances in Table 3)"
+    },
+    {
+      "question_id": "Q8",
+      "number": 8,
+      "topic": "Jaccard similarity range of two binary vectors",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Suppose x1 and x2 are two binary vectors of dimension N = 1500 such that x1 has one non-zero element and x2 has 1498 non-zero elements. What are the possible range of values of the Jaccard similarities of x1 and x2?\n\nA. J(x1, x2) in [0; 0.00242]\nB. J(x1, x2) in [0; 0.00067]\nC. J(x1, x2) in [0; 0.00074]\nD. J(x1, x2) in [0; 0.00206]",
+      "options": {
+        "A": "J(x1, x2) in [0; 0.00242]",
+        "B": "J(x1, x2) in [0; 0.00067]",
+        "C": "J(x1, x2) in [0; 0.00074]",
+        "D": "J(x1, x2) in [0; 0.00206]"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 8 (pure text/math)"
+    },
+    {
+      "question_id": "Q9",
+      "number": 9,
+      "topic": "Variable selection (forward/backward) from RMSE table",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider again the Beijing air pollution dataset in Table 1. We would like to predict a pollution level using a linear regression, and since we would like the model to be as interpretable as possible we will use variable selection to obtain a parsimonious model. We limit ourselves to the five features x2, x4, x6, x9, and x11 and in Table 4 we have pre-computed the estimated training and test error (RMSE) for the different variable combinations.\n\nTable 4 (Root-mean-square error for training and test set, least squares regression predicting y_r):\n Feature(s)                Training RMSE   Test RMSE\n none                          2.235          2.851\n x2                            2.096          2.232\n x4                            1.902          1.793\n x6                            2.214          2.351\n x9                            2.183          3.227\n x11                           2.235          2.83\n x2, x4                        1.9            1.797\n x2, x6                        2.081          2.597\n x4, x6                        1.777          2.785\n x2, x9                        1.606          3.09\n x4, x9                        1.724          2.243\n x6, x9                        2.087          2.307\n x2, x11                       2.046          2.754\n x4, x11                       1.87           2.143\n x6, x11                       2.214          2.37\n x9, x11                       2.177          3.058\n x2, x4, x6                    1.773          2.838\n x2, x4, x9                    1.574          2.81\n x2, x6, x9                    1.605          3.187\n x4, x6, x9                    1.691          2.698\n x2, x4, x11                   1.868          2.188\n x2, x6, x11                   2.003          3.738\n x4, x6, x11                   1.723          3.472\n x2, x9, x11                   1.483          4.246\n x4, x9, x11                   1.714          2.418\n x6, x9, x11                   2.081          2.159\n x2, x4, x6, x9                1.549          3.174\n x2, x4, x6, x11               1.676          4.227\n x2, x4, x9, x11               1.469          3.944\n x2, x6, x9, x11               1.459          5.017\n x4, x6, x9, x11               1.667          3.146\n x2, x4, x6, x9, x11           1.406          5.006\n\nWhich of the following statements is correct?\n\nA. Backward selection will select attributes x6, x9, x11\nB. Backward selection will select attributes x4, x6, x9, x11\nC. Forward selection will select attributes x6, x9, x11\nD. Forward selection will select attributes x4, x6, x9, x11",
+      "options": {
+        "A": "Backward selection will select attributes x6, x9, x11",
+        "B": "Backward selection will select attributes x4, x6, x9, x11",
+        "C": "Forward selection will select attributes x6, x9, x11",
+        "D": "Forward selection will select attributes x4, x6, x9, x11"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 4: Root-mean-square error (RMSE) for the training and test set when using least squares regression to predict y_r using different combinations of the features x2, x4, x6, x9, x11.\n Feature(s)                Training RMSE   Test RMSE\n none                          2.235          2.851\n x2                            2.096          2.232\n x4                            1.902          1.793\n x6                            2.214          2.351\n x9                            2.183          3.227\n x11                           2.235          2.83\n x2, x4                        1.9            1.797\n x2, x6                        2.081          2.597\n x4, x6                        1.777          2.785\n x2, x9                        1.606          3.09\n x4, x9                        1.724          2.243\n x6, x9                        2.087          2.307\n x2, x11                       2.046          2.754\n x4, x11                       1.87           2.143\n x6, x11                       2.214          2.37\n x9, x11                       2.177          3.058\n x2, x4, x6                    1.773          2.838\n x2, x4, x9                    1.574          2.81\n x2, x6, x9                    1.605          3.187\n x4, x6, x9                    1.691          2.698\n x2, x4, x11                   1.868          2.188\n x2, x6, x11                   2.003          3.738\n x4, x6, x11                   1.723          3.472\n x2, x9, x11                   1.483          4.246\n x4, x9, x11                   1.714          2.418\n x6, x9, x11                   2.081          2.159\n x2, x4, x6, x9                1.549          3.174\n x2, x4, x6, x11               1.676          4.227\n x2, x4, x9, x11               1.469          3.944\n x2, x6, x9, x11               1.459          5.017\n x4, x6, x9, x11               1.667          3.146\n x2, x4, x6, x9, x11           1.406          5.006",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q9.png",
+      "source_location": "exam p.6, Table 4 (RMSE table for feature subsets)"
+    },
+    {
+      "question_id": "Q10",
+      "number": 10,
+      "topic": "Bayes classifier / robust probability estimate from binary matrix",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We again consider the Beijing air pollution dataset from Table 1 and the N = 10 observations from Table 3. The data is processed to produce 11 new, binary features such that f_i = 1 corresponds to a value x_i greater than the median, giving the 10x11 binary matrix in Table 5. We wish to apply a Bayesian classifier and as part of this task we have to estimate the probability p(f2 = 0, f11 = 0 | y = 2). For better numerical stability, we use robust estimation with a regularization factor alpha: p(A|B) = ({Occurrences matching A and B} + alpha) / ({Occurrences matching B} + 2*alpha). What is the probability estimate if alpha = 1?\n\nTable 5 (binarized dataset; f_i = 1 if x_i greater than median, else 0). Classes: black {o1, o2} in C1 (light), red {o3, o4, o5, o6} in C2 (medium), blue {o7, o8, o9, o10} in C3 (high).\n        f1  f2  f3  f4  f5  f6  f7  f8  f9  f10  f11\n o1      0   0   0   0   0   1   1   1   0   1    1\n o2      1   0   0   1   0   1   1   0   1   1    1\n o3      1   1   1   1   1   0   0   0   0   1    0\n o4      0   1   0   0   1   0   0   0   1   1    0\n o5      0   0   0   0   0   1   0   1   1   1    0\n o6      0   1   1   1   1   0   0   0   1   1    0\n o7      1   1   1   1   1   0   0   1   0   1    0\n o8      0   1   1   1   1   0   0   0   1   1    0\n o9      1   1   1   1   1   0   0   1   0   1    0\n o10     0   1   1   1   1   0   0   1   0   1    0\n\nA. p(f2 = 0, f11 = 0 | y = 2) = 1/3\nB. p(f2 = 0, f11 = 0 | y = 2) = 3/5\nC. p(f2 = 0, f11 = 0 | y = 2) = 0\nD. p(f2 = 0, f11 = 0 | y = 2) = 1",
+      "options": {
+        "A": "p(f2 = 0, f11 = 0 | y = 2) = 1/3",
+        "B": "p(f2 = 0, f11 = 0 | y = 2) = 3/5",
+        "C": "p(f2 = 0, f11 = 0 | y = 2) = 0",
+        "D": "p(f2 = 0, f11 = 0 | y = 2) = 1"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 5: binarized version of the Beijing air pollution dataset. f_i = 1 if attribute x_i is greater than the median, otherwise f_i = 0. Classes: black {o1, o2} in C1 (light pollution), red {o3, o4, o5, o6} in C2 (medium pollution), blue {o7, o8, o9, o10} in C3 (high pollution).\n        f1  f2  f3  f4  f5  f6  f7  f8  f9  f10  f11\n o1      0   0   0   0   0   1   1   1   0   1    1\n o2      1   0   0   1   0   1   1   0   1   1    1\n o3      1   1   1   1   1   0   0   0   0   1    0\n o4      0   1   0   0   1   0   0   0   1   1    0\n o5      0   0   0   0   0   1   0   1   1   1    0\n o6      0   1   1   1   1   0   0   0   1   1    0\n o7      1   1   1   1   1   0   0   1   0   1    0\n o8      0   1   1   1   1   0   0   0   1   1    0\n o9      1   1   1   1   1   0   0   1   0   1    0\n o10     0   1   1   1   1   0   0   1   0   1    0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q10.png",
+      "source_location": "exam p.7, Table 5 (10x11 binary matrix)"
+    },
+    {
+      "question_id": "Q11",
+      "number": 11,
+      "topic": "Association mining / itemsets above support threshold",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the binarized version of the Beijing air pollution dataset shown in Table 5. The matrix can be considered as representing N = 10 transactions o1, o2, ..., o10 and M = 11 items f1, f2, ..., f11. Which of the following options represents all (non-empty) itemsets with support greater than 0.65 (and only itemsets with support greater than 0.65)?\n\nTable 5 (binarized dataset; f_i = 1 if x_i greater than median, else 0):\n        f1  f2  f3  f4  f5  f6  f7  f8  f9  f10  f11\n o1      0   0   0   0   0   1   1   1   0   1    1\n o2      1   0   0   1   0   1   1   0   1   1    1\n o3      1   1   1   1   1   0   0   0   0   1    0\n o4      0   1   0   0   1   0   0   0   1   1    0\n o5      0   0   0   0   0   1   0   1   1   1    0\n o6      0   1   1   1   1   0   0   0   1   1    0\n o7      1   1   1   1   1   0   0   1   0   1    0\n o8      0   1   1   1   1   0   0   0   1   1    0\n o9      1   1   1   1   1   0   0   1   0   1    0\n o10     0   1   1   1   1   0   0   1   0   1    0\n\nA. {f4}, {f10}, {f4, f10}\nB. {f2}, {f4}, {f10}, {f2, f4}, {f2, f10}, {f4, f10}, {f2, f4, f10}\nC. {f2}, {f4}, {f10}, {f2, f4}, {f2, f10}, {f4, f10}\nD. {f10}",
+      "options": {
+        "A": "{f4}, {f10}, {f4, f10}",
+        "B": "{f2}, {f4}, {f10}, {f2, f4}, {f2, f10}, {f4, f10}, {f2, f4, f10}",
+        "C": "{f2}, {f4}, {f10}, {f2, f4}, {f2, f10}, {f4, f10}",
+        "D": "{f10}"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 5: binarized version of the Beijing air pollution dataset, viewed as N = 10 transactions o1..o10 and M = 11 items f1..f11. f_i = 1 if attribute x_i is greater than the median, otherwise 0.\n        f1  f2  f3  f4  f5  f6  f7  f8  f9  f10  f11\n o1      0   0   0   0   0   1   1   1   0   1    1\n o2      1   0   0   1   0   1   1   0   1   1    1\n o3      1   1   1   1   1   0   0   0   0   1    0\n o4      0   1   0   0   1   0   0   0   1   1    0\n o5      0   0   0   0   0   1   0   1   1   1    0\n o6      0   1   1   1   1   0   0   0   1   1    0\n o7      1   1   1   1   1   0   0   1   0   1    0\n o8      0   1   1   1   1   0   0   0   1   1    0\n o9      1   1   1   1   1   0   0   1   0   1    0\n o10     0   1   1   1   1   0   0   1   0   1    0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q11.png",
+      "source_location": "exam p.7, Table 5 (10x11 binary matrix)"
+    },
+    {
+      "question_id": "Q12",
+      "number": 12,
+      "topic": "Association mining / confidence of a rule",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We again consider the binary matrix from Table 5 as a market basket problem consisting of N = 10 transactions o1, ..., o10 and M = 11 items f1, ..., f11. What is the confidence of the rule {f1, f3, f4, f5, f8} -> {f2, f10}?\n\nTable 5 (binarized dataset; f_i = 1 if x_i greater than median, else 0):\n        f1  f2  f3  f4  f5  f6  f7  f8  f9  f10  f11\n o1      0   0   0   0   0   1   1   1   0   1    1\n o2      1   0   0   1   0   1   1   0   1   1    1\n o3      1   1   1   1   1   0   0   0   0   1    0\n o4      0   1   0   0   1   0   0   0   1   1    0\n o5      0   0   0   0   0   1   0   1   1   1    0\n o6      0   1   1   1   1   0   0   0   1   1    0\n o7      1   1   1   1   1   0   0   1   0   1    0\n o8      0   1   1   1   1   0   0   0   1   1    0\n o9      1   1   1   1   1   0   0   1   0   1    0\n o10     0   1   1   1   1   0   0   1   0   1    0\n\nA. The confidence is 1\nB. The confidence is 1/5\nC. The confidence is 2/7\nD. The confidence is 9/20",
+      "options": {
+        "A": "The confidence is 1",
+        "B": "The confidence is 1/5",
+        "C": "The confidence is 2/7",
+        "D": "The confidence is 9/20"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 5: binarized version of the Beijing air pollution dataset, viewed as N = 10 transactions o1..o10 and M = 11 items f1..f11. f_i = 1 if attribute x_i is greater than the median, otherwise 0.\n        f1  f2  f3  f4  f5  f6  f7  f8  f9  f10  f11\n o1      0   0   0   0   0   1   1   1   0   1    1\n o2      1   0   0   1   0   1   1   0   1   1    1\n o3      1   1   1   1   1   0   0   0   0   1    0\n o4      0   1   0   0   1   0   0   0   1   1    0\n o5      0   0   0   0   0   1   0   1   1   1    0\n o6      0   1   1   1   1   0   0   0   1   1    0\n o7      1   1   1   1   1   0   0   1   0   1    0\n o8      0   1   1   1   1   0   0   0   1   1    0\n o9      1   1   1   1   1   0   0   1   0   1    0\n o10     0   1   1   1   1   0   0   1   0   1    0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q12.png",
+      "source_location": "exam p.7, Table 5 (10x11 binary matrix)"
+    },
+    {
+      "question_id": "Q13",
+      "number": 13,
+      "topic": "ROC curve / matching class densities to ROC (options are ROC plots)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A logistic regression classifier is applied to the Beijing air pollution dataset described in Table 1 to solve the binary classification problem of light pollution level (positive class) vs. medium pollution level & high pollution level (negative class). The output of the classifier is the class-assignment probability theta_hat, and for each threshold value theta_0 we assign observations with theta_hat > theta_0 to the positive class light pollution level (and otherwise to the negative class). Suppose the class-density for each class is as indicated in Figure 5, which of the receiver operator characteristic (ROC) curves in Figure 6 corresponds to the classifier?\n\nA. ROC curve 1\nB. ROC curve 2\nC. ROC curve 3\nD. ROC curve 4",
+      "options": {
+        "A": "ROC curve 1",
+        "B": "ROC curve 2",
+        "C": "ROC curve 3",
+        "D": "ROC curve 4"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q13.png",
+      "source_location": "exam p.8, Figure 5 (class densities vs prediction theta_hat) and Figure 6 (four candidate ROC curves)"
+    },
+    {
+      "question_id": "Q14",
+      "number": 14,
+      "topic": "Ridge regression cost function on a small 1d dataset",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the small 1d dataset shown in Table 6 comprised of N = 4 observations where the goal is to predict y_i given x_i. Suppose we apply ridge regression to the problem in the form described in the lecture notes, Section 14.1.\n\nTable 6 (simple 1d regression dataset):\n        i=1   i=2   i=3   i=4\n x_i      2     5     6     7\n y_i      6     7     7     9\n\nIf lambda = 2, what is the ridge regression cost function assuming the weight-vector is w = [0.6], i.e. E_lambda(w, w0)?\n\nA. E_lambda(w, w0) = 1.205\nB. E_lambda(w, w0) = 1.97\nC. E_lambda(w, w0) = 1.033\nD. E_lambda(w, w0) = 2.662",
+      "options": {
+        "A": "E_lambda(w, w0) = 1.205",
+        "B": "E_lambda(w, w0) = 1.97",
+        "C": "E_lambda(w, w0) = 1.033",
+        "D": "E_lambda(w, w0) = 2.662"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 6: simple 1d regression dataset, N = 4 observations.\n        i=1   i=2   i=3   i=4\n x_i      2     5     6     7\n y_i      6     7     7     9",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q14.png",
+      "source_location": "exam p.8-9, Table 6 (1d regression dataset)"
+    },
+    {
+      "question_id": "Q15",
+      "number": 15,
+      "topic": "Regression tree / predicted value from tree structure and table",
+      "type": "B",
+      "text_faithful": true,
+      "question_text": "We will consider the first 6 observations of the Beijing air pollution dataset. Table 7 shows their corresponding value of x7 and y_r. We fit a small regression tree to this dataset, the structure (and binary splitting rules) is depicted in Figure 8. What is the predicted value y_hat_r as evaluated at x7 = 0.5?\n\nTable 7 (values of x7 and corresponding y_r):\n        1      2     3     4     5     6\n x7    -1.76   -0    0.06  0.08  0.65  1.3\n y_r    12      6     8     10    4     2\n\nRegression tree structure (Figure 8): The root node tests the rule 'x7 > 0.365'. If False, go to a second internal node testing 'x7 > -0.88'; if that is False go to leaf L1, if True go to leaf L2. If the root rule 'x7 > 0.365' is True, go to leaf L3. (Each leaf predicts the mean y_r of the training observations assigned to it.)\n\nA. y_hat_r = 2.85\nB. y_hat_r = 3.0\nC. y_hat_r = 2.52\nD. y_hat_r = 0.98",
+      "options": {
+        "A": "y_hat_r = 2.85",
+        "B": "y_hat_r = 3.0",
+        "C": "y_hat_r = 2.52",
+        "D": "y_hat_r = 0.98"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 7: values of x7 and the corresponding value of y_r (first 6 observations).\n        1      2     3     4     5     6\n x7    -1.76   -0    0.06  0.08  0.65  1.3\n y_r    12      6     8     10    4     2\n\nFigure 8 (decision tree structure; leaves are to be filled by the mean y_r of assigned observations):\n   root: x7 > 0.365 ?\n     False -> node: x7 > -0.88 ?\n                False -> leaf L1\n                True  -> leaf L2\n     True  -> leaf L3",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q15.png",
+      "source_location": "exam p.9, Table 7 (x7, y_r values) and Figure 8 (decision-tree structure with split rules)"
+    },
+    {
+      "question_id": "Q16",
+      "number": 16,
+      "topic": "Regression tree / purity (impurity) gain of first split",
+      "type": "B",
+      "text_faithful": true,
+      "question_text": "In this problem, we will again consider the 6 observations from the Beijing air pollution dataset shown in Table 7. Recall Figure 8 shows the structure of the small regression tree fitted to this dataset using Hunt's algorithm along with the thereby obtained binary splitting rules. What was the purity gain Delta of the first split Hunt's algorithm accepted?\n\nTable 7 (values of x7 and corresponding y_r):\n        1      2     3     4     5     6\n x7    -1.76   -0    0.06  0.08  0.65  1.3\n y_r    12      6     8     10    4     2\n\nRegression tree structure (Figure 8): root tests 'x7 > 0.365'; the False branch leads to a node testing 'x7 > -0.88' (False -> leaf L1, True -> leaf L2); the True branch leads to leaf L3. The impurity for regression trees is I(v) = (1/N(v)) sum_{i in v} (y_i - y(v))^2, and the purity gain is Delta = I(v0) - sum_k (N(v_k)/N) I(v_k).\n\nA. Delta = 11.67\nB. Delta = 3.67\nC. Delta = 8.0\nD. Delta = 56.0",
+      "options": {
+        "A": "Delta = 11.67",
+        "B": "Delta = 3.67",
+        "C": "Delta = 8.0",
+        "D": "Delta = 56.0"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 7: values of x7 and the corresponding value of y_r (first 6 observations).\n        1      2     3     4     5     6\n x7    -1.76   -0    0.06  0.08  0.65  1.3\n y_r    12      6     8     10    4     2\n\nFigure 8 (decision tree structure):\n   root: x7 > 0.365 ?\n     False -> node: x7 > -0.88 ?\n                False -> leaf L1\n                True  -> leaf L2\n     True  -> leaf L3\nThe first split accepted by Hunt's algorithm is the root split x7 > 0.365.",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q16.png",
+      "source_location": "exam p.9, Table 7 (x7, y_r values) and Figure 8 (decision-tree structure with split rules)"
+    },
+    {
+      "question_id": "Q17",
+      "number": 17,
+      "topic": "KNN regression / leave-one-out squared-loss contribution",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider once more the Beijing air pollution dataset treated as a regression problem where the goal is to predict y_r. We wish to do this using KNN regression using K = 3 neighbors. We simplify the problem by only considering the first N = 6 observations whose pairwise distances are given in Table 3, and their corresponding y_r-value can be found in Table 7. Suppose we evaluate the leave-one-out estimate of the generalization error E = (1/N) sum_{i=1}^N L(y_r,i, y_hat_r,i), where L is the standard squared (Euclidean) loss. It is too time-consuming to compute the full LOO estimate, but what is the contribution from observation i = 1?\n\nTable 3 (pairwise Euclidean distances among o1..o6; relevant submatrix from the 10x10 table):\n        o1    o2    o3    o4    o5    o6\n o1     0.0   4.2   8.3   3.9   3.8   4.6\n o2     4.2   0.0   7.4   2.6   3.0   3.2\n o3     8.3   7.4   0.0   6.3   7.1   5.5\n o4     3.9   2.6   6.3   0.0   1.5   1.6\n o5     3.8   3.0   7.1   1.5   0.0   2.4\n o6     4.6   3.2   5.5   1.6   2.4   0.0\n\nTable 7 (y_r values for observations 1..6): y_r = [12, 6, 8, 10, 4, 2].\n\nA. L(y_r,1, y_hat_r,1) = 6.667\nB. L(y_r,1, y_hat_r,1) = 28.444\nC. L(y_r,1, y_hat_r,1) = 6.0\nD. L(y_r,1, y_hat_r,1) = 7.111",
+      "options": {
+        "A": "L(y_r,1, y_hat_r,1) = 6.667",
+        "B": "L(y_r,1, y_hat_r,1) = 28.444",
+        "C": "L(y_r,1, y_hat_r,1) = 6.0",
+        "D": "L(y_r,1, y_hat_r,1) = 7.111"
+      },
+      "correct_answer": "B",
+      "text_representation": "Pairwise Euclidean distances among the first 6 observations o1..o6 (submatrix of Table 3):\n        o1    o2    o3    o4    o5    o6\n o1     0.0   4.2   8.3   3.9   3.8   4.6\n o2     4.2   0.0   7.4   2.6   3.0   3.2\n o3     8.3   7.4   0.0   6.3   7.1   5.5\n o4     3.9   2.6   6.3   0.0   1.5   1.6\n o5     3.8   3.0   7.1   1.5   0.0   2.4\n o6     4.6   3.2   5.5   1.6   2.4   0.0\n\nTable 7 (y_r values for observations 1..6): y_r = [12, 6, 8, 10, 4, 2].",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q17.png",
+      "source_location": "exam p.9, Table 3 (distance matrix, first 6 observations) and Table 7 (y_r values)"
+    },
+    {
+      "question_id": "Q18",
+      "number": 18,
+      "topic": "McNemar's test / estimated difference in accuracy from CV counts",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We will consider the Beijing air pollution dataset, and compare two models for predicting the class label y. Specifically, let M1 be a K = 1 nearest neighbor classification model and M2 a K = 5 nearest neighbor classification model. To compare them statistically, we perform K = 4 fold cross-validation, and for each fold we record the number of observations where both models are correct (as M1/M2), M1 is correct and M2 wrong (as M1/not-M2), and so on. The outcome can be found in Table 8.\n\nTable 8 (outcome of cross-validation; columns: both correct M1/M2, M1 correct & M2 wrong M1/not-M2, M1 wrong & M2 correct not-M1/M2, both wrong not-M1/not-M2):\n Fold   M1/M2   M1/not-M2   not-M1/M2   not-M1/not-M2\n 1       134       40          24            47\n 2       141       31          26            48\n 3       131       23          25            66\n 4       132       30          25            58\n\nThese results are sufficient to perform the McNemar test to compare the performance difference, i.e. the difference in accuracy, of model M1 and M2. According to the McNemar test, what is the estimated difference in accuracy theta_hat = acc(M1) - acc(M2) of the two models?\n\nA. theta_hat = 0.75\nB. theta_hat = 0.07\nC. theta_hat = 0.11\nD. theta_hat = 0.02",
+      "options": {
+        "A": "theta_hat = 0.75",
+        "B": "theta_hat = 0.07",
+        "C": "theta_hat = 0.11",
+        "D": "theta_hat = 0.02"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 8: outcome of K = 4 fold cross-validation comparing M1 (K=1 NN) and M2 (K=5 NN). Columns are combinations of outcomes: M1/M2 = both correct, M1/not-M2 = M1 correct & M2 wrong, not-M1/M2 = M1 wrong & M2 correct, not-M1/not-M2 = both wrong. Total N = 981.\n Fold   M1/M2   M1/not-M2   not-M1/M2   not-M1/not-M2\n 1       134       40          24            47\n 2       141       31          26            48\n 3       131       23          25            66\n 4       132       30          25            58",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q18.png",
+      "source_location": "exam p.10, Table 8 (cross-validation outcome counts)"
+    },
+    {
+      "question_id": "Q19",
+      "number": 19,
+      "topic": "Jeffreys confidence interval for a model's accuracy",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We will again consider the result of the two KNN models in Table 8 as evaluated over the K = 4 folds. What is the Jeffreys alpha = 0.05 confidence interval [theta_L, theta_U] of the model M2?\n\nTable 8 (outcome of cross-validation; columns: both correct M1/M2, M1 correct & M2 wrong M1/not-M2, M1 wrong & M2 correct not-M1/M2, both wrong not-M1/not-M2; total N = 981):\n Fold   M1/M2   M1/not-M2   not-M1/M2   not-M1/not-M2\n 1       134       40          24            47\n 2       141       31          26            48\n 3       131       23          25            66\n 4       132       30          25            58\n\n(cdf_B^-1(p | a, b) denotes the inverse CDF / quantile function of the Beta distribution with parameters a and b.)\n\nA. theta_L = cdf_B^-1(0.025 | a = 538.5, b = 443.5), theta_U = cdf_B^-1(0.975 | a = 538.5, b = 443.5)\nB. theta_L = cdf_B^-1(0.025 | a = 638.5, b = 343.5), theta_U = cdf_B^-1(0.975 | a = 638.5, b = 343.5)\nC. theta_L = cdf_B^-1(0.025 | a = 538.5, b = 219.5), theta_U = cdf_B^-1(0.975 | a = 538.5, b = 219.5)\nD. theta_L = cdf_B^-1(0.025 | a = 662.5, b = 319.5), theta_U = cdf_B^-1(0.975 | a = 662.5, b = 319.5)",
+      "options": {
+        "A": "theta_L = cdf_B^-1(0.025 | a = 538.5, b = 443.5), theta_U = cdf_B^-1(0.975 | a = 538.5, b = 443.5)",
+        "B": "theta_L = cdf_B^-1(0.025 | a = 638.5, b = 343.5), theta_U = cdf_B^-1(0.975 | a = 638.5, b = 343.5)",
+        "C": "theta_L = cdf_B^-1(0.025 | a = 538.5, b = 219.5), theta_U = cdf_B^-1(0.975 | a = 538.5, b = 219.5)",
+        "D": "theta_L = cdf_B^-1(0.025 | a = 662.5, b = 319.5), theta_U = cdf_B^-1(0.975 | a = 662.5, b = 319.5)"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 8: outcome of K = 4 fold cross-validation comparing M1 (K=1 NN) and M2 (K=5 NN). Columns: M1/M2 = both correct, M1/not-M2 = M1 correct & M2 wrong, not-M1/M2 = M1 wrong & M2 correct, not-M1/not-M2 = both wrong. Total N = 981.\n Fold   M1/M2   M1/not-M2   not-M1/M2   not-M1/not-M2\n 1       134       40          24            47\n 2       141       31          26            48\n 3       131       23          25            66\n 4       132       30          25            58",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q19.png",
+      "source_location": "exam p.10, Table 8 (cross-validation outcome counts)"
+    },
+    {
+      "question_id": "Q20",
+      "number": 20,
+      "topic": "ANN forward pass / matching output to plotted curve (options are plots)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider an artificial neural network (ANN) trained on the Beijing air pollution dataset described in Table 1 to predict y_r from the attribute x2. Suppose the neural network takes the form f(x, w) = h^(2)( w0^(2) + sum_{j=1}^2 w_j^(2) h^(1)([1 x] w_j^(1)) ), where the activation functions are h^(1)(x) = sigma(x) (logistic sigmoid) and h^(2)(x) = sigma(x) (logistic sigmoid), and the weights are w_1^(1) = [-0.5, -0.1]^T, w_2^(1) = [0.9, 2.0]^T, w^(2) = [-1.0, 0.4]^T, w0^(2) = 1.4. Which one of the curves in Figure 9 will then correspond to the function f?\n\nA. ANN output 1\nB. ANN output 2\nC. ANN output 3\nD. ANN output 4",
+      "options": {
+        "A": "ANN output 1",
+        "B": "ANN output 2",
+        "C": "ANN output 3",
+        "D": "ANN output 4"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q20.png",
+      "source_location": "exam p.11-12, Figure 9 (four candidate ANN output curves vs x2)"
+    },
+    {
+      "question_id": "Q21",
+      "number": 21,
+      "topic": "KDE / hold-out cross-validation error curve (options are plots)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider the following N = 3 observations of the attribute CO from the Beijing air pollution dataset described in Table 1: x5 = [4.5, -0.5, 1.2]. Suppose we apply a Kernel Density Estimator (KDE) to the dataset with kernel width sigma (i.e. sigma is the standard deviation of the Gaussian kernels), and we wish to find sigma by using hold-out cross validation (CV) using the average (per observation) negative log-likelihood E(sigma) = (-1/N_test) sum_{i=1}^{N_test} log p_sigma(x_i). We construct the hold out split by considering the first 2 observations a training set and the last observations as a test set. Which of the cross validation curves in Figure 10 shows the cross-validation estimate of the generalization error E(sigma)?\n\nA. CV error curve 1\nB. CV error curve 2\nC. CV error curve 3\nD. CV error curve 4",
+      "options": {
+        "A": "CV error curve 1",
+        "B": "CV error curve 2",
+        "C": "CV error curve 3",
+        "D": "CV error curve 4"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q21.png",
+      "source_location": "exam p.12, Figure 10 (four candidate CV error curves E(sigma) vs sigma)"
+    },
+    {
+      "question_id": "Q22",
+      "number": 22,
+      "topic": "AdaBoost / weight update after first boosting round",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider again the Beijing air pollution dataset of Table 1. Suppose we limit ourselves to N = 7 observations from the original dataset and furthermore suppose we limit ourselves to class y = 1 or y = 2 and only consider the features x6 and x9. We use a KNN classification model (K = 1) and apply AdaBoost to improve the performance. After the first round of boosting, we obtain predictions and the true class labels as tabulated in Table 9. Given this information, how will the AdaBoost update the weights w?\n\nTable 9 (for each of N = 7 observations: true class label y^true and AdaBoost prediction at boosting round t = 1):\n Variable   y^true   t=1\n y1          1        1\n y2          1        2\n y3          1        1\n y4          2        1\n y5          2        1\n y6          2        2\n y7          2        2\n\nA. [0.173, 0.103, 0.173, 0.103, 0.103, 0.173, 0.173]\nB. [0.146, 0.138, 0.146, 0.138, 0.138, 0.146, 0.146]\nC. [0.125, 0.167, 0.125, 0.167, 0.167, 0.125, 0.125]\nD. [0.102, 0.198, 0.102, 0.198, 0.198, 0.102, 0.102]",
+      "options": {
+        "A": "[0.173, 0.103, 0.173, 0.103, 0.103, 0.173, 0.173]",
+        "B": "[0.146, 0.138, 0.146, 0.138, 0.138, 0.146, 0.146]",
+        "C": "[0.125, 0.167, 0.125, 0.167, 0.167, 0.125, 0.125]",
+        "D": "[0.102, 0.198, 0.102, 0.198, 0.198, 0.102, 0.102]"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 9: for each of the N = 7 observations, the true class label y^true and the AdaBoost classifier prediction for the first boosting round t = 1.\n Variable   y^true   t=1\n y1          1        1\n y2          1        2\n y3          1        1\n y4          2        1\n y5          2        1\n y6          2        2\n y7          2        2",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q22.png",
+      "source_location": "exam p.12, Table 9 (true labels and round-1 AdaBoost predictions)"
+    },
+    {
+      "question_id": "Q23",
+      "number": 23,
+      "topic": "Bayes rule / posterior class probability from counts",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider the Beijing air pollution dataset from Table 1 consisting of N = 981 observations, and suppose the attribute O3 concentration (ug/m^3) has been binarized into low and high values. We still consider the goal to predict the pollution level. Given the following information:\n- Of the 391 observations with light pollution level, 64 had a high value of O3 concentration (ug/m^3)\n- Of the 241 observations with medium pollution level, 66 had a high value of O3 concentration (ug/m^3)\n- Of the 349 observations with high pollution level, 206 had a high value of O3 concentration (ug/m^3)\nand supposing a particular observation has a low value of O3 concentration (ug/m^3), what is the probability of observing medium pollution level?\n\nA. 0.271\nB. 0.192\nC. 0.044\nD. 0.141",
+      "options": {
+        "A": "0.271",
+        "B": "0.192",
+        "C": "0.044",
+        "D": "0.141"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.13, Question 23 (counts given inline as text)"
+    },
+    {
+      "question_id": "Q24",
+      "number": 24,
+      "topic": "Multinomial regression / class-assignment probability vector",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the Beijing air pollution dataset. We consider a multinomial regression model applied to the dataset projected onto the first two principal directions, i.e. applied to observations of the form x = [b1, b2]^T where b1 and b2 are the coordinates of the PCA projections. In the notation of the lecture notes, suppose the weight-vectors in the multinomial regression model are w1 = [0.04, 1.32, -1.48]^T and w2 = [-0.03, 0.7, -0.85]^T. What is the class-assignment probability vector y_tilde for the input observation with coordinates b1 = -5.52, b2 = -4.69?\n\nA. y_tilde = [0.77, 0.23, 0.0]^T\nB. y_tilde = [0.26, 0.39, 0.35]^T\nC. y_tilde = [0.16, 0.24, 0.6]^T\nD. y_tilde = [0.22, 0.07, 0.72]^T",
+      "options": {
+        "A": "y_tilde = [0.77, 0.23, 0.0]^T",
+        "B": "y_tilde = [0.26, 0.39, 0.35]^T",
+        "C": "y_tilde = [0.16, 0.24, 0.6]^T",
+        "D": "y_tilde = [0.22, 0.07, 0.72]^T"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.13, Question 24 (weight vectors and coordinates given inline as text)"
+    },
+    {
+      "question_id": "Q25",
+      "number": 25,
+      "topic": "Gaussian Mixture Model / matching density to colored sample scatter (options are densities, requires figure)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Let N(x | mu, Sigma) denote the multivariate normal distribution with mean mu and covariance matrix Sigma. In Figure 11 is given 1000 observations drawn from a density defined by a Gaussian Mixture Model (GMM) with three clusters. Each observation is colored and marked in terms of which cluster it came from in the Gaussian Mixture model. Which one of the following GMM densities was used to generate the data?\n\nA. p(x) = (5/8) N(x | [2.0, 2.4], [[1.1, -0.9], [-0.9, 2.2]]) + (1/8) N(x | [-1.2, -3.8], [[1.0, -0.8], [-0.8, 1.9]]) + (1/4) N(x | [-6.9, -6.3], [[1.3, 0.3], [0.3, 2.0]])\nB. p(x) = (1/4) N(x | [2.0, 2.4], [[1.3, 0.3], [0.3, 2.0]]) + (5/8) N(x | [-1.2, -3.8], [[1.1, -0.9], [-0.9, 2.2]]) + (1/8) N(x | [-6.9, -6.3], [[1.0, -0.8], [-0.8, 1.9]])\nC. p(x) = (1/8) N(x | [2.0, 2.4], [[1.0, -0.8], [-0.8, 1.9]]) + (1/4) N(x | [-1.2, -3.8], [[1.1, -0.9], [-0.9, 2.2]]) + (5/8) N(x | [-6.9, -6.3], [[1.3, 0.3], [0.3, 2.0]])\nD. p(x) = (1/8) N(x | [2.0, 2.4], [[1.3, 0.3], [0.3, 2.0]]) + (5/8) N(x | [-1.2, -3.8], [[1.0, -0.8], [-0.8, 1.9]]) + (1/4) N(x | [-6.9, -6.3], [[1.1, -0.9], [-0.9, 2.2]])",
+      "options": {
+        "A": "p(x) = (5/8) N(x | [2.0, 2.4], [[1.1, -0.9], [-0.9, 2.2]]) + (1/8) N(x | [-1.2, -3.8], [[1.0, -0.8], [-0.8, 1.9]]) + (1/4) N(x | [-6.9, -6.3], [[1.3, 0.3], [0.3, 2.0]])",
+        "B": "p(x) = (1/4) N(x | [2.0, 2.4], [[1.3, 0.3], [0.3, 2.0]]) + (5/8) N(x | [-1.2, -3.8], [[1.1, -0.9], [-0.9, 2.2]]) + (1/8) N(x | [-6.9, -6.3], [[1.0, -0.8], [-0.8, 1.9]])",
+        "C": "p(x) = (1/8) N(x | [2.0, 2.4], [[1.0, -0.8], [-0.8, 1.9]]) + (1/4) N(x | [-1.2, -3.8], [[1.1, -0.9], [-0.9, 2.2]]) + (5/8) N(x | [-6.9, -6.3], [[1.3, 0.3], [0.3, 2.0]])",
+        "D": "p(x) = (1/8) N(x | [2.0, 2.4], [[1.3, 0.3], [0.3, 2.0]]) + (5/8) N(x | [-1.2, -3.8], [[1.0, -0.8], [-0.8, 1.9]]) + (1/4) N(x | [-6.9, -6.3], [[1.1, -0.9], [-0.9, 2.2]])"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q25.png",
+      "source_location": "exam p.13-14, Figure 11 (scatter of 1000 GMM samples in 3 colored clusters)"
+    },
+    {
+      "question_id": "Q26",
+      "number": 26,
+      "topic": "Matching classifiers to decision boundaries (options are plots)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider the following four classifiers: MREG (Multinomial regression), ANN (Artificial neural network with 5 hidden units), CT (Classification tree with regular axis-aligned splits b_i < c), KNN (K-nearest neighbours with K = 3). Suppose the classifiers are trained on a subset of the Beijing air pollution dataset described in Table 1 after it has been projected onto the first two principal components b1 and b2 from Equation (1). The decision boundary for each of the four classifiers is given in Figure 11 (the four panels labelled Classifier 1-4). Which one of the following statements is correct?\n\nA. Classifier 1 corresponds to ANN, Classifier 2 corresponds to CT, Classifier 3 corresponds to MREG, Classifier 4 corresponds to KNN.\nB. Classifier 1 corresponds to KNN, Classifier 2 corresponds to CT, Classifier 3 corresponds to MREG, Classifier 4 corresponds to ANN.\nC. Classifier 1 corresponds to CT, Classifier 2 corresponds to MREG, Classifier 3 corresponds to ANN, Classifier 4 corresponds to KNN.\nD. Classifier 1 corresponds to ANN, Classifier 2 corresponds to KNN, Classifier 3 corresponds to MREG, Classifier 4 corresponds to CT.",
+      "options": {
+        "A": "Classifier 1 corresponds to ANN, Classifier 2 corresponds to CT, Classifier 3 corresponds to MREG, Classifier 4 corresponds to KNN.",
+        "B": "Classifier 1 corresponds to KNN, Classifier 2 corresponds to CT, Classifier 3 corresponds to MREG, Classifier 4 corresponds to ANN.",
+        "C": "Classifier 1 corresponds to CT, Classifier 2 corresponds to MREG, Classifier 3 corresponds to ANN, Classifier 4 corresponds to KNN.",
+        "D": "Classifier 1 corresponds to ANN, Classifier 2 corresponds to KNN, Classifier 3 corresponds to MREG, Classifier 4 corresponds to CT."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2019_Q26.png",
+      "source_location": "exam p.14, Figure 11/13 (four classifier decision-boundary panels Classifier 1-4 over b1/b2 PCA axes)"
+    },
+    {
+      "question_id": "Q27",
+      "number": 27,
+      "topic": "k-means clustering / converged partition",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider a small dataset comprised of N = 10 observations x = [0.4, 0.5, 1.1, 2.2, 2.6, 3.0, 3.6, 3.7, 4.9, 5.0]. Suppose a k-means algorithm is applied to the dataset with K = 3 and using Euclidean distances. The algorithm is initialized with K cluster centers located at mu1 = 2.4, mu2 = 3.3, mu3 = 3.5. What clustering will the k-means algorithm eventually converge to?\n\nA. {0.4, 0.5, 1.1, 2.2}, {2.6, 3, 3.6}, {3.7, 4.9, 5}\nB. {0.4, 0.5, 1.1}, {2.2, 2.6, 3, 3.6}, {3.7, 4.9, 5}\nC. {0.4, 0.5, 1.1, 2.2, 2.6}, {3, 3.6, 3.7, 4.9}, {5}\nD. {0.4, 0.5, 1.1, 2.2, 2.6}, {3, 3.6, 3.7}, {4.9, 5}",
+      "options": {
+        "A": "{0.4, 0.5, 1.1, 2.2}, {2.6, 3, 3.6}, {3.7, 4.9, 5}",
+        "B": "{0.4, 0.5, 1.1}, {2.2, 2.6, 3, 3.6}, {3.7, 4.9, 5}",
+        "C": "{0.4, 0.5, 1.1, 2.2, 2.6}, {3, 3.6, 3.7, 4.9}, {5}",
+        "D": "{0.4, 0.5, 1.1, 2.2, 2.6}, {3, 3.6, 3.7}, {4.9, 5}"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.15, Question 27 (data and initial centroids given inline as text)"
+    }
+  ]
+}

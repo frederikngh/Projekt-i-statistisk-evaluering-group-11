@@ -1,0 +1,551 @@
+{
+  "exam": "Spring2020",
+  "course": "02450",
+  "source_pdf": "ML-examsets/Spring2020.pdf",
+  "solution_pdf": "ML-solutions/Spring2020_sol.pdf",
+  "n_questions": 27,
+  "answer_key": {
+    "Q1": "B",
+    "Q2": "D",
+    "Q3": "A",
+    "Q4": "A",
+    "Q5": "D",
+    "Q6": "D",
+    "Q7": "A",
+    "Q8": "B",
+    "Q9": "A",
+    "Q10": "B",
+    "Q11": "D",
+    "Q12": "A",
+    "Q13": "D",
+    "Q14": "C",
+    "Q15": "C",
+    "Q16": "B",
+    "Q17": "C",
+    "Q18": "B",
+    "Q19": "C",
+    "Q20": "C",
+    "Q21": "D",
+    "Q22": "A",
+    "Q23": "A",
+    "Q24": "B",
+    "Q25": "B",
+    "Q26": "D",
+    "Q27": "D"
+  },
+  "questions": [
+    {
+      "question_id": "Q1",
+      "number": 1,
+      "topic": "Attribute types",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We will consider the Poverty dataset described in Table 1. The dataset consists of 91 countries (observations) and six input attributes x1,...,x6 as well as the output yr providing the gross national product pr. capita (denoted GNP). The six input attributes are: x1 = Live birth rate per 1000 population (BirthRt); x2 = Death rate per 1000 population (DeathRt); x3 = Infant deaths per 1000 population under 1 year (InfMort); x4 = Life expectancy at births for males (LExpM); x5 = Life expectancy at births for females (LExpF); x6 = Region encoded as 1,2,...,6 (Region), where 1 = Eastern Europe, 2 = South America/Mexico, 3 = Western Europe/US/Canada/Australia/NewZealand/Japan, 4 = Middle East, 5 = Asia and 6 = Africa. The output y = Gross National Product, per capita, US$ (GNP). Which one of the following statements regarding the dataset is correct?\n\nA. All the input attributes x1,...,x6 are ratio.\nB. One of the six input attributes is nominal.\nC. All the input attributes x1,...,x6 are interval.\nD. The output attribute yr is ordinal.",
+      "options": {
+        "A": "All the input attributes x1,...,x6 are ratio.",
+        "B": "One of the six input attributes is nominal.",
+        "C": "All the input attributes x1,...,x6 are interval.",
+        "D": "The output attribute yr is ordinal."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.2, Question 1 (Table 1 = feature description, used as text)"
+    },
+    {
+      "question_id": "Q2",
+      "number": 2,
+      "topic": "Histograms / summary statistics matching",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Table 2 contains summary statistics of the first four attributes of the Poverty dataset. Which of the histograms in Figure 1 match which of the attributes according to their summary statistics?\n\nA. BirthRt matches histogram 4, DeathRt matches histogram 2, InfMort matches histogram 1 and LExpM matches histogram 3.\nB. BirthRt matches histogram 4, DeathRt matches histogram 1, InfMort matches histogram 3 and LExpM matches histogram 2.\nC. BirthRt matches histogram 2, DeathRt matches histogram 3, InfMort matches histogram 1 and LExpM matches histogram 4.\nD. BirthRt matches histogram 1, DeathRt matches histogram 2, InfMort matches histogram 4 and LExpM matches histogram 3.",
+      "options": {
+        "A": "BirthRt matches histogram 4, DeathRt matches histogram 2, InfMort matches histogram 1 and LExpM matches histogram 3.",
+        "B": "BirthRt matches histogram 4, DeathRt matches histogram 1, InfMort matches histogram 3 and LExpM matches histogram 2.",
+        "C": "BirthRt matches histogram 2, DeathRt matches histogram 3, InfMort matches histogram 1 and LExpM matches histogram 4.",
+        "D": "BirthRt matches histogram 1, DeathRt matches histogram 2, InfMort matches histogram 4 and LExpM matches histogram 3."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q2.png",
+      "source_location": "exam p.2, Figure 1 (four histograms) + Table 2 (summary statistics)"
+    },
+    {
+      "question_id": "Q3",
+      "number": 3,
+      "topic": "PCA variance explained",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "A Principal Component Analysis (PCA) is carried out on the Poverty dataset in Table 1 based on the attributes x1, x2, x3, x4, x5. The data is standardized by (i) subtracting the mean and (ii) dividing each column by its standard deviation to obtain the standardized data matrix X~. A singular value decomposition is then carried out on the standardized data matrix to obtain the decomposition U S V^T = X~, where the diagonal of the singular value matrix S is S = diag(19.64, 6.87, 3.26, 2.30, 1.12). Which one of the following statements is true?\n\nA. The variance explained by the first four principal components is greater than 99 %.\nB. The variance explained by the last four principal components is greater than 15 %.\nC. The variance explained by the first two principal components is greater than 97 %.\nD. The variance explained by the first principal component is greater than 90 %.",
+      "options": {
+        "A": "The variance explained by the first four principal components is greater than 99 %.",
+        "B": "The variance explained by the last four principal components is greater than 15 %.",
+        "C": "The variance explained by the first two principal components is greater than 97 %.",
+        "D": "The variance explained by the first principal component is greater than 90 %."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 3 (S matrix printed inline as text)"
+    },
+    {
+      "question_id": "Q4",
+      "number": 4,
+      "topic": "PCA projection interpretation",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the PCA analysis of the Poverty dataset, in particular the SVD decomposition of X~. The matrix V of principal component directions (columns are the components) is:\n\nV =\n[ 0.43  -0.5    0.7   -0.25  -0.07 ]\n[ 0.38   0.85   0.3   -0.2    0.03 ]\n[ 0.46  -0.13  -0.61  -0.61  -0.15 ]\n[-0.48  -0.0    0.13  -0.63   0.6  ]\n[-0.48   0.1    0.16  -0.36  -0.78 ]\n\nwhere row i corresponds to attribute xi (x1=BirthRt, x2=DeathRt, x3=InfMort, x4=LExpM, x5=LExpF). The data is projected onto the first two principal components and each observation labelled according to the region it belongs to (given by x6). Which one of the following statements is true?\n\nA. An observation from Africa will typically have a relatively high value of BirthRt, a high value of DeathRt, a high value of InfMort, a low value of LExpM and a low value of LExpF as observed from the projection onto principal component number 1.\nB. An observation from Western Europe/US/Canada/Australia/NewZealand/Japan will typically have a relatively high value of BirthRt, a low value of DeathRt, a high value of InfMort, and a low value of LExpF as observed from the projection onto principal component number 2.\nC. As observed from the projection onto principal component number 1 observations from Eastern Europe will typically have a relatively low value of BirthRt, a high value of DeathRt, a low value of InfMort, a high value of LExpM whereas LExpF will have almost no influence (the coefficient is only -0.07).\nD. As can be seen from the plot of the first and second principal components there is a negative correlation between the observations projected onto PC1 and PC2.",
+      "options": {
+        "A": "An observation from Africa will typically have a relatively high value of BirthRt, a high value of DeathRt, a high value of InfMort, a low value of LExpM and a low value of LExpF as observed from the projection onto principal component number 1.",
+        "B": "An observation from Western Europe/US/Canada/Australia/NewZealand/Japan will typically have a relatively high value of BirthRt, a low value of DeathRt, a high value of InfMort, and a low value of LExpF as observed from the projection onto principal component number 2.",
+        "C": "As observed from the projection onto principal component number 1 observations from Eastern Europe will typically have a relatively low value of BirthRt, a high value of DeathRt, a low value of InfMort, a high value of LExpM whereas LExpF will have almost no influence (the coefficient is only -0.07).",
+        "D": "As can be seen from the plot of the first and second principal components there is a negative correlation between the observations projected onto PC1 and PC2."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 4 (V matrix from Eq. 1 printed inline as text; Figure 2 illustrative only)"
+    },
+    {
+      "question_id": "Q5",
+      "number": 5,
+      "topic": "GMM density matching",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "In Figure 3 a Gaussian Mixture Model (GMM) is fitted to the standardized data projected onto the first two principal component directions using three mixture components (i.e., K = 3 clusters). Recall that the multivariate Gaussian distribution is given by N(x|mu,Sigma) = (1/((2*pi)^(M/2)*|Sigma|^(1/2))) * exp(-0.5*(x-mu)^T * Sigma^-1 * (x-mu)), with mean mu and covariance matrix Sigma. Which one of the following GMM densities corresponds to the fitted density given in Figure 3?\n\nA. p(x) = 0.1425*N(x | mu=[3.3884; 0.7424], Sigma=[0.1695 0.0665; 0.0665 0.1104]) + 0.3235*N(x | mu=[-1.9482; 0.6132], Sigma=[1.2137 -0.0703; -0.0703 0.3773]) + 0.5340*N(x | mu=[0.2756; -0.5696], Sigma=[2.0700 0.1876; 0.1876 0.1037])\nB. p(x) = 0.1425*N(x | mu=[-1.9482; 0.6132], Sigma=[0.1695 0.0665; 0.0665 0.1104]) + 0.3235*N(x | mu=[3.3884; 0.7424], Sigma=[1.2137 -0.0703; -0.0703 0.3773]) + 0.5340*N(x | mu=[0.2756; -0.5696], Sigma=[2.0700 0.1876; 0.1876 0.1037])\nC. p(x) = 0.3235*N(x | mu=[-1.9482; 0.6132], Sigma=[0.1695 0.0665; 0.0665 0.1104]) + 0.1425*N(x | mu=[3.3884; 0.7424], Sigma=[2.0700 0.1876; 0.1876 0.1037]) + 0.5340*N(x | mu=[0.2756; -0.5696], Sigma=[1.2137 -0.0703; -0.0703 0.3773])\nD. p(x) = 0.3235*N(x | mu=[-1.9482; 0.6132], Sigma=[0.1695 0.0665; 0.0665 0.1104]) + 0.1425*N(x | mu=[3.3884; 0.7424], Sigma=[1.2137 -0.0703; -0.0703 0.3773]) + 0.5340*N(x | mu=[0.2756; -0.5696], Sigma=[2.0700 0.1876; 0.1876 0.1037])",
+      "options": {
+        "A": "p(x) = 0.1425*N(x | mu=[3.3884; 0.7424], Sigma=[0.1695 0.0665; 0.0665 0.1104]) + 0.3235*N(x | mu=[-1.9482; 0.6132], Sigma=[1.2137 -0.0703; -0.0703 0.3773]) + 0.5340*N(x | mu=[0.2756; -0.5696], Sigma=[2.0700 0.1876; 0.1876 0.1037])",
+        "B": "p(x) = 0.1425*N(x | mu=[-1.9482; 0.6132], Sigma=[0.1695 0.0665; 0.0665 0.1104]) + 0.3235*N(x | mu=[3.3884; 0.7424], Sigma=[1.2137 -0.0703; -0.0703 0.3773]) + 0.5340*N(x | mu=[0.2756; -0.5696], Sigma=[2.0700 0.1876; 0.1876 0.1037])",
+        "C": "p(x) = 0.3235*N(x | mu=[-1.9482; 0.6132], Sigma=[0.1695 0.0665; 0.0665 0.1104]) + 0.1425*N(x | mu=[3.3884; 0.7424], Sigma=[2.0700 0.1876; 0.1876 0.1037]) + 0.5340*N(x | mu=[0.2756; -0.5696], Sigma=[1.2137 -0.0703; -0.0703 0.3773])",
+        "D": "p(x) = 0.3235*N(x | mu=[-1.9482; 0.6132], Sigma=[0.1695 0.0665; 0.0665 0.1104]) + 0.1425*N(x | mu=[3.3884; 0.7424], Sigma=[1.2137 -0.0703; -0.0703 0.3773]) + 0.5340*N(x | mu=[0.2756; -0.5696], Sigma=[2.0700 0.1876; 0.1876 0.1037])"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q5.png",
+      "source_location": "exam p.4, Figure 3 (GMM contour/density plot)"
+    },
+    {
+      "question_id": "Q6",
+      "number": 6,
+      "topic": "KNN average relative density",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "To examine if observation o3 may be an outlier we will calculate the average relative density using the Euclidean distance based on the observations given in Table 3 only. We recall that the KNN density and average relative density (ard) for observation xi are given by: density(xi,K) = 1 / ((1/K) * sum over x' in N(xi,K) of d(xi,x')), and ard(xi,K) = density(xi,K) / ((1/K) * sum over xj in N(xi,K) of density(xj,K)), where N(xi,K) is the set of K nearest neighbors of observation xi excluding the i'th observation. The pairwise Euclidean distance matrix d(oi,oj) between the 11 observations is:\n\n       o1    o2    o3    o4    o5    o6    o7    o8    o9    o10   o11\n o1   0.0   1.7   1.4   0.4   2.2   3.7   5.2   0.2   4.3   6.8   6.0\n o2   1.7   0.0   1.0   2.0   1.3   2.6   4.5   1.8   3.2   5.9   5.2\n o3   1.4   1.0   0.0   1.7   0.9   2.4   4.1   1.5   3.0   5.5   4.8\n o4   0.4   2.0   1.7   0.0   2.6   4.0   5.5   0.3   4.6   7.1   6.3\n o5   2.2   1.3   0.9   2.6   0.0   1.7   3.4   2.4   2.1   4.8   4.1\n o6   3.7   2.6   2.4   4.0   1.7   0.0   2.0   3.8   1.6   3.3   2.7\n o7   5.2   4.5   4.1   5.5   3.4   2.0   0.0   5.4   2.5   1.6   0.9\n o8   0.2   1.8   1.5   0.3   2.4   3.8   5.4   0.0   4.4   6.9   6.1\n o9   4.3   3.2   3.0   4.6   2.1   1.6   2.5   4.4   0.0   3.4   2.9\n o10  6.8   5.9   5.5   7.1   4.8   3.3   1.6   6.9   3.4   0.0   1.0\n o11  6.0   5.2   4.8   6.3   4.1   2.7   0.9   6.1   2.9   1.0   0.0\n\nWhat is the average relative density for observation o3 for K = 2 nearest neighbors?\n\nA. 0.59\nB. 1.00\nC. 1.05\nD. 1.18",
+      "options": {
+        "A": "0.59",
+        "B": "1.00",
+        "C": "1.05",
+        "D": "1.18"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 3: pairwise Euclidean distances d(oi,oj) between 11 observations o1..o11.\n\n       o1    o2    o3    o4    o5    o6    o7    o8    o9    o10   o11\n o1   0.0   1.7   1.4   0.4   2.2   3.7   5.2   0.2   4.3   6.8   6.0\n o2   1.7   0.0   1.0   2.0   1.3   2.6   4.5   1.8   3.2   5.9   5.2\n o3   1.4   1.0   0.0   1.7   0.9   2.4   4.1   1.5   3.0   5.5   4.8\n o4   0.4   2.0   1.7   0.0   2.6   4.0   5.5   0.3   4.6   7.1   6.3\n o5   2.2   1.3   0.9   2.6   0.0   1.7   3.4   2.4   2.1   4.8   4.1\n o6   3.7   2.6   2.4   4.0   1.7   0.0   2.0   3.8   1.6   3.3   2.7\n o7   5.2   4.5   4.1   5.5   3.4   2.0   0.0   5.4   2.5   1.6   0.9\n o8   0.2   1.8   1.5   0.3   2.4   3.8   5.4   0.0   4.4   6.9   6.1\n o9   4.3   3.2   3.0   4.6   2.1   1.6   2.5   4.4   0.0   3.4   2.9\n o10  6.8   5.9   5.5   7.1   4.8   3.3   1.6   6.9   3.4   0.0   1.0\n o11  6.0   5.2   4.8   6.3   4.1   2.7   0.9   6.1   2.9   1.0   0.0\n\nClasses (from colors): o1..o8 belong to class yb=0 (low GNP); o9, o10, o11 belong to class yb=1 (high GNP).",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q6.png",
+      "source_location": "exam p.4, Table 3 (pairwise Euclidean distance matrix)"
+    },
+    {
+      "question_id": "Q7",
+      "number": 7,
+      "topic": "Hierarchical clustering dendrogram",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A hierarchical clustering is applied to the 11 observations in Table 3 using maximum linkage. Which one of the dendrograms shown in Figure 4 corresponds to the distances given in Table 3?\n\nA. Dendrogram 1\nB. Dendrogram 2\nC. Dendrogram 3\nD. Dendrogram 4",
+      "options": {
+        "A": "Dendrogram 1",
+        "B": "Dendrogram 2",
+        "C": "Dendrogram 3",
+        "D": "Dendrogram 4"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q7.png",
+      "source_location": "exam p.5, Figure 4 (four dendrograms; answer options are plots)"
+    },
+    {
+      "question_id": "Q8",
+      "number": 8,
+      "topic": "KNN leave-one-out cross-validation error",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider again the 11 observations in Table 3. We will use a one-nearest neighbor classifier to classify the observations. What will be the error rate of the KNN classifier when considering a leave-one-out cross-validation strategy to quantify performance? The pairwise Euclidean distance matrix d(oi,oj) between the 11 observations is:\n\n       o1    o2    o3    o4    o5    o6    o7    o8    o9    o10   o11\n o1   0.0   1.7   1.4   0.4   2.2   3.7   5.2   0.2   4.3   6.8   6.0\n o2   1.7   0.0   1.0   2.0   1.3   2.6   4.5   1.8   3.2   5.9   5.2\n o3   1.4   1.0   0.0   1.7   0.9   2.4   4.1   1.5   3.0   5.5   4.8\n o4   0.4   2.0   1.7   0.0   2.6   4.0   5.5   0.3   4.6   7.1   6.3\n o5   2.2   1.3   0.9   2.6   0.0   1.7   3.4   2.4   2.1   4.8   4.1\n o6   3.7   2.6   2.4   4.0   1.7   0.0   2.0   3.8   1.6   3.3   2.7\n o7   5.2   4.5   4.1   5.5   3.4   2.0   0.0   5.4   2.5   1.6   0.9\n o8   0.2   1.8   1.5   0.3   2.4   3.8   5.4   0.0   4.4   6.9   6.1\n o9   4.3   3.2   3.0   4.6   2.1   1.6   2.5   4.4   0.0   3.4   2.9\n o10  6.8   5.9   5.5   7.1   4.8   3.3   1.6   6.9   3.4   0.0   1.0\n o11  6.0   5.2   4.8   6.3   4.1   2.7   0.9   6.1   2.9   1.0   0.0\n\nClasses: o1..o8 are class yb=0 (low GNP); o9, o10, o11 are class yb=1 (high GNP).\n\nA. 3/11\nB. 4/11\nC. 5/11\nD. 6/11",
+      "options": {
+        "A": "3/11",
+        "B": "4/11",
+        "C": "5/11",
+        "D": "6/11"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 3: pairwise Euclidean distances d(oi,oj) between 11 observations o1..o11.\n\n       o1    o2    o3    o4    o5    o6    o7    o8    o9    o10   o11\n o1   0.0   1.7   1.4   0.4   2.2   3.7   5.2   0.2   4.3   6.8   6.0\n o2   1.7   0.0   1.0   2.0   1.3   2.6   4.5   1.8   3.2   5.9   5.2\n o3   1.4   1.0   0.0   1.7   0.9   2.4   4.1   1.5   3.0   5.5   4.8\n o4   0.4   2.0   1.7   0.0   2.6   4.0   5.5   0.3   4.6   7.1   6.3\n o5   2.2   1.3   0.9   2.6   0.0   1.7   3.4   2.4   2.1   4.8   4.1\n o6   3.7   2.6   2.4   4.0   1.7   0.0   2.0   3.8   1.6   3.3   2.7\n o7   5.2   4.5   4.1   5.5   3.4   2.0   0.0   5.4   2.5   1.6   0.9\n o8   0.2   1.8   1.5   0.3   2.4   3.8   5.4   0.0   4.4   6.9   6.1\n o9   4.3   3.2   3.0   4.6   2.1   1.6   2.5   4.4   0.0   3.4   2.9\n o10  6.8   5.9   5.5   7.1   4.8   3.3   1.6   6.9   3.4   0.0   1.0\n o11  6.0   5.2   4.8   6.3   4.1   2.7   0.9   6.1   2.9   1.0   0.0\n\nClasses (from colors): o1..o8 belong to class yb=0 (low GNP); o9, o10, o11 belong to class yb=1 (high GNP).",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q8.png",
+      "source_location": "exam p.5, Table 3 (pairwise Euclidean distance matrix)"
+    },
+    {
+      "question_id": "Q9",
+      "number": 9,
+      "topic": "Logistic regression interpretation",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "A logistic regression model is trained to distinguish between the two classes yb in {0,1}, i.e., relatively low GNP (negative class) vs. relative high GNP (positive class). The model is trained using all observations except the 11 observations given in Table 3 that are used for testing the model (i.e., using the hold-out method). The features x1,...,x5 are standardized (mean subtracted and each feature divided by its standard deviation). The feature x6 is transformed using one-out-of-K coding and the last region removed to generate the new features c1,c2,c3,c4,c5 that are included in the regression to produce the class-probability y_hat defined by the trained model:\n\ny_hat = sigma(1.41 + 0.76*x1 + 1.76*x2 - 0.32*x3 - 0.96*x4 + 6.64*x5 - 5.13*c1 - 2.06*c2 + 96.73*c3 + 1.03*c4 - 2.74*c5).\n\nWe will predict the estimated output of the sixth of the eleven test observations given by:\nx6 = [-0.06, -0.28, 0.43, -0.30, -0.36, 0, 0, 0, 0, 1].\n\nWhich one of the following statements is correct?\n\nA. According to the estimated model an increase in a country's birth rate will increase the probability that the country is rich.\nB. The probability observation x6 belongs to class y = 1 is less than 1 %.\nC. The attribute Region has very little influence on whether a country is poor or rich.\nD. As the weight for x1 and x3 have opposing signs we can conclude the two features are negatively correlated.",
+      "options": {
+        "A": "According to the estimated model an increase in a country's birth rate will increase the probability that the country is rich.",
+        "B": "The probability observation x6 belongs to class y = 1 is less than 1 %.",
+        "C": "The attribute Region has very little influence on whether a country is poor or rich.",
+        "D": "As the weight for x1 and x3 have opposing signs we can conclude the two features are negatively correlated."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.5, Question 9 (model equation and x6 vector printed inline as text)"
+    },
+    {
+      "question_id": "Q10",
+      "number": 10,
+      "topic": "F-measure from confusion matrix",
+      "type": "B",
+      "text_faithful": true,
+      "question_text": "Based on the entire dataset in Table 1, we use 5-fold cross-validation to estimate the performance of logistic regression. In Figure 5 is given the confusion matrix obtained using the cross-validation procedure. The confusion matrix is (rows = actual class, columns = predicted class): for the Positive actual class, 34 predicted Positive and 11 predicted Negative; for the Negative actual class, 7 predicted Positive and 39 predicted Negative. We will quantify the performance of the results using the F-measure given by F1 = 2*Precision*Recall/(Precision+Recall). Which one of the following statements is correct?\n\nA. F1 = 0.7556\nB. F1 = 0.7907\nC. F1 = 0.7990\nD. F1 = 0.8293",
+      "options": {
+        "A": "F1 = 0.7556",
+        "B": "F1 = 0.7907",
+        "C": "F1 = 0.7990",
+        "D": "F1 = 0.8293"
+      },
+      "correct_answer": "B",
+      "text_representation": "Figure 5: Confusion matrix from 5-fold cross-validation (rows = actual class, columns = predicted class):\n\n                 Predicted Positive   Predicted Negative\nActual Positive          34                   11\nActual Negative           7                   39\n\n(Positive = high GNP yb=1; Negative = low GNP yb=0.)",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q10.png",
+      "source_location": "exam p.6, Figure 5 (confusion matrix, numeric)"
+    },
+    {
+      "question_id": "Q11",
+      "number": 11,
+      "topic": "ROC curve matching classifier",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Four different logistic regression models are trained to distinguish between the two classes yb in {0,1}, (i.e., low GNP (negative class given as red plusses) vs. high GNP (positive class given as black crosses)) and evaluated on the 11 observations also considered in Table 3 presently used as a test set. In Figure 6 is in the top panel given the four classifiers' predictions on the 11 test observations and in the bottom panel a receiver operator characteristic (ROC) curve (with AUC = 0.958). Which classifier's performance corresponds to the shown ROC curve?\n\nA. Classifier 1\nB. Classifier 2\nC. Classifier 3\nD. Classifier 4",
+      "options": {
+        "A": "Classifier 1",
+        "B": "Classifier 2",
+        "C": "Classifier 3",
+        "D": "Classifier 4"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q11.png",
+      "source_location": "exam p.6, Figure 6 (top: four classifier prediction lines; bottom: ROC curve)"
+    },
+    {
+      "question_id": "Q12",
+      "number": 12,
+      "topic": "Forward/backward variable selection",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider again the Poverty dataset in Table 1. We would like to predict GNP using a least squares linear regression model, and since we would like the model to be as interpretable as possible we will use variable selection to obtain a parsimonious model. We limit ourselves to the five features x1, x2, x3, x4 and x5. In Table 4 we have pre-computed the estimated training and test errors for all combinations of the five attributes. The root-mean-square error (RMSE) for the training and test sets is:\n\n Feature(s)            Training RMSE   Test RMSE\n none                  1.429           2.02\n x1                    0.755           1.662\n x2                    1.421           1.977\n x3                    0.636           1.628\n x4                    0.847           1.636\n x5                    0.773           1.702\n x1,x2                 0.640           1.706\n x1,x3                 0.636           1.638\n x2,x3                 0.401           1.912\n x1,x4                 0.745           1.602\n x2,x4                 0.565           1.799\n x3,x4                 0.587           1.890\n x1,x5                 0.728           1.647\n x2,x5                 0.449           1.767\n x3,x5                 0.613           1.824\n x4,x5                 0.733           2.155\n x1,x2,x3              0.380           2.135\n x1,x2,x4              0.541           1.696\n x1,x3,x4              0.586           1.914\n x2,x3,x4              0.399           1.954\n x1,x2,x5              0.448           1.779\n x1,x3,x5              0.613           1.831\n x2,x3,x5              0.396           1.828\n x1,x4,x5              0.702           2.022\n x2,x4,x5              0.407           2.087\n x3,x4,x5              0.582           1.901\n x1,x2,x3,x4           0.379           2.168\n x1,x2,x3,x5           0.369           1.988\n x1,x2,x4,x5           0.400           2.138\n x1,x3,x4,x5           0.580           1.927\n x2,x3,x4,x5           0.359           1.935\n x1,x2,x3,x4,x5        0.315           2.030\n\nWhich one of the following statements is correct?\n\nA. Forward selection will select attributes x3.\nB. Forward selection will select attributes x1, x3, x4, x5.\nC. Forward selection will select attributes x1, x2, x4.\nD. Backward selection will select attributes x1, x4.",
+      "options": {
+        "A": "Forward selection will select attributes x3.",
+        "B": "Forward selection will select attributes x1, x3, x4, x5.",
+        "C": "Forward selection will select attributes x1, x2, x4.",
+        "D": "Backward selection will select attributes x1, x4."
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 4: RMSE for training and test sets using least squares regression to predict GNP, for all combinations of features x1, x2, x3, x4, x5.\n\n Feature(s)            Training RMSE   Test RMSE\n none                  1.429           2.02\n x1                    0.755           1.662\n x2                    1.421           1.977\n x3                    0.636           1.628\n x4                    0.847           1.636\n x5                    0.773           1.702\n x1,x2                 0.640           1.706\n x1,x3                 0.636           1.638\n x2,x3                 0.401           1.912\n x1,x4                 0.745           1.602\n x2,x4                 0.565           1.799\n x3,x4                 0.587           1.890\n x1,x5                 0.728           1.647\n x2,x5                 0.449           1.767\n x3,x5                 0.613           1.824\n x4,x5                 0.733           2.155\n x1,x2,x3              0.380           2.135\n x1,x2,x4              0.541           1.696\n x1,x3,x4              0.586           1.914\n x2,x3,x4              0.399           1.954\n x1,x2,x5              0.448           1.779\n x1,x3,x5              0.613           1.831\n x2,x3,x5              0.396           1.828\n x1,x4,x5              0.702           2.022\n x2,x4,x5              0.407           2.087\n x3,x4,x5              0.582           1.901\n x1,x2,x3,x4           0.379           2.168\n x1,x2,x3,x5           0.369           1.988\n x1,x2,x4,x5           0.400           2.138\n x1,x3,x4,x5           0.580           1.927\n x2,x3,x4,x5           0.359           1.935\n x1,x2,x3,x4,x5        0.315           2.030",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q12.png",
+      "source_location": "exam p.7, Table 4 (RMSE table for feature combinations)"
+    },
+    {
+      "question_id": "Q13",
+      "number": 13,
+      "topic": "Two-level cross-validation timing",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Suppose a neural network is trained to predict GNP. As part of training the network, we wish to select between three different model architectures respectively with 5, 10 and 20 hidden units and estimate the generalization error of the optimal choice. In the outer loop we opt for K1 = 4-fold cross-validation, and in the inner K2 = 7-fold cross-validation. The time taken to train a single model is 20 seconds, and this can be assumed constant for each fold. If the time taken to test a model is 1 second what is then the total time required to complete the 2-level cross-validation procedure?\n\nA. 1760 seconds\nB. 1764 seconds\nC. 1844 seconds\nD. 1848 seconds",
+      "options": {
+        "A": "1760 seconds",
+        "B": "1764 seconds",
+        "C": "1844 seconds",
+        "D": "1848 seconds"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.7, Question 13 (all values printed inline as text)"
+    },
+    {
+      "question_id": "Q14",
+      "number": 14,
+      "topic": "Decision tree boundaries matching",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will fit a decision tree in order to determine based on the features x1 and x2 if a country has a relatively low or high GNP. In the top panel of Figure 7 is given the fitted decision tree and in the bottom panel is given four different decision boundaries in which one of the four decision boundaries corresponds to the boundaries generated by the decision tree given in the top panel. Which one of the the four decision boundaries corresponds to the decision boundaries of the illustrated classification tree?\n\nA. Decision boundary of Classifier 1\nB. Decision boundary of Classifier 2\nC. Decision boundary of Classifier 3\nD. Decision boundary of Classifier 4",
+      "options": {
+        "A": "Decision boundary of Classifier 1",
+        "B": "Decision boundary of Classifier 2",
+        "C": "Decision boundary of Classifier 3",
+        "D": "Decision boundary of Classifier 4"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q14.png",
+      "source_location": "exam p.8, Figure 7 (top: decision tree; bottom: four decision-boundary plots)"
+    },
+    {
+      "question_id": "Q15",
+      "number": 15,
+      "topic": "Bayes theorem",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "According to the poverty dataset we have that 15.4% of countries are from Africa. We are further told that if a country is from Africa the probability that the country has a GNP above 1000 US$ pr. capita is 28.6% whereas if a country is outside of Africa the probability that the GNP is above 1000 US$ pr. capita is 68.8%. Given that a country's GNP is above 1000 US$ pr. capita what is the probably it is in Africa?\n\nA. 4.4 %\nB. 6.4 %\nC. 7.0 %\nD. 7.6 %",
+      "options": {
+        "A": "4.4 %",
+        "B": "6.4 %",
+        "C": "7.0 %",
+        "D": "7.6 %"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.8, Question 15 (all probabilities printed inline as text)"
+    },
+    {
+      "question_id": "Q16",
+      "number": 16,
+      "topic": "Bayesian probability estimate (robust)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We again consider the Poverty dataset from Table 1 with the N = 11 observations we already encountered in Table 3. The first five features of the dataset are processed to produce five new, binary features such that fi = 1 corresponds to a value xi greater than the median, and we thereby arrive at the N x M = 11 x 5 binary matrix in Table 5:\n\n      f1  f2  f3  f4  f5\n o1    1   1   1   0   0\n o2    1   1   1   0   0\n o3    1   1   1   0   0\n o4    1   1   1   0   0\n o5    1   1   1   0   0\n o6    0   1   1   0   0\n o7    0   1   0   1   1\n o8    1   1   1   0   0\n o9    1   0   1   0   0\n o10   0   0   0   1   1\n o11   0   1   0   1   1\n\nThe colors indicate the two classes such that the red observations {o1,...,o8} belong to class yb = 0 (low GNP) and black observations {o9, o10, o11} belong to class yb = 1 (high GNP). We wish to apply a Bayesian classifier and as part of this task we have to estimate the probability p(f2 = 1, f3 = 1 | yb = 1). For better numerical stability, we will use robust estimation to obtain the probability by introducing a regularization factor of alpha such that: p(A|B) = ({Occurences matching A and B} + alpha) / ({Occurences matching B} + 2*alpha). What is the probability estimate if alpha = 1?\n\nA. p(f2 = 1, f3 = 1 | yb = 1) = 1/9\nB. p(f2 = 1, f3 = 1 | yb = 1) = 1/5\nC. p(f2 = 1, f3 = 1 | yb = 1) = 4/11\nD. p(f2 = 1, f3 = 1 | yb = 1) = 2/3",
+      "options": {
+        "A": "p(f2 = 1, f3 = 1 | yb = 1) = 1/9",
+        "B": "p(f2 = 1, f3 = 1 | yb = 1) = 1/5",
+        "C": "p(f2 = 1, f3 = 1 | yb = 1) = 4/11",
+        "D": "p(f2 = 1, f3 = 1 | yb = 1) = 2/3"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 5: Binarized version of the Poverty dataset (features x1..x5 binarized; fi = 1 if xi greater than the median, else 0).\n\n      f1  f2  f3  f4  f5\n o1    1   1   1   0   0\n o2    1   1   1   0   0\n o3    1   1   1   0   0\n o4    1   1   1   0   0\n o5    1   1   1   0   0\n o6    0   1   1   0   0\n o7    0   1   0   1   1\n o8    1   1   1   0   0\n o9    1   0   1   0   0\n o10   0   0   0   1   1\n o11   0   1   0   1   1\n\nClasses (from colors): o1..o8 belong to class yb=0 (low GNP); o9, o10, o11 belong to class yb=1 (high GNP).",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q16.png",
+      "source_location": "exam p.9, Table 5 (11x5 binary matrix)"
+    },
+    {
+      "question_id": "Q17",
+      "number": 17,
+      "topic": "Naive-Bayes classifier",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider again the binarized version of the Poverty dataset given in Table 5. We will no longer use robust estimation (i.e., we set alpha = 0) and train a naive-Bayes classifier in order to predict the class label yb using only the features f2 and f3. The binary matrix Table 5 is:\n\n      f1  f2  f3  f4  f5\n o1    1   1   1   0   0\n o2    1   1   1   0   0\n o3    1   1   1   0   0\n o4    1   1   1   0   0\n o5    1   1   1   0   0\n o6    0   1   1   0   0\n o7    0   1   0   1   1\n o8    1   1   1   0   0\n o9    1   0   1   0   0\n o10   0   0   0   1   1\n o11   0   1   0   1   1\n\nClasses: red observations {o1,...,o8} belong to class yb = 0 (low GNP); black observations {o9, o10, o11} belong to class yb = 1 (high GNP). If for an observation we have f2 = 1, f3 = 0, what is then the probability that the observation has high GNP (i.e., yb = 1) according to a naive-Bayes classifier trained using only the data in Table 5?\n\nA. pNB(yb = 1 | f2 = 1, f3 = 0) = 2/9\nB. pNB(yb = 1 | f2 = 1, f3 = 0) = 1/3\nC. pNB(yb = 1 | f2 = 1, f3 = 0) = 2/5\nD. pNB(yb = 1 | f2 = 1, f3 = 0) = 16/25",
+      "options": {
+        "A": "pNB(yb = 1 | f2 = 1, f3 = 0) = 2/9",
+        "B": "pNB(yb = 1 | f2 = 1, f3 = 0) = 1/3",
+        "C": "pNB(yb = 1 | f2 = 1, f3 = 0) = 2/5",
+        "D": "pNB(yb = 1 | f2 = 1, f3 = 0) = 16/25"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 5: Binarized version of the Poverty dataset (features x1..x5 binarized; fi = 1 if xi greater than the median, else 0).\n\n      f1  f2  f3  f4  f5\n o1    1   1   1   0   0\n o2    1   1   1   0   0\n o3    1   1   1   0   0\n o4    1   1   1   0   0\n o5    1   1   1   0   0\n o6    0   1   1   0   0\n o7    0   1   0   1   1\n o8    1   1   1   0   0\n o9    1   0   1   0   0\n o10   0   0   0   1   1\n o11   0   1   0   1   1\n\nClasses (from colors): o1..o8 belong to class yb=0 (low GNP); o9, o10, o11 belong to class yb=1 (high GNP).",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q17.png",
+      "source_location": "exam p.9, Table 5 (11x5 binary matrix)"
+    },
+    {
+      "question_id": "Q18",
+      "number": 18,
+      "topic": "Decision tree Gini purity gain",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We will develop a decision tree classifier in order to determine whether a country is relatively poor (yb = 0) or rich (yb = 1) considering only the data in Table 5. During the training of the classifier the purity gain using feature f1 corresponding to thresholding x1 by the median value is evaluated by Hunt's algorithm as the first decision in the tree (i.e., as decision for the root of the tree). As impurity measure we will use Gini which is given by I(v) = 1 - sum over c of p(c|v)^2. The binary matrix Table 5 is:\n\n      f1  f2  f3  f4  f5\n o1    1   1   1   0   0\n o2    1   1   1   0   0\n o3    1   1   1   0   0\n o4    1   1   1   0   0\n o5    1   1   1   0   0\n o6    0   1   1   0   0\n o7    0   1   0   1   1\n o8    1   1   1   0   0\n o9    1   0   1   0   0\n o10   0   0   0   1   1\n o11   0   1   0   1   1\n\nClasses: o1..o8 are class yb = 0 (low GNP); o9, o10, o11 are class yb = 1 (high GNP). What is the purity gain (Delta) of this considered split (on f1)?\n\nA. Delta = 0.000\nB. Delta = 0.059\nC. Delta = 0.125\nD. Delta = 0.148",
+      "options": {
+        "A": "Delta = 0.000",
+        "B": "Delta = 0.059",
+        "C": "Delta = 0.125",
+        "D": "Delta = 0.148"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 5: Binarized version of the Poverty dataset (features x1..x5 binarized; fi = 1 if xi greater than the median, else 0).\n\n      f1  f2  f3  f4  f5\n o1    1   1   1   0   0\n o2    1   1   1   0   0\n o3    1   1   1   0   0\n o4    1   1   1   0   0\n o5    1   1   1   0   0\n o6    0   1   1   0   0\n o7    0   1   0   1   1\n o8    1   1   1   0   0\n o9    1   0   1   0   0\n o10   0   0   0   1   1\n o11   0   1   0   1   1\n\nClasses (from colors): o1..o8 belong to class yb=0 (low GNP); o9, o10, o11 belong to class yb=1 (high GNP).",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q18.png",
+      "source_location": "exam p.9, Table 5 (11x5 binary matrix)"
+    },
+    {
+      "question_id": "Q19",
+      "number": 19,
+      "topic": "Jaccard index clustering vs labels",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We again consider the dataset in Table 5. This time it is decided to group the observations according to f2 corresponding to having a relatively low or high death rate (DeathRt). We will thereby cluster the observations such that f2 = 0 corresponds to observations in the first cluster and f2 = 1 corresponds to observations in the second cluster. We wish to compare this clustering to that corresponding to the true class labels yb = 0 and yb = 1 according to the Jaccard index. Recall that the Jaccard index is given by J = S / (N(N-1)/2 - D) where S denotes the number of pairs of observations assigned to the same cluster that are in the same class, and D denotes the number of pairs of observations assigned to different clusters that are also in different classes. The binary matrix Table 5 is:\n\n      f1  f2  f3  f4  f5\n o1    1   1   1   0   0\n o2    1   1   1   0   0\n o3    1   1   1   0   0\n o4    1   1   1   0   0\n o5    1   1   1   0   0\n o6    0   1   1   0   0\n o7    0   1   0   1   1\n o8    1   1   1   0   0\n o9    1   0   1   0   0\n o10   0   0   0   1   1\n o11   0   1   0   1   1\n\nClasses: o1..o8 are class yb = 0; o9, o10, o11 are class yb = 1. What is the value of J between the true class labels given by yb = 0 and yb = 1 and the two extracted clusters given by f2 = 0 and f2 = 1?\n\nA. J = 0.0909\nB. J = 0.5273\nC. J = 0.7436\nD. J = 0.7838",
+      "options": {
+        "A": "J = 0.0909",
+        "B": "J = 0.5273",
+        "C": "J = 0.7436",
+        "D": "J = 0.7838"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 5: Binarized version of the Poverty dataset (features x1..x5 binarized; fi = 1 if xi greater than the median, else 0).\n\n      f1  f2  f3  f4  f5\n o1    1   1   1   0   0\n o2    1   1   1   0   0\n o3    1   1   1   0   0\n o4    1   1   1   0   0\n o5    1   1   1   0   0\n o6    0   1   1   0   0\n o7    0   1   0   1   1\n o8    1   1   1   0   0\n o9    1   0   1   0   0\n o10   0   0   0   1   1\n o11   0   1   0   1   1\n\nClasses (from colors): o1..o8 belong to class yb=0 (low GNP); o9, o10, o11 belong to class yb=1 (high GNP).",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q19.png",
+      "source_location": "exam p.10, Table 5 (11x5 binary matrix)"
+    },
+    {
+      "question_id": "Q20",
+      "number": 20,
+      "topic": "Frequent itemsets / support",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the binarized version of the Poverty dataset shown in Table 5. The matrix can be considered as representing N = 11 transactions o1,o2,...,o11 and M = 5 items f1,f2,...,f5. The binary matrix Table 5 is:\n\n      f1  f2  f3  f4  f5\n o1    1   1   1   0   0\n o2    1   1   1   0   0\n o3    1   1   1   0   0\n o4    1   1   1   0   0\n o5    1   1   1   0   0\n o6    0   1   1   0   0\n o7    0   1   0   1   1\n o8    1   1   1   0   0\n o9    1   0   1   0   0\n o10   0   0   0   1   1\n o11   0   1   0   1   1\n\nWhich one of the following options represents all (non-empty) itemsets with support greater than 0.3 (and only itemsets with support greater than 0.3)?\n\nA. {f1}, {f2}, {f3}, {f4}, {f5}\nB. {f1}, {f2}, {f3}, {f1,f2}, {f1,f3}, {f2,f3}\nC. {f1}, {f2}, {f3}, {f1,f2}, {f1,f3}, {f2,f3}, {f1,f2,f3}\nD. {f1}, {f2}, {f3}, {f4}, {f5}, {f1,f2}, {f1,f3}, {f2,f3}, {f4,f5}, {f1,f2,f3}",
+      "options": {
+        "A": "{f1}, {f2}, {f3}, {f4}, {f5}",
+        "B": "{f1}, {f2}, {f3}, {f1,f2}, {f1,f3}, {f2,f3}",
+        "C": "{f1}, {f2}, {f3}, {f1,f2}, {f1,f3}, {f2,f3}, {f1,f2,f3}",
+        "D": "{f1}, {f2}, {f3}, {f4}, {f5}, {f1,f2}, {f1,f3}, {f2,f3}, {f4,f5}, {f1,f2,f3}"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 5: Binarized version of the Poverty dataset (features x1..x5 binarized; fi = 1 if xi greater than the median, else 0). Considered as N = 11 transactions o1..o11 over M = 5 items f1..f5.\n\n      f1  f2  f3  f4  f5\n o1    1   1   1   0   0\n o2    1   1   1   0   0\n o3    1   1   1   0   0\n o4    1   1   1   0   0\n o5    1   1   1   0   0\n o6    0   1   1   0   0\n o7    0   1   0   1   1\n o8    1   1   1   0   0\n o9    1   0   1   0   0\n o10   0   0   0   1   1\n o11   0   1   0   1   1",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q20.png",
+      "source_location": "exam p.10, Table 5 (11x5 binary matrix)"
+    },
+    {
+      "question_id": "Q21",
+      "number": 21,
+      "topic": "Association rule confidence",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We again consider the binary matrix from Table 5 as a market basket problem consisting of N = 11 transactions o1,...,o11 and M = 5 items f1,...,f5. The binary matrix Table 5 is:\n\n      f1  f2  f3  f4  f5\n o1    1   1   1   0   0\n o2    1   1   1   0   0\n o3    1   1   1   0   0\n o4    1   1   1   0   0\n o5    1   1   1   0   0\n o6    0   1   1   0   0\n o7    0   1   0   1   1\n o8    1   1   1   0   0\n o9    1   0   1   0   0\n o10   0   0   0   1   1\n o11   0   1   0   1   1\n\nWhat is the confidence of the rule {f1,f2} -> {f3}?\n\nA. The confidence is 6/11\nB. The confidence is 7/11\nC. The confidence is 3/4\nD. The confidence is 1",
+      "options": {
+        "A": "The confidence is 6/11",
+        "B": "The confidence is 7/11",
+        "C": "The confidence is 3/4",
+        "D": "The confidence is 1"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 5: Binarized version of the Poverty dataset (features x1..x5 binarized; fi = 1 if xi greater than the median, else 0). Considered as N = 11 transactions o1..o11 over M = 5 items f1..f5.\n\n      f1  f2  f3  f4  f5\n o1    1   1   1   0   0\n o2    1   1   1   0   0\n o3    1   1   1   0   0\n o4    1   1   1   0   0\n o5    1   1   1   0   0\n o6    0   1   1   0   0\n o7    0   1   0   1   1\n o8    1   1   1   0   0\n o9    1   0   1   0   0\n o10   0   0   0   1   1\n o11   0   1   0   1   1",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q21.png",
+      "source_location": "exam p.10, Table 5 (11x5 binary matrix)"
+    },
+    {
+      "question_id": "Q22",
+      "number": 22,
+      "topic": "Hierarchical clustering linkage assignment",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider the data set given in Figure 8 in which three clusters have been extracted given by blue plusses, red crosses and black dots. We have a new observation given by the green circle located at (0,0). We assign the green observation to one of the three cluster by considering the proximity measure as computed based on Euclidean distance between the green point, and the points in the cluster. Which one of the following statements is correct?\n\nA. If we use maximum linkage the new observation will be assigned to the cluster given by blue plusses.\nB. If we use minimum linkage the new observation will be assigned to the cluster given by black dots.\nC. If we use average linkage the new observation will be assigned to the cluster given by red crosses.\nD. If we use minimum linkage the new observation will be assigned to the cluster given by blue plusses.",
+      "options": {
+        "A": "If we use maximum linkage the new observation will be assigned to the cluster given by blue plusses.",
+        "B": "If we use minimum linkage the new observation will be assigned to the cluster given by black dots.",
+        "C": "If we use average linkage the new observation will be assigned to the cluster given by red crosses.",
+        "D": "If we use minimum linkage the new observation will be assigned to the cluster given by blue plusses."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q22.png",
+      "source_location": "exam p.11, Figure 8 (scatter plot of three clusters + new point)"
+    },
+    {
+      "question_id": "Q23",
+      "number": 23,
+      "topic": "Mahalanobis distance / covariance",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider the dataset given in Figure 9 (a dataset of 1000 observations given by blue dots; the plot also gives the location of two red crosses, two green circles, two cyan plusses and two black squares). We will consider the Mahalanobis distance using the empirical covariance matrix estimated based on the 1000 blue observations. Which one of the following statements is correct?\n\nA. The Mahalanobis distance between the two green circles is smaller than the Mahalanobis distance between the two black squares.\nB. The Mahalanobis distance between the two red crosses is the same as the Mahalanobis distance between the two green circles.\nC. The Mahalanobis distance between the two black squares is smaller than the Mahalanobis distance between the two cyan plusses.\nD. The empirical covariance matrix estimated based on the blue observations has at least one element that is negative.",
+      "options": {
+        "A": "The Mahalanobis distance between the two green circles is smaller than the Mahalanobis distance between the two black squares.",
+        "B": "The Mahalanobis distance between the two red crosses is the same as the Mahalanobis distance between the two green circles.",
+        "C": "The Mahalanobis distance between the two black squares is smaller than the Mahalanobis distance between the two cyan plusses.",
+        "D": "The empirical covariance matrix estimated based on the blue observations has at least one element that is negative."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q23.png",
+      "source_location": "exam p.11, Figure 9 (scatter plot of 1000 points + marked locations)"
+    },
+    {
+      "question_id": "Q24",
+      "number": 24,
+      "topic": "Expected value from PDF",
+      "type": "B",
+      "text_faithful": true,
+      "question_text": "In Figure 10 is given the density function p(x) of a random variable x. The density is a piecewise-constant (step) function: p(x) = 0.6 for 0 <= x < 0.2, p(x) = 1.0 for 0.2 <= x < 0.6, and p(x) = 1.6 for 0.6 <= x < 0.9; outside the region from 0 to 0.9 the density function is zero. What is the expected value of x, i.e. E[x]?\n\nA. 0.450\nB. 0.532\nC. 0.600\nD. 1.000",
+      "options": {
+        "A": "0.450",
+        "B": "0.532",
+        "C": "0.600",
+        "D": "1.000"
+      },
+      "correct_answer": "B",
+      "text_representation": "Figure 10: Probability density function p(x), a piecewise-constant step function (values read from the printed axes):\n p(x) = 0.6 for 0 <= x < 0.2\n p(x) = 1.0 for 0.2 <= x < 0.6\n p(x) = 1.6 for 0.6 <= x < 0.9\n p(x) = 0 otherwise (outside [0, 0.9]).",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q24.png",
+      "source_location": "exam p.12, Figure 10 (step-function PDF; values printed on axes)"
+    },
+    {
+      "question_id": "Q25",
+      "number": 25,
+      "topic": "p-norm distance and cosine similarity",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the Poverty dataset from Table 1 and in particular the first three attributes x1, x2 and x3 of the 35'th and 53'th observation:\nx35 = [-1.24, -0.26, -1.04],  x53 = [-0.60, -0.86, -0.50].\nLet the p-norm distance be denoted dp(.,.) and the cosine similarity be denoted cos(.,.). Which one of the following statements is correct?\n\nA. d_{p=1}(x35, x53) = 0.64\nB. d_{p=4}(x35, x53) = 0.79\nC. d_{p=inf}(x35, x53) = 0.68\nD. cos(x35, x53) = 0.67",
+      "options": {
+        "A": "d_{p=1}(x35, x53) = 0.64",
+        "B": "d_{p=4}(x35, x53) = 0.79",
+        "C": "d_{p=inf}(x35, x53) = 0.68",
+        "D": "cos(x35, x53) = 0.67"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.12, Question 25 (both observation vectors printed inline as text)"
+    },
+    {
+      "question_id": "Q26",
+      "number": 26,
+      "topic": "Cross-validation concepts",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements regarding machine learning and cross-validation is correct?\n\nA. In machine learning we are mainly concerned about the training error as opposed to the test error.\nB. As we get more training data the trained model becomes more prone to overfitting.\nC. For a classifier the test error rate will in general be lower than the training error rate.\nD. The number of observations used for testing is the same for five-fold and ten-fold cross-validation.",
+      "options": {
+        "A": "In machine learning we are mainly concerned about the training error as opposed to the test error.",
+        "B": "As we get more training data the trained model becomes more prone to overfitting.",
+        "C": "For a classifier the test error rate will in general be lower than the training error rate.",
+        "D": "The number of observations used for testing is the same for five-fold and ten-fold cross-validation."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.12, Question 26 (pure text conceptual statements)"
+    },
+    {
+      "question_id": "Q27",
+      "number": 27,
+      "topic": "AdaBoost classification",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider again the Poverty dataset of Table 1. Suppose we limit ourselves to N = 12 randomly selected observations from the original dataset and only consider the features x2 and x5. We apply a KNN classification model (K = 1) to this dataset and use AdaBoost in order to enhance the performance of the classifier. During the first T = 4 rounds of boosting, we obtain decision boundaries and predictions tabulated in Table 6. The table gives, for each round t = 1,2,3,4, the predicted output of each AdaBoost weak classifier for the 12 training observations (y1..y12) and the two test observations (y1_test, y2_test), as well as the weighted error rate epsilon_t:\n\n Variable   t=1   t=2   t=3   t=4\n y1          0     1     1     1\n y2          0     1     0     0\n y3          0     1     1     1\n y4          1     1     1     1\n y5          0     0     0     1\n y6          1     1     1     0\n y7          1     1     1     1\n y8          0     0     1     1\n y9          0     1     1     1\n y10         0     0     1     1\n y11         0     1     1     1\n y12         1     0     1     1\n y1_test     0     0     1     0\n y2_test     0     1     1     1\n epsilon_t   0.417 0.243 0.307 0.534\n\nThe two test observations are marked respectively by a cross and a square (x1_test and x2_test). Using this information, how will the AdaBoost classifier as obtained by combining the T = 4 weak KNN-classifiers classify the two test observations x1_test and x2_test?\n\nA. y1_test_hat = 0 and y2_test_hat = 0\nB. y1_test_hat = 1 and y2_test_hat = 0\nC. y1_test_hat = 0 and y2_test_hat = 1\nD. y1_test_hat = 1 and y2_test_hat = 1",
+      "options": {
+        "A": "y1_test_hat = 0 and y2_test_hat = 0",
+        "B": "y1_test_hat = 1 and y2_test_hat = 0",
+        "C": "y1_test_hat = 0 and y2_test_hat = 1",
+        "D": "y1_test_hat = 1 and y2_test_hat = 1"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 6: Predicted outputs of each AdaBoost weak classifier and the weighted error rate epsilon_t for T = 4 rounds (includes predictions of the two test points). Rows y1..y12 are the 12 training observations; y1_test, y2_test are the two test observations.\n\n Variable   t=1   t=2   t=3   t=4\n y1          0     1     1     1\n y2          0     1     0     0\n y3          0     1     1     1\n y4          1     1     1     1\n y5          0     0     0     1\n y6          1     1     1     0\n y7          1     1     1     1\n y8          0     0     1     1\n y9          0     1     1     1\n y10         0     0     1     1\n y11         0     1     1     1\n y12         1     0     1     1\n y1_test     0     0     1     0\n y2_test     0     1     1     1\n epsilon_t   0.417 0.243 0.307 0.534",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2020_Q27.png",
+      "source_location": "exam p.13, Table 6 (AdaBoost predictions + error rates; Figure 11 illustrative)"
+    }
+  ]
+}

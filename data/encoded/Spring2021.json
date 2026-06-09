@@ -1,0 +1,551 @@
+{
+  "exam": "Spring2021",
+  "course": "02450",
+  "source_pdf": "ML-examsets/Spring2021.pdf",
+  "solution_pdf": "ML-solutions/Spring2021_sol.pdf",
+  "n_questions": 27,
+  "answer_key": {
+    "Q1": "D",
+    "Q2": "A",
+    "Q3": "A",
+    "Q4": "A",
+    "Q5": "C",
+    "Q6": "A",
+    "Q7": "A",
+    "Q8": "A",
+    "Q9": "C",
+    "Q10": "A",
+    "Q11": "A",
+    "Q12": "A",
+    "Q13": "D",
+    "Q14": "C",
+    "Q15": "B",
+    "Q16": "A",
+    "Q17": "D",
+    "Q18": "B",
+    "Q19": "C",
+    "Q20": "D",
+    "Q21": "D",
+    "Q22": "D",
+    "Q23": "D",
+    "Q24": "A",
+    "Q25": "C",
+    "Q26": "A",
+    "Q27": "A"
+  },
+  "questions": [
+    {
+      "question_id": "Q1",
+      "number": 1,
+      "topic": "Attribute types (nominal/ordinal/interval/ratio)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "The main dataset used in this exam is the Bicycle rental dataset described in Table 1. The attributes are: x1 (Hour, 0-23), x2 (Temperature, Celcius), x3 (Humidity, percent), x4 (Wind speed, m/s), x5 (Visibility, 10m), x6 (Dew point temperature, Celcius), x7 (Solar Radiation, MJ/m2), x8 (Rainfall, mm), and the target y_r (Bike rental/demand, bikes/hour). Visibility is the degree of visibility at 10m of distance (0 meaning no visibility at all) and humidity is measured in percentage of full water saturation (0 being completely dry air). For classification, y_r is discretized into y taking values y = 1 (low demand), y = 2 (medium demand), y = 3 (high demand). There are N = 8760 observations in total. We will consider the type of an attribute as the highest level it obtains in the type-hierarchy (nominal, ordinal, interval, and ratio). Which of the following statements are true about the types of the attributes in the Bicycle rental dataset?\n\nA. x1 (Hour) is nominal, x2 (Temperature) is ratio, x4 (Wind) is ratio, and x6 (Dewpoint) is interval\nB. x2 (Temperature) is nominal, x4 (Wind) is nominal, x7 (Solar) is ratio, and x8 (Rain) is ratio\nC. x1 (Hour) is nominal, x2 (Temperature) is interval, x3 (Humidity) is ratio, and x6 (Dewpoint) is interval\nD. x2 (Temperature) is interval, x5 (Visibility) is ratio, x6 (Dewpoint) is interval, and x7 (Solar) is ratio",
+      "options": {
+        "A": "x1 (Hour) is nominal, x2 (Temperature) is ratio, x4 (Wind) is ratio, and x6 (Dewpoint) is interval",
+        "B": "x2 (Temperature) is nominal, x4 (Wind) is nominal, x7 (Solar) is ratio, and x8 (Rain) is ratio",
+        "C": "x1 (Hour) is nominal, x2 (Temperature) is interval, x3 (Humidity) is ratio, and x6 (Dewpoint) is interval",
+        "D": "x2 (Temperature) is interval, x5 (Visibility) is ratio, x6 (Dewpoint) is interval, and x7 (Solar) is ratio"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.2, Question 1 (Table 1 attribute descriptions given as text; pure reasoning about attribute types)"
+    },
+    {
+      "question_id": "Q2",
+      "number": 2,
+      "topic": "PCA / variance explained by first two components",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "A Principal Component Analysis (PCA) is carried out on the Bicycle rental dataset in Table 1 based on the attributes x1 (Hour), x2 (Temperature), x3 (Humidity), x6 (Dewpoint), and x7 (Solar). The data is pre-processed by subtracting the mean to obtain the centered data matrix X_tilde. A singular value decomposition is then carried out to obtain the decomposition U S V^T = X_tilde, with\nV = [[0.11, -0.8, 0.3, -0.17, -0.48], [-0.58, -0.31, 0.01, -0.5, 0.56], [0.49, 0.08, -0.49, -0.72, -0.07], [0.6, -0.36, 0.04, 0.27, 0.66], [-0.23, -0.36, -0.82, 0.37, -0.09]]   (1)\nS = diag(126.15, 104.44, 92.19, 75.07, 53.48).\nWe let u_i denote the i'th column of U and v_i the i'th column of V. Furthermore, suppose e1 and e2 are the first two unit vectors (only coordinate 1 of e1 is 1, only coordinate 2 of e2 is 1, all other coordinates zero), with dimensions such that the matrix/vector multiplications below are possible. Recall ||X||_F is the Frobenius norm. Which one of the following statements computes the variance explained by the first two principal components?\n\nA. ( (u1^T U S V^T v1)^2 + (u2^T U S V^T v2)^2 ) / ||S||_F^2\nB. ( e1^T S e1 + e2^T S e2 ) / ||S||_F\nC. ( e1^T S V^T v1 + e2^T S V^T v2 ) / ||S||_F\nD. ( (e1^T U S V^T v1)^2 + (e2^T U S V^T v2)^2 ) / ||X_tilde^T X_tilde||_F^2",
+      "options": {
+        "A": "( (u1^T U S V^T v1)^2 + (u2^T U S V^T v2)^2 ) / ||S||_F^2",
+        "B": "( e1^T S e1 + e2^T S e2 ) / ||S||_F",
+        "C": "( e1^T S V^T v1 + e2^T S V^T v2 ) / ||S||_F",
+        "D": "( (e1^T U S V^T v1)^2 + (e2^T U S V^T v2)^2 ) / ||X_tilde^T X_tilde||_F^2"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 2 (V and S matrices printed inline as text; pure math)"
+    },
+    {
+      "question_id": "Q3",
+      "number": 3,
+      "topic": "PCA / sign and direction of projections",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the PCA analysis for the Bicycle rental dataset, in particular the SVD decomposition of X_tilde in Equation (1), where the matrix V (columns v_1..v_5) is\nV = [[0.11, -0.8, 0.3, -0.17, -0.48], [-0.58, -0.31, 0.01, -0.5, 0.56], [0.49, 0.08, -0.49, -0.72, -0.07], [0.6, -0.36, 0.04, 0.27, 0.66], [-0.23, -0.36, -0.82, 0.37, -0.09]] (rows correspond to the attributes x1 Hour, x2 Temperature, x3 Humidity, x6 Dewpoint, x7 Solar). Which one of the following statements is true?\n\nA. An observation with a low value of Temperature, a high value of Humidity, a high value of Dewpoint, and a low value of Solar will typically have a positive value of the projection onto principal component number 1.\nB. An observation with a high value of Hour, a low value of Humidity, and a low value of Solar will typically have a negative value of the projection onto principal component number 3.\nC. An observation with a high value of Hour, a low value of Temperature, and a low value of Dewpoint will typically have a positive value of the projection onto principal component number 5.\nD. An observation with a low value of Hour, a low value of Temperature, a low value of Dewpoint, and a low value of Solar will typically have a negative value of the projection onto principal component number 2.",
+      "options": {
+        "A": "An observation with a low value of Temperature, a high value of Humidity, a high value of Dewpoint, and a low value of Solar will typically have a positive value of the projection onto principal component number 1.",
+        "B": "An observation with a high value of Hour, a low value of Humidity, and a low value of Solar will typically have a negative value of the projection onto principal component number 3.",
+        "C": "An observation with a high value of Hour, a low value of Temperature, and a low value of Dewpoint will typically have a positive value of the projection onto principal component number 5.",
+        "D": "An observation with a low value of Hour, a low value of Temperature, a low value of Dewpoint, and a low value of Solar will typically have a negative value of the projection onto principal component number 2."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 3 (V matrix from Eq.(1) printed inline as text; pure reasoning)"
+    },
+    {
+      "question_id": "Q4",
+      "number": 4,
+      "topic": "PCA / coordinates in principal component basis",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the Bicycle rental dataset and the PCA decomposition described in Equation (1) (V given in Question 2). Recall the PCA decomposition is obtained by first forming the centered data matrix X_tilde by subtracting the column-wise mean\nmu = [12.9, 58.2, 1.7, 1436.8, 4.1]^T\nfrom the data matrix X. Assume an observation has coordinates\nx = [15.5, 59.2, 1.4, 1438.0, 5.3]^T.\nWhich coordinates in the coordinate system spanned by the principal component vectors corresponds to x?\n\nA. b = [0.0, -3.2, 0.0, 0.0, 0.0]^T\nB. b = [0.0, 1.2, 0.0, 0.0, 0.0]^T\nC. b = [0.0, 1.5, 0.0, 0.0, 0.0]^T\nD. b = [0.0, -1.6, 0.0, 0.0, 0.0]^T",
+      "options": {
+        "A": "b = [0.0, -3.2, 0.0, 0.0, 0.0]^T",
+        "B": "b = [0.0, 1.2, 0.0, 0.0, 0.0]^T",
+        "C": "b = [0.0, 1.5, 0.0, 0.0, 0.0]^T",
+        "D": "b = [0.0, -1.6, 0.0, 0.0, 0.0]^T"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.4, Question 4 (mu, x and V all printed inline as text; pure computation)"
+    },
+    {
+      "question_id": "Q5",
+      "number": 5,
+      "topic": "Empirical correlation from covariance matrix",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the Bicycle rental dataset. The empirical covariance matrix of the first 5 attributes x1, ..., x5 is given by:\nSigma_hat = [[143.0, 39.0, -0.0, 253.0, 142.0], [39.0, 415.0, -7.0, -6727.0, 143.0], [-0.0, -7.0, 1.0, 108.0, -2.0], [253.0, -6727.0, 108.0, 370027.0, -1403.0], [142.0, 143.0, -2.0, -1403.0, 171.0]].\nWhat is the empirical correlation of x2 (Temperature) and x3 (Humidity)?\n\nA. -0.12987\nB. -0.01687\nC. -0.34362\nD. -2.64575",
+      "options": {
+        "A": "-0.12987",
+        "B": "-0.01687",
+        "C": "-0.34362",
+        "D": "-2.64575"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.4, Question 5 (covariance matrix printed inline as text; pure computation)"
+    },
+    {
+      "question_id": "Q6",
+      "number": 6,
+      "topic": "KNN average relative density (ARD) / outlier detection",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "To examine if observation o3 may be an outlier, we will calculate the average relative density using the cityblock distance based on the observations given in Table 2 only. We recall that the KNN density and average relative density (ard) for the observation x_i are given by:\ndensity(x_i, K) = 1 / ( (1/K) sum_{x' in N(x_i,K)} d(x_i, x') ),\nard(x_i, K) = density(x_i, K) / ( (1/K) sum_{x_j in N(x_i,K)} density(x_j, K) ),\nwhere N(x_i, K) is the set of K nearest neighbors of observation x_i excluding the i'th observation. What is the average relative density for observation o3 for K = 2 nearest neighbors?\n\nA. 0.7\nB. 0.4\nC. 0.63\nD. 0.19",
+      "options": {
+        "A": "0.7",
+        "B": "0.4",
+        "C": "0.63",
+        "D": "0.19"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 2: Pairwise cityblock distances d(o_i, o_j) = ||x_i - x_j||_{p=1} = sum_{k=1}^{M} |x_ik - x_jk| between 10 observations from the Bicycle rental dataset (M = 8). Each observation o_i corresponds to a row of the data matrix X of Table 1. Classes: black observations {o1, o2} belong to class C1 (low demand); red observations {o3, o4, o5, o6} belong to class C2 (medium demand); blue observations {o7, o8, o9, o10} belong to class C3 (high demand). The dataset was standardized (subtract mean, divide by std) before computing distances.\n\n        o1     o2     o3     o4     o5     o6     o7     o8     o9    o10\n o1     0.0    5.0    7.7    6.1    4.2   11.0    7.3    9.0   11.3    1.4\n o2     5.0    0.0    5.4    4.0    7.5    7.9    5.3    6.8   11.9    3.5\n o3     7.7    5.4    0.0    5.2    7.2    6.1    7.8    6.7   12.9    6.4\n o4     6.1    4.0    5.2    0.0    5.1    5.4    8.4    3.3    8.1    4.8\n o5     4.2    7.5    7.2    5.1    0.0    8.7    8.8    6.6    7.7    4.1\n o6    11.0    7.9    6.1    5.4    8.7    0.0   12.0    4.2    9.3    9.8\n o7     7.3    5.3    7.8    8.4    8.8   12.0    0.0   11.0   16.3    6.7\n o8     9.0    6.8    6.7    3.3    6.6    4.2   11.0    0.0    6.2    7.8\n o9    11.3   11.9   12.9    8.1    7.7    9.3   16.3    6.2    0.0   10.4\no10     1.4    3.5    6.4    4.8    4.1    9.8    6.7    7.8   10.4    0.0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2021_Q6.png",
+      "source_location": "exam p.4, Table 2 (10x10 pairwise cityblock distance matrix with class colors)"
+    },
+    {
+      "question_id": "Q7",
+      "number": 7,
+      "topic": "Hierarchical clustering / dendrograms (maximum linkage)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A hierarchical clustering is applied to the 10 observations in Table 2 using maximum linkage. Which one of the dendrograms shown in Figure 1 corresponds to the distances given in Table 2?\n\nA. Dendrogram 1\nB. Dendrogram 2\nC. Dendrogram 3\nD. Dendrogram 4",
+      "options": {
+        "A": "Dendrogram 1",
+        "B": "Dendrogram 2",
+        "C": "Dendrogram 3",
+        "D": "Dendrogram 4"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2021_Q7.png",
+      "source_location": "exam p.5, Figure 1 (four candidate dendrograms; answer options are the plots) using Table 2 distances"
+    },
+    {
+      "question_id": "Q8",
+      "number": 8,
+      "topic": "Jaccard similarity of binary vectors",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Suppose x1 and x2 are two binary vectors of (even) dimension M such that the first two elements of x1 are 1 (and the rest are 0) and the first M/2 elements of x2 are 1 (and the rest are 0). Which of the following expressions computes the Jaccard similarity of x1 and x2 when M >= 4?\n\nA. J(x1, x2) = 4 / M\nB. J(x1, x2) = ( (1/2) M ) / ( (1/2) M + 2 )\nC. J(x1, x2) = 2 / M\nD. J(x1, x2) = 2 / ( (1/2) M - 2 )",
+      "options": {
+        "A": "J(x1, x2) = 4 / M",
+        "B": "J(x1, x2) = ( (1/2) M ) / ( (1/2) M + 2 )",
+        "C": "J(x1, x2) = 2 / M",
+        "D": "J(x1, x2) = 2 / ( (1/2) M - 2 )"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.5, Question 8 (pure text/math)"
+    },
+    {
+      "question_id": "Q9",
+      "number": 9,
+      "topic": "Backward selection / number of models tested",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the Bicycle rental dataset in Table 1. We apply backward selection to find an interpretable linear regression model which uses a subset of the M = 8 attributes to predict the bike rental y_r. Recall backward selection chooses models based on the test error as determined by cross-validation, and in our case we use the hold-out method to generate a single test/training split. Suppose backward selection ends up selecting the attributes x1, x3, x4, x5, x6, x7, and x8, what is the minimal number of models which were tested in order to obtain this result?\n\nA. 15 models\nB. 18 models\nC. 16 models\nD. 8 models",
+      "options": {
+        "A": "15 models",
+        "B": "18 models",
+        "C": "16 models",
+        "D": "8 models"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.5, Question 9 (pure text)"
+    },
+    {
+      "question_id": "Q10",
+      "number": 10,
+      "topic": "Naive Bayes / number of density evaluations",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We wish to predict which of the three classes an observation x belong to in the Bicycle rental dataset described in Table 1. To accomplish this we apply a Naive-Bayes classifier where we model each of the M = 8 features using a 1-dimensional normal distribution. The classifier will be used in an embedded setting where model prediction speed is paramount. Therefore, consider a single model evaluation: p(y = LOW DEMAND | x). What is the minimum number of evaluations of the normal density function N(x | mu, sigma^2) we have to perform to compute this quantity?\n\nA. 24\nB. 27\nC. 36\nD. 32",
+      "options": {
+        "A": "24",
+        "B": "27",
+        "C": "36",
+        "D": "32"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 10 (pure text)"
+    },
+    {
+      "question_id": "Q11",
+      "number": 11,
+      "topic": "Bayes theorem from class counts",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider the Bicycle rental dataset from Table 1 consisting of N = 8760 observations, and suppose the attribute Humidity has been binarized into low and high values. We still consider the goal to predict the bike rental and are given the following information:\n- Of the 3285 observations with low demand, 1327 had a low value of Humidity.\n- Of the 2190 observations with medium demand, 1718 had a low value of Humidity.\n- Of the 3285 observations with high demand, 2344 had a low value of Humidity.\nSuppose a particular observation has a high value of Humidity, what is the probability of observing high demand?\n\nA. 0.279\nB. 0.286\nC. 0.04\nD. 0.487",
+      "options": {
+        "A": "0.279",
+        "B": "0.286",
+        "C": "0.04",
+        "D": "0.487"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 11 (pure text, counts given inline as bullet points)"
+    },
+    {
+      "question_id": "Q12",
+      "number": 12,
+      "topic": "Association mining / highest possible itemset support",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider the Bicycle rental dataset described in Table 1. Suppose we apply a market basket analysis to the dataset in the usual fashion: We first binarize each of the attributes, thereby obtaining M = 8 items, and consider each of the N = 8760 observations as a transaction containing a (subset) of the binarized attributes. We will let C({I_1, ..., I_k}) be the number of the N = 8760 transactions containing the itemset {I_1, ..., I_k}. For this problem we focus on just three items and are given the information:\n- C({Visibility}) = 4091.\n- C({Humidity}) = 3637.\n- C({Dewpoint}) = 3459.\nFinally, consider the itemset I : {Visibility, Humidity}. Which of the following options indicate the highest possible support of the itemset I which is consistent (i.e., obtainable) given the information in the bullet list above?\n\nA. supp(I) = 0.415\nB. supp(I) = 0.441\nC. supp(I) = 0.217\nD. supp(I) = 0.467",
+      "options": {
+        "A": "supp(I) = 0.415",
+        "B": "supp(I) = 0.441",
+        "C": "supp(I) = 0.217",
+        "D": "supp(I) = 0.467"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 12 (pure text, counts given inline as bullet points)"
+    },
+    {
+      "question_id": "Q13",
+      "number": 13,
+      "topic": "Regression tree / prediction-rule plot matching",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider the first 8 observations of the Bicycle rental dataset shown in Table 2. Table 3 shows their corresponding value of x1 and y_r. We fit a small regression tree to this dataset. The structure (and binary splitting rules) is depicted in Figure 2 (root split: x1 > 0.13; right child split: x1 > 0.26). Which one of the prediction rules (i.e., the model output y_hat_r as a function of x1) shown in Figure 3 corresponds to the tree?\n\nA. Prediction rule 1\nB. Prediction rule 2\nC. Prediction rule 3\nD. Prediction rule 4",
+      "options": {
+        "A": "Prediction rule 1",
+        "B": "Prediction rule 2",
+        "C": "Prediction rule 3",
+        "D": "Prediction rule 4"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2021_Q13.png",
+      "source_location": "exam p.7, Figure 3 (four candidate prediction-rule step plots; answer options are the plots), Figure 2 (regression tree) and Table 3 (x1, y_r values)"
+    },
+    {
+      "question_id": "Q14",
+      "number": 14,
+      "topic": "Regression tree / purity gain of a split (Hunt's algorithm)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "In this problem, we will again consider the 8 observations from the Bicycle rental dataset shown in Table 3. Figure 2 shows the structure of the small regression tree fitted to this dataset using Hunt's algorithm along with the thereby obtained binary splitting rules (root split: x1 > 0.13; second/right split: x1 > 0.26). What was the purity gain Delta of the second split Hunt's algorithm accepted?\n\nA. Delta = 101.2\nB. Delta = 30.64\nC. Delta = 17.64\nD. Delta = 13.0",
+      "options": {
+        "A": "Delta = 101.2",
+        "B": "Delta = 30.64",
+        "C": "Delta = 17.64",
+        "D": "Delta = 13.0"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 3: Values of x1 and the corresponding value of y_r for the first 8 observations.\n\n         obs:    1      2      3      4      5      6      7      8\n          x1:  -1.1   -0.8   0.08   0.18   0.34    0.6   1.42   1.68\n          y_r:   12      5     10     23      6     17     14     13\n\nRegression-tree splitting rules (Figure 2): root node splits on x1 > 0.13; the right child (the 'second' split) splits on x1 > 0.26. The second split partitions the observations with x1 > 0.13 (observations {4,5,6,7,8}) into {4} (x1 <= 0.26) and {5,6,7,8} (x1 > 0.26).",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2021_Q14.png",
+      "source_location": "exam p.7, Table 3 (x1, y_r numeric table) and Figure 2 (regression tree giving the split thresholds 0.13 and 0.26)"
+    },
+    {
+      "question_id": "Q15",
+      "number": 15,
+      "topic": "AdaBoost / ratio of observation weights",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider again the Bicycle rental dataset of Table 1. Suppose we wish to predict the class label y using a multivariate regression model, and to improve performance we wish to apply Adaboost. Recall the first steps of adaboost consists of: (i) Initialize weights, (ii) select a training set (iii) fit a model to the training set. In the first round of boosting, the fitted model has an error rate epsilon when evaluated on the full dataset, and it made a correct prediction of the class membership of observation i = 5 and an incorrect prediction of the class membership of observation i = 1. After the first round of boosting, which of the following expressions will compute the ratio of weights of observation 1, w1 and observation 5, w5?\n\nA. w1 / w5 = exp( (1 - epsilon) / epsilon )\nB. w1 / w5 = (1 - epsilon) / epsilon\nC. w1 / w5 = exp( (1 - epsilon) / epsilon ) / exp( -(1 - epsilon) / epsilon )\nD. w1 / w5 = sqrt( (1 - epsilon) / epsilon )",
+      "options": {
+        "A": "w1 / w5 = exp( (1 - epsilon) / epsilon )",
+        "B": "w1 / w5 = (1 - epsilon) / epsilon",
+        "C": "w1 / w5 = exp( (1 - epsilon) / epsilon ) / exp( -(1 - epsilon) / epsilon )",
+        "D": "w1 / w5 = sqrt( (1 - epsilon) / epsilon )"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.8, Question 15 (pure text/math)"
+    },
+    {
+      "question_id": "Q16",
+      "number": 16,
+      "topic": "KNN regression / identifying number of neighbours K",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Suppose a K-nearest neighbors regression model is fitted to a small 1-dimensional dataset with N = 5 observations. The predicted response is shown in Figure 4 (a step-function red line fitted to 5 scatter points). How many neighbors (i.e. K) was used?\n\nA. K = 2\nB. K = 4\nC. K = 1\nD. K = 3",
+      "options": {
+        "A": "K = 2",
+        "B": "K = 4",
+        "C": "K = 1",
+        "D": "K = 3"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2021_Q16.png",
+      "source_location": "exam p.8, Figure 4 (scatter of 5 points with KNN regression step-function; positions of points and steps must be read off the figure)"
+    },
+    {
+      "question_id": "Q17",
+      "number": 17,
+      "topic": "Variance of a discrete probability distribution",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "The number of times a citybike is rented per day is an important factor in determining how often they should be replaced. Suppose the typical bike rentals per day is estimated from data, and the chance p(k) a bike will be rented k times is shown in the discrete probability distribution shown in Figure 5 (bar chart over k = 1, 2, 3). It is known that the mean of this distribution is 1.6, but what is the variance?\n\nA. Variance is 3.4\nB. Variance is 1.6\nC. Variance is 0.2\nD. Variance is 0.5",
+      "options": {
+        "A": "Variance is 3.4",
+        "B": "Variance is 1.6",
+        "C": "Variance is 0.2",
+        "D": "Variance is 0.5"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2021_Q17.png",
+      "source_location": "exam p.9, Figure 5 (bar chart of p(k) for k=1,2,3; bar heights are not printed and must be read off the y-axis: approx p(1)=0.5, p(2)=0.36, p(3)=0.14)"
+    },
+    {
+      "question_id": "Q18",
+      "number": 18,
+      "topic": "Conceptual statements (regularization, AdaBoost, McNemar, PCA norm)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements are true?\n\nA. Regularization is not applicable to a logistic regression model.\nB. When we apply Adaboost, the less errors a classifier makes in a given round of boosting, the more the weights will be increased for the wrongly classified observations.\nC. When using McNemars test to determine if two classification models have different performance, one should apply two-level cross-validation (either hold out/K-fold or leave-one-out).\nD. Let x_i be the i'th observation of a (non-standardized) dataset X. Suppose we carry out a PCA analysis on X and we let b_i be the principal component coefficient vector (i.e., projection) corresponding to x_i when projected onto all the principal components. It is then true that ||x_i|| = ||b_i|| (in the Euclidean norm).",
+      "options": {
+        "A": "Regularization is not applicable to a logistic regression model.",
+        "B": "When we apply Adaboost, the less errors a classifier makes in a given round of boosting, the more the weights will be increased for the wrongly classified observations.",
+        "C": "When using McNemars test to determine if two classification models have different performance, one should apply two-level cross-validation (either hold out/K-fold or leave-one-out).",
+        "D": "Let x_i be the i'th observation of a (non-standardized) dataset X. Suppose we carry out a PCA analysis on X and we let b_i be the principal component coefficient vector (i.e., projection) corresponding to x_i when projected onto all the principal components. It is then true that ||x_i|| = ||b_i|| (in the Euclidean norm)."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.9, Question 18 (pure text)"
+    },
+    {
+      "question_id": "Q19",
+      "number": 19,
+      "topic": "Neural network / appropriate regression cost function",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider a regression problem where the goal is to predict a ratio variable y_i using the 1-dimensional input x_i. Suppose we wish to do this using a neural network with a single hidden layer (the hidden layer has a sigmoid activation function), no activation function (i.e. the identity activation function) for the output layer, and that we use the ordinary quadratic cost function suitable for regression. What is an appropriate cost function on a training set of size N (assuming all terms of the form w^(.) are weights)?\n\nA. sum_{i=1}^{N} ( w0^(2)/(1+e^{-y_i}) - w1^(2)/(1+e^{-w1,0^(1) - x_i w1,1^(1)}) - w2^(2)/(1+e^{-w2,0^(1) - x_i w2,1^(1)}) )^2\nB. sum_{i=1}^{N} ( w0^(2) - w1^(2)/(1+e^{-w1,0^(1) - x_i w1,1^(1) - y_i w1,2^(1)}) - w2^(2)/(1+e^{-w2,0^(1) - x_i w2,1^(1) - y_i w2,3^(1)}) )^2\nC. sum_{i=1}^{N} ( y_i - w0^(2) - w1^(2)/(1+e^{-w1,0^(1) - x_i w1,1^(1)}) - w2^(2)/(1+e^{-w2,0^(1) - x_i w2,1^(1)}) )^2\nD. sum_{i=1}^{N} ( y_i - w0^(2) - w1^(2)/(w1^(2) - e^{w1,0^(1) + x_i w1,1^(1)}) - w2^(2)/(w2^(2) - e^{w2,0^(1) + x_i w2,1^(1)}) )^2",
+      "options": {
+        "A": "sum_{i=1}^{N} ( w0^(2)/(1+e^{-y_i}) - w1^(2)/(1+e^{-w1,0^(1) - x_i w1,1^(1)}) - w2^(2)/(1+e^{-w2,0^(1) - x_i w2,1^(1)}) )^2",
+        "B": "sum_{i=1}^{N} ( w0^(2) - w1^(2)/(1+e^{-w1,0^(1) - x_i w1,1^(1) - y_i w1,2^(1)}) - w2^(2)/(1+e^{-w2,0^(1) - x_i w2,1^(1) - y_i w2,3^(1)}) )^2",
+        "C": "sum_{i=1}^{N} ( y_i - w0^(2) - w1^(2)/(1+e^{-w1,0^(1) - x_i w1,1^(1)}) - w2^(2)/(1+e^{-w2,0^(1) - x_i w2,1^(1)}) )^2",
+        "D": "sum_{i=1}^{N} ( y_i - w0^(2) - w1^(2)/(w1^(2) - e^{w1,0^(1) + x_i w1,1^(1)}) - w2^(2)/(w2^(2) - e^{w2,0^(1) + x_i w2,1^(1)}) )^2"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.9, Question 19 (pure text/math)"
+    },
+    {
+      "question_id": "Q20",
+      "number": 20,
+      "topic": "Ridge regression / prediction for standardized input",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider once again the bicycle rental dataset described in Table 1, but this time we will limit ourselves to just the features x1 (Hour) and x5 (Visibility) from the full dataset X. The goal is still to predict the bike rental y = y_r, and to achieve this we will apply ridge-regression. Recall that ridge regression determines the constant offset w0 and the two coefficients w1 and w2 of x1 and x5 respectively, by minimizing a cost function of the form:\nsum_{i=1}^{N} ( y_i - w0 - w1 (X_i,1 - mu_1)/sigma_1 - w2 (X_i,5 - mu_5)/sigma_5 )^2 + lambda (w1^2 + w2^2).\nIn this expression, mu_k and sigma_k are the mean and standard deviations of column k, and their values can be found in Table 4, along with the corresponding values for y. Assuming the regularization strength is lambda = 10.0, which one of the following expressions will predict the value y for an input observation with x1 = 0 and x5 = 1?\n\nA. y = w0 + 1.08 w1 + 0.39 w2\nB. y = 0.14 w0 - 1.08 w1 - 0.24 w2\nC. y = w0 - 0.24 w2\nD. y = 11.5 - 1.08 w1 - 0.24 w2",
+      "options": {
+        "A": "y = w0 + 1.08 w1 + 0.39 w2",
+        "B": "y = 0.14 w0 - 1.08 w1 - 0.24 w2",
+        "C": "y = w0 - 0.24 w2",
+        "D": "y = 11.5 - 1.08 w1 - 0.24 w2"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 4: Column-wise mean and standard deviation computed on the Bicycle rental dataset.\n\n                        x1      x5       y\n Mean                  12.9    4.1     11.5\n Standard deviation    11.9   13.1      6.9",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2021_Q20.png",
+      "source_location": "exam p.10, Table 4 (means and standard deviations for x1, x5, y)"
+    },
+    {
+      "question_id": "Q21",
+      "number": 21,
+      "topic": "Multinomial regression / softmax class probability",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the Bicycle rental dataset described in Table 1. Recall the dataset is comprised of C = 3 classes, and suppose we fit a multinomial regression model to predict the class label y_i given the M = 8-dimensional feature vector x_i. This results in two weight-vectors w1 and w2 such that the class-label is predicted using the softmax activation as described in Section 15.3.3 in the lecture notes. Prior to softmax normalization, the output on the first 8 observations are shown in Table 5. According to the multinomial regression model, what is the probability observation i = 1 is assigned to the low demand class (y = 1)?\n\nA. 0.01\nB. 0.07\nC. 0.26\nD. 0.47",
+      "options": {
+        "A": "0.01",
+        "B": "0.07",
+        "C": "0.26",
+        "D": "0.47"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 5: Output of the linear transformation (prior to softmax normalization) of a multinomial regression model applied to the Bicycle rental dataset. The full dataset contains N = 8760 observations, but the table only contains the output for the first i = 1, ..., 8 observations.\n\n Observation nr. i    w1^T x_tilde_i    w2^T x_tilde_i\n        1                  0.03             -1.89\n        2                  1.17             -0.89\n        3                  1.15             -0.87\n        4                  1.32             -0.71\n        5                 -0.05             -1.9\n        6                  0.64             -1.28\n        7                  0.65             -1.27\n        8                  1.25             -0.69",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2021_Q21.png",
+      "source_location": "exam p.10, Table 5 (linear-transformation outputs w1^T x and w2^T x for 8 observations)"
+    },
+    {
+      "question_id": "Q22",
+      "number": 22,
+      "topic": "ROC curve identification from TP/TN/FN/FP plots",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We wish to predict whether an observation from the Bicycle rental dataset (see Table 1) belongs to the low demand class (or not). To accomplish this, we fit a logistic regression model to the dataset, and for each observation x_i, y_i obtain a class-probability prediction y_hat_i in [0, 1]. We threshold the class-probability at different values theta thereby obtaining, for each value of theta, the true positives (TP), true negatives (TN), false positives (FP) and false negatives (FN). These are plotted as functions of theta in Figure 7. Which of the receiver-operator characteristic (ROC) plots shown in Figure 6 corresponds to these graphs?\n\nA. ROC curve 1\nB. ROC curve 2\nC. ROC curve 3\nD. ROC curve 4",
+      "options": {
+        "A": "ROC curve 1",
+        "B": "ROC curve 2",
+        "C": "ROC curve 3",
+        "D": "ROC curve 4"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2021_Q22.png",
+      "source_location": "exam p.11, Figure 6 (four candidate ROC curves; answer options are the plots) and Figure 7 (TP/TN/FN/FP as functions of threshold theta)"
+    },
+    {
+      "question_id": "Q23",
+      "number": 23,
+      "topic": "Conceptual statements (backward selection, bagging/boosting, bias-variance, McNemar+LOO)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements is true?\n\nA. Suppose hold-out cross-validated backward selection is applied to select which features to include in a linear regression model. Each time a new model is selected by backward selection, the training error for that model will be smaller than (or equal to) the training error in the previous step.\nB. Consider how Bagging and Boosting makes predictions in a binary classification task. Recall that both bagging and boosting train multiple classifiers on the same dataset. The only difference between the methods is how the training sets used to train the classifiers is sampled from the full dataset. Both sample the datasets with replacement, but bagging sample them uniformly, whereas Adaboost sample them according to weights which are iteratively updated.\nC. In terms of a bias-variance trade-off, a logistic regression model with a well-tuned regularization parameter has a negligible bias but a fairly high variance.\nD. When comparing two classifiers, leave-one-out cross-validation is a suitable cross-validation method to use in conjunction with McNemars test.",
+      "options": {
+        "A": "Suppose hold-out cross-validated backward selection is applied to select which features to include in a linear regression model. Each time a new model is selected by backward selection, the training error for that model will be smaller than (or equal to) the training error in the previous step.",
+        "B": "Consider how Bagging and Boosting makes predictions in a binary classification task. Recall that both bagging and boosting train multiple classifiers on the same dataset. The only difference between the methods is how the training sets used to train the classifiers is sampled from the full dataset. Both sample the datasets with replacement, but bagging sample them uniformly, whereas Adaboost sample them according to weights which are iteratively updated.",
+        "C": "In terms of a bias-variance trade-off, a logistic regression model with a well-tuned regularization parameter has a negligible bias but a fairly high variance.",
+        "D": "When comparing two classifiers, leave-one-out cross-validation is a suitable cross-validation method to use in conjunction with McNemars test."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.12, Question 23 (pure text)"
+    },
+    {
+      "question_id": "Q24",
+      "number": 24,
+      "topic": "Gaussian Mixture Model / matching density to scatter plot",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Let N(x | mu, Sigma) denote the multivariate normal distribution with mean mu and covariance matrix Sigma. In Figure 8 is given 1000 observations drawn from a density defined by a Gaussian Mixture Model (GMM) with three clusters. Each observation is colored and marked in terms of which cluster it came from in the Gaussian Mixture model. Which one of the following GMM densities was used to generate the data?\n\nA. p(x) = (5/11) N(x | [-1.5, 3.4], [[1.6, 1.3], [1.3, 1.2]]) + (1/11) N(x | [10.1, -7.2], [[2.4, 1.6], [1.6, 3.0]]) + (5/11) N(x | [9.9, -8.8], [[1.6, -1.7], [-1.7, 2.9]])\nB. p(x) = (5/11) N(x | [-1.5, 3.4], [[2.4, 1.6], [1.6, 3.0]]) + (1/11) N(x | [10.1, -7.2], [[1.6, 1.3], [1.3, 1.2]]) + (5/11) N(x | [9.9, -8.8], [[1.6, -1.7], [-1.7, 2.9]])\nC. p(x) = (1/11) N(x | [-1.5, 3.4], [[1.6, -1.7], [-1.7, 2.9]]) + (5/11) N(x | [10.1, -7.2], [[2.4, 1.6], [1.6, 3.0]]) + (5/11) N(x | [9.9, -8.8], [[1.6, 1.3], [1.3, 1.2]])\nD. p(x) = (1/11) N(x | [-1.5, 3.4], [[2.4, 1.6], [1.6, 3.0]]) + (5/11) N(x | [10.1, -7.2], [[1.6, -1.7], [-1.7, 2.9]]) + (5/11) N(x | [9.9, -8.8], [[1.6, 1.3], [1.3, 1.2]])",
+      "options": {
+        "A": "p(x) = (5/11) N(x | [-1.5, 3.4], [[1.6, 1.3], [1.3, 1.2]]) + (1/11) N(x | [10.1, -7.2], [[2.4, 1.6], [1.6, 3.0]]) + (5/11) N(x | [9.9, -8.8], [[1.6, -1.7], [-1.7, 2.9]])",
+        "B": "p(x) = (5/11) N(x | [-1.5, 3.4], [[2.4, 1.6], [1.6, 3.0]]) + (1/11) N(x | [10.1, -7.2], [[1.6, 1.3], [1.3, 1.2]]) + (5/11) N(x | [9.9, -8.8], [[1.6, -1.7], [-1.7, 2.9]])",
+        "C": "p(x) = (1/11) N(x | [-1.5, 3.4], [[1.6, -1.7], [-1.7, 2.9]]) + (5/11) N(x | [10.1, -7.2], [[2.4, 1.6], [1.6, 3.0]]) + (5/11) N(x | [9.9, -8.8], [[1.6, 1.3], [1.3, 1.2]])",
+        "D": "p(x) = (1/11) N(x | [-1.5, 3.4], [[2.4, 1.6], [1.6, 3.0]]) + (5/11) N(x | [10.1, -7.2], [[1.6, -1.7], [-1.7, 2.9]]) + (5/11) N(x | [9.9, -8.8], [[1.6, 1.3], [1.3, 1.2]])"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2021_Q24.png",
+      "source_location": "exam p.12, Figure 8 (scatter plot of 1000 GMM-generated points colored by cluster; cluster locations, shapes and mixing proportions must be read off the figure)"
+    },
+    {
+      "question_id": "Q25",
+      "number": 25,
+      "topic": "k-means clustering / centroid update after one step",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider a small dataset comprised of N = 7 one-dimensional observations shown as the filled circles in Figure 9. Suppose a k-means algorithm is applied to the dataset with K = 3 and using Euclidean distances. We will assume the location of the centroids are initialized to the values indicated by the crosses in Figure 9. After initialization, the k-means algorithm is evaluated for one step, comprised of assigning observations to centroids and updating the location of the centroids. After the first step, what will be the new location of the centroids?\n\nA. mu_1 = 1, mu_2 = 11/2, and mu_3 = 14.\nB. mu_1 = 4, mu_2 = 6, and mu_3 = 7.\nC. mu_1 = 1, mu_2 = 5, and mu_3 = 21/2.\nD. mu_1 = 2, mu_2 = 11/2, and mu_3 = 21/2.",
+      "options": {
+        "A": "mu_1 = 1, mu_2 = 11/2, and mu_3 = 14.",
+        "B": "mu_1 = 4, mu_2 = 6, and mu_3 = 7.",
+        "C": "mu_1 = 1, mu_2 = 5, and mu_3 = 21/2.",
+        "D": "mu_1 = 2, mu_2 = 11/2, and mu_3 = 21/2."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2021_Q25.png",
+      "source_location": "exam p.13, Figure 9 (1-D plot showing 7 observation points and 3 initial centroid crosses; positions must be read off the x-axis)"
+    },
+    {
+      "question_id": "Q26",
+      "number": 26,
+      "topic": "Classifier decision boundaries / model identification",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider a subset of the Bicycle rental dataset (described in Table 1) after it has been projected onto the first two principal components b1 and b2 given in Equation (1), thereby giving rise to a smaller two-dimensional dataset. We will consider the following four classifiers: MREG: Multinomial regression. ANN: Artificial neural network with 5 hidden units. CT: Classification tree with regular axis-aligned splits (b_i < c). KNN: K-nearest neighbours with K = 3. Suppose the classifiers are trained on the two-dimensional dataset and the decision boundary for each of the four classifiers is given in Figure 10. Which one of the following statements is correct?\n\nA. Classifier 1 corresponds to ANN, Classifier 2 corresponds to KNN, Classifier 3 corresponds to CT, Classifier 4 corresponds to MREG.\nB. Classifier 1 corresponds to CT, Classifier 2 corresponds to MREG, Classifier 3 corresponds to KNN, Classifier 4 corresponds to ANN.\nC. Classifier 1 corresponds to MREG, Classifier 2 corresponds to CT, Classifier 3 corresponds to KNN, Classifier 4 corresponds to ANN.\nD. Classifier 1 corresponds to KNN, Classifier 2 corresponds to ANN, Classifier 3 corresponds to CT, Classifier 4 corresponds to MREG.",
+      "options": {
+        "A": "Classifier 1 corresponds to ANN, Classifier 2 corresponds to KNN, Classifier 3 corresponds to CT, Classifier 4 corresponds to MREG.",
+        "B": "Classifier 1 corresponds to CT, Classifier 2 corresponds to MREG, Classifier 3 corresponds to KNN, Classifier 4 corresponds to ANN.",
+        "C": "Classifier 1 corresponds to MREG, Classifier 2 corresponds to CT, Classifier 3 corresponds to KNN, Classifier 4 corresponds to ANN.",
+        "D": "Classifier 1 corresponds to KNN, Classifier 2 corresponds to ANN, Classifier 3 corresponds to CT, Classifier 4 corresponds to MREG."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2021_Q26.png",
+      "source_location": "exam p.13, Figure 10 (four decision-boundary plots in PCA1/PCA2 space)"
+    },
+    {
+      "question_id": "Q27",
+      "number": 27,
+      "topic": "Kernel density estimation / number of observations",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A small 1-dimensional dataset of N observations, along with the kernel density estimate, is shown in Figure 11. The kernel is the usual Gaussian kernel with kernel width lambda = 0.168 (i.e., the individual Gaussian components in the KDE have variance sigma^2 = lambda^2). Note the x-axis has been truncated so not all observations are shown. How many observations were in the dataset?\n\nA. N = 9\nB. N = 6\nC. N = 21\nD. N = 17",
+      "options": {
+        "A": "N = 9",
+        "B": "N = 6",
+        "C": "N = 21",
+        "D": "N = 17"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2021_Q27.png",
+      "source_location": "exam p.14, Figure 11 (KDE density curve with a subset of observation points; the peak density value approx 0.26 must be read off the figure)"
+    }
+  ]
+}

@@ -1,0 +1,551 @@
+{
+  "exam": "Fall2023",
+  "course": "02450",
+  "source_pdf": "ML-examsets/Fall2023.pdf",
+  "solution_pdf": "ML-solutions/Fall2023_sol.pdf",
+  "n_questions": 27,
+  "answer_key": {
+    "Q1": "C",
+    "Q2": "B",
+    "Q3": "A",
+    "Q4": "D",
+    "Q5": "A",
+    "Q6": "D",
+    "Q7": "C",
+    "Q8": "A",
+    "Q9": "B",
+    "Q10": "A",
+    "Q11": "A",
+    "Q12": "B",
+    "Q13": "C",
+    "Q14": "B",
+    "Q15": "C",
+    "Q16": "C",
+    "Q17": "A",
+    "Q18": "B",
+    "Q19": "D",
+    "Q20": "D",
+    "Q21": "B",
+    "Q22": "C",
+    "Q23": "D",
+    "Q24": "D",
+    "Q25": "B",
+    "Q26": "C",
+    "Q27": "A"
+  },
+  "questions": [
+    {
+      "question_id": "Q1",
+      "number": 1,
+      "topic": "Empirical correlation matrix from scatter plot matrix",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "The main dataset used in this exam is the Combined Cycle Power Plant (CCPP) dataset described in Table 1, with attributes x1 = Temperature, x2 = Pressure, x3 = Humidity, x4 = Vacuum. We consider the four attributes of the CCPP dataset in Table 1. A scatter plot matrix for these attributes is shown in Figure 1.\nWhich one of the following matrices represents the empirical correlation matrix for these attributes?\n\nA. C_hat ~ [[1.00, 0.85, -0.51, -0.55], [0.85, 1.00, -0.42, -0.33], [-0.51, -0.42, 1.00, 0.72], [-0.55, -0.33, 0.72, 1.00]]\nB. C_hat ~ [[1.00, 0.85, -0.51, 0.55], [0.85, 1.00, -0.42, -0.33], [-0.51, -0.42, 1.00, 0.09], [0.55, -0.33, 0.09, 1.00]]\nC. C_hat ~ [[1.00, 0.85, -0.51, -0.55], [0.85, 1.00, -0.42, -0.33], [-0.51, -0.42, 1.00, 0.09], [-0.55, -0.33, 0.09, 1.00]]\nD. C_hat ~ [[1.00, 0.25, -0.51, -0.55], [0.25, 1.00, -0.42, -0.33], [-0.51, -0.42, 1.00, 0.09], [-0.55, -0.33, 0.09, 1.00]]",
+      "options": {
+        "A": "C_hat ~ [[1.00, 0.85, -0.51, -0.55], [0.85, 1.00, -0.42, -0.33], [-0.51, -0.42, 1.00, 0.72], [-0.55, -0.33, 0.72, 1.00]]",
+        "B": "C_hat ~ [[1.00, 0.85, -0.51, 0.55], [0.85, 1.00, -0.42, -0.33], [-0.51, -0.42, 1.00, 0.09], [0.55, -0.33, 0.09, 1.00]]",
+        "C": "C_hat ~ [[1.00, 0.85, -0.51, -0.55], [0.85, 1.00, -0.42, -0.33], [-0.51, -0.42, 1.00, 0.09], [-0.55, -0.33, 0.09, 1.00]]",
+        "D": "C_hat ~ [[1.00, 0.25, -0.51, -0.55], [0.25, 1.00, -0.42, -0.33], [-0.51, -0.42, 1.00, 0.09], [-0.55, -0.33, 0.09, 1.00]]"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q1.png",
+      "source_location": "exam p.2, Figure 1 (scatter plot matrix of x1-x4 with density coloring)"
+    },
+    {
+      "question_id": "Q2",
+      "number": 2,
+      "topic": "Matching histograms to attributes",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We consider the histograms of the four attributes in Figure 2. Match the histograms to the attributes by using the information regarding the distribution of the points from Figure 1.\nWhich one of the following statements is correct?\n\nA. Histogram 1: x3, Histogram 2: x4, Histogram 3: x1, Histogram 4: x2.\nB. Histogram 1: x3, Histogram 2: x1, Histogram 3: x4, Histogram 4: x2.\nC. Histogram 1: x2, Histogram 2: x3, Histogram 3: x1, Histogram 4: x4.\nD. Histogram 1: x2, Histogram 2: x1, Histogram 3: x3, Histogram 4: x2.",
+      "options": {
+        "A": "Histogram 1: x3, Histogram 2: x4, Histogram 3: x1, Histogram 4: x2.",
+        "B": "Histogram 1: x3, Histogram 2: x1, Histogram 3: x4, Histogram 4: x2.",
+        "C": "Histogram 1: x2, Histogram 2: x3, Histogram 3: x1, Histogram 4: x4.",
+        "D": "Histogram 1: x2, Histogram 2: x1, Histogram 3: x3, Histogram 4: x2."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q2.png",
+      "source_location": "exam p.2-3, Figure 1 (scatter matrix) and Figure 2 (four histograms with permuted order)"
+    },
+    {
+      "question_id": "Q3",
+      "number": 3,
+      "topic": "PCA reconstruction from SVD (first two PCs)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We consider a subset of N = 5 points from the CCPP dataset X where each row corresponds to an observation. We apply Principal Component Analysis (PCA) using the Singular Value Decomposition (SVD) and the resulting matrices Sigma, V are given below. The observation x4 = [1.4, 1, 0.1, -2.8]^T is projected and then reconstructed using the first two principal components and the mean. The data matrix is\nX = [[-0.6, -0.6, 2.5, -0.1], [-0.8, -0.3, -1, 1.2], [-0.7, 0.3, -0.2, -0.1], [1.4, 1, 0.1, -2.8], [-0.2, 0.8, -1.2, 0.7]],\nwith X_tilde_ij = X_ij - (1/N) sum_{n=1}^N X_nj the centered matrix and the singular value decomposition\nX_tilde = U Sigma V^T, Sigma ~ diag(3.7, 3.04, 0.56, 0.48, 0) (5x4, last row zero),\nV ~ [[0.43, -0.26, 0.22, -0.84], [0.17, -0.37, 0.81, 0.42], [0.33, 0.88, 0.34, -0.01], [-0.82, 0.14, 0.42, -0.36]].\nWhich one of the following reconstructions is correct?\n\nA. x4_hat ~ [1.35, 1.11, 0.13, -2.77]^T\nB. x4_hat ~ [1.42, 1.15, 0.15, -2.91]^T\nC. x4_hat ~ [1.53, 0.97, 0.19, -2.35]^T\nD. x4_hat ~ [1.6, 0.91, 0.11, -2.69]^T",
+      "options": {
+        "A": "x4_hat ~ [1.35, 1.11, 0.13, -2.77]^T",
+        "B": "x4_hat ~ [1.42, 1.15, 0.15, -2.91]^T",
+        "C": "x4_hat ~ [1.53, 0.97, 0.19, -2.35]^T",
+        "D": "x4_hat ~ [1.6, 0.91, 0.11, -2.69]^T"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 3 (X, Sigma, V printed inline as matrices)"
+    },
+    {
+      "question_id": "Q4",
+      "number": 4,
+      "topic": "PCA properties (eigenvectors / variance explained)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We consider again the PCA result of the CCPP dataset.\nWhich one of the following statements is correct?\n\nA. The first two eigenvectors explain less than 90% of the total variance.\nB. With respect to the first eigenvector, low values of Temperature, Pressure, Humidity and a high value of Vacuum results in a positive projection.\nC. For every dataset, if we do not use all the principal components, then we are not able to reconstruct perfectly the given data.\nD. For every dataset it holds for the eigenvectors computed by SVD that the angle between every pair of distinct eigenvectors is 90 degrees and the Euclidean norm of every individual eigenvector is equal to one.",
+      "options": {
+        "A": "The first two eigenvectors explain less than 90% of the total variance.",
+        "B": "With respect to the first eigenvector, low values of Temperature, Pressure, Humidity and a high value of Vacuum results in a positive projection.",
+        "C": "For every dataset, if we do not use all the principal components, then we are not able to reconstruct perfectly the given data.",
+        "D": "For every dataset it holds for the eigenvectors computed by SVD that the angle between every pair of distinct eigenvectors is 90 degrees and the Euclidean norm of every individual eigenvector is equal to one."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 4 (pure text, refers to Q3 SVD)"
+    },
+    {
+      "question_id": "Q5",
+      "number": 5,
+      "topic": "Logistic regression properties",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements regarding logistic regression is correct?\n\nA. Consider a regularized logistic regression model for a binary classification problem. Assume that during training we over-regularize (lambda -> +infinity) the weights while the intercept is not regularized. The resulting model will classify every test point to the class with the highest number of training points.\nB. We can find the optimal weights for a regularized logistic regression classifier using the formula w* = (X_tilde^T X_tilde + lambda I)^-1 X_tilde^T y.\nC. The logistic regression classifier cannot be modified to separate two classes with a nonlinear decision boundary.\nD. The logistic sigmoid function maps from a probability to a continuous value in (-infinity, infinity).",
+      "options": {
+        "A": "Consider a regularized logistic regression model for a binary classification problem. Assume that during training we over-regularize (lambda -> +infinity) the weights while the intercept is not regularized. The resulting model will classify every test point to the class with the highest number of training points.",
+        "B": "We can find the optimal weights for a regularized logistic regression classifier using the formula w* = (X_tilde^T X_tilde + lambda I)^-1 X_tilde^T y.",
+        "C": "The logistic regression classifier cannot be modified to separate two classes with a nonlinear decision boundary.",
+        "D": "The logistic sigmoid function maps from a probability to a continuous value in (-infinity, infinity)."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 5 (pure text)"
+    },
+    {
+      "question_id": "Q6",
+      "number": 6,
+      "topic": "Logistic regression with nonlinear transform / matching to decision surface",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We consider the projection of the CCPP dataset on the first two principal components, and a logistic regression classifier where we use nonlinear transformations on the projection b = [b1, b2]^T. The resulting classifier assigns for each b the probability p(y = High | b) = sigma(w^T b_tilde) as shown in Figure 3.\nWhich one of the following combination of transformation and weight vector corresponds to this classifier?\n\nA. w = [0.31, -0.06, 0.07]^T, b_tilde = [1, b1^2, b2^2]^T\nB. w = [0.72, 3.13, -0.25]^T, b_tilde = [1, b1^2, b2^2]^T\nC. w = [0.31, -0.06, 0.07]^T, b_tilde = [1, b1^3, b2^2]^T\nD. w = [0.72, 3.13, -0.25]^T, b_tilde = [1, b1^3, b2^2]^T",
+      "options": {
+        "A": "w = [0.31, -0.06, 0.07]^T, b_tilde = [1, b1^2, b2^2]^T",
+        "B": "w = [0.72, 3.13, -0.25]^T, b_tilde = [1, b1^2, b2^2]^T",
+        "C": "w = [0.31, -0.06, 0.07]^T, b_tilde = [1, b1^3, b2^2]^T",
+        "D": "w = [0.72, 3.13, -0.25]^T, b_tilde = [1, b1^3, b2^2]^T"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q6.png",
+      "source_location": "exam p.4, Figure 3 (logistic regression probability contour over b1-b2 with class markers)"
+    },
+    {
+      "question_id": "Q7",
+      "number": 7,
+      "topic": "ANN forward pass / matching output to density surface",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider an artificial neural network (ANN) trained on the CCPP dataset described in Table 1 to predict the continuous attribute x3 from the two attributes x1 and x2. Suppose the neural network takes the form:\nf(x, w) = h^(2)( w0^(2) + sum_{j=1}^2 wj^(2) h^(1)([1, x1, x2] wj^(1)) ),\nwhere the activation functions are selected as h^(1)(x) = tanh(x) (the hyperbolic tangent activation function) and h^(2)(x) = tanh(x) (the hyperbolic tangent activation function) and the weights are given as:\nw1^(1) = [2.2, 0.7, -0.3]^T, w2^(1) = [-0.2, 0.8, 0.4]^T, w^(2) = [-0.7, 0.5]^T, w0^(2) = 2.2.\nWhich one of the functions in Figure 4 will then correspond to the function f?\n\nA. ANN output 1\nB. ANN output 2\nC. ANN output 3\nD. ANN output 4",
+      "options": {
+        "A": "ANN output 1",
+        "B": "ANN output 2",
+        "C": "ANN output 3",
+        "D": "ANN output 4"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q7.png",
+      "source_location": "exam p.4, Figure 4 (four ANN output density surfaces over x1-x2)"
+    },
+    {
+      "question_id": "Q8",
+      "number": 8,
+      "topic": "Simple Matching Coefficient with unknown values",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We consider the binarized version of the CCPP dataset in Table 2, where each feature f_i is 1 if the attribute x_i is greater than the median (otherwise f_i = 0). Consider a new, binarized observation\no11 = [0, ?, ?, 1]^T,\nwhich contains two unknown values each indicated with a ?. What is the minimum and maximum achievable value of the Simple Matching Coefficient (SMC) between o6 from Table 2 and the new observation o11?\n\nTable 2 (binarized CCPP dataset, features f1 f2 f3 f4; o1-o6 are class Low, o7-o10 are class High):\n        f1  f2  f3  f4\n o1      0   1   0   0\n o2      0   1   0   0\n o3      0   1   0   1\n o4      0   1   0   0\n o5      1   1   0   1\n o6      0   1   0   1\n o7      0   0   0   1\n o8      0   0   0   1\n o9      0   0   0   1\n o10     0   0   0   1\n\nA. min SMC(o6, o11) = 0.50, max SMC(o6, o11) = 1.0\nB. min SMC(o6, o11) = 0.75, max SMC(o6, o11) = 0.9\nC. min SMC(o6, o11) = 0.25, max SMC(o6, o11) = 1.0\nD. min SMC(o6, o11) = 0.25, max SMC(o6, o11) = 0.9",
+      "options": {
+        "A": "min SMC(o6, o11) = 0.50, max SMC(o6, o11) = 1.0",
+        "B": "min SMC(o6, o11) = 0.75, max SMC(o6, o11) = 0.9",
+        "C": "min SMC(o6, o11) = 0.25, max SMC(o6, o11) = 1.0",
+        "D": "min SMC(o6, o11) = 0.25, max SMC(o6, o11) = 0.9"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 2: binarized CCPP dataset. Each feature f_i = 1 if attribute x_i is greater than the median, else 0. Observations o1-o6 belong to class Low; o7-o10 belong to class High.\n        f1  f2  f3  f4\n o1      0   1   0   0\n o2      0   1   0   0\n o3      0   1   0   1\n o4      0   1   0   0\n o5      1   1   0   1\n o6      0   1   0   1\n o7      0   0   0   1\n o8      0   0   0   1\n o9      0   0   0   1\n o10     0   0   0   1",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q8.png",
+      "source_location": "exam p.5, Table 2 (binarized observation matrix)"
+    },
+    {
+      "question_id": "Q9",
+      "number": 9,
+      "topic": "Two-level cross-validation / generalization error estimate",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We consider a subset of N = 1000 points from the CCPP dataset and a classifier with three different complexity levels (Model 1, Model 2, Model 3). We apply two-level cross-validation to estimate the generalization error, with 2 outer folds and 5 inner folds. In Table 3 the information for each outer fold, model, and inner fold is given, together with the performance of each model on the test partition of the outer fold.\n\nTable 3 (validation error on inner folds j=1..5 and test error on the outer test partition):\nOuter fold i = 1\n           j=1    j=2    j=3    j=4    j=5   | Test\n Model 1   0.12   0.21   0.22   0.23   0.15  | 0.24\n Model 2   0.30   0.11   0.15   0.30   0.28  | 0.17\n Model 3   0.21   0.14   0.26   0.17   0.26  | 0.22\n\nOuter fold i = 2\n           j=1    j=2    j=3    j=4    j=5   | Test\n Model 1   0.28   0.18   0.19   0.27   0.12  | 0.19\n Model 2   0.16   0.20   0.27   0.30   0.25  | 0.16\n Model 3   0.13   0.16   0.21   0.17   0.13  | 0.25\n\nWhich one of the following options is the correct estimate of the generalization error?\n\nA. E_hat^gen = 0.165\nB. E_hat^gen = 0.245\nC. E_hat^gen = 0.215\nD. E_hat^gen = 0.205",
+      "options": {
+        "A": "E_hat^gen = 0.165",
+        "B": "E_hat^gen = 0.245",
+        "C": "E_hat^gen = 0.215",
+        "D": "E_hat^gen = 0.205"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 3: two-level cross-validation, N = 1000, 2 outer folds, 5 inner folds. Entries under j=1..5 are validation errors on the inner folds; the Test column is the test error on the associated outer test partition.\nOuter fold i = 1\n           j=1    j=2    j=3    j=4    j=5   | Test\n Model 1   0.12   0.21   0.22   0.23   0.15  | 0.24\n Model 2   0.30   0.11   0.15   0.30   0.28  | 0.17\n Model 3   0.21   0.14   0.26   0.17   0.26  | 0.22\n\nOuter fold i = 2\n           j=1    j=2    j=3    j=4    j=5   | Test\n Model 1   0.28   0.18   0.19   0.27   0.12  | 0.19\n Model 2   0.16   0.20   0.27   0.30   0.25  | 0.16\n Model 3   0.13   0.16   0.21   0.17   0.13  | 0.25",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q9.png",
+      "source_location": "exam p.5, Table 3 (two-level CV validation/test errors)"
+    },
+    {
+      "question_id": "Q10",
+      "number": 10,
+      "topic": "Artificial neural network properties",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements regarding artificial neural networks is correct?\n\nA. An artificial neural network with linear activation functions (h^(i)(x) = x) can be written in terms of a linear regression model.\nB. We are guaranteed to find the optimal artificial neural network every time we train the model from a random initialization.\nC. The optimal number of hidden units of an artificial neural network should be selected in terms of the model that minimizes the training error.\nD. Regularizing an artificial neural network regression model by penalizing the weights using the squared Euclidean norm and a positive value lambda decreases bias and increases variance.",
+      "options": {
+        "A": "An artificial neural network with linear activation functions (h^(i)(x) = x) can be written in terms of a linear regression model.",
+        "B": "We are guaranteed to find the optimal artificial neural network every time we train the model from a random initialization.",
+        "C": "The optimal number of hidden units of an artificial neural network should be selected in terms of the model that minimizes the training error.",
+        "D": "Regularizing an artificial neural network regression model by penalizing the weights using the squared Euclidean norm and a positive value lambda decreases bias and increases variance."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.5, Question 10 (pure text)"
+    },
+    {
+      "question_id": "Q11",
+      "number": 11,
+      "topic": "Bayes / class conditional probability from table",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the Table 4 that shows the class conditional joint probability for the attributes x1, x3 of the CCPP dataset after binarization, while the prior probabilities for the two classes are p(y = Low) = 0.53 and p(y = High) = 0.47.\nWhat is the probability the energy production to be High when x1 = 0?\n\nTable 4 (class conditional probabilities p(x1, x3 | y)):\n  x1   x3 | y=Low   y=High\n   0    0 |  0.04     0.25\n   0    1 |  0.03     0.68\n   1    0 |  0.66     0.02\n   1    1 |  0.27     0.05\n\nA. p(y = High | x1 = 0) ~ 0.92\nB. p(y = High | x1 = 0) ~ 0.82\nC. p(y = High | x1 = 0) ~ 0.56\nD. p(y = High | x1 = 0) ~ 0.78",
+      "options": {
+        "A": "p(y = High | x1 = 0) ~ 0.92",
+        "B": "p(y = High | x1 = 0) ~ 0.82",
+        "C": "p(y = High | x1 = 0) ~ 0.56",
+        "D": "p(y = High | x1 = 0) ~ 0.78"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 4: class conditional probabilities p(x1, x3 | y) for the binarized attributes x1, x3. Priors: p(y=Low) = 0.53, p(y=High) = 0.47.\n  x1   x3 | y=Low   y=High\n   0    0 |  0.04     0.25\n   0    1 |  0.03     0.68\n   1    0 |  0.66     0.02\n   1    1 |  0.27     0.05",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q11.png",
+      "source_location": "exam p.6, Table 4 (class conditional probability table)"
+    },
+    {
+      "question_id": "Q12",
+      "number": 12,
+      "topic": "Regularized linear regression prediction (standardization)",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We consider the synthetic dataset given in Table 5 where x represents the one dimensional input and y the corresponding one dimensional output. We standardize the input before learning the optimal bias w0* and parameter w1* for a regularized linear regression model with lambda = 0.7, where we consider the formulation from Section 14.1.\nWhat is the prediction of the trained model for the input x2?\n\nTable 5 (synthetic dataset for regularized linear regression):\n        i=1    i=2    i=3   i=4   i=5\n y_i    -2.9   -0.4   0.7   2.5   4.5\n x_i    -3.4   -1.3   0.5   2.4   4.2\n\nA. y_hat ~ -0.76\nB. y_hat ~ -0.54\nC. y_hat ~ -0.65\nD. y_hat ~ -2.22",
+      "options": {
+        "A": "y_hat ~ -0.76",
+        "B": "y_hat ~ -0.54",
+        "C": "y_hat ~ -0.65",
+        "D": "y_hat ~ -2.22"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 5: synthetic dataset for the regularized linear regression model. x is the 1D input, y the 1D output.\n        i=1    i=2    i=3   i=4   i=5\n y_i    -2.9   -0.4   0.7   2.5   4.5\n x_i    -3.4   -1.3   0.5   2.4   4.2",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q12.png",
+      "source_location": "exam p.6, Table 5 (synthetic 1D regression dataset)"
+    },
+    {
+      "question_id": "Q13",
+      "number": 13,
+      "topic": "Naive Bayes classification (Gaussian class-conditionals)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We consider the class conditional distributions for the x1, x3 attributes of the CCPP dataset which we model with the following multivariate normal distributions\np(x1, x3 | y = 1) = N(mu^(1), Sigma^(1)), where mu^(1) = [0.77, -0.41]^T, Sigma^(1) = [[0.29, -0.12], [-0.12, 0.55]],\np(x1, x3 | y = 2) = N(mu^(2), Sigma^(2)), where mu^(2) = [-0.91, 0.5]^T, Sigma^(2) = [[0.32, -0.11], [-0.11, 1.12]].\nThe prior probabilities for the classes Low and High are p(y = 1) = 0.53 and p(y = 2) = 0.47 respectively. We are given a new test point x_test = [0, 0.7]^T to classify and we consider a Naive Bayes approach.\nWhich one of the following statements is correct?\n\nA. We do not have enough information to classify the point to one of the two classes.\nB. We will classify the point to the Low class (y = 1).\nC. We will classify the point to the High class (y = 2).\nD. The point belongs in both classes with the same probability p(y = 1 | x_test) = p(y = 2 | x_test) = 0.5.",
+      "options": {
+        "A": "We do not have enough information to classify the point to one of the two classes.",
+        "B": "We will classify the point to the Low class (y = 1).",
+        "C": "We will classify the point to the High class (y = 2).",
+        "D": "The point belongs in both classes with the same probability p(y = 1 | x_test) = p(y = 2 | x_test) = 0.5."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 13 (mu, Sigma, priors printed inline)"
+    },
+    {
+      "question_id": "Q14",
+      "number": 14,
+      "topic": "Ensemble methods (AdaBoost / bagging / boosting)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements regarding ensemble methods is correct?\n\nA. If the accuracy of a classifier in AdaBoost is lower than 0.5, then this classifier will have no influence on the result.\nB. In AdaBoost with a regularized logistic regression classifier as the weak learner, increasing the number of iterations increases the chance of overfitting.\nC. In bagging and boosting observations are sampled without replacement, but in boosting misclassified observations are given a higher probability of being sampled in the next round.\nD. In AdaBoost the more errors a classifier makes in a given round of boosting the more the weights will be increased for the wrongly classified observations.",
+      "options": {
+        "A": "If the accuracy of a classifier in AdaBoost is lower than 0.5, then this classifier will have no influence on the result.",
+        "B": "In AdaBoost with a regularized logistic regression classifier as the weak learner, increasing the number of iterations increases the chance of overfitting.",
+        "C": "In bagging and boosting observations are sampled without replacement, but in boosting misclassified observations are given a higher probability of being sampled in the next round.",
+        "D": "In AdaBoost the more errors a classifier makes in a given round of boosting the more the weights will be increased for the wrongly classified observations."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 14 (pure text)"
+    },
+    {
+      "question_id": "Q15",
+      "number": 15,
+      "topic": "p-distances and KNN (K=3) prediction",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We are given the synthetic dataset in Figure 5 where the color indicates the class. We consider the p-distances d2, d1, d_inf and the KNN classifier with K = 3 to predict the label of the test point o_test = [0, 0]^T.\n\nDataset (coordinates of the six observations; red observations o1, o2, o3 belong to class C1, blue observations o4, o5, o6 belong to class C2):\n       x1     x2\n o1   -0.4   -0.8\n o2   -0.9    0.3\n o3    0      0.9\n o4    1     -0.1\n o5    0.8   -0.7\n o6    0.1    0.8\n\nWhich one of the following statements is correct?\n\nA. d2 and d_inf predict the same label.\nB. d2 and d1 predict the same label.\nC. d1 and d_inf predict the same label.\nD. All the norms predict the same result.",
+      "options": {
+        "A": "d2 and d_inf predict the same label.",
+        "B": "d2 and d1 predict the same label.",
+        "C": "d1 and d_inf predict the same label.",
+        "D": "All the norms predict the same result."
+      },
+      "correct_answer": "C",
+      "text_representation": "Synthetic dataset for Figure 5. The color indicates the class: red observations o1, o2, o3 belong to class C1; blue observations o4, o5, o6 belong to class C2. Test point o_test = [0, 0]^T.\n       x1     x2\n o1   -0.4   -0.8\n o2   -0.9    0.3\n o3    0      0.9\n o4    1     -0.1\n o5    0.8   -0.7\n o6    0.1    0.8",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q15.png",
+      "source_location": "exam p.7, Figure 5 (2D scatter of two classes) with accompanying coordinate table"
+    },
+    {
+      "question_id": "Q16",
+      "number": 16,
+      "topic": "McNemar test / matching Beta distributions to count table (options are plots)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We consider three different classifiers (Model 1, Model 2, Model 3) and the McNemar test is used to compare M1 vs. M2 and M1 vs. M3. In Figure 6 we are given four options of Beta distributions together with the associated information for the comparisons i.e., such that M1 implies that Model 1 predicts correctly and not-M1 that it predicts incorrectly.\nFor which one of the four options does the Beta distributions match the information in the table?\n\nA. Option A\nB. Option B\nC. Option C\nD. Option D",
+      "options": {
+        "A": "Option A",
+        "B": "Option B",
+        "C": "Option C",
+        "D": "Option D"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q16.png",
+      "source_location": "exam p.7, Figure 6 (four options A-D, each a pair of Beta density plots plus a McNemar count table)"
+    },
+    {
+      "question_id": "Q17",
+      "number": 17,
+      "topic": "Hierarchical clustering / complete linkage merge height",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the observations and the pairwise distances in Table 6. At which height will groups/clusters containing o9 and o10 merge in a dendrogram when using the complete linkage function?\n\nTable 6 (pairwise Euclidean distances d(o_i, o_j) between 10 observations; o1-o6 are class C1 Low, o7-o10 are class C2 High):\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\n o1    0.0   2.6   2.8   2.1   0.8   1.7   3.9   3.8   4.1   4.2\n o2    2.6   0.0   1.8   2.3   2.7   1.4   1.9   1.7   2.0   2.2\n o3    2.8   1.8   0.0   1.2   2.9   2.1   2.2   1.6   2.3   2.0\n o4    2.1   2.3   1.2   0.0   2.4   1.8   2.6   2.5   3.0   2.9\n o5    0.8   2.7   2.9   2.4   0.0   2.0   4.2   4.0   4.4   4.5\n o6    1.7   1.4   2.1   1.8   2.0   0.0   2.4   2.6   2.7   3.0\n o7    3.9   1.9   2.2   2.6   4.2   2.4   0.0   1.2   0.6   1.3\n o8    3.8   1.7   1.6   2.5   4.0   2.6   1.2   0.0   1.0   0.6\n o9    4.1   2.0   2.3   3.0   4.4   2.7   0.6   1.0   0.0   0.9\n o10   4.2   2.2   2.0   2.9   4.5   3.0   1.3   0.6   0.9   0.0\n\nA. 1.3\nB. 0.6\nC. 0.9\nD. 1.4",
+      "options": {
+        "A": "1.3",
+        "B": "0.6",
+        "C": "0.9",
+        "D": "1.4"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 6: pairwise Euclidean distances d(o_i, o_j) between 10 observations (M = 4 standardized features). Observations o1-o6 belong to class C1 (Low); o7-o10 belong to class C2 (High).\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\n o1    0.0   2.6   2.8   2.1   0.8   1.7   3.9   3.8   4.1   4.2\n o2    2.6   0.0   1.8   2.3   2.7   1.4   1.9   1.7   2.0   2.2\n o3    2.8   1.8   0.0   1.2   2.9   2.1   2.2   1.6   2.3   2.0\n o4    2.1   2.3   1.2   0.0   2.4   1.8   2.6   2.5   3.0   2.9\n o5    0.8   2.7   2.9   2.4   0.0   2.0   4.2   4.0   4.4   4.5\n o6    1.7   1.4   2.1   1.8   2.0   0.0   2.4   2.6   2.7   3.0\n o7    3.9   1.9   2.2   2.6   4.2   2.4   0.0   1.2   0.6   1.3\n o8    3.8   1.7   1.6   2.5   4.0   2.6   1.2   0.0   1.0   0.6\n o9    4.1   2.0   2.3   3.0   4.4   2.7   0.6   1.0   0.0   0.9\n o10   4.2   2.2   2.0   2.9   4.5   3.0   1.3   0.6   0.9   0.0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q17.png",
+      "source_location": "exam p.8, Table 6 (10x10 pairwise distance matrix with class colors)"
+    },
+    {
+      "question_id": "Q18",
+      "number": 18,
+      "topic": "AdaBoost weight update after first round",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider again the CCPP dataset of Table 1. Suppose we limit ourselves to N = 6 observations from the original dataset and furthermore suppose we consider only the features x1 and x4 to predict the class y = 1 or y = 2. We use a KNN classification model (K = 1) to this dataset and apply AdaBoost to improve the performance. After the first round of boosting, we obtain predictions and the true class labels as tabulated in Table 7. Note that log(x) consistently refers to the natural logarithm (i.e., base e). Given this information, how will the AdaBoost update the weights w?\n\nTable 7 (true class labels y^true and AdaBoost predictions t=1 for the N = 6 observations):\n         y^true   t=1\n y1        2        2\n y2        2        2\n y3        1        2\n y4        2        1\n y5        1        2\n y6        1        2\n\nA. [0.112, 0.112, 0.194, 0.194, 0.194, 0.194]\nB. [0.25, 0.25, 0.125, 0.125, 0.125, 0.125]\nC. [0.059, 0.059, 0.221, 0.221, 0.221, 0.221]\nD. [0.341, 0.341, 0.079, 0.079, 0.079, 0.079]",
+      "options": {
+        "A": "[0.112, 0.112, 0.194, 0.194, 0.194, 0.194]",
+        "B": "[0.25, 0.25, 0.125, 0.125, 0.125, 0.125]",
+        "C": "[0.059, 0.059, 0.221, 0.221, 0.221, 0.221]",
+        "D": "[0.341, 0.341, 0.079, 0.079, 0.079, 0.079]"
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 7: for each of the N = 6 observations, the true class label y^true and the predicted output of the AdaBoost classifier (t = 1, first round of boosting).\n         y^true   t=1\n y1        2        2\n y2        2        2\n y3        1        2\n y4        2        1\n y5        1        2\n y6        1        2",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q18.png",
+      "source_location": "exam p.8, Table 7 (true labels vs AdaBoost predictions for 6 observations)"
+    },
+    {
+      "question_id": "Q19",
+      "number": 19,
+      "topic": "KNN (K=3) leave-one-out accuracy from distance matrix",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Consider the distances in Table 6 based on 10 observations from the CCPP dataset. The class labels C1, C2 (see table caption for details) will be predicted using a k-nearest neighbour classifier based on the distances given in Table 6 (ties are broken in the usual manner by considering the nearest observation from the tied classes). Suppose we use leave-one-out cross validation (i.e., the observation that is being predicted is left out) and a 3-nearest neighbour classifier (i.e., k = 3). What is the accuracy computed for all N = 10 observations?\n\nTable 6 (pairwise Euclidean distances d(o_i, o_j) between 10 observations; o1-o6 are class C1 Low, o7-o10 are class C2 High):\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\n o1    0.0   2.6   2.8   2.1   0.8   1.7   3.9   3.8   4.1   4.2\n o2    2.6   0.0   1.8   2.3   2.7   1.4   1.9   1.7   2.0   2.2\n o3    2.8   1.8   0.0   1.2   2.9   2.1   2.2   1.6   2.3   2.0\n o4    2.1   2.3   1.2   0.0   2.4   1.8   2.6   2.5   3.0   2.9\n o5    0.8   2.7   2.9   2.4   0.0   2.0   4.2   4.0   4.4   4.5\n o6    1.7   1.4   2.1   1.8   2.0   0.0   2.4   2.6   2.7   3.0\n o7    3.9   1.9   2.2   2.6   4.2   2.4   0.0   1.2   0.6   1.3\n o8    3.8   1.7   1.6   2.5   4.0   2.6   1.2   0.0   1.0   0.6\n o9    4.1   2.0   2.3   3.0   4.4   2.7   0.6   1.0   0.0   0.9\n o10   4.2   2.2   2.0   2.9   4.5   3.0   1.3   0.6   0.9   0.0\n\nA. accuracy = 1/5\nB. accuracy = 3/5\nC. accuracy = 4/5\nD. accuracy = 1",
+      "options": {
+        "A": "accuracy = 1/5",
+        "B": "accuracy = 3/5",
+        "C": "accuracy = 4/5",
+        "D": "accuracy = 1"
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 6: pairwise Euclidean distances d(o_i, o_j) between 10 observations (M = 4 standardized features). Observations o1-o6 belong to class C1 (Low); o7-o10 belong to class C2 (High).\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\n o1    0.0   2.6   2.8   2.1   0.8   1.7   3.9   3.8   4.1   4.2\n o2    2.6   0.0   1.8   2.3   2.7   1.4   1.9   1.7   2.0   2.2\n o3    2.8   1.8   0.0   1.2   2.9   2.1   2.2   1.6   2.3   2.0\n o4    2.1   2.3   1.2   0.0   2.4   1.8   2.6   2.5   3.0   2.9\n o5    0.8   2.7   2.9   2.4   0.0   2.0   4.2   4.0   4.4   4.5\n o6    1.7   1.4   2.1   1.8   2.0   0.0   2.4   2.6   2.7   3.0\n o7    3.9   1.9   2.2   2.6   4.2   2.4   0.0   1.2   0.6   1.3\n o8    3.8   1.7   1.6   2.5   4.0   2.6   1.2   0.0   1.0   0.6\n o9    4.1   2.0   2.3   3.0   4.4   2.7   0.6   1.0   0.0   0.9\n o10   4.2   2.2   2.0   2.9   4.5   3.0   1.3   0.6   0.9   0.0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q19.png",
+      "source_location": "exam p.8, Table 6 (10x10 pairwise distance matrix with class colors)"
+    },
+    {
+      "question_id": "Q20",
+      "number": 20,
+      "topic": "Matching classifiers to decision boundaries",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider a subset of the CCPP dataset (described in Table 1) after it has been projected onto the first two principal components b1 and b2, thereby giving rise to a smaller two-dimensional dataset. We will consider the following four classifiers: LREG: Logistic regression. ANN: Artificial neural network with 5 hidden units. CT: Classification tree with regular axis-aligned splits (b_i < c). KNN: K-nearest neighbours with K = 3. Suppose the classifiers are trained on the two-dimensional dataset and the decision boundary for each of the four classifiers is given in Figure 7. Which one of the following statements is correct?\n\nA. Classifier 1 corresponds to KNN, Classifier 2 corresponds to ANN, Classifier 3 corresponds to LREG, Classifier 4 corresponds to CT.\nB. Classifier 1 corresponds to LREG, Classifier 2 corresponds to ANN, Classifier 3 corresponds to KNN, Classifier 4 corresponds to CT.\nC. Classifier 1 corresponds to CT, Classifier 2 corresponds to LREG, Classifier 3 corresponds to KNN, Classifier 4 corresponds to ANN.\nD. Classifier 1 corresponds to LREG, Classifier 2 corresponds to CT, Classifier 3 corresponds to ANN, Classifier 4 corresponds to KNN.",
+      "options": {
+        "A": "Classifier 1 corresponds to KNN, Classifier 2 corresponds to ANN, Classifier 3 corresponds to LREG, Classifier 4 corresponds to CT.",
+        "B": "Classifier 1 corresponds to LREG, Classifier 2 corresponds to ANN, Classifier 3 corresponds to KNN, Classifier 4 corresponds to CT.",
+        "C": "Classifier 1 corresponds to CT, Classifier 2 corresponds to LREG, Classifier 3 corresponds to KNN, Classifier 4 corresponds to ANN.",
+        "D": "Classifier 1 corresponds to LREG, Classifier 2 corresponds to CT, Classifier 3 corresponds to ANN, Classifier 4 corresponds to KNN."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q20.png",
+      "source_location": "exam p.9, Figure 7 (four classifier decision-boundary plots over PCA1/PCA2)"
+    },
+    {
+      "question_id": "Q21",
+      "number": 21,
+      "topic": "Kernel density estimation / anomaly detection",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Consider the synthetic 1D dataset with four training observations:\nX = {-3, -1, 5, 6}.\nA standard kernel density estimator (KDE) with sigma^2 = 0.5 is used to determine if test observations are anomalous based on their estimated densities. An observation will be flagged as an anomaly if p(x) < 0.015. We test two new observations located at x = -4 and x = 2.\nDetermine which one of the following statements is correct.\n\nA. Both test observations are anomalies.\nB. The observation at x = -4 is not an anomaly but the observation at x = 2 is an anomaly.\nC. The observation at x = -4 is an anomaly but the observation at x = 2 is not an anomaly.\nD. Neither of the test observations are anomalies.",
+      "options": {
+        "A": "Both test observations are anomalies.",
+        "B": "The observation at x = -4 is not an anomaly but the observation at x = 2 is an anomaly.",
+        "C": "The observation at x = -4 is an anomaly but the observation at x = 2 is not an anomaly.",
+        "D": "Neither of the test observations are anomalies."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.9, Question 21 (dataset X printed inline)"
+    },
+    {
+      "question_id": "Q22",
+      "number": 22,
+      "topic": "Decision tree / matching split rules to classification boundary",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider the CCPP dataset projected onto the first two principal directions. Suppose we train a decision tree to predict which of the two classes an observation belongs to. Since the attributes are continuous, we will consider binary splits of the form b_i >= z for different values of i and z, where b1, b2 refer to the coordinates of the observations when projected onto principal directions. Suppose the trained decision tree has the form shown in Figure 8, and that according to the tree the predicted label assignment for a subset of the observations is as given in Figure 9, what is then the correct rule assignment to the nodes in the decision tree?\n\nA. B: b1 >= 0.63, C: b1 >= 0.28, D: b2 >= -1.63, E: b1 >= 0.19, F: b1 >= -1.75\nB. B: b1 >= -1.75, C: b2 >= -1.63, D: b1 >= 0.28, E: b1 >= 0.63, F: b1 >= 0.19\nC. B: b1 >= 0.19, C: b2 >= -1.63, D: b1 >= 0.63, E: b1 >= -1.75, F: b1 >= 0.28\nD. B: b2 >= -1.63, C: b1 >= 0.63, D: b1 >= -1.75, E: b1 >= 0.28, F: b1 >= 0.19",
+      "options": {
+        "A": "B: b1 >= 0.63, C: b1 >= 0.28, D: b2 >= -1.63, E: b1 >= 0.19, F: b1 >= -1.75",
+        "B": "B: b1 >= -1.75, C: b2 >= -1.63, D: b1 >= 0.28, E: b1 >= 0.63, F: b1 >= 0.19",
+        "C": "B: b1 >= 0.19, C: b2 >= -1.63, D: b1 >= 0.63, E: b1 >= -1.75, F: b1 >= 0.28",
+        "D": "B: b2 >= -1.63, C: b1 >= 0.63, D: b1 >= -1.75, E: b1 >= 0.28, F: b1 >= 0.19"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q22.png",
+      "source_location": "exam p.10, Figure 8 (decision-tree structure with nodes B,C,D,E,F) and Figure 9 (classification boundary over PCA1/PCA2)"
+    },
+    {
+      "question_id": "Q23",
+      "number": 23,
+      "topic": "KNN (K=3) decision boundary identification",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider a two-dimensional data set comprised of N = 9 observations shown in Figure 10. The dataset consists of three classes indicated by the blue squares (class 1), red triangles (class 2) and yellow circles (class 3). In the figure, the decision boundaries for four K-nearest neighbor classifiers (KNN) are shown. Which one of the plots correspond to the K = 3 nearest-neighbour classifier assuming ties are broken by assigning to the nearest neighbour's class?\n\nA. KNN decision boundary A\nB. KNN decision boundary B\nC. KNN decision boundary C\nD. KNN decision boundary D",
+      "options": {
+        "A": "KNN decision boundary A",
+        "B": "KNN decision boundary B",
+        "C": "KNN decision boundary C",
+        "D": "KNN decision boundary D"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q23.png",
+      "source_location": "exam p.10, Figure 10 (four KNN decision-boundary strips A-D with 9 observations)"
+    },
+    {
+      "question_id": "Q24",
+      "number": 24,
+      "topic": "ROC curve / matching predictions to ROC",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "A neural network classifier is trained to distinguish between two classes y in {1, 2} and produce class-probability y_hat and the receiver operator characteristic (ROC) curve of the network when evaluated on a test set with N = 8 observations is shown in Figure 11. Suppose we plot the predictions on the N = 8 test observations by their y_hat value along the x-axis and indicate the class labels by either a black circle (class y = 1) or red cross (class y = 2), which one of the subplots in Figure 12 then corresponds to the ROC curve in Figure 11?\n\nA. Prediction A\nB. Prediction B\nC. Prediction C\nD. Prediction D",
+      "options": {
+        "A": "Prediction A",
+        "B": "Prediction B",
+        "C": "Prediction C",
+        "D": "Prediction D"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q24.png",
+      "source_location": "exam p.11, Figure 11 (ROC curve) and Figure 12 (four 1D prediction plots A-D with y_hat positions and class markers)"
+    },
+    {
+      "question_id": "Q25",
+      "number": 25,
+      "topic": "Apriori algorithm principle",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "In the context of the Apriori algorithm for association rule mining, which one of the following statements accurately describes a fundamental principle or step within the algorithm?\n\nA. Apriori randomly samples a candidate itemset and includes it in the list of frequent itemsets if its support is >= epsilon.\nB. Apriori prunes infrequent itemsets by exploiting the downward closure property of support, where any subset of a frequent itemset must also be frequent.\nC. Apriori finds association rules with support >= epsilon by exploiting that itemsets with N + 1 items always have lower support than itemsets with N items.\nD. Apriori uses a regression model to efficiently calculate the support of any itemset exploiting the downward closure property to find relevant inputs to the regression model.",
+      "options": {
+        "A": "Apriori randomly samples a candidate itemset and includes it in the list of frequent itemsets if its support is >= epsilon.",
+        "B": "Apriori prunes infrequent itemsets by exploiting the downward closure property of support, where any subset of a frequent itemset must also be frequent.",
+        "C": "Apriori finds association rules with support >= epsilon by exploiting that itemsets with N + 1 items always have lower support than itemsets with N items.",
+        "D": "Apriori uses a regression model to efficiently calculate the support of any itemset exploiting the downward closure property to find relevant inputs to the regression model."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.11, Question 25 (pure text)"
+    },
+    {
+      "question_id": "Q26",
+      "number": 26,
+      "topic": "Cross-validation properties",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements regarding cross-validation is correct?\n\nA. The size of the test set in 10 fold cross-validation is bigger than the size of the test set in 5 fold cross-validation.\nB. Leave-one-out cross-validation gives a poor estimate of the generalization error as only one observation is part of the test set at the time.\nC. The test error obtained for the model selected based on cross-validation is a biased estimate of the generalization error.\nD. In K-fold cross-validation the trained models are more similar to each other compared to leave-one-out cross-validation because fewer data are used in each iteration for training.",
+      "options": {
+        "A": "The size of the test set in 10 fold cross-validation is bigger than the size of the test set in 5 fold cross-validation.",
+        "B": "Leave-one-out cross-validation gives a poor estimate of the generalization error as only one observation is part of the test set at the time.",
+        "C": "The test error obtained for the model selected based on cross-validation is a biased estimate of the generalization error.",
+        "D": "In K-fold cross-validation the trained models are more similar to each other compared to leave-one-out cross-validation because fewer data are used in each iteration for training."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.12, Question 26 (pure text)"
+    },
+    {
+      "question_id": "Q27",
+      "number": 27,
+      "topic": "Gaussian Mixture Model / matching density to samples",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Let N(x|mu, Sigma) denote the multivariate normal distribution with mean mu and covariance matrix Sigma. In Figure 13 is given 1000 observations drawn from a density defined by a Gaussian Mixture Model (GMM) with three clusters. Each observation is colored in terms of which cluster it came from in the Gaussian Mixture model. Which one of the following GMM densities was used to generate the data?\n\nA. p(x) = (3/8) N(x | [1.7, -8.4], [[3.0, 0.8], [0.8, 2.1]]) + (1/2) N(x | [10.7, -11.5], [[0.6, 0.3], [0.3, 1.1]]) + (1/8) N(x | [-7.4, 0.3], [[1.3, -1.5], [-1.5, 2.3]])\nB. p(x) = (1/8) N(x | [1.7, -8.4], [[1.3, -1.5], [-1.5, 2.3]]) + (3/8) N(x | [10.7, -11.5], [[0.6, 0.3], [0.3, 1.1]]) + (1/2) N(x | [-7.4, 0.3], [[3.0, 0.8], [0.8, 2.1]])\nC. p(x) = (1/8) N(x | [1.7, -8.4], [[3.0, 0.8], [0.8, 2.1]]) + (1/2) N(x | [10.7, -11.5], [[0.6, 0.3], [0.3, 1.1]]) + (3/8) N(x | [-7.4, 0.3], [[1.3, -1.5], [-1.5, 2.3]])\nD. p(x) = (3/8) N(x | [1.7, -8.4], [[1.3, -1.5], [-1.5, 2.3]]) + (1/2) N(x | [10.7, -11.5], [[3.0, 0.8], [0.8, 2.1]]) + (1/8) N(x | [-7.4, 0.3], [[0.6, 0.3], [0.3, 1.1]])",
+      "options": {
+        "A": "p(x) = (3/8) N(x | [1.7, -8.4], [[3.0, 0.8], [0.8, 2.1]]) + (1/2) N(x | [10.7, -11.5], [[0.6, 0.3], [0.3, 1.1]]) + (1/8) N(x | [-7.4, 0.3], [[1.3, -1.5], [-1.5, 2.3]])",
+        "B": "p(x) = (1/8) N(x | [1.7, -8.4], [[1.3, -1.5], [-1.5, 2.3]]) + (3/8) N(x | [10.7, -11.5], [[0.6, 0.3], [0.3, 1.1]]) + (1/2) N(x | [-7.4, 0.3], [[3.0, 0.8], [0.8, 2.1]])",
+        "C": "p(x) = (1/8) N(x | [1.7, -8.4], [[3.0, 0.8], [0.8, 2.1]]) + (1/2) N(x | [10.7, -11.5], [[0.6, 0.3], [0.3, 1.1]]) + (3/8) N(x | [-7.4, 0.3], [[1.3, -1.5], [-1.5, 2.3]])",
+        "D": "p(x) = (3/8) N(x | [1.7, -8.4], [[1.3, -1.5], [-1.5, 2.3]]) + (1/2) N(x | [10.7, -11.5], [[3.0, 0.8], [0.8, 2.1]]) + (1/8) N(x | [-7.4, 0.3], [[0.6, 0.3], [0.3, 1.1]])"
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Fall2023_Q27.png",
+      "source_location": "exam p.12, Figure 13 (scatter of 1000 GMM samples in 3 colored clusters)"
+    }
+  ]
+}

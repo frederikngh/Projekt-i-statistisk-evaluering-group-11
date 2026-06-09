@@ -1,0 +1,551 @@
+{
+  "exam": "Spring2017",
+  "course": "02450",
+  "source_pdf": "ML-examsets/Spring2017.pdf",
+  "solution_pdf": "ML-solutions/Spring2017_sol.pdf",
+  "n_questions": 27,
+  "answer_key": {
+    "Q1": "B",
+    "Q2": "A",
+    "Q3": "A",
+    "Q4": "A",
+    "Q5": "B",
+    "Q6": "B",
+    "Q7": "B",
+    "Q8": "B",
+    "Q9": "B",
+    "Q10": "C",
+    "Q11": "C",
+    "Q12": "C",
+    "Q13": "A",
+    "Q14": "D",
+    "Q15": "B",
+    "Q16": "D",
+    "Q17": "B",
+    "Q18": "C",
+    "Q19": "C",
+    "Q20": "D",
+    "Q21": "C",
+    "Q22": "D",
+    "Q23": "D",
+    "Q24": "A",
+    "Q25": "C",
+    "Q26": "A",
+    "Q27": "D"
+  },
+  "questions": [
+    {
+      "question_id": "Q1",
+      "number": 1,
+      "topic": "Attribute types (continuous/discrete/nominal/ordinal/ratio)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We will consider the data of Motor Trend Car Road Tests based on 32 automobiles (observations) taken from the Cars dataset. The original data contains eleven attributes, however, we presently consider only five of these attributes given in Table 1 as well as the output attribute y given by how many miles the car drives pr. gallon of fuel. The five input attributes are: x1 = Number of cylinders (cyl), x2 = Horsepower (hp), x3 = Weight (wt), x4 = Transmission (am; 0=automatic, 1=manual), x5 = Number of forward gears (gear), and the output y = Miles pr. gallon (mpg). Considering the attributes described in Table 1 which one of the following statements is correct?\n\nA. The attribute x5 is continuous.\nB. The output variable y is ratio.\nC. The attribute x4 is ordinal.\nD. The attribute x1 is nominal.",
+      "options": {
+        "A": "The attribute x5 is continuous.",
+        "B": "The output variable y is ratio.",
+        "C": "The attribute x4 is ordinal.",
+        "D": "The attribute x1 is nominal."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.2, Question 1 + Table 1 (attribute descriptions, all text)"
+    },
+    {
+      "question_id": "Q2",
+      "number": 2,
+      "topic": "Boxplot interpretation of standardized attributes",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "In Figure 1 is given a boxplot of the five attributes x1-x5 after standardizing the data, i.e. subtracting the mean of each attribute and dividing each attribute by its standard deviation. The boxplot shows the five attributes cyl, hp, wt, am, gear on the horizontal axis with standardized values (roughly -1.5 to 2.7) on the vertical axis. Which one of the following statements is correct?\n\nA. The majority of cars have automatic transmission.\nB. The attribute x5 (i.e., number of forward gears (gear)) appears to be normal distributed.\nC. The attribute x2 (i.e., horse power (hp)) has a clear outlier that should be removed.\nD. From the boxplot it is clear that some of the attributes are highly correlated with each other.",
+      "options": {
+        "A": "The majority of cars have automatic transmission.",
+        "B": "The attribute x5 (i.e., number of forward gears (gear)) appears to be normal distributed.",
+        "C": "The attribute x2 (i.e., horse power (hp)) has a clear outlier that should be removed.",
+        "D": "From the boxplot it is clear that some of the attributes are highly correlated with each other."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q2.png",
+      "source_location": "exam p.2, Figure 1 (boxplot of five standardized attributes)"
+    },
+    {
+      "question_id": "Q3",
+      "number": 3,
+      "topic": "PCA / variance explained from singular values",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "A principal component analysis (PCA) is carried out on the standardized attributes x1-x5, forming the standardized matrix X_tilde, resulting in the following S and V matrices obtained from a singular value decomposition of X_tilde:\n\nS =\n[ 10.2   0     0     0     0   ]\n[  0     6.1   0     0     0   ]\n[  0     0     2.8   0     0   ]\n[  0     0     0     2.2   0   ]\n[  0     0     0     0     1.6 ]\n\nV =\n[  0.49  -0.31   0.42  -0.14   0.69 ]\n[  0.39  -0.62   0.05  -0.24  -0.63 ]\n[  0.51  -0.06  -0.55   0.66   0.08 ]\n[ -0.44  -0.46   0.42   0.65  -0.02 ]\n[ -0.40  -0.55  -0.59  -0.27   0.35 ]\n\nThe data projected onto the first two principal components are given in Figure 2. Which one of the following statements is correct?\n\nA. The first principal component accounts for less than 70 % of the variance.\nB. The two first principal components account for less than 90 % of the variance.\nC. The fifth principal component accounts for less than 1% of the variance.\nD. As can be observed in Figure 2 there is a positive correlation between the projection of the data to the first and second principal component.",
+      "options": {
+        "A": "The first principal component accounts for less than 70 % of the variance.",
+        "B": "The two first principal components account for less than 90 % of the variance.",
+        "C": "The fifth principal component accounts for less than 1% of the variance.",
+        "D": "As can be observed in Figure 2 there is a positive correlation between the projection of the data to the first and second principal component."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.3, Question 3 (S and V matrices inline; correct answer A computed from S diagonal)"
+    },
+    {
+      "question_id": "Q4",
+      "number": 4,
+      "topic": "PCA / interpretation of projection plot colored by output",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "The data projected onto the two first principal components (as defined in Question 3) is given in Figure 2 where the output variable y is indicated by the color of each observation. Figure 2 is a scatter plot of the observations in the (PCA 1, PCA 2) plane, each point color coded according to y (miles pr. gallon, colorbar roughly 12 to 32). The V matrix from Question 3 is:\n\nV =\n[  0.49  -0.31   0.42  -0.14   0.69 ]\n[  0.39  -0.62   0.05  -0.24  -0.63 ]\n[  0.51  -0.06  -0.55   0.66   0.08 ]\n[ -0.44  -0.46   0.42   0.65  -0.02 ]\n[ -0.40  -0.55  -0.59  -0.27   0.35 ]\n\nWhich one of the following statements pertaining to the PCA is correct?\n\nA. Cars with a relatively small number of cylinders, low horsepower, low weight, that have manual transmission, and many forward gears tend to drive longer pr. gallon of fuel.\nB. The second principal component appears to provide a better description of how far a car drives pr. gallon of fuel than principal component direction one.\nC. From the PCA plot it appears to be very difficult to predict fuel consumption based on the attributes x1-x5.\nD. Cars with a relatively small number of cylinders, low horsepower, that are automatic, and with few forward gears will have a large negative projection onto the second principal component.",
+      "options": {
+        "A": "Cars with a relatively small number of cylinders, low horsepower, low weight, that have manual transmission, and many forward gears tend to drive longer pr. gallon of fuel.",
+        "B": "The second principal component appears to provide a better description of how far a car drives pr. gallon of fuel than principal component direction one.",
+        "C": "From the PCA plot it appears to be very difficult to predict fuel consumption based on the attributes x1-x5.",
+        "D": "Cars with a relatively small number of cylinders, low horsepower, that are automatic, and with few forward gears will have a large negative projection onto the second principal component."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q4.png",
+      "source_location": "exam p.4, Figure 2 (PCA projection scatter colored by y) + V matrix from Q3"
+    },
+    {
+      "question_id": "Q5",
+      "number": 5,
+      "topic": "Gaussian Mixture Model / matching density to contour plot",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Consider the Gaussian Mixture Model (GMM) fitted to the Cars dataset projected onto the first two principal components for which the contours of the fitted GMM is given in Figure 3. Figure 3 is a contour plot of the fitted three-cluster GMM density in the (PCA 1, PCA 2) plane (density values roughly 0.1 to 0.6). We will in the following use N(x | mu, Sigma) = (1/((2pi)^(M/2) |Sigma|^(1/2))) exp(-(1/2)(x - mu)^T Sigma^(-1) (x - mu)) to denote the multivariate normal distribution with mean mu and covariance matrix Sigma. Which one of the following GMM densities corresponds to the fitted GMM?\n\nA. p(x) = 0.449*N(x | mu=[-1.129, 0.417], Sigma=[[1.307, 0.557],[0.557, 0.575]]) + 0.176*N(x | mu=[-1.298, -1.261], Sigma=[[0.248, -0.128],[-0.128, 0.101]]) + 0.375*N(x | mu=[1.957, 0.091], Sigma=[[1.458, -1.982],[-1.982, 2.771]])\nB. p(x) = 0.449*N(x | mu=[-1.129, 0.417], Sigma=[[1.307, 0.557],[0.557, 0.575]]) + 0.176*N(x | mu=[-1.298, -1.261], Sigma=[[1.458, -1.982],[-1.982, 2.771]]) + 0.375*N(x | mu=[1.957, 0.091], Sigma=[[0.248, -0.128],[-0.128, 0.101]])\nC. p(x) = 0.449*N(x | mu=[-1.129, 0.417], Sigma=[[1.458, -1.982],[-1.982, 2.771]]) + 0.176*N(x | mu=[-1.298, -1.261], Sigma=[[1.307, 0.557],[0.557, 0.575]]) + 0.375*N(x | mu=[1.957, 0.091], Sigma=[[0.248, -0.128],[-0.128, 0.101]])\nD. p(x) = 0.449*N(x | mu=[-1.129, 0.417], Sigma=[[1.458, -1.982],[-1.982, 2.771]]) + 0.176*N(x | mu=[-1.298, -1.261], Sigma=[[0.248, -0.128],[-0.128, 0.101]]) + 0.375*N(x | mu=[1.957, 0.091], Sigma=[[1.307, 0.557],[0.557, 0.575]])",
+      "options": {
+        "A": "p(x) = 0.449*N(x | mu=[-1.129, 0.417], Sigma=[[1.307, 0.557],[0.557, 0.575]]) + 0.176*N(x | mu=[-1.298, -1.261], Sigma=[[0.248, -0.128],[-0.128, 0.101]]) + 0.375*N(x | mu=[1.957, 0.091], Sigma=[[1.458, -1.982],[-1.982, 2.771]])",
+        "B": "p(x) = 0.449*N(x | mu=[-1.129, 0.417], Sigma=[[1.307, 0.557],[0.557, 0.575]]) + 0.176*N(x | mu=[-1.298, -1.261], Sigma=[[1.458, -1.982],[-1.982, 2.771]]) + 0.375*N(x | mu=[1.957, 0.091], Sigma=[[0.248, -0.128],[-0.128, 0.101]])",
+        "C": "p(x) = 0.449*N(x | mu=[-1.129, 0.417], Sigma=[[1.458, -1.982],[-1.982, 2.771]]) + 0.176*N(x | mu=[-1.298, -1.261], Sigma=[[1.307, 0.557],[0.557, 0.575]]) + 0.375*N(x | mu=[1.957, 0.091], Sigma=[[0.248, -0.128],[-0.128, 0.101]])",
+        "D": "p(x) = 0.449*N(x | mu=[-1.129, 0.417], Sigma=[[1.458, -1.982],[-1.982, 2.771]]) + 0.176*N(x | mu=[-1.298, -1.261], Sigma=[[0.248, -0.128],[-0.128, 0.101]]) + 0.375*N(x | mu=[1.957, 0.091], Sigma=[[1.307, 0.557],[0.557, 0.575]])"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q5.png",
+      "source_location": "exam p.4, Figure 3 (GMM contour plot)"
+    },
+    {
+      "question_id": "Q6",
+      "number": 6,
+      "topic": "Forward/backward feature selection from RMSE table",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "A least squares linear regression model is trained using different combinations of the five attributes x1, x2, x3, x4, and x5. Table 2 gives the training and test root-mean-square error (RMSE = sqrt((1/N) sum_{i=1}^{N} (y_i - y_hat_i)^2)) performance of the least squares linear regression model when trained using different combinations of the five attributes. Which one of the following statements is correct?\n\nTable 2 (Training RMSE, Test RMSE per feature subset):\nFeature(s)                          Training   Test\nx1                                  3.2522     3.0343\nx2                                  3.1721     5.5072\nx3                                  2.907      3.4486\nx4                                  4.4608     5.8157\nx5                                  4.4637     9.0155\nx1 and x2                           3.043      3.8668\nx1 and x3                           2.4192     2.7692\nx1 and x4                           2.8918     3.3297\nx1 and x5                           3.2465     3.3177\nx2 and x3                           2.5325     2.5853\nx2 and x4                           2.8066     3.2509\nx2 and x5                           3.1646     4.6723\nx3 and x4                           2.8601     3.7105\nx3 and x5                           2.8230     4.3690\nx4 and x5                           3.9742     8.4346\nx1 and x2 and x3                    2.4098     2.4869\nx1 and x2 and x4                    2.7253     2.6258\nx1 and x2 and x5                    3.0341     4.6252\nx1 and x3 and x4                    2.3834     2.9486\nx1 and x3 and x5                    2.3709     2.9676\nx1 and x4 and x5                    2.7956     3.4894\nx2 and x3 and x4                    2.4703     2.3423\nx2 and x3 and x5                    2.5319     2.7017\nx2 and x4 and x5                    2.7847     4.2531\nx3 and x4 and x5                    2.8028     4.4864\nx1 and x2 and x3 and x4             2.3679     2.5095\nx1 and x2 and x3 and x5             2.3623     3.0234\nx1 and x2 and x4 and x5             2.6249     4.3059\nx1 and x3 and x4 and x5             2.2937     3.0251\nx2 and x3 and x4 and x5             2.4561     2.8221\nx1 and x2 and x3 and x4 and x5      2.2759     3.1368\n\nA. Forward selection will select the same optimal feature set as backward selection.\nB. For this problem backward selection will identify the optimal feature combination.\nC. Forward selection will end up selecting all the features, i.e., terminate at the feature set x1,x2,x3,x4,x5.\nD. Forward selection will as first feature select x3.",
+      "options": {
+        "A": "Forward selection will select the same optimal feature set as backward selection.",
+        "B": "For this problem backward selection will identify the optimal feature combination.",
+        "C": "Forward selection will end up selecting all the features, i.e., terminate at the feature set x1,x2,x3,x4,x5.",
+        "D": "Forward selection will as first feature select x3."
+      },
+      "correct_answer": "B",
+      "text_representation": "Table 2 (Root-mean-square error for the training and test set using least squares regression to predict mpg, for different combinations of the five attributes x1-x5):\nFeature(s)                          Training_RMSE   Test_RMSE\nx1                                  3.2522          3.0343\nx2                                  3.1721          5.5072\nx3                                  2.907           3.4486\nx4                                  4.4608          5.8157\nx5                                  4.4637          9.0155\nx1 and x2                           3.043           3.8668\nx1 and x3                           2.4192          2.7692\nx1 and x4                           2.8918          3.3297\nx1 and x5                           3.2465          3.3177\nx2 and x3                           2.5325          2.5853\nx2 and x4                           2.8066          3.2509\nx2 and x5                           3.1646          4.6723\nx3 and x4                           2.8601          3.7105\nx3 and x5                           2.8230          4.3690\nx4 and x5                           3.9742          8.4346\nx1 and x2 and x3                    2.4098          2.4869\nx1 and x2 and x4                    2.7253          2.6258\nx1 and x2 and x5                    3.0341          4.6252\nx1 and x3 and x4                    2.3834          2.9486\nx1 and x3 and x5                    2.3709          2.9676\nx1 and x4 and x5                    2.7956          3.4894\nx2 and x3 and x4                    2.4703          2.3423\nx2 and x3 and x5                    2.5319          2.7017\nx2 and x4 and x5                    2.7847          4.2531\nx3 and x4 and x5                    2.8028          4.4864\nx1 and x2 and x3 and x4             2.3679          2.5095\nx1 and x2 and x3 and x5             2.3623          3.0234\nx1 and x2 and x4 and x5             2.6249          4.3059\nx1 and x3 and x4 and x5             2.2937          3.0251\nx2 and x3 and x4 and x5             2.4561          2.8221\nx1 and x2 and x3 and x4 and x5      2.2759          3.1368",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q6.png",
+      "source_location": "exam p.5, Table 2 (training/test RMSE for all feature subsets)"
+    },
+    {
+      "question_id": "Q7",
+      "number": 7,
+      "topic": "Regularized regression / cross-validation / number of models",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Using the 32 observations of the Cars dataset we would like to predict the fuel consumption of cars (y) based on the five features (x1-x5). For this purpose we consider regularized least squares regression which minimizes with respect to w the following cost function: E(w) = sum_n (y_n - [1 x_n1 x_n2 x_n3 x_n4 x_n5] w)^2 + lambda w^T w, where x_nm denotes the m'th feature of the n'th observation, and 1 is concatenated to the data to account for the bias term. We consider nine different values of lambda and use leave-one-out cross-validation to quantify the performance of each of these different values of lambda. The results of the leave-one-out cross-validation performance is given in Figure 4 where the optimal value of lambda is found to be lambda = 10^(-1.75) indicated with a black cross in the figure. Figure 4 plots the training error (red) and test error (black) RMSE as a function of log10(lambda) (x-axis -3 to -1). Which one of the following statements is correct?\n\nA. The identified test performance having RMSE=2.8 is an unbiased estimator of how the optimal model identified will generalize to new data.\nB. To create the test error curve given in Figure 4 requires training 288 regularized least squares regression models.\nC. Leave-one-out cross-validation is computationally more efficient than 10-fold cross-validation.\nD. As lambda increases the fitted models will have smaller and smaller bias.",
+      "options": {
+        "A": "The identified test performance having RMSE=2.8 is an unbiased estimator of how the optimal model identified will generalize to new data.",
+        "B": "To create the test error curve given in Figure 4 requires training 288 regularized least squares regression models.",
+        "C": "Leave-one-out cross-validation is computationally more efficient than 10-fold cross-validation.",
+        "D": "As lambda increases the fitted models will have smaller and smaller bias."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q7.png",
+      "source_location": "exam p.6, Figure 4 (training/test RMSE vs log10(lambda) curve)"
+    },
+    {
+      "question_id": "Q8",
+      "number": 8,
+      "topic": "Logistic regression / interpretation of coefficients",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We will build a model to determine if a car has a relatively high or low fuel consumption using the original data (i.e., the data is no longer standardized). For this purpose we will split the output y in two classes forming the new output variable z defined by thresholding at the median value of y, i.e. if y_i > median(y) then z_i = 1, otherwise z_i = 0. We fit a logistic regression model using the features x1-x5 and use as output for the logistic regression model the binary variable z indicating if a car has relatively high (z = 0) or low (z = 1) fuel consumption. The predicted output probability is given by:\n\nz_hat = sigma(1257.6 - 46.8*x1 + 0.6*x2 - 271.1*x3 - 31.9*x4 - 44.7*x5),\n\nwhere sigma(.) is the logistic sigmoid function. Which one of the following statements regarding the logistic regression model is correct?\n\nA. x2 is the least important attribute for defining whether a car has high (i.e., z = 0) or low (i.e., z = 1) fuel consumption.\nB. According to the model increasing a car's number of forward gears will make it more likely to have high fuel consumption (i.e., z = 0).\nC. A new car with the following observation vector: x* = [6 120 3.2 0 4] will be more likely to have high (i.e., z = 0) than low (i.e., z = 1) fuel consumption.\nD. Logistic regression is not very suited for classification as it is a regression method.",
+      "options": {
+        "A": "x2 is the least important attribute for defining whether a car has high (i.e., z = 0) or low (i.e., z = 1) fuel consumption.",
+        "B": "According to the model increasing a car's number of forward gears will make it more likely to have high fuel consumption (i.e., z = 0).",
+        "C": "A new car with the following observation vector: x* = [6 120 3.2 0 4] will be more likely to have high (i.e., z = 0) than low (i.e., z = 1) fuel consumption.",
+        "D": "Logistic regression is not very suited for classification as it is a regression method."
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.6, Question 8 (logistic regression weights inline)"
+    },
+    {
+      "question_id": "Q9",
+      "number": 9,
+      "topic": "AdaBoost / weight update for correctly classified observations",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "In order to improve the performance of the logistic regression model we will use ensembling based on the Adaboost algorithm using the 32 observations of the Cars dataset (note that for the Adaboost algorithm log(.) is based on the natural logarithm). The first trained logistic regression classifier (i.e., for boosting round t = 1) has an error rate of 1/16. What will be the updated weight for each of the correctly classified observations?\n\nA. 0.0081\nB. 0.0167\nC. 0.0332\nD. 0.2500",
+      "options": {
+        "A": "0.0081",
+        "B": "0.0167",
+        "C": "0.0332",
+        "D": "0.2500"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.7, Question 9 (error rate 1/16 inline, N=32)"
+    },
+    {
+      "question_id": "Q10",
+      "number": 10,
+      "topic": "Decision tree / purity gain with classification error impurity",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "A decision tree is fitted to the data considering as output whether the car has a relatively high (i.e., z = 0) or low (i.e., z = 1) fuel consumption. At the root of the tree three different splits according to the number of forward gears are considered based on the data given in Table 3. For impurity we will use the classification error given by I(v) = 1 - max_c p(c|v). For the three considered splits we have:\n- Split A: 3 gear vs. 4 or 5 gears.\n- Split B: 3 or 4 gears vs. 5 gears.\n- Split C: 3 gears vs. 4 gears vs. 5 gears.\nThus, split A and B have two branches whereas split C has three branches.\n\nTable 3 (Number of low mpg (z=0) and high mpg (z=1) cars by number of gears x5):\n                   3 gears (x5=3)   4 gears (x5=4)   5 gears (x5=5)\nLow mpg (z=0)            13                2                2\nHigh mpg (z=1)            2               10                3\n\nWhich statement about the splits is correct?\n\nA. Split B provides a higher purity gain than split A.\nB. Split C provides a higher purity gain than split A.\nC. The best obtainable purity gain is 9/32.\nD. Split B provides a higher purity gain than split C.",
+      "options": {
+        "A": "Split B provides a higher purity gain than split A.",
+        "B": "Split C provides a higher purity gain than split A.",
+        "C": "The best obtainable purity gain is 9/32.",
+        "D": "Split B provides a higher purity gain than split C."
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 3 (Number of low mpg (z=0) and high mpg (z=1) cars according to number of forward gears x5):\n                   3 gears (x5=3)   4 gears (x5=4)   5 gears (x5=5)\nLow mpg (z=0)            13                2                2\nHigh mpg (z=1)            2               10                3",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q10.png",
+      "source_location": "exam p.7, Table 3 (2x3 count table of low/high mpg by gears)"
+    },
+    {
+      "question_id": "Q11",
+      "number": 11,
+      "topic": "ROC curve / matching AUC for a feature discriminator",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will evaluate the feature x5 (gear) in its ability to discriminate low mpg, i.e., z = 0, (considered the negative class) from high mpg, i.e. z = 1, (considered the positive class) based on the data given in Table 3. For this purpose, we will evaluate the area under curve (AUC) of the receiver operator characteristic (ROC) using the feature x5 to discriminate cars with high (i.e., z = 0) from cars with low (i.e., z = 1) fuel consumption. Figure 5 shows four different ROC curves (TPR vs FPR) with AUC values 0.418, 0.582, 0.788, and 0.816 respectively. Which one of the ROC curves given in Figure 5 corresponds to using x5 to discriminate between high fuel consumption (z = 0) and low fuel consumption (z = 1)?\n\nA. The curve having AUC=0.418\nB. The curve having AUC=0.582\nC. The curve having AUC=0.788\nD. The curve having AUC=0.816",
+      "options": {
+        "A": "The curve having AUC=0.418",
+        "B": "The curve having AUC=0.582",
+        "C": "The curve having AUC=0.788",
+        "D": "The curve having AUC=0.816"
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q11.png",
+      "source_location": "exam p.7, Figure 5 (four ROC curves with AUC values) + Table 3"
+    },
+    {
+      "question_id": "Q12",
+      "number": 12,
+      "topic": "Classifier identification from decision boundaries",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "Four different classifiers are trained on the Cars dataset using only x2 and x3 as features (the features have been standardized) and the decision boundary for each of the four classifiers is given in Figure 6. Figure 6 shows the decision boundaries (shaded regions) of Classifier 1, Classifier 2, Classifier 3 and Classifier 4 in the (x2, x3) plane, with the training observations of the two classes marked. Which one of the following statements is correct?\n\nA. Classifier 1 is an artificial neural network with one hidden unit in the hidden layer.\nB. Classifier 2 is a 3-nearest neighbor classifier.\nC. Classifier 3 is a 1-nearest neighbor classifier.\nD. Classifier 4 is a logistic regression classifier.",
+      "options": {
+        "A": "Classifier 1 is an artificial neural network with one hidden unit in the hidden layer.",
+        "B": "Classifier 2 is a 3-nearest neighbor classifier.",
+        "C": "Classifier 3 is a 1-nearest neighbor classifier.",
+        "D": "Classifier 4 is a logistic regression classifier."
+      },
+      "correct_answer": "C",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q12.png",
+      "source_location": "exam p.8, Figure 6 (four decision-boundary plots)"
+    },
+    {
+      "question_id": "Q13",
+      "number": 13,
+      "topic": "Majority-voting ensemble / combined decision boundary",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "In an attempt to make a stronger classifier the first three classifiers (i.e., Classifier 1, Classifier 2, and Classifier 3) are combined using majority voting. Figure 7 shows four candidate combined decision boundaries (Decision Boundary A, B, C, D) in the (x2, x3) plane. Which one of the decision boundaries given in Figure 7 corresponds to the combined classifier?\n\nA. Decision boundary A.\nB. Decision boundary B.\nC. Decision boundary C.\nD. Decision boundary D.",
+      "options": {
+        "A": "Decision boundary A.",
+        "B": "Decision boundary B.",
+        "C": "Decision boundary C.",
+        "D": "Decision boundary D."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q13.png",
+      "source_location": "exam p.8, Figure 7 (four candidate combined decision boundaries) + Figure 6"
+    },
+    {
+      "question_id": "Q14",
+      "number": 14,
+      "topic": "k-means clustering on 1D feature values",
+      "type": "B",
+      "text_faithful": true,
+      "question_text": "We will consider the first eight observations of the Cars dataset and the new feature defined by the ratio of horse power to weight, i.e. defined by q = x2/x3. In Figure 8 is shown the value of q for the first eight observations that are colored according to low (red) and high (black) fuel consumption. The q values (shown along a 1D axis) are: O8 = 19.4, O6 = 30.3, O4 = 34.2, O2 = 38.3, O3 = 40.1, O1 = 42.0, O5 = 50.9, O7 = 68.6 (low fuel consumption {O1, O2, O3, O4, O8} in red; high fuel consumption {O5, O6, O7} in black). We will cluster this data using k-means with Euclidean distance into two clusters (i.e., k=2) and initialize the k-means algorithm with centroids located at observation O8 and O6. Which one of the following statements is correct?\n\nA. The converged solution will be {O8},{O1, O2, O3, O4, O5, O6, O7}.\nB. The converged solution will be {O1, O2, O3, O4, O6, O8}, {O5, O7}.\nC. The converged solution will be {O1, O2, O3, O4, O5, O6, O8}, {O7}.\nD. The converged solution will be {O4, O6, O8}, {O1, O2, O3, O5, O7}.",
+      "options": {
+        "A": "The converged solution will be {O8},{O1, O2, O3, O4, O5, O6, O7}.",
+        "B": "The converged solution will be {O1, O2, O3, O4, O6, O8}, {O5, O7}.",
+        "C": "The converged solution will be {O1, O2, O3, O4, O5, O6, O8}, {O7}.",
+        "D": "The converged solution will be {O4, O6, O8}, {O1, O2, O3, O5, O7}."
+      },
+      "correct_answer": "D",
+      "text_representation": "Figure 8 (value of feature q = x2/x3 for the first eight observations, shown along a 1D axis; colored by fuel consumption):\nObservation : q value\nO8 : 19.4   (low / red)\nO6 : 30.3   (high / black)\nO4 : 34.2   (low / red)\nO2 : 38.3   (low / red)\nO3 : 40.1   (low / red)\nO1 : 42.0   (low / red)\nO5 : 50.9   (high / black)\nO7 : 68.6   (high / black)\nLow fuel consumption (red) = {O1, O2, O3, O4, O8}; high fuel consumption (black) = {O5, O6, O7}.",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q14.png",
+      "source_location": "exam p.8, Figure 8 (1D plot of q values with numbers printed in parentheses)"
+    },
+    {
+      "question_id": "Q15",
+      "number": 15,
+      "topic": "Jaccard coefficient between clustering and class labels",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We will consider a clustering given by the two clusters {O2, O3, O4, O6, O8},{O1, O5, O7}. We will evaluate this clustering in terms of its correspondence with the class label information in which O1, O2, O3, O4, and O8 correspond to cars with low fuel consumption and O5, O6, and O7 correspond to cars with high fuel consumption. We recall that the Jaccard coefficient between the true labels and the extracted clusters is given by: J = f11 / (K - f00), where f11 is the number of object pairs in same class assigned to same cluster, f00 is the number of object pairs in different class assigned to different clusters, and K = N(N - 1)/2 is the total number of object pairs, where N is the number of observations considered. What is the above value of J between the true labeling of the observations in terms of high and low fuel consumption and the two clusters?\n\nA. 0.1665\nB. 0.3684\nC. 0.5714\nD. 0.7500",
+      "options": {
+        "A": "0.1665",
+        "B": "0.3684",
+        "C": "0.5714",
+        "D": "0.7500"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.9, Question 15 (clusters and class labels listed in text)"
+    },
+    {
+      "question_id": "Q16",
+      "number": 16,
+      "topic": "Bayes theorem from conditional percentages",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "According to the Cars dataset we have that 59.38% of the cars have automatic transmission. Furthermore, 63.16% of the cars that have automatic transmission have eight cylinders, whereas 15.38% of the cars that have manual transmission have eight cylinders. According to the Cars dataset what is the probability that a car that has eight cylinders, i.e. x1 = 8 will have automatic transmission, i.e. x4 = 0?\n\nA. 16.7 %\nB. 37.5 %\nC. 63.2%\nD. 85.7 %",
+      "options": {
+        "A": "16.7 %",
+        "B": "37.5 %",
+        "C": "63.2%",
+        "D": "85.7 %"
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.9, Question 16 (percentages inline)"
+    },
+    {
+      "question_id": "Q17",
+      "number": 17,
+      "topic": "Artificial neural network / forward pass with tanh activation",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "We will consider an artificial neural network (ANN) trained to predict mpg (i.e., y) of a car. The ANN is based on the model: f(x, w) = sum_{j=1}^{2} w_j^(2) h^(1)([1 x] w_j^(1)) + w_0^(2), where h^(1)(x) = (e^x - e^(-x)) / (e^x + e^(-x)) is the hyperbolic tangent function used as activation function in the hidden layer. We will consider an ANN with two hidden units in the hidden layer defined by:\nw_1^(1) = [-4, 1, 0.01, 1, -1, -1]^T, w_2^(1) = [-10, 1, -0.02, 1, 1, 1]^T,\nand w_0^(2) = 7, w_1^(2) = 8, and w_2^(2) = 9.\nWhat is the predicted fuel consumption of a car with observation vector x* = [6 120 3.2 0 4]?\n\nA. 17.00\nB. 20.85\nC. 24.00\nD. 33.40",
+      "options": {
+        "A": "17.00",
+        "B": "20.85",
+        "C": "24.00",
+        "D": "33.40"
+      },
+      "correct_answer": "B",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.9, Question 17 (ANN weights inline; Table 4 not required for this computation)"
+    },
+    {
+      "question_id": "Q18",
+      "number": 18,
+      "topic": "Association rule confidence from binarized market-basket matrix",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "Considering the dataset in Table 4 as a market basket problem with observation O1-O8 corresponding to customers and hpL, hpH, wtL, wtH, am=0, am=1 corresponding to items, what is the confidence of the association rule {wtH, am=0} -> {hpH}?\n\nTable 4 (first eight observations binarized; x2 split into low/high horse power hpL/hpH, x3 into low/high weight wtL/wtH, x4 into am=0 (automatic) / am=1 (manual)):\n      hpL  hpH  wtL  wtH  am=0  am=1\nO1     1    0    1    0    0     1\nO2     1    0    1    0    0     1\nO3     1    0    1    0    0     1\nO4     1    0    1    0    1     0\nO5     0    1    0    1    1     0\nO6     1    0    0    1    1     0\nO7     0    1    0    1    1     0\nO8     1    0    1    0    1     0\nColor coding: low fuel consumption {O1, O2, O3, O4, O8}; high fuel consumption {O5, O6, O7}.\n\nA. 0.0%\nB. 25.0\nC. 66.7%\nD. 100.0 %",
+      "options": {
+        "A": "0.0%",
+        "B": "25.0",
+        "C": "66.7%",
+        "D": "100.0 %"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 4 (first eight observations of the Cars dataset binarized; x2 split into low/high horse power hpL/hpH, x3 into low/high weight wtL/wtH, x4 into am=0 (automatic) / am=1 (manual)):\n      hpL  hpH  wtL  wtH  am=0  am=1\nO1     1    0    1    0    0     1\nO2     1    0    1    0    0     1\nO3     1    0    1    0    0     1\nO4     1    0    1    0    1     0\nO5     0    1    0    1    1     0\nO6     1    0    0    1    1     0\nO7     0    1    0    1    1     0\nO8     1    0    1    0    1     0\nColor coding: low fuel consumption {O1, O2, O3, O4, O8}; high fuel consumption {O5, O6, O7}.",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q18.png",
+      "source_location": "exam p.10/13, Table 4 (8x6 binary matrix)"
+    },
+    {
+      "question_id": "Q19",
+      "number": 19,
+      "topic": "Frequent itemsets / support threshold from binary matrix",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We will again consider the data in Table 4. What are all frequent itemsets with support greater than 30%?\n\nTable 4 (first eight observations binarized; columns hpL, hpH, wtL, wtH, am=0, am=1):\n      hpL  hpH  wtL  wtH  am=0  am=1\nO1     1    0    1    0    0     1\nO2     1    0    1    0    0     1\nO3     1    0    1    0    0     1\nO4     1    0    1    0    1     0\nO5     0    1    0    1    1     0\nO6     1    0    0    1    1     0\nO7     0    1    0    1    1     0\nO8     1    0    1    0    1     0\n\nA. {hpL}, {wtL}, {wtH}, {am=0}, {am=1}.\nB. {hpL}, {wtL}, {wtH}, {am=0}, {am=1}, {hpL, wtL}, {hpL, am=0}, {hpL, am=1}, {wtL, am=1}, {wtH, am=0}.\nC. {hpL}, {wtL}, {wtH}, {am=0}, {am=1}, {hpL, wtL}, {hpL, am=0}, {hpL, am=1}, {wtL, am=1}, {wtH, am=0}, {hpL, wtL, am=1}.\nD. {hpL}, {wtL}, {wtH}, {am=0}, {am=1}, {hpL, wtL}, {hpL, am=0}, {hpL, am=1}, {wtL, am=1}, {wtH, am=0}, {hpL, wtL, am=1}, {hpL, wtL, am=0}.",
+      "options": {
+        "A": "{hpL}, {wtL}, {wtH}, {am=0}, {am=1}.",
+        "B": "{hpL}, {wtL}, {wtH}, {am=0}, {am=1}, {hpL, wtL}, {hpL, am=0}, {hpL, am=1}, {wtL, am=1}, {wtH, am=0}.",
+        "C": "{hpL}, {wtL}, {wtH}, {am=0}, {am=1}, {hpL, wtL}, {hpL, am=0}, {hpL, am=1}, {wtL, am=1}, {wtH, am=0}, {hpL, wtL, am=1}.",
+        "D": "{hpL}, {wtL}, {wtH}, {am=0}, {am=1}, {hpL, wtL}, {hpL, am=0}, {hpL, am=1}, {wtL, am=1}, {wtH, am=0}, {hpL, wtL, am=1}, {hpL, wtL, am=0}."
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 4 (first eight observations binarized; columns hpL, hpH, wtL, wtH, am=0, am=1):\n      hpL  hpH  wtL  wtH  am=0  am=1\nO1     1    0    1    0    0     1\nO2     1    0    1    0    0     1\nO3     1    0    1    0    0     1\nO4     1    0    1    0    1     0\nO5     0    1    0    1    1     0\nO6     1    0    0    1    1     0\nO7     0    1    0    1    1     0\nO8     1    0    1    0    1     0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q19.png",
+      "source_location": "exam p.10, Table 4 (8x6 binary matrix)"
+    },
+    {
+      "question_id": "Q20",
+      "number": 20,
+      "topic": "Similarity / distance measures (Jaccard, SMC, cosine, p-norm)",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Considering the data in Table 4, we will calculate the similarity as well as distance between O1 given by the vector a = [1 0 1 0 0 1] and O4 given by the vector b = [1 0 1 0 1 0] using respectively the Jaccard (J), simple matching coefficient (SMC), cosine similarity (cos) and p-norm (||.||_p) given by:\nJ(a,b) = f11 / (M - f00),\nSMC(a,b) = (f11 + f00) / M,\ncos(a,b) = f11 / (||a||_2 ||b||_2),\n||a - b||_p = ( sum_{m=1}^{M} |a_m - b_m|^p )^(1/p).\nWhich one of the following statements is correct?\n\nA. ||a - b||_2 = 2.\nB. ||a - b||_1 < ||a - b||_2.\nC. J(a,b) = 2/3.\nD. cos(a,b) = SMC(a,b).",
+      "options": {
+        "A": "||a - b||_2 = 2.",
+        "B": "||a - b||_1 < ||a - b||_2.",
+        "C": "J(a,b) = 2/3.",
+        "D": "cos(a,b) = SMC(a,b)."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.10/14, Question 20 (vectors a and b given inline)"
+    },
+    {
+      "question_id": "Q21",
+      "number": 21,
+      "topic": "Naive Bayes classifier from binarized matrix",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We would like to predict whether a car has high fuel or low fuel consumption using the data in Table 4. We will apply a Naive Bayes classifier that assumes independence between the attributes given the class label (i.e. high or low fuel consumption corresponding to observation indicated in black and red respectively in the table). Given that a car has hpL = 1, and am=0 what is the probability that the car will have high fuel consumption according to the Naive Bayes classifier derived from the data in Table 4?\n\nTable 4 (first eight observations binarized; columns hpL, hpH, wtL, wtH, am=0, am=1; low fuel consumption (red) {O1,O2,O3,O4,O8}, high fuel consumption (black) {O5,O6,O7}):\n      hpL  hpH  wtL  wtH  am=0  am=1\nO1     1    0    1    0    0     1\nO2     1    0    1    0    0     1\nO3     1    0    1    0    0     1\nO4     1    0    1    0    1     0\nO5     0    1    0    1    1     0\nO6     1    0    0    1    1     0\nO7     0    1    0    1    1     0\nO8     1    0    1    0    1     0\n\nA. 3/80\nB. 1/8\nC. 1/3\nD. 3/5",
+      "options": {
+        "A": "3/80",
+        "B": "1/8",
+        "C": "1/3",
+        "D": "3/5"
+      },
+      "correct_answer": "C",
+      "text_representation": "Table 4 (first eight observations binarized; columns hpL, hpH, wtL, wtH, am=0, am=1; classes: low fuel consumption (red) = {O1,O2,O3,O4,O8}, high fuel consumption (black) = {O5,O6,O7}):\n      hpL  hpH  wtL  wtH  am=0  am=1\nO1     1    0    1    0    0     1\nO2     1    0    1    0    0     1\nO3     1    0    1    0    0     1\nO4     1    0    1    0    1     0\nO5     0    1    0    1    1     0\nO6     1    0    0    1    1     0\nO7     0    1    0    1    1     0\nO8     1    0    1    0    1     0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q21.png",
+      "source_location": "exam p.10/15, Table 4 (8x6 binary matrix with class colors)"
+    },
+    {
+      "question_id": "Q22",
+      "number": 22,
+      "topic": "KNN classifier (K=1) leave-one-out from distance matrix",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "To determine whether the fuel consumption of a car is high or low we will use a k-nearest neighbor (KNN) classifier to predict each of the eight observations based on the Euclidean distance between the observations given in Table 5. We will use leave-one-out cross-validation for the KNN in order to classify the eight considered observations using a one-nearest neighbor classifier, i.e. K = 1. The analysis will be based only on the data given in Table 5. Which one of the following statements is correct?\n\nTable 5 (pairwise Euclidean distance between the first eight observations; red/low = {O1,O2,O3,O4,O8}, black/high = {O5,O6,O7}):\n        O1      O2      O3      O4      O5      O6      O7      O8\nO1      0       0.2606  1.1873  2.4946  2.9510  2.5682  3.4535  2.4698\nO2      0.2606  0       1.2796  2.4442  2.8878  2.4932  3.3895  2.4216\nO3      1.1873  1.2796  0       2.8294  3.6892  2.9147  4.1733  2.2386\nO4      2.4946  2.4442  2.8294  0       1.4852  0.2608  2.2941  1.8926\nO5      2.9510  2.8878  3.6892  1.4852  0       1.5155  1.0296  3.1040\nO6      2.5682  2.4932  2.9147  0.2608  1.5155  0       2.3316  1.8870\nO7      3.4535  3.3895  4.1733  2.2941  1.0296  2.3316  0       3.7588\nO8      2.4698  2.4216  2.2386  1.8926  3.1040  1.8870  3.7588  0\n\nA. None of the observations will be misclassified.\nB. One of the observations will be misclassified.\nC. Two the observations will be misclassified.\nD. Three of the observations will be misclassified.",
+      "options": {
+        "A": "None of the observations will be misclassified.",
+        "B": "One of the observations will be misclassified.",
+        "C": "Two the observations will be misclassified.",
+        "D": "Three of the observations will be misclassified."
+      },
+      "correct_answer": "D",
+      "text_representation": "Table 5 (pairwise Euclidean distance between the first eight observations O1-O8; symmetric matrix, diagonal = 0; classes: low fuel consumption (red) = {O1,O2,O3,O4,O8}, high fuel consumption (black) = {O5,O6,O7}):\n        O1      O2      O3      O4      O5      O6      O7      O8\nO1      0       0.2606  1.1873  2.4946  2.9510  2.5682  3.4535  2.4698\nO2      0.2606  0       1.2796  2.4442  2.8878  2.4932  3.3895  2.4216\nO3      1.1873  1.2796  0       2.8294  3.6892  2.9147  4.1733  2.2386\nO4      2.4946  2.4442  2.8294  0       1.4852  0.2608  2.2941  1.8926\nO5      2.9510  2.8878  3.6892  1.4852  0       1.5155  1.0296  3.1040\nO6      2.5682  2.4932  2.9147  0.2608  1.5155  0       2.3316  1.8870\nO7      3.4535  3.3895  4.1733  2.2941  1.0296  2.3316  0       3.7588\nO8      2.4698  2.4216  2.2386  1.8926  3.1040  1.8870  3.7588  0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q22.png",
+      "source_location": "exam p.11/15, Table 5 (8x8 pairwise distance matrix)"
+    },
+    {
+      "question_id": "Q23",
+      "number": 23,
+      "topic": "Hierarchical clustering / matching dendrogram (average linkage)",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "In Table 5 is given the pairwise Euclidean distances between the first eight observations of the Cars data. A hierarchical clustering is used to cluster these observations using average linkage. Figure 9 shows four candidate dendrograms (Dendrogram 1, 2, 3, 4) derived from the distances between the eight first cars in Table 5. Which one of the dendrograms given in Figure 9 corresponds to the clustering?\n\nA. Dendrogram 1.\nB. Dendrogram 2.\nC. Dendrogram 3.\nD. Dendrogram 4.",
+      "options": {
+        "A": "Dendrogram 1.",
+        "B": "Dendrogram 2.",
+        "C": "Dendrogram 3.",
+        "D": "Dendrogram 4."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q23.png",
+      "source_location": "exam p.11/16, Figure 9 (four candidate dendrograms) + Table 5"
+    },
+    {
+      "question_id": "Q24",
+      "number": 24,
+      "topic": "Average relative KNN density / outlier detection from distance matrix",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We suspect that observation O8 may be an outlier. In order to assess if this is the case we would like to calculate the average relative KNN density based on the observations given in Table 5 only. We recall that the KNN density and average relative density (ard) for the observation x_i are given by:\ndensity_{X\\i}(x_i, K) = 1 / ( (1/K) sum_{x' in N_{X\\i}(x_i,K)} d(x_i, x') ),\nard_X(x_i, K) = density_{X\\i}(x_i, K) / ( (1/K) sum_{x_j in N_{X\\i}(x_i,K)} density_{X\\j}(x_j, K) ),\nwhere N_{X\\i}(x_i, K) is the set of K nearest neighbors of observation x_i excluding the i'th observation, and ard_X(x_i, K) is the average relative density of x_i using K nearest neighbors. Based on the data in Table 5, what is the average relative density for observation O8 for K = 2 nearest neighbors?\n\nTable 5 (pairwise Euclidean distance between the first eight observations O1-O8; diagonal = 0):\n        O1      O2      O3      O4      O5      O6      O7      O8\nO1      0       0.2606  1.1873  2.4946  2.9510  2.5682  3.4535  2.4698\nO2      0.2606  0       1.2796  2.4442  2.8878  2.4932  3.3895  2.4216\nO3      1.1873  1.2796  0       2.8294  3.6892  2.9147  4.1733  2.2386\nO4      2.4946  2.4442  2.8294  0       1.4852  0.2608  2.2941  1.8926\nO5      2.9510  2.8878  3.6892  1.4852  0       1.5155  1.0296  3.1040\nO6      2.5682  2.4932  2.9147  0.2608  1.5155  0       2.3316  1.8870\nO7      3.4535  3.3895  4.1733  2.2941  1.0296  2.3316  0       3.7588\nO8      2.4698  2.4216  2.2386  1.8926  3.1040  1.8870  3.7588  0\n\nA. 0.4660\nB. 0.4800\nC. 0.5292\nD. 1.8898",
+      "options": {
+        "A": "0.4660",
+        "B": "0.4800",
+        "C": "0.5292",
+        "D": "1.8898"
+      },
+      "correct_answer": "A",
+      "text_representation": "Table 5 (pairwise Euclidean distance between the first eight observations O1-O8; symmetric matrix, diagonal = 0):\n        O1      O2      O3      O4      O5      O6      O7      O8\nO1      0       0.2606  1.1873  2.4946  2.9510  2.5682  3.4535  2.4698\nO2      0.2606  0       1.2796  2.4442  2.8878  2.4932  3.3895  2.4216\nO3      1.1873  1.2796  0       2.8294  3.6892  2.9147  4.1733  2.2386\nO4      2.4946  2.4442  2.8294  0       1.4852  0.2608  2.2941  1.8926\nO5      2.9510  2.8878  3.6892  1.4852  0       1.5155  1.0296  3.1040\nO6      2.5682  2.4932  2.9147  0.2608  1.5155  0       2.3316  1.8870\nO7      3.4535  3.3895  4.1733  2.2941  1.0296  2.3316  0       3.7588\nO8      2.4698  2.4216  2.2386  1.8926  3.1040  1.8870  3.7588  0",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q24.png",
+      "source_location": "exam p.11/16, Table 5 (8x8 pairwise distance matrix)"
+    },
+    {
+      "question_id": "Q25",
+      "number": 25,
+      "topic": "Confusion matrix / error rate, precision, recall",
+      "type": "C",
+      "text_faithful": true,
+      "question_text": "We will consider a classifier classifying a dataset with 100 test observations into two classes (positive and negative) with confusion matrix given in Figure 10. Which statement regarding the classifier is correct?\n\nFigure 10 (confusion matrix; rows = Actual class, columns = Predicted class):\n                  Predicted Positive   Predicted Negative\nActual Positive          36                   15\nActual Negative          10                   39\n\nA. The error rate of the classifier is 33.3 %.\nB. The precision of the classifier is 75.0 %.\nC. The recall of the classifier is 70.6 %.\nD. There are more negative than positive examples in the test set.",
+      "options": {
+        "A": "The error rate of the classifier is 33.3 %.",
+        "B": "The precision of the classifier is 75.0 %.",
+        "C": "The recall of the classifier is 70.6 %.",
+        "D": "There are more negative than positive examples in the test set."
+      },
+      "correct_answer": "C",
+      "text_representation": "Figure 10 (confusion matrix of a classifier on 100 positive/negative test observations; rows = Actual class, columns = Predicted class):\n                  Predicted Positive   Predicted Negative\nActual Positive          36                   15\nActual Negative          10                   39\n(TP=36, FN=15, FP=10, TN=39.)",
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q25.png",
+      "source_location": "exam p.12/17, Figure 10 (2x2 confusion matrix with counts)"
+    },
+    {
+      "question_id": "Q26",
+      "number": 26,
+      "topic": "Norm-based classification rule separating two classes",
+      "type": "B",
+      "text_faithful": false,
+      "question_text": "We will consider the two class classification problem given in Figure 11 in which the goal is to separate red plusses (i.e., +) from blue crosses (i.e., x). Figure 11 is a scatter plot in the (x1, x2) plane (each axis roughly 0 to 1) with two dense classes of points (red plusses and blue crosses). Which one of the following procedures will perfectly separate the two classes?\n\nA. ||x - [0, 1]||_2 > 0.5 and ||x - [1, 0]||_inf > 0.5 and ||x - [1, 1]||_1 > 0.75 then blue cross, otherwise red plus.\nB. ||x - [0, 1]||_inf > 0.5 and ||x - [1, 0]||_2 > 0.5 and ||x - [1, 1]||_1 > 0.75 then blue cross, otherwise red plus.\nC. ||x - [0, 1]||_2 > 0.5 and ||x - [1, 0]||_1 > 0.5 and ||x - [1, 1]||_inf > 0.75 then blue cross, otherwise red plus.\nD. ||x - [0, 1]||_inf > 0.5 and ||x - [1, 0]||_1 > 0.5 and ||x - [1, 1]||_inf > 0.75 then blue cross, otherwise red plus.",
+      "options": {
+        "A": "||x - [0, 1]||_2 > 0.5 and ||x - [1, 0]||_inf > 0.5 and ||x - [1, 1]||_1 > 0.75 then blue cross, otherwise red plus.",
+        "B": "||x - [0, 1]||_inf > 0.5 and ||x - [1, 0]||_2 > 0.5 and ||x - [1, 1]||_1 > 0.75 then blue cross, otherwise red plus.",
+        "C": "||x - [0, 1]||_2 > 0.5 and ||x - [1, 0]||_1 > 0.5 and ||x - [1, 1]||_inf > 0.75 then blue cross, otherwise red plus.",
+        "D": "||x - [0, 1]||_inf > 0.5 and ||x - [1, 0]||_1 > 0.5 and ||x - [1, 1]||_inf > 0.75 then blue cross, otherwise red plus."
+      },
+      "correct_answer": "A",
+      "text_representation": null,
+      "needs_screenshot": true,
+      "screenshot_path": "data/screenshots/Spring2017_Q26.png",
+      "source_location": "exam p.12/17, Figure 11 (two-class scatter of red plusses and blue crosses)"
+    },
+    {
+      "question_id": "Q27",
+      "number": 27,
+      "topic": "Supervised vs unsupervised learning / cross-validation concepts",
+      "type": "A",
+      "text_faithful": true,
+      "question_text": "Which one of the following statements is correct?\n\nA. Unsupervised learning differs from supervised learning in that unsupervised learning both uses the input data and the outputs for training whereas supervised learning only uses the input data.\nB. When using Gaussian Mixture Models (GMM) for outlier detection it is important that the observations evaluated for being outliers are included in the training of the GMM.\nC. When training an artificial neural network for a dataset with very few observations it is important to include many hidden units in order to avoid overfitting.\nD. Cross-validation can both be used for supervised and unsupervised learning.",
+      "options": {
+        "A": "Unsupervised learning differs from supervised learning in that unsupervised learning both uses the input data and the outputs for training whereas supervised learning only uses the input data.",
+        "B": "When using Gaussian Mixture Models (GMM) for outlier detection it is important that the observations evaluated for being outliers are included in the training of the GMM.",
+        "C": "When training an artificial neural network for a dataset with very few observations it is important to include many hidden units in order to avoid overfitting.",
+        "D": "Cross-validation can both be used for supervised and unsupervised learning."
+      },
+      "correct_answer": "D",
+      "text_representation": null,
+      "needs_screenshot": false,
+      "screenshot_path": null,
+      "source_location": "exam p.13, Question 27 (all text)"
+    }
+  ]
+}
