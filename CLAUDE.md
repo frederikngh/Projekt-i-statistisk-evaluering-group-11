@@ -87,6 +87,8 @@ crop_figures.py               ← exam PDFs -> data/screenshots/<Exam>_Q<N>.png 
 validate_encoded.py           ← schema/consistency check on the JSONs
 apply_corrections.py          ← records/reapplies the post-checker answer-key fixes
 ENCODING_SPEC.md / CHECKER_SPEC.md ← how the JSONs were produced & verified
+STATISTICS.md         ← per-test reference (theory, assumptions, materials anchors) for
+                        the report's methods section + the oral; cites materials/ pages
 simple_gemma.py       ← minimal "does Gemma load and answer" smoke test
 ```
 
