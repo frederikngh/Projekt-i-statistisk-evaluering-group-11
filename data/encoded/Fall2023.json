@@ -97,7 +97,7 @@
       "topic": "PCA properties (eigenvectors / variance explained)",
       "type": "A",
       "text_faithful": true,
-      "question_text": "We consider again the PCA result of the CCPP dataset.\nWhich one of the following statements is correct?\n\nA. The first two eigenvectors explain less than 90% of the total variance.\nB. With respect to the first eigenvector, low values of Temperature, Pressure, Humidity and a high value of Vacuum results in a positive projection.\nC. For every dataset, if we do not use all the principal components, then we are not able to reconstruct perfectly the given data.\nD. For every dataset it holds for the eigenvectors computed by SVD that the angle between every pair of distinct eigenvectors is 90 degrees and the Euclidean norm of every individual eigenvector is equal to one.",
+      "question_text": "We consider the PCA of a subset of the CCPP dataset, where the SVD of the centered data matrix gives the singular values Sigma ~ diag(3.7, 3.04, 0.56, 0.48) (the remaining singular value is 0) and\nV ~ [[0.43, -0.26, 0.22, -0.84], [0.17, -0.37, 0.81, 0.42], [0.33, 0.88, 0.34, -0.01], [-0.82, 0.14, 0.42, -0.36]],\nwhere the rows of V correspond to the attributes x1 (Temperature), x2 (Pressure), x3 (Humidity), x4 (Vacuum).\nWhich one of the following statements is correct?\n\nA. The first two eigenvectors explain less than 90% of the total variance.\nB. With respect to the first eigenvector, low values of Temperature, Pressure, Humidity and a high value of Vacuum results in a positive projection.\nC. For every dataset, if we do not use all the principal components, then we are not able to reconstruct perfectly the given data.\nD. For every dataset it holds for the eigenvectors computed by SVD that the angle between every pair of distinct eigenvectors is 90 degrees and the Euclidean norm of every individual eigenvector is equal to one.",
       "options": {
         "A": "The first two eigenvectors explain less than 90% of the total variance.",
         "B": "With respect to the first eigenvector, low values of Temperature, Pressure, Humidity and a high value of Vacuum results in a positive projection.",
@@ -135,10 +135,10 @@
       "topic": "Logistic regression with nonlinear transform / matching to decision surface",
       "type": "B",
       "text_faithful": false,
-      "question_text": "We consider the projection of the CCPP dataset on the first two principal components, and a logistic regression classifier where we use nonlinear transformations on the projection b = [b1, b2]^T. The resulting classifier assigns for each b the probability p(y = High | b) = sigma(w^T b_tilde) as shown in Figure 3.\nWhich one of the following combination of transformation and weight vector corresponds to this classifier?\n\nA. w = [0.31, -0.06, 0.07]^T, b_tilde = [1, b1^2, b2^2]^T\nB. w = [0.72, 3.13, -0.25]^T, b_tilde = [1, b1^2, b2^2]^T\nC. w = [0.31, -0.06, 0.07]^T, b_tilde = [1, b1^3, b2^2]^T\nD. w = [0.72, 3.13, -0.25]^T, b_tilde = [1, b1^3, b2^2]^T",
+      "question_text": "We consider the projection of the CCPP dataset on the first two principal components, and a logistic regression classifier where we use nonlinear transformations on the projection b = [b1, b2]^T. The resulting classifier assigns for each b the probability p(y = High | b) = sigma(w^T b_tilde) as shown in Figure 3.\nWhich one of the following combination of transformation and weight vector corresponds to this classifier?\n\nA. w = [0.31, -0.06, 0.07]^T, b_tilde = [1, b1^2, b2^3]^T\nB. w = [0.72, 3.13, -0.25]^T, b_tilde = [1, b1^2, b2^3]^T\nC. w = [0.31, -0.06, 0.07]^T, b_tilde = [1, b1^3, b2^2]^T\nD. w = [0.72, 3.13, -0.25]^T, b_tilde = [1, b1^3, b2^2]^T",
       "options": {
-        "A": "w = [0.31, -0.06, 0.07]^T, b_tilde = [1, b1^2, b2^2]^T",
-        "B": "w = [0.72, 3.13, -0.25]^T, b_tilde = [1, b1^2, b2^2]^T",
+        "A": "w = [0.31, -0.06, 0.07]^T, b_tilde = [1, b1^2, b2^3]^T",
+        "B": "w = [0.72, 3.13, -0.25]^T, b_tilde = [1, b1^2, b2^3]^T",
         "C": "w = [0.31, -0.06, 0.07]^T, b_tilde = [1, b1^3, b2^2]^T",
         "D": "w = [0.72, 3.13, -0.25]^T, b_tilde = [1, b1^3, b2^2]^T"
       },
@@ -173,7 +173,7 @@
       "topic": "Simple Matching Coefficient with unknown values",
       "type": "C",
       "text_faithful": true,
-      "question_text": "We consider the binarized version of the CCPP dataset in Table 2, where each feature f_i is 1 if the attribute x_i is greater than the median (otherwise f_i = 0). Consider a new, binarized observation\no11 = [0, ?, ?, 1]^T,\nwhich contains two unknown values each indicated with a ?. What is the minimum and maximum achievable value of the Simple Matching Coefficient (SMC) between o6 from Table 2 and the new observation o11?\n\nTable 2 (binarized CCPP dataset, features f1 f2 f3 f4; o1-o6 are class Low, o7-o10 are class High):\n        f1  f2  f3  f4\n o1      0   1   0   0\n o2      0   1   0   0\n o3      0   1   0   1\n o4      0   1   0   0\n o5      1   1   0   1\n o6      0   1   0   1\n o7      0   0   0   1\n o8      0   0   0   1\n o9      0   0   0   1\n o10     0   0   0   1\n\nA. min SMC(o6, o11) = 0.50, max SMC(o6, o11) = 1.0\nB. min SMC(o6, o11) = 0.75, max SMC(o6, o11) = 0.9\nC. min SMC(o6, o11) = 0.25, max SMC(o6, o11) = 1.0\nD. min SMC(o6, o11) = 0.25, max SMC(o6, o11) = 0.9",
+      "question_text": "Consider a new, binarized observation\no11 = [0, ?, ?, 1]^T,\nwhich contains two unknown values each indicated with a ?. What is the minimum and maximum achievable value of the Simple Matching Coefficient (SMC) between o6 from Table 2 and the new observation o11?\n\nA. min SMC(o6, o11) = 0.50, max SMC(o6, o11) = 1.0\nB. min SMC(o6, o11) = 0.75, max SMC(o6, o11) = 0.9\nC. min SMC(o6, o11) = 0.25, max SMC(o6, o11) = 1.0\nD. min SMC(o6, o11) = 0.25, max SMC(o6, o11) = 0.9",
       "options": {
         "A": "min SMC(o6, o11) = 0.50, max SMC(o6, o11) = 1.0",
         "B": "min SMC(o6, o11) = 0.75, max SMC(o6, o11) = 0.9",
@@ -192,7 +192,7 @@
       "topic": "Two-level cross-validation / generalization error estimate",
       "type": "C",
       "text_faithful": true,
-      "question_text": "We consider a subset of N = 1000 points from the CCPP dataset and a classifier with three different complexity levels (Model 1, Model 2, Model 3). We apply two-level cross-validation to estimate the generalization error, with 2 outer folds and 5 inner folds. In Table 3 the information for each outer fold, model, and inner fold is given, together with the performance of each model on the test partition of the outer fold.\n\nTable 3 (validation error on inner folds j=1..5 and test error on the outer test partition):\nOuter fold i = 1\n           j=1    j=2    j=3    j=4    j=5   | Test\n Model 1   0.12   0.21   0.22   0.23   0.15  | 0.24\n Model 2   0.30   0.11   0.15   0.30   0.28  | 0.17\n Model 3   0.21   0.14   0.26   0.17   0.26  | 0.22\n\nOuter fold i = 2\n           j=1    j=2    j=3    j=4    j=5   | Test\n Model 1   0.28   0.18   0.19   0.27   0.12  | 0.19\n Model 2   0.16   0.20   0.27   0.30   0.25  | 0.16\n Model 3   0.13   0.16   0.21   0.17   0.13  | 0.25\n\nWhich one of the following options is the correct estimate of the generalization error?\n\nA. E_hat^gen = 0.165\nB. E_hat^gen = 0.245\nC. E_hat^gen = 0.215\nD. E_hat^gen = 0.205",
+      "question_text": "We consider a subset of N = 1000 points from the CCPP dataset and a classifier with three different complexity levels (Model 1, Model 2, Model 3). We apply two-level cross-validation to estimate the generalization error, with 2 outer folds and 5 inner folds. In Table 3 the information for each outer fold, model, and inner fold is given, together with the performance of each model on the test partition of the outer fold.\n\nWhich one of the following options is the correct estimate of the generalization error?\n\nA. E_hat^gen = 0.165\nB. E_hat^gen = 0.245\nC. E_hat^gen = 0.215\nD. E_hat^gen = 0.205",
       "options": {
         "A": "E_hat^gen = 0.165",
         "B": "E_hat^gen = 0.245",
@@ -230,7 +230,7 @@
       "topic": "Bayes / class conditional probability from table",
       "type": "C",
       "text_faithful": true,
-      "question_text": "Consider the Table 4 that shows the class conditional joint probability for the attributes x1, x3 of the CCPP dataset after binarization, while the prior probabilities for the two classes are p(y = Low) = 0.53 and p(y = High) = 0.47.\nWhat is the probability the energy production to be High when x1 = 0?\n\nTable 4 (class conditional probabilities p(x1, x3 | y)):\n  x1   x3 | y=Low   y=High\n   0    0 |  0.04     0.25\n   0    1 |  0.03     0.68\n   1    0 |  0.66     0.02\n   1    1 |  0.27     0.05\n\nA. p(y = High | x1 = 0) ~ 0.92\nB. p(y = High | x1 = 0) ~ 0.82\nC. p(y = High | x1 = 0) ~ 0.56\nD. p(y = High | x1 = 0) ~ 0.78",
+      "question_text": "Consider the Table 4 that shows the class conditional joint probability for the attributes x1, x3 of the CCPP dataset after binarization, while the prior probabilities for the two classes are p(y = Low) = 0.53 and p(y = High) = 0.47.\nWhat is the probability the energy production to be High when x1 = 0?\n\nA. p(y = High | x1 = 0) ~ 0.92\nB. p(y = High | x1 = 0) ~ 0.82\nC. p(y = High | x1 = 0) ~ 0.56\nD. p(y = High | x1 = 0) ~ 0.78",
       "options": {
         "A": "p(y = High | x1 = 0) ~ 0.92",
         "B": "p(y = High | x1 = 0) ~ 0.82",
@@ -249,7 +249,7 @@
       "topic": "Regularized linear regression prediction (standardization)",
       "type": "C",
       "text_faithful": true,
-      "question_text": "We consider the synthetic dataset given in Table 5 where x represents the one dimensional input and y the corresponding one dimensional output. We standardize the input before learning the optimal bias w0* and parameter w1* for a regularized linear regression model with lambda = 0.7, where we consider the formulation from Section 14.1.\nWhat is the prediction of the trained model for the input x2?\n\nTable 5 (synthetic dataset for regularized linear regression):\n        i=1    i=2    i=3   i=4   i=5\n y_i    -2.9   -0.4   0.7   2.5   4.5\n x_i    -3.4   -1.3   0.5   2.4   4.2\n\nA. y_hat ~ -0.76\nB. y_hat ~ -0.54\nC. y_hat ~ -0.65\nD. y_hat ~ -2.22",
+      "question_text": "We consider the synthetic dataset given in Table 5 where x represents the one dimensional input and y the corresponding one dimensional output. We standardize the input before learning the optimal bias w0* and parameter w1* for a regularized linear regression model with lambda = 0.7, where we consider the formulation from Section 14.1.\nWhat is the prediction of the trained model for the input x2?\n\nA. y_hat ~ -0.76\nB. y_hat ~ -0.54\nC. y_hat ~ -0.65\nD. y_hat ~ -2.22",
       "options": {
         "A": "y_hat ~ -0.76",
         "B": "y_hat ~ -0.54",
@@ -306,7 +306,7 @@
       "topic": "p-distances and KNN (K=3) prediction",
       "type": "C",
       "text_faithful": true,
-      "question_text": "We are given the synthetic dataset in Figure 5 where the color indicates the class. We consider the p-distances d2, d1, d_inf and the KNN classifier with K = 3 to predict the label of the test point o_test = [0, 0]^T.\n\nDataset (coordinates of the six observations; red observations o1, o2, o3 belong to class C1, blue observations o4, o5, o6 belong to class C2):\n       x1     x2\n o1   -0.4   -0.8\n o2   -0.9    0.3\n o3    0      0.9\n o4    1     -0.1\n o5    0.8   -0.7\n o6    0.1    0.8\n\nWhich one of the following statements is correct?\n\nA. d2 and d_inf predict the same label.\nB. d2 and d1 predict the same label.\nC. d1 and d_inf predict the same label.\nD. All the norms predict the same result.",
+      "question_text": "We are given the synthetic dataset in Figure 5 where the color indicates the class. We consider the p-distances d2, d1, d_inf and the KNN classifier with K = 3 to predict the label of the test point o_test = [0, 0]^T.\n\nWhich one of the following statements is correct?\n\nA. d2 and d_inf predict the same label.\nB. d2 and d1 predict the same label.\nC. d1 and d_inf predict the same label.\nD. All the norms predict the same result.",
       "options": {
         "A": "d2 and d_inf predict the same label.",
         "B": "d2 and d1 predict the same label.",
@@ -344,7 +344,7 @@
       "topic": "Hierarchical clustering / complete linkage merge height",
       "type": "C",
       "text_faithful": true,
-      "question_text": "Consider the observations and the pairwise distances in Table 6. At which height will groups/clusters containing o9 and o10 merge in a dendrogram when using the complete linkage function?\n\nTable 6 (pairwise Euclidean distances d(o_i, o_j) between 10 observations; o1-o6 are class C1 Low, o7-o10 are class C2 High):\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\n o1    0.0   2.6   2.8   2.1   0.8   1.7   3.9   3.8   4.1   4.2\n o2    2.6   0.0   1.8   2.3   2.7   1.4   1.9   1.7   2.0   2.2\n o3    2.8   1.8   0.0   1.2   2.9   2.1   2.2   1.6   2.3   2.0\n o4    2.1   2.3   1.2   0.0   2.4   1.8   2.6   2.5   3.0   2.9\n o5    0.8   2.7   2.9   2.4   0.0   2.0   4.2   4.0   4.4   4.5\n o6    1.7   1.4   2.1   1.8   2.0   0.0   2.4   2.6   2.7   3.0\n o7    3.9   1.9   2.2   2.6   4.2   2.4   0.0   1.2   0.6   1.3\n o8    3.8   1.7   1.6   2.5   4.0   2.6   1.2   0.0   1.0   0.6\n o9    4.1   2.0   2.3   3.0   4.4   2.7   0.6   1.0   0.0   0.9\n o10   4.2   2.2   2.0   2.9   4.5   3.0   1.3   0.6   0.9   0.0\n\nA. 1.3\nB. 0.6\nC. 0.9\nD. 1.4",
+      "question_text": "Consider the observations and the pairwise distances in Table 6. At which height will groups/clusters containing o9 and o10 merge in a dendrogram when using the complete linkage function?\n\nA. 1.3\nB. 0.6\nC. 0.9\nD. 1.4",
       "options": {
         "A": "1.3",
         "B": "0.6",
@@ -363,7 +363,7 @@
       "topic": "AdaBoost weight update after first round",
       "type": "C",
       "text_faithful": true,
-      "question_text": "Consider again the CCPP dataset of Table 1. Suppose we limit ourselves to N = 6 observations from the original dataset and furthermore suppose we consider only the features x1 and x4 to predict the class y = 1 or y = 2. We use a KNN classification model (K = 1) to this dataset and apply AdaBoost to improve the performance. After the first round of boosting, we obtain predictions and the true class labels as tabulated in Table 7. Note that log(x) consistently refers to the natural logarithm (i.e., base e). Given this information, how will the AdaBoost update the weights w?\n\nTable 7 (true class labels y^true and AdaBoost predictions t=1 for the N = 6 observations):\n         y^true   t=1\n y1        2        2\n y2        2        2\n y3        1        2\n y4        2        1\n y5        1        2\n y6        1        2\n\nA. [0.112, 0.112, 0.194, 0.194, 0.194, 0.194]\nB. [0.25, 0.25, 0.125, 0.125, 0.125, 0.125]\nC. [0.059, 0.059, 0.221, 0.221, 0.221, 0.221]\nD. [0.341, 0.341, 0.079, 0.079, 0.079, 0.079]",
+      "question_text": "Consider again the CCPP dataset of Table 1. Suppose we limit ourselves to N = 6 observations from the original dataset and furthermore suppose we consider only the features x1 and x4 to predict the class y = 1 or y = 2. We use a KNN classification model (K = 1) to this dataset and apply AdaBoost to improve the performance. After the first round of boosting, we obtain predictions and the true class labels as tabulated in Table 7. Note that log(x) consistently refers to the natural logarithm (i.e., base e). Given this information, how will the AdaBoost update the weights w?\n\nA. [0.112, 0.112, 0.194, 0.194, 0.194, 0.194]\nB. [0.25, 0.25, 0.125, 0.125, 0.125, 0.125]\nC. [0.059, 0.059, 0.221, 0.221, 0.221, 0.221]\nD. [0.341, 0.341, 0.079, 0.079, 0.079, 0.079]",
       "options": {
         "A": "[0.112, 0.112, 0.194, 0.194, 0.194, 0.194]",
         "B": "[0.25, 0.25, 0.125, 0.125, 0.125, 0.125]",
@@ -382,7 +382,7 @@
       "topic": "KNN (K=3) leave-one-out accuracy from distance matrix",
       "type": "C",
       "text_faithful": true,
-      "question_text": "Consider the distances in Table 6 based on 10 observations from the CCPP dataset. The class labels C1, C2 (see table caption for details) will be predicted using a k-nearest neighbour classifier based on the distances given in Table 6 (ties are broken in the usual manner by considering the nearest observation from the tied classes). Suppose we use leave-one-out cross validation (i.e., the observation that is being predicted is left out) and a 3-nearest neighbour classifier (i.e., k = 3). What is the accuracy computed for all N = 10 observations?\n\nTable 6 (pairwise Euclidean distances d(o_i, o_j) between 10 observations; o1-o6 are class C1 Low, o7-o10 are class C2 High):\n        o1    o2    o3    o4    o5    o6    o7    o8    o9    o10\n o1    0.0   2.6   2.8   2.1   0.8   1.7   3.9   3.8   4.1   4.2\n o2    2.6   0.0   1.8   2.3   2.7   1.4   1.9   1.7   2.0   2.2\n o3    2.8   1.8   0.0   1.2   2.9   2.1   2.2   1.6   2.3   2.0\n o4    2.1   2.3   1.2   0.0   2.4   1.8   2.6   2.5   3.0   2.9\n o5    0.8   2.7   2.9   2.4   0.0   2.0   4.2   4.0   4.4   4.5\n o6    1.7   1.4   2.1   1.8   2.0   0.0   2.4   2.6   2.7   3.0\n o7    3.9   1.9   2.2   2.6   4.2   2.4   0.0   1.2   0.6   1.3\n o8    3.8   1.7   1.6   2.5   4.0   2.6   1.2   0.0   1.0   0.6\n o9    4.1   2.0   2.3   3.0   4.4   2.7   0.6   1.0   0.0   0.9\n o10   4.2   2.2   2.0   2.9   4.5   3.0   1.3   0.6   0.9   0.0\n\nA. accuracy = 1/5\nB. accuracy = 3/5\nC. accuracy = 4/5\nD. accuracy = 1",
+      "question_text": "Consider the distances in Table 6 based on 10 observations from the CCPP dataset. The class labels C1, C2 (see table caption for details) will be predicted using a k-nearest neighbour classifier based on the distances given in Table 6 (ties are broken in the usual manner by considering the nearest observation from the tied classes). Suppose we use leave-one-out cross validation (i.e., the observation that is being predicted is left out) and a 3-nearest neighbour classifier (i.e., k = 3). What is the accuracy computed for all N = 10 observations?\n\nA. accuracy = 1/5\nB. accuracy = 3/5\nC. accuracy = 4/5\nD. accuracy = 1",
       "options": {
         "A": "accuracy = 1/5",
         "B": "accuracy = 3/5",

@@ -32,6 +32,15 @@ q_re = re.compile(r"^Question\s+\d+\b")
 ref_re = re.compile(r"\b(Figure|Table)\s+(\d+)")
 stop_re = re.compile(r"^(Question\s+\d+|Figure\s+\d+|Table\s+\d+|[A-E]\.\s)")
 
+# Figures/tables a question NEEDS although its stem never names them by number
+# (the stem only refers to them implicitly, e.g. "the classifiers", "x5^L",
+# "the black line"); unioned with the stem's own references.
+EXTRA_REFS = {
+    ("Spring2017", "Q13"): [("Figure", 6)],   # the three classifiers being voted
+    ("Spring2018", "Q22"): [("Table", 4)],   # x5^L values + class labels (caption)
+    ("Spring2019", "Q7"): [("Figure", 4)],    # dendrogram 1 with the cutoff line
+}
+
 
 def col(x0):
     return 0 if x0 < COLMID else 1
@@ -46,9 +55,13 @@ def crop_exam_captions(doc):
             if q_re.match(head) or cap_re.match(head):
                 anchors.append((pno, col(b[0]), b[3]))
 
-    def clamp(reg, c):
-        cx0, cx1 = (4, 296) if c == 0 else (299, 591)
-        return fitz.Rect(max(reg.x0, cx0) - 4, reg.y0 - 5, min(reg.x1, cx1) + 4, reg.y1 + 5) & doc[0].rect
+    def clamp(reg, c, pno):
+        # column edges derive from the PAGE width: exams mix A4 (595 pt) and
+        # US-Letter (612 pt) pages, and a hardcoded 591 pt right edge cut wide
+        # tables on Letter pages mid-number
+        pw = doc[pno].rect.x1
+        cx0, cx1 = (4, COLMID - 1) if c == 0 else (COLMID + 2, pw - 4)
+        return fitz.Rect(max(reg.x0, cx0) - 4, reg.y0 - 5, min(reg.x1, cx1) + 4, reg.y1 + 5) & doc[pno].rect
 
     def caption_paragraph(pno, crect, c):
         """Extend a caption anchor rect downward over its continuation lines.
@@ -87,12 +100,16 @@ def crop_exam_captions(doc):
                 reg |= r
         # raster figure bodies: their bboxes often carry transparent padding that
         # overlaps the caption or the figure above -> clip to the allowed band
-        band = fitz.Rect(4 if c == 0 else 299, bt - 2, 296 if c == 0 else 591, crect.y0 + 2)
+        band = fitz.Rect(4 if c == 0 else COLMID + 2, bt - 2,
+                         COLMID - 1 if c == 0 else doc[pno].rect.x1 - 4, crect.y0 + 2)
         for i in doc[pno].get_image_info():
             r = fitz.Rect(i["bbox"]) & band
             if r.width > 8 and r.height > 8:
                 reg |= r
-        return clamp(reg, c)
+        # headroom above the topmost drawing so panel titles printed just
+        # above the plot box ("Option A", "Histogram 1") are not sliced off
+        reg = fitz.Rect(reg.x0, max(reg.y0 - 9, bt - 2), reg.x1, reg.y1)
+        return clamp(reg, c, pno)
 
     def region_table(pno, crect, c):
         items = []
@@ -116,7 +133,7 @@ def crop_exam_captions(doc):
                 break
             reg |= fitz.Rect(it[2], it[0], it[3], it[1])
             cur = min(cur, it[0])
-        return clamp(reg, c)
+        return clamp(reg, c, pno)
 
     crops, seen = {}, set()
     for pno in range(len(doc)):
@@ -180,6 +197,9 @@ def process(exam):
         if not q.get("needs_screenshot"):
             continue
         refs = refs_in_order(q["question_text"]) or refs_in_order(q.get("source_location", ""))
+        for key in EXTRA_REFS.get((exam, q["question_id"]), []):
+            if key not in refs:
+                refs.append(key)
         imgs = [crops[r] for r in refs if r in crops]
         missing = [f"{k}{n}" for (k, n) in refs if (k, n) not in crops]
         if not imgs:

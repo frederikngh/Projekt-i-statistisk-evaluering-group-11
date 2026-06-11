@@ -287,7 +287,7 @@
       "topic": "Apriori algorithm / frequent itemsets L3",
       "type": "C",
       "text_faithful": true,
-      "question_text": "Again, we consider the binarized version of the Olive Oil dataset in Table 3 as a market basket problem consisting. We want to apply the Apriori algorithm (the specific variant described in Chapter 21 of the lecture notes) to find all itemsets with support greater than epsilon = 0.3. What is the content of L3 when the Apriori algorithm is completed?\n\nA. L3 = {}\nB. L3 = {{f3, f6, f8}}\nC. L3 = {{f2, f6, f8}, {f3, f6, f8}}\nD. L3 = {{f2}, {f3}, {f6}, {f8}}",
+      "question_text": "Again, we consider the binarized version of the Olive Oil dataset in Table 3 as a market basket problem consisting of N = 11 transactions o1, ..., o11 and M = 8 items f1, ..., f8. We want to apply the Apriori algorithm (the specific variant described in Chapter 21 of the lecture notes) to find all itemsets with support greater than epsilon = 0.3. What is the content of L3 when the Apriori algorithm is completed?\n\nA. L3 = {}\nB. L3 = {{f3, f6, f8}}\nC. L3 = {{f2, f6, f8}, {f3, f6, f8}}\nD. L3 = {{f2}, {f3}, {f6}, {f8}}",
       "options": {
         "A": "L3 = {}",
         "B": "L3 = {{f3, f6, f8}}",
@@ -344,7 +344,7 @@
       "topic": "Neural network / parameter count",
       "type": "A",
       "text_faithful": true,
-      "question_text": "An artificial neural network (ANN) trained on the Olive Oil dataset described in Table 1 will be used to predict the region of origin in Italy y as a multi-class classification problem based on all of the attributes x1, ..., x8. The neural network has a single hidden layer containing nh = 50 units that uses a sigmoid non-linear activation function. The output layer uses a softmax activation function as described in the lecture notes, Section 15.3.2. How many parameters has to be trained to fit the neural network?\n\nA. Network contains 501 parameters\nB. Network contains 858 parameters\nC. The network has 909 parameters\nD. The network has 959 parameters",
+      "question_text": "An artificial neural network (ANN) trained on the Olive Oil dataset described in Table 1 will be used to predict the region of origin in Italy y as a multi-class classification problem based on all of the attributes x1, ..., x8. The neural network has a single hidden layer containing nh = 50 units that uses a sigmoid non-linear activation function. The output layer uses a softmax activation function as described in the lecture notes, Section 15.3.2. How many parameters has to be trained to fit the neural network? (The dataset has nine classes, y = 1, ..., 9.)\n\nA. Network contains 501 parameters\nB. Network contains 858 parameters\nC. The network has 909 parameters\nD. The network has 959 parameters",
       "options": {
         "A": "Network contains 501 parameters",
         "B": "Network contains 858 parameters",

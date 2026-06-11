@@ -78,7 +78,7 @@
       "topic": "PCA projection onto principal components",
       "type": "A",
       "text_faithful": true,
-      "question_text": "According to the extracted PCA directions given by the matrix V in question 2 what will be the coordinate of the standardized observation x_tilde* = [-0.1, 0.2, 0.1, -0.3, 1, 0.5] when projected onto the first two principal components? (V = [[0.38, -0.51, 0.23, 0.47, -0.55, 0.11], [0.41, 0.41, -0.53, 0.24, 0.00, 0.58], [0.50, 0.34, -0.13, 0.15, -0.05, -0.77], [0.29, 0.48, 0.78, -0.17, 0.00, 0.23], [0.45, -0.42, 0.09, 0.03, 0.78, 0.04], [0.39, -0.23, -0.20, -0.82, -0.30, 0.04]]; the projection is x_tilde* times the first two columns of V.)\n\nA. (-0.753, 0.206)\nB. (0.652, -0.512)\nC. (0.680, 0.019)\nD. (0.671, -0.139)",
+      "question_text": "According to the extracted PCA directions given by the matrix V below, what will be the coordinate of the standardized observation x_tilde* = [-0.1, 0.2, 0.1, -0.3, 1, 0.5] when projected onto the first two principal components? (V = [[0.38, -0.51, 0.23, 0.47, -0.55, 0.11], [0.41, 0.41, -0.53, 0.24, 0.00, 0.58], [0.50, 0.34, -0.13, 0.15, -0.05, -0.77], [0.29, 0.48, 0.78, -0.17, 0.00, 0.23], [0.45, -0.42, 0.09, 0.03, 0.78, 0.04], [0.39, -0.23, -0.20, -0.82, -0.30, 0.04]]; the projection is x_tilde* times the first two columns of V.)\n\nA. (-0.753, 0.206)\nB. (0.652, -0.512)\nC. (0.680, 0.019)\nD. (0.671, -0.139)",
       "options": {
         "A": "(-0.753, 0.206)",
         "B": "(0.652, -0.512)",
@@ -249,7 +249,7 @@
       "topic": "Confusion matrix matching a decision-tree split",
       "type": "B",
       "text_faithful": true,
-      "question_text": "We will consider the decision tree given by having only the above split (defined in question 11) as a decision and classifying according to this split using the largest class (i.e., majority voting). In Figure 5 are given four different confusion matrices. Which one of the four confusion matrices corresponds to the decision tree's classification of the 56 observations?\n\nA. Confusion Matrix 1.\nB. Confusion Matrix 2.\nC. Confusion Matrix 3.\nD. Confusion Matrix 4.",
+      "question_text": "We consider a dataset of 56 airline companies, of which 32 are labeled safe (the positive class) and 24 unsafe (the negative class). A decision tree splits the data at the root according to the median value of the number of incidences (x5): the branch with relatively few incidences contains 23 safe and 8 unsafe companies, while the branch with relatively many incidences contains 9 safe and 16 unsafe companies. We will consider the decision tree given by having only this split as a decision and classifying according to this split using the largest class (i.e., majority voting). In Figure 5 are given four different confusion matrices. Which one of the four confusion matrices corresponds to the decision tree's classification of the 56 observations?\n\nA. Confusion Matrix 1.\nB. Confusion Matrix 2.\nC. Confusion Matrix 3.\nD. Confusion Matrix 4.",
       "options": {
         "A": "Confusion Matrix 1.",
         "B": "Confusion Matrix 2.",
@@ -287,7 +287,7 @@
       "topic": "Classifier performance metrics from a confusion matrix",
       "type": "C",
       "text_faithful": true,
-      "question_text": "We will consider Confusion Matrix 1 given in Figure 5 and we regard the class safe as the positive class and unsafe as the negative class. Confusion Matrix 1 has rows = Actual class and columns = Predicted class, with values: Actual-Safe & Pred-Safe = 14, Actual-Safe & Pred-Unsafe = 18, Actual-Unsafe & Pred-Safe = 10, Actual-Unsafe & Pred-Unsafe = 14. Which statement regarding a classifier having performance given by Confusion Matrix 1 is correct?\n\nA. The classifier's precision is 7/12.\nB. The classifier's recall is 1/2.\nC. The false positive rate (FPR) of the classifier is 5/14.\nD. The accuracy of the classifier is better than guessing everything to be the largest class.",
+      "question_text": "We will consider Confusion Matrix 1 given in Figure 5 and we regard the class safe as the positive class and unsafe as the negative class. Which statement regarding a classifier having performance given by the performance indicated by Confusion Matrix 1 is correct?\n\nA. The classifier's precision is 7/12.\nB. The classifier's recall is 1/2.\nC. The false positive rate (FPR) of the classifier is 5/14.\nD. The accuracy of the classifier is better than guessing everything to be the largest class.",
       "options": {
         "A": "The classifier's precision is 7/12.",
         "B": "The classifier's recall is 1/2.",
@@ -295,7 +295,7 @@
         "D": "The accuracy of the classifier is better than guessing everything to be the largest class."
       },
       "correct_answer": "A",
-      "text_representation": "Confusion Matrix 1 (from Figure 5), with class safe as positive and unsafe as negative. Rows = Actual class, columns = Predicted class.\n\n                Pred Safe   Pred Unsafe\n Actual Safe       14           18\n Actual Unsafe      10           14\n\nEquivalently: TP (Safe predicted Safe) = 14, FN (Safe predicted Unsafe) = 18, FP (Unsafe predicted Safe) = 10, TN (Unsafe predicted Unsafe) = 14. Totals: 32 actual safe, 24 actual unsafe, 56 observations.",
+      "text_representation": "Confusion Matrix 1 (from Figure 5), with class safe as positive and unsafe as negative. Rows = Actual class, columns = Predicted class.\n\n                Pred Safe   Pred Unsafe\n Actual Safe       14           18\n Actual Unsafe      10           14",
       "needs_screenshot": true,
       "screenshot_path": "data/screenshots/Spring2018_Q14.png",
       "source_location": "exam p.7, Figure 5, Confusion Matrix 1 (printed counts)"
@@ -515,7 +515,7 @@
       "topic": "Decision tree with distance-norm decisions (two-class separation)",
       "type": "B",
       "text_faithful": false,
-      "question_text": "We will consider the two class classification problem given in Figure 10 in which the goal is to separate red crosses (x) from black plusses (+). Which one of the following procedures based on the decision tree given in Figure 11 will perfectly separate the two classes? (The decision tree in Figure 11 has four decision nodes A, B, C, D: if A true -> Class 1 (x); else go to B; if B true -> Class 1 (x); else go to C; if C true -> Class 2 (+); else go to D; if D true -> Class 2 (+); else Class 1 (x).)\n\nA. A = ||x - [1/2, 1/2]||_1 <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/20, C = ||x - [1/4, 1/2]||_inf <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/4.\nB. A = ||x - [1/2, 1/2]||_1 <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/4, C = ||x - [1/4, 1/2]||_inf <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/20.\nC. A = ||x - [1/2, 1/2]||_inf <= 1/4, B = ||x - [3/4, 1/2]||_1 <= 1/4, C = ||x - [1/4, 1/2]||_2 <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/20.\nD. A = ||x - [1/2, 1/2]||_inf <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/4, C = ||x - [1/4, 1/2]||_1 <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/20.",
+      "question_text": "We will consider the two class classification problem given in Figure 10 in which the goal is to separate red crosses (x) from black plusses (+). Which one of the following procedures based on the decision tree given in Figure 11 will perfectly separate the two classes?\n\nA. A = ||x - [1/2, 1/2]||_1 <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/20, C = ||x - [1/4, 1/2]||_inf <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/4.\nB. A = ||x - [1/2, 1/2]||_1 <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/4, C = ||x - [1/4, 1/2]||_inf <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/20.\nC. A = ||x - [1/2, 1/2]||_inf <= 1/4, B = ||x - [3/4, 1/2]||_1 <= 1/4, C = ||x - [1/4, 1/2]||_2 <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/20.\nD. A = ||x - [1/2, 1/2]||_inf <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/4, C = ||x - [1/4, 1/2]||_1 <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/20.",
       "options": {
         "A": "A = ||x - [1/2, 1/2]||_1 <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/20, C = ||x - [1/4, 1/2]||_inf <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/4.",
         "B": "A = ||x - [1/2, 1/2]||_1 <= 1/4, B = ||x - [3/4, 1/2]||_2 <= 1/4, C = ||x - [1/4, 1/2]||_inf <= 1/4, D = ||x - [3/16, 9/16]||_2 <= 1/20.",

@@ -10,12 +10,15 @@ import sys
 
 arg = ""
 if len(sys.argv) > 1:
-    arg = " " + sys.argv[1]
+    arg = ' "' + sys.argv[1] + '"'
 
-os.system("python binomial_test.py" + arg)
-os.system("python mcnemar_test.py" + arg)
-os.system("python text_vs_graph_test.py" + arg)
-os.system("python question_types_test.py" + arg)
-os.system("python dont_know_test.py" + arg)
-os.system("python power_check.py" + arg)
-os.system("python make_figure.py" + arg)
+scripts = ["binomial_test.py", "mcnemar_test.py", "text_vs_graph_test.py",
+           "question_types_test.py", "dont_know_test.py", "power_check.py",
+           "make_figure.py"]
+
+for script in scripts:
+    code = os.system("python " + script + arg)
+    if code != 0:
+        print()
+        print("STOPPED:", script, "failed (exit code " + str(code) + ").")
+        sys.exit(1)

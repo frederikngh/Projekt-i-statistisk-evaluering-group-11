@@ -30,7 +30,7 @@ pip install -r requirements.txt
 ```
 
 Gemma is a gated model, so the machine needs a Hugging Face login once:
-accept the licence on the google/gemma-4-E4B-it model page, then run
+accept the licence on the google/gemma-4-E2B-it model page, then run
 
 ```bash
 hf auth login
@@ -72,7 +72,12 @@ Modalities:
 - text_desc: the same figure/table written out as text instead of an image
 
 Every question is sent to Gemma as a brand new call with no chat history, so
-the answers are independent of each other.
+the answers are independent of each other. Gemma is prompted to reason step
+by step (chain of thought) and to close its reply with a "FINAL ANSWER: X"
+line, which collect.py parses from the END of the reply. Decoding is greedy,
+so the answers stay reproducible. (Answers collected with the older
+single-letter/no-reasoning prompt are kept in data/results_noCoT_archive.csv
+and are not comparable with the current protocol.)
 
 ## Step 1: collect Gemma's answers
 

@@ -97,7 +97,7 @@
       "topic": "PCA / coordinates in principal component basis",
       "type": "A",
       "text_faithful": true,
-      "question_text": "Consider again the Bicycle rental dataset and the PCA decomposition described in Equation (1) (V given in Question 2). Recall the PCA decomposition is obtained by first forming the centered data matrix X_tilde by subtracting the column-wise mean\nmu = [12.9, 58.2, 1.7, 1436.8, 4.1]^T\nfrom the data matrix X. Assume an observation has coordinates\nx = [15.5, 59.2, 1.4, 1438.0, 5.3]^T.\nWhich coordinates in the coordinate system spanned by the principal component vectors corresponds to x?\n\nA. b = [0.0, -3.2, 0.0, 0.0, 0.0]^T\nB. b = [0.0, 1.2, 0.0, 0.0, 0.0]^T\nC. b = [0.0, 1.5, 0.0, 0.0, 0.0]^T\nD. b = [0.0, -1.6, 0.0, 0.0, 0.0]^T",
+      "question_text": "Consider the Bicycle rental dataset and the PCA decomposition U S V^T = X_tilde, where\nV = [[0.11, -0.8, 0.3, -0.17, -0.48], [-0.58, -0.31, 0.01, -0.5, 0.56], [0.49, 0.08, -0.49, -0.72, -0.07], [0.6, -0.36, 0.04, 0.27, 0.66], [-0.23, -0.36, -0.82, 0.37, -0.09]]\nand the columns of V are the principal component directions. Recall the PCA decomposition is obtained by first forming the centered data matrix X_tilde by subtracting the column-wise mean\nmu = [12.9, 58.2, 1.7, 1436.8, 4.1]^T\nfrom the data matrix X. Assume an observation has coordinates\nx = [15.5, 59.2, 1.4, 1438.0, 5.3]^T.\nWhich coordinates in the coordinate system spanned by the principal component vectors corresponds to x?\n\nA. b = [0.0, -3.2, 0.0, 0.0, 0.0]^T\nB. b = [0.0, 1.2, 0.0, 0.0, 0.0]^T\nC. b = [0.0, 1.5, 0.0, 0.0, 0.0]^T\nD. b = [0.0, -1.6, 0.0, 0.0, 0.0]^T",
       "options": {
         "A": "b = [0.0, -3.2, 0.0, 0.0, 0.0]^T",
         "B": "b = [0.0, 1.2, 0.0, 0.0, 0.0]^T",
@@ -268,7 +268,7 @@
       "topic": "Regression tree / prediction-rule plot matching",
       "type": "B",
       "text_faithful": false,
-      "question_text": "We will consider the first 8 observations of the Bicycle rental dataset shown in Table 2. Table 3 shows their corresponding value of x1 and y_r. We fit a small regression tree to this dataset. The structure (and binary splitting rules) is depicted in Figure 2 (root split: x1 > 0.13; right child split: x1 > 0.26). Which one of the prediction rules (i.e., the model output y_hat_r as a function of x1) shown in Figure 3 corresponds to the tree?\n\nA. Prediction rule 1\nB. Prediction rule 2\nC. Prediction rule 3\nD. Prediction rule 4",
+      "question_text": "We will consider the first 8 observations of the Bicycle rental dataset shown in Table 2. Table 3 shows their corresponding value of x1 and y_r. We fit a small regression tree to this dataset. The structure (and binary splitting rules) is depicted in Figure 2. Which one of the prediction rules (i.e., the model output y_hat_r as a function of x1) shown in Figure 3 corresponds to the tree?\n\nA. Prediction rule 1\nB. Prediction rule 2\nC. Prediction rule 3\nD. Prediction rule 4",
       "options": {
         "A": "Prediction rule 1",
         "B": "Prediction rule 2",
@@ -287,7 +287,7 @@
       "topic": "Regression tree / purity gain of a split (Hunt's algorithm)",
       "type": "C",
       "text_faithful": true,
-      "question_text": "In this problem, we will again consider the 8 observations from the Bicycle rental dataset shown in Table 3. Figure 2 shows the structure of the small regression tree fitted to this dataset using Hunt's algorithm along with the thereby obtained binary splitting rules (root split: x1 > 0.13; second/right split: x1 > 0.26). What was the purity gain Delta of the second split Hunt's algorithm accepted?\n\nA. Delta = 101.2\nB. Delta = 30.64\nC. Delta = 17.64\nD. Delta = 13.0",
+      "question_text": "In this problem, we will again consider the 8 observations from the Bicycle rental dataset shown in Table 3. Figure 2 shows the structure of the small regression tree fitted to this dataset using Hunt's algorithm along with the thereby obtained binary splitting rules. What was the purity gain Delta of the second split Hunt's algorithm accepted?\n\nA. Delta = 101.2\nB. Delta = 30.64\nC. Delta = 17.64\nD. Delta = 13.0",
       "options": {
         "A": "Delta = 101.2",
         "B": "Delta = 30.64",
@@ -295,7 +295,7 @@
         "D": "Delta = 13.0"
       },
       "correct_answer": "C",
-      "text_representation": "Table 3: Values of x1 and the corresponding value of y_r for the first 8 observations.\n\n         obs:    1      2      3      4      5      6      7      8\n          x1:  -1.1   -0.8   0.08   0.18   0.34    0.6   1.42   1.68\n          y_r:   12      5     10     23      6     17     14     13\n\nRegression-tree splitting rules (Figure 2): root node splits on x1 > 0.13; the right child (the 'second' split) splits on x1 > 0.26. The second split partitions the observations with x1 > 0.13 (observations {4,5,6,7,8}) into {4} (x1 <= 0.26) and {5,6,7,8} (x1 > 0.26).",
+      "text_representation": "Table 3: Values of x1 and the corresponding value of y_r for the first 8 observations.\n\n         obs:    1      2      3      4      5      6      7      8\n          x1:  -1.1   -0.8   0.08   0.18   0.34    0.6   1.42   1.68\n          y_r:   12      5     10     23      6     17     14     13\n\nRegression-tree splitting rules (Figure 2): root node splits on x1 > 0.13; the right child (the 'second' split) splits on x1 > 0.26.",
       "needs_screenshot": true,
       "screenshot_path": "data/screenshots/Spring2021_Q14.png",
       "source_location": "exam p.7, Table 3 (x1, y_r numeric table) and Figure 2 (regression tree giving the split thresholds 0.13 and 0.26)"

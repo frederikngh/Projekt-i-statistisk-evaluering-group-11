@@ -10,8 +10,9 @@ else:
     device = "cpu"
 
 print("Using device:", device)
-gemma = pipeline("image-text-to-text", model="google/gemma-4-E4B-it", dtype="auto", device=device)
+gemma = pipeline("image-text-to-text", model="google/gemma-4-E2B-it", dtype="auto", device=device)
 
 PROMPT = "Hvem er Frederik Naervig Gerlach-Hansen?"
-out = gemma(text=[{"role": "user", "content": [{"type": "text", "text": PROMPT}]}], max_new_tokens=200)
+out = gemma(text=[{"role": "user", "content": [{"type": "text", "text": PROMPT}]}],
+            generate_kwargs={"max_new_tokens": 200, "do_sample": False})
 print(out[0]["generated_text"][-1]["content"])

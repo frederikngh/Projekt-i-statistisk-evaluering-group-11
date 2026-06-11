@@ -13,6 +13,11 @@ Rows already in results.csv are skipped, so the script is safe to stop
 and rerun. Every question is sent as a NEW call with no chat history
 (the answers must be independent for our statistics to be valid), and
 greedy decoding (do_sample=False) makes the answers reproducible.
+
+Gemma is asked to reason step by step (chain of thought) and to finish
+with a line "FINAL ANSWER: X"; extract_letter() parses that line from
+the END of the reply, so option letters mentioned during the reasoning
+are not picked up by mistake.
 """
 
 import argparse
@@ -29,8 +34,11 @@ INSTRUCTION = (
     "You are answering a multiple-choice exam question from a university "
     "Machine Learning course. Each question has exactly one correct answer "
     "among A, B, C, D. You may also answer E if you genuinely do not know. "
-    "Respond with ONLY a single capital letter: A, B, C, D, or E. "
-    "Do not explain your answer."
+    "Think the problem through step by step: write out your reasoning and "
+    "any calculations first, but keep each step short and to the point. "
+    "ALWAYS finish your reply with one line of exactly this form:\n"
+    "FINAL ANSWER: X\n"
+    "where X is a single capital letter A, B, C, D, or E."
 )
 
 
@@ -53,7 +61,7 @@ def load_gemma():
     print("Loading Gemma on " + device + "...", flush=True)
     model = pipeline(
         "image-text-to-text",
-        model="google/gemma-4-E4B-it",
+        model="google/gemma-4-E2B-it",
         dtype="auto",
         device=device,
     )
@@ -69,25 +77,66 @@ def query_gemma(model, prompt, image_path):
     content.append({"type": "text", "text": prompt})
     messages = [{"role": "user", "content": content}]
 
-    out = model(text=messages, max_new_tokens=16, do_sample=False)
+    # 4096 new tokens leaves room for the step-by-step reasoning (dense
+    # calculation questions hit a 2048 cap mid-arithmetic; the cap only
+    # matters when it is hit, so finished replies are unaffected). Greedy
+    # decoding keeps the answers reproducible. The params must go through
+    # generate_kwargs: passed loose, the pipeline hands them to the
+    # processor, which ignores them (do_sample would silently not apply).
+    out = model(text=messages,
+                generate_kwargs={"max_new_tokens": 4096, "do_sample": False})
     reply = out[0]["generated_text"][-1]["content"]
     raw = reply.strip()
     return extract_letter(raw), raw
 
 
 def extract_letter(text):
-    """Find the answer letter in Gemma's reply (usually the reply IS just 'B').
+    """Find the FINAL ANSWER letter in Gemma's (chain-of-thought) reply.
 
-    Handles replies like 'B', 'B.', 'Answer: B'. If no letter is found we
-    count it as E ('don't know') - the raw reply is saved so we can check.
+    The prompt asks Gemma to finish with a line like "FINAL ANSWER: B". We
+    look at the LAST "FINAL ANSWER" in the reply, so option letters that come
+    up during the reasoning are not picked up by mistake. If that line is
+    missing (for example the reply was cut off at the token limit) we accept
+    a line in the last three non-empty lines that IS just a letter (maybe
+    decorated, like "(B)" or "**B.**"). A letter inside a sentence does NOT
+    count: in upper-case text the word "A" is usually just the article "a",
+    so a cut-off reply must not be scored as the answer A by accident. If
+    nothing is found we count it as E ('don't know') - the raw reply is
+    saved in results.csv so we can check those rows by hand.
     """
+    letters = ["A", "B", "C", "D", "E"]
+    skip = [" ", ":", "-", "*", "(", ")", ".", "\t"]
     text = text.upper()
-    punctuation = [".", ",", ":", ";", "!", "(", ")", "*", "'", '"']
-    for ch in punctuation:
-        text = text.replace(ch, " ")
-    for word in text.split():
-        if word in ["A", "B", "C", "D", "E"]:
-            return word
+
+    # 1) the FINAL ANSWER line (take the LAST one in the reply)
+    pos = text.rfind("FINAL ANSWER")
+    if pos != -1:
+        rest = text[pos + len("FINAL ANSWER"):]
+        i = 0
+        while i < len(rest) and rest[i] in skip:
+            i = i + 1
+        if i < len(rest) and rest[i] in letters:
+            # make sure it is a single letter, not the start of a word
+            if i + 1 == len(rest) or not rest[i + 1].isalnum():
+                return rest[i]
+
+    # 2) fallback: a line that IS just the answer letter, nothing else
+    tail = []
+    for line in text.splitlines():
+        line = line.strip()
+        if line != "":
+            tail.append(line)
+    tail = tail[-3:]
+    decorations = [".", ",", ":", ";", "!", "?", "(", ")", "*", "'", '"',
+                   "[", "]", " ", "\t"]
+    i = len(tail) - 1
+    while i >= 0:
+        line = tail[i]
+        for ch in decorations:
+            line = line.replace(ch, "")
+        if line in letters:
+            return line
+        i = i - 1
     return "E"
 
 
@@ -100,14 +149,14 @@ def build_prompt(row):
     if row["modality"] == "text":
         prompt = (f"{INSTRUCTION}\n\n"
                   f"Question:\n{question}\n\n"
-                  "Your answer (A/B/C/D/E):")
+                  "Reason step by step, then end with your FINAL ANSWER line.")
         return prompt, None
 
     if row["modality"] == "screenshot":
         prompt = (f"{INSTRUCTION}\n\n"
                   f"Question:\n{question}\n\n"
                   "The figure(s)/table(s) this question refers to are in the attached image.\n\n"
-                  "Your answer (A/B/C/D/E):")
+                  "Reason step by step, then end with your FINAL ANSWER line.")
         return prompt, row["image_path"]
 
     # modality == "text_desc": the figure/table is written out as text instead
@@ -116,7 +165,7 @@ def build_prompt(row):
               "Use this description to answer the question.\n\n"
               f"{question}\n\n"
               f"Figure/Table Description:\n{row['description']}\n\n"
-              "Your answer (A/B/C/D/E):")
+              "Reason step by step, then end with your FINAL ANSWER line.")
     return prompt, None
 
 
@@ -135,7 +184,7 @@ def load_done():
 
 def append_result(result):
     """Add one answer to results.csv (creating the file if needed)."""
-    new_file = not os.path.exists(RESULTS)
+    new_file = not os.path.exists(RESULTS) or os.path.getsize(RESULTS) == 0
     with open(RESULTS, "a", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=COLUMNS)
         if new_file:
@@ -170,6 +219,14 @@ def main():
         key = q["exam_year"] + " " + q["question_id"] + " " + q["modality"]
         if key not in done:
             pending.append(q)
+
+    # safety: every screenshot row must have its image file on disk
+    for q in pending:
+        if q["modality"] == "screenshot":
+            if q["image_path"] == "" or not os.path.exists(q["image_path"]):
+                print("ERROR: missing screenshot for", q["exam_year"],
+                      q["question_id"], "->", q["image_path"])
+                return
 
     print("Questions selected :", len(questions))
     print("Already answered   :", len(done))

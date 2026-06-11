@@ -19,6 +19,9 @@ def load_results():
     path = "data/results.csv"
     if len(sys.argv) > 1:
         path = sys.argv[1]
+        if not os.path.exists(path):
+            print("ERROR:", path, "not found.")
+            sys.exit(1)
     if not os.path.exists(path):
         print(path, "not found - using the example data instead.")
         path = "data/example.csv"

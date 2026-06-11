@@ -97,7 +97,7 @@
       "topic": "Bayes classifier on binary attributes",
       "type": "C",
       "text_faithful": true,
-      "question_text": "We consider the dataset in Table 2 with the binary attributes x_j for j = 1, ..., 4. We construct a Bayes classifier relying on the attributes x2 and x4.\n\nTable 2 (observations o_i with binary attributes x_j and label y):\n      x1  x2  x3  x4 | y\n o1    0   0   0   0 | 1\n o2    0   0   1   1 | 1\n o3    1   1   0   0 | 1\n o4    0   1   1   1 | 1\n o5    1   1   0   1 | 2\n o6    0   0   0   0 | 2\n o7    1   1   0   1 | 2\n o8    0   0   0   0 | 2\n\nWhich one of the following probabilities is correct?\n\nA. p(y = 2 | x2 = 1, x4 = 1) ~ 0.67\nB. p(y = 2 | x2 = 1, x4 = 1) ~ 0.5\nC. p(y = 2 | x2 = 1, x4 = 1) ~ 0.39\nD. p(y = 2 | x2 = 1, x4 = 1) ~ 0.92",
+      "question_text": "We consider the dataset in Table 2 with the binary attributes x_j for j = 1, ..., 4. We construct a Bayes classifier relying on the attributes x2 and x4.\n\nWhich one of the following probabilities is correct?\n\nA. p(y = 2 | x2 = 1, x4 = 1) ~ 0.67\nB. p(y = 2 | x2 = 1, x4 = 1) ~ 0.5\nC. p(y = 2 | x2 = 1, x4 = 1) ~ 0.39\nD. p(y = 2 | x2 = 1, x4 = 1) ~ 0.92",
       "options": {
         "A": "p(y = 2 | x2 = 1, x4 = 1) ~ 0.67",
         "B": "p(y = 2 | x2 = 1, x4 = 1) ~ 0.5",
@@ -230,7 +230,7 @@
       "topic": "Confusion matrices / precision, recall, error rate",
       "type": "C",
       "text_faithful": true,
-      "question_text": "Table 3 shows the confusion matrices related to a Logistic Regression model (LR) and a Decision Tree classifier (DT) trained on a particular instance of the Earthquakes in Romania dataset to predict Earthquake level. The number of observations is N = 464. We define y = 1 to indicate a positive outcome and y = 2 to be a negative outcome.\n\nTable 3 (confusion matrices):\nModel 1: Logistic Regression (LR)\n                  Predicted Class 1   Predicted Class 2\n Actual Class 1          52                  64\n Actual Class 2         244                 104\n\nModel 2: Decision Tree (DT)\n                  Predicted Class 1   Predicted Class 2\n Actual Class 1          60                  56\n Actual Class 2         110                 238\n\nWhich one of the following statements is correct?\n\nA. Predicting everything as Negative gives worse accuracy than Model 1.\nB. Model 1 has higher recall than Model 2.\nC. Model 2 has higher precision than Model 1.\nD. Model 1 has lower error rate than Model 2.",
+      "question_text": "Table 3 shows the confusion matrices related to a Logistic Regression model (LR) and a Decision Tree classifier (DT) trained on a particular instance of the Earthquakes in Romania dataset to predict Earthquake level. The number of observations is N = 464. We define y = 1 to indicate a positive outcome and y = 2 to be a negative outcome.\n\nWhich one of the following statements is correct?\n\nA. Predicting everything as Negative gives worse accuracy than Model 1.\nB. Model 1 has higher recall than Model 2.\nC. Model 2 has higher precision than Model 1.\nD. Model 1 has lower error rate than Model 2.",
       "options": {
         "A": "Predicting everything as Negative gives worse accuracy than Model 1.",
         "B": "Model 1 has higher recall than Model 2.",
@@ -363,7 +363,7 @@
       "topic": "Two-level cross-validation / generalization error estimate",
       "type": "C",
       "text_faithful": true,
-      "question_text": "We consider a subset of N = 120 points from the Earthquakes in Romania dataset and two different classifiers (Model 1 and Model 2). We apply two-level cross-validation to estimate the generalization error, with 2 outer folds and 3 inner folds. In Table 5 the information for each outer fold, model, and inner fold is given, together with the performance of each model on the test partition of the outer fold.\n\nTable 5 (misclassification counts; inner folds j=1..3 are on validation sets, Test column is on the outer test partition):\nOuter fold i = 1\n           j=1  j=2  j=3  | Test\n Model 1    1    9    4   |  55\n Model 2    6    4   19   |  43\n\nOuter fold i = 2\n           j=1  j=2  j=3  | Test\n Model 1   18    4    8   |  47\n Model 2   15    4    9   |  29\n\nWhich one of the following options is a correct estimate of the generalization error?\n\nA. E_hat^gen = 0.6\nB. E_hat^gen = 0.7\nC. E_hat^gen = 0.85\nD. E_hat^gen = 0.35",
+      "question_text": "We consider a subset of N = 120 points from the Earthquakes in Romania dataset and two different classifiers (Model 1 and Model 2). We apply two-level cross-validation to estimate the generalization error, with 2 outer folds and 3 inner folds. In Table 5 the information for each outer fold, model, and inner fold is given, together with the performance of each model on the test partition of the outer fold.\n\nWhich one of the following options is a correct estimate of the generalization error?\n\nA. E_hat^gen = 0.6\nB. E_hat^gen = 0.7\nC. E_hat^gen = 0.85\nD. E_hat^gen = 0.35",
       "options": {
         "A": "E_hat^gen = 0.6",
         "B": "E_hat^gen = 0.7",
@@ -371,7 +371,7 @@
         "D": "E_hat^gen = 0.35"
       },
       "correct_answer": "B",
-      "text_representation": "Table 5: two-level cross-validation, N = 120, 2 outer folds, 3 inner folds. Each entry under j=1,2,3 is the number of misclassified points on that inner validation set; the Test column is the number of misclassified points on the outer test partition (each outer test partition has 120/2 = 60 points).\nOuter fold i = 1\n           j=1  j=2  j=3  | Test\n Model 1    1    9    4   |  55\n Model 2    6    4   19   |  43\n\nOuter fold i = 2\n           j=1  j=2  j=3  | Test\n Model 1   18    4    8   |  47\n Model 2   15    4    9   |  29",
+      "text_representation": "Table 5: two-level cross-validation, N = 120, 2 outer folds, 3 inner folds. Each entry under j=1,2,3 is the number of misclassified points on that inner validation set; the Test column is the number of misclassified points on the outer test partition.\nOuter fold i = 1\n           j=1  j=2  j=3  | Test\n Model 1    1    9    4   |  55\n Model 2    6    4   19   |  43\n\nOuter fold i = 2\n           j=1  j=2  j=3  | Test\n Model 1   18    4    8   |  47\n Model 2   15    4    9   |  29",
       "needs_screenshot": true,
       "screenshot_path": "data/screenshots/Fall2024_Q18.png",
       "source_location": "exam p.7, Table 5 (two-level CV misclassification counts)"
@@ -458,7 +458,7 @@
       "topic": "Cluster quality / count matrix from dendrogram vs ground truth",
       "type": "B",
       "text_faithful": false,
-      "question_text": "Consider the dendrogram from Figure 13. Suppose we apply a cutoff (indicated by the black line in Figure 13) thereby generating three clusters. We wish to compare the quality of this clustering, Q, to the ground-truth clustering, Z, indicated by the colors in Table 6. Recall, n is the count matrix where element n_km indicates the number of observations assigned to cluster k in Z and m in Q. S is the number of times Z and Q agree that two observations are in the same cluster. D the number of times Z and Q agree that two observations are not in the same cluster. Determine which one of the following set of intermediate calculations is correct.\n\nThe ground-truth classes (colors in Table 6): observations o1,o2,o3,o4,o5,o6 belong to class C1 (Low strength), and observations o7,o8,o9,o10 belong to class C2 (High strength).\n\nA. n = [[1, 3, 2], [0, 4, 0]], S = 10, D = 12\nB. n = [[0, 4, 0], [0, 0, 1], [1, 1, 3]], S = 9, D = 22\nC. n = [[3, 1, 2], [0, 0, 4]], S = 10, D = 16\nD. n = [[2, 4], [1, 0], [3, 0]], S = 10, D = 16",
+      "question_text": "Consider the dendrogram from Figure 13. Suppose we apply a cutoff (indicated by the black line in Figure 13) thereby generating three clusters. We wish to compare the quality of this clustering, Q, to the ground-truth clustering, Z, indicated by the colors in Table 6. Recall, n is the count matrix where element n_km indicates the number of observations assigned to cluster k in Z and m in Q. S is the number of times Z and Q agree that two observations are in the same cluster. D the number of times Z and Q agree that two observations are not in the same cluster. Determine which one of the following set of intermediate calculations is correct.\n\nA. n = [[1, 3, 2], [0, 4, 0]], S = 10, D = 12\nB. n = [[0, 4, 0], [0, 0, 1], [1, 1, 3]], S = 9, D = 22\nC. n = [[3, 1, 2], [0, 0, 4]], S = 10, D = 16\nD. n = [[2, 4], [1, 0], [3, 0]], S = 10, D = 16",
       "options": {
         "A": "n = [[1, 3, 2], [0, 4, 0]], S = 10, D = 12",
         "B": "n = [[0, 4, 0], [0, 0, 1], [1, 1, 3]], S = 9, D = 22",

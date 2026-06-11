@@ -33,6 +33,9 @@ if n_d >= 5:
         print("  At least " + str(needed) + " of those " + str(n_d) + " must favour the SAME modality for p < 0.05.")
     else:
         print("  McNemar: only " + str(n_d) + " disagreements - significance is impossible.")
+else:
+    print("  McNemar: " + str(n_pairs) + " pairs, but only " + str(n_d) + " disagree -")
+    print("  too few disagreements for a meaningful power statement.")
 
 # Part 2: z-test. Try a drop of 1%, 2%, 3%, ... below the text accuracy and ask
 # the power function how likely the z-test is to detect that drop with our
