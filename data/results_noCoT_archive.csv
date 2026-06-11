@@ -1,0 +1,137 @@
+exam_year,question_id,question_type,topic,modality,gemma_answer,correct_answer,raw_response
+Fall2017,Q1,B,Attribute types / boxplot interpretation of standardized attributes,screenshot,B,D,B
+Fall2017,Q2,A,PCA / fourth singular value from squared Frobenius norm,text,A,C,A
+Fall2017,Q3,B,PCA / identifying a projected observation in the PCA plane,screenshot,D,C,D
+Fall2017,Q4,C,Forward/backward feature selection from RMSE table,screenshot,D,B,D
+Fall2017,Q4,C,Forward/backward feature selection from RMSE table,text_desc,D,B,D
+Fall2017,Q5,B,Gaussian distributions / matching covariance matrices to contour plot,screenshot,D,C,D
+Fall2017,Q6,A,Decision tree / purity gain with Gini impurity,text,A,A,A
+Fall2017,Q7,B,ROC curve / matching AUC for a feature discriminator,screenshot,C,B,C
+Fall2017,Q8,B,k-means clustering on 1D Height values (converged solution),screenshot,D,B,D
+Fall2017,Q8,B,k-means clustering on 1D Height values (converged solution),text_desc,B,B,B
+Fall2017,Q9,B,Average relative KNN density / outlier detection on 1D Height values,screenshot,D,A,D
+Fall2017,Q9,B,Average relative KNN density / outlier detection on 1D Height values,text_desc,A,A,A
+Fall2017,Q10,B,Hierarchical clustering / matching dendrogram (average linkage),screenshot,A,D,A
+Fall2017,Q11,B,Rand index (SMC) between dendrogram-2 cut and class labels,screenshot,C,B,C
+Fall2017,Q12,B,Gaussian Mixture Model / posterior cluster assignment probability (1D),screenshot,B,C,B
+Fall2017,Q12,B,Gaussian Mixture Model / posterior cluster assignment probability (1D),text_desc,B,C,B
+Fall2017,Q13,B,"Confusion matrix / recall, precision, accuracy, class balance",screenshot,C,A,C
+Fall2017,Q13,B,"Confusion matrix / recall, precision, accuracy, class balance",text_desc,C,A,C
+Fall2017,Q14,A,Bayes theorem from conditional probabilities,text,C,C,C
+Fall2017,Q15,B,Classifier identification from decision boundaries,screenshot,C,A,C
+Fall2017,Q16,A,Artificial neural network / forward pass with ReLU activation,text,C,D,C
+Fall2017,Q17,A,Cross-validation concepts,text,C,A,C
+Fall2017,Q18,C,Frequent itemsets / support threshold from binarized market-basket matrix,screenshot,B,C,B
+Fall2017,Q18,C,Frequent itemsets / support threshold from binarized market-basket matrix,text_desc,B,C,B
+Fall2017,Q19,C,Association rule confidence from binarized market-basket matrix,screenshot,C,D,C
+Fall2017,Q19,C,Association rule confidence from binarized market-basket matrix,text_desc,C,D,C
+Fall2017,Q20,C,Naive Bayes classifier from binarized matrix,screenshot,C,B,C
+Fall2017,Q20,C,Naive Bayes classifier from binarized matrix,text_desc,B,B,B
+Fall2017,Q21,C,3-nearest neighbor classifier with Jaccard similarity from binary matrix,screenshot,A,A,A
+Fall2017,Q21,C,3-nearest neighbor classifier with Jaccard similarity from binary matrix,text_desc,B,A,B
+Fall2017,Q22,B,AdaBoost / classification after two boosting rounds from decision boundaries,screenshot,C,C,C
+Fall2017,Q23,B,Regularized (ridge) regression / interpreting training vs test RMSE curves,screenshot,B,A,B
+Fall2017,Q24,A,Ridge regression / number of models and generalization estimate,text,E,A,E
+Fall2017,Q25,B,Clustering / choosing the appropriate clustering approach for a scatter,screenshot,C,B,C
+Fall2017,Q26,A,"General ML concepts (multinomial regression, decision trees, local minima, accuracy)",text,C,C,C
+Fall2017,Q27,B,Decision tree with norm-based decisions matching decision boundaries,screenshot,A,A,A
+Fall2018,Q1,B,Matching percentile plots to boxplots,screenshot,B,C,B
+Fall2018,Q2,A,PCA / variance explained from singular values,text,D,A,D
+Fall2018,Q3,B,PCA / matching projection plot,screenshot,A,B,A
+Fall2018,Q4,C,KNN average relative density (outlier score),screenshot,C,B,C
+Fall2018,Q4,C,KNN average relative density (outlier score),text_desc,B,B,B
+Fall2018,Q5,C,Gaussian Mixture Model density evaluation,screenshot,C,C,C
+Fall2018,Q5,C,Gaussian Mixture Model density evaluation,text_desc,D,C,D
+Fall2018,Q6,B,Hierarchical clustering / matching dendrogram (minimum linkage),screenshot,A,C,A
+Fall2018,Q7,B,Normalized mutual information from dendrogram cutoff,screenshot,B,B,B
+Fall2018,Q8,C,Leave-one-out 1-nearest-neighbour error rate,screenshot,C,D,C
+Fall2018,Q8,C,Leave-one-out 1-nearest-neighbour error rate,text_desc,A,D,A
+Fall2018,Q9,C,Decision tree / purity gain (classification error impurity),screenshot,B,B,B
+Fall2018,Q9,C,Decision tree / purity gain (classification error impurity),text_desc,A,B,A
+Fall2018,Q10,C,Decision tree / training accuracy of a single split,screenshot,B,D,B
+Fall2018,Q10,C,Decision tree / training accuracy of a single split,text_desc,A,D,A
+Fall2018,Q11,A,Bag-of-words / cosine similarity of two documents,text,A,D,A
+Fall2018,Q12,B,Logistic regression / reading weights from output curve,screenshot,A,A,A
+Fall2018,Q13,B,ROC curve / matching ROC to classifier,screenshot,B,C,B
+Fall2018,Q14,C,Naive Bayes classifier on binary features,screenshot,B,C,B
+Fall2018,Q14,C,Naive Bayes classifier on binary features,text_desc,B,C,B
+Fall2018,Q15,C,Association mining / frequent itemsets by support,screenshot,D,B,D
+Fall2018,Q15,C,Association mining / frequent itemsets by support,text_desc,D,B,D
+Fall2018,Q16,C,Association mining / confidence of a rule,screenshot,D,B,D
+Fall2018,Q16,C,Association mining / confidence of a rule,text_desc,D,B,D
+Fall2018,Q17,B,Decision tree / matching split rules to classification boundary,screenshot,B,C,B
+Fall2018,Q18,A,Apriori algorithm / downward closure pruning,text,D,D,D
+Fall2018,Q19,C,Variable selection / forward and backward selection,screenshot,D,A,D
+Fall2018,Q19,C,Variable selection / forward and backward selection,text_desc,A,A,A
+Fall2018,Q20,C,Bayes' theorem on binarized attributes,screenshot,D,D,D
+Fall2018,Q20,C,Bayes' theorem on binarized attributes,text_desc,D,D,D
+Fall2018,Q21,C,AdaBoost / combining weak classifiers to classify test points,screenshot,D,B,D
+Fall2018,Q21,C,AdaBoost / combining weak classifiers to classify test points,text_desc,D,B,D
+Fall2018,Q22,B,ANN / matching activation curve to weights,screenshot,D,B,D
+Fall2018,Q23,A,Two-level cross-validation / total training time,text,B,A,B
+Fall2018,Q24,B,EM algorithm / responsibility from GMM densities,screenshot,B,A,B
+Fall2018,Q25,B,Multivariate normal / matching covariance matrix to scatter plots,screenshot,B,B,B
+Fall2018,Q26,B,KNN / matching p-norm to decision boundary,screenshot,D,C,D
+Fall2018,Q27,A,k-means clustering / convergence,text,A,B,A
+Fall2019,Q1,B,Matching boxplots to attributes from summary statistics,screenshot,C,C,C
+Fall2019,Q2,A,PCA / variance explained from SVD,text,A,B,A
+Fall2019,Q3,A,PCA / interpreting projection signs from V,text,E,D,E
+Fall2019,Q4,B,PCA / matching a path in attribute space to its PCA projection (options are plots),screenshot,B,C,B
+Fall2019,Q5,A,Empirical correlation from covariance matrix,text,C,C,C
+Fall2019,Q6,C,Average relative density (ARD) / outlier detection from distance matrix,screenshot,B,B,B
+Fall2019,Q6,C,Average relative density (ARD) / outlier detection from distance matrix,text_desc,B,B,B
+Fall2019,Q7,B,Hierarchical clustering / matching dendrogram (options are dendrograms),screenshot,B,A,B
+Fall2019,Q8,A,Jaccard similarity range of two binary vectors,text,C,B,C
+Fall2019,Q9,C,Variable selection (forward/backward) from RMSE table,screenshot,B,A,B
+Fall2019,Q9,C,Variable selection (forward/backward) from RMSE table,text_desc,D,A,D
+Fall2019,Q10,C,Bayes classifier / robust probability estimate from binary matrix,screenshot,B,A,B
+Fall2019,Q10,C,Bayes classifier / robust probability estimate from binary matrix,text_desc,B,A,B
+Fall2019,Q11,C,Association mining / itemsets above support threshold,screenshot,B,B,B
+Fall2019,Q11,C,Association mining / itemsets above support threshold,text_desc,C,B,C
+Fall2019,Q12,C,Association mining / confidence of a rule,screenshot,C,A,C
+Fall2019,Q12,C,Association mining / confidence of a rule,text_desc,D,A,D
+Fall2019,Q13,B,ROC curve / matching class densities to ROC (options are ROC plots),screenshot,D,D,D
+Fall2019,Q14,C,Ridge regression cost function on a small 1d dataset,screenshot,A,D,A
+Fall2019,Q14,C,Ridge regression cost function on a small 1d dataset,text_desc,B,D,B
+Fall2019,Q15,B,Regression tree / predicted value from tree structure and table,screenshot,C,B,C
+Fall2019,Q15,B,Regression tree / predicted value from tree structure and table,text_desc,C,B,C
+Fall2019,Q16,B,Regression tree / purity (impurity) gain of first split,screenshot,B,C,B
+Fall2019,Q16,B,Regression tree / purity (impurity) gain of first split,text_desc,B,C,B
+Fall2019,Q17,C,KNN regression / leave-one-out squared-loss contribution,screenshot,A,B,A
+Fall2019,Q17,C,KNN regression / leave-one-out squared-loss contribution,text_desc,A,B,A
+Fall2019,Q18,C,McNemar's test / estimated difference in accuracy from CV counts,screenshot,B,D,B
+Fall2019,Q18,C,McNemar's test / estimated difference in accuracy from CV counts,text_desc,C,D,C
+Fall2019,Q19,C,Jeffreys confidence interval for a model's accuracy,screenshot,B,B,B
+Fall2019,Q19,C,Jeffreys confidence interval for a model's accuracy,text_desc,A,B,A
+Fall2019,Q20,B,ANN forward pass / matching output to plotted curve (options are plots),screenshot,D,A,D
+Fall2019,Q21,B,KDE / hold-out cross-validation error curve (options are plots),screenshot,D,B,D
+Fall2019,Q22,C,AdaBoost / weight update after first boosting round,screenshot,B,C,B
+Fall2019,Q22,C,AdaBoost / weight update after first boosting round,text_desc,D,C,D
+Fall2019,Q23,A,Bayes rule / posterior class probability from counts,text,C,A,C
+Fall2019,Q24,A,Multinomial regression / class-assignment probability vector,text,D,B,D
+Fall2019,Q25,B,"Gaussian Mixture Model / matching density to colored sample scatter (options are densities, requires figure)",screenshot,B,A,B
+Fall2019,Q26,B,Matching classifiers to decision boundaries (options are plots),screenshot,B,B,B
+Fall2019,Q27,A,k-means clustering / converged partition,text,A,B,A
+Fall2020,Q1,A,Attribute types,text,C,C,C
+Fall2020,Q2,B,Boxplot interpretation,screenshot,A,B,A
+Fall2020,Q3,B,Boxplot interpretation,screenshot,A,C,A
+Fall2020,Q4,B,"Variance, covariance, correlation",screenshot,B,A,B
+Fall2020,Q5,A,PCA variance explained,text,B,C,B
+Fall2020,Q6,A,PCA component interpretation,text,A,D,A
+Fall2020,Q7,B,PCA projection and KNN,screenshot,B,A,B
+Fall2020,Q8,B,Rand index from confusion matrix,screenshot,B,C,B
+Fall2020,Q8,B,Rand index from confusion matrix,text_desc,C,C,C
+Fall2020,Q9,A,Models without trained parameters,text,C,C,C
+Fall2020,Q10,A,Overfitting,text,B,B,B
+Fall2020,Q11,C,Bayes classifier,screenshot,D,C,D
+Fall2020,Q11,C,Bayes classifier,text_desc,D,C,D
+Fall2020,Q12,C,KNN average relative density,screenshot,C,D,C
+Fall2020,Q12,C,KNN average relative density,text_desc,B,D,B
+Fall2020,Q13,C,Hierarchical clustering average linkage,screenshot,B,B,B
+Fall2020,Q13,C,Hierarchical clustering average linkage,text_desc,A,B,A
+Fall2020,Q14,B,Dendrogram cutoff,screenshot,D,C,D
+Fall2020,Q15,C,Naive Bayes classifier,screenshot,B,C,B
+Fall2020,Q15,C,Naive Bayes classifier,text_desc,A,C,A
+Fall2020,Q16,C,Association mining support,screenshot,A,A,A
+Fall2020,Q16,C,Association mining support,text_desc,B,A,B
+Fall2020,Q17,C,Association mining confidence,screenshot,B,D,B
