@@ -47,7 +47,7 @@ python simple_gemma.py
 ```bash
 python build_questions_csv.py   # data/encoded/*.json -> data/questions.csv
 python collect.py               # Gemma answers every question -> data/results.csv
-python run_all.py               # all statistical tests + the report figure
+python summarize.py             # counts and accuracies from the answers
 ```
 
 ## The data
@@ -91,53 +91,31 @@ python collect.py --dry-run          # show the prompts without running Gemma
 Answers are appended to data/results.csv. Questions that are already answered
 get skipped, so the script is safe to stop and rerun.
 
-## Step 2: run the tests
+## Step 2: count the results
 
-Every test is its own small script, with shared functions in helpers.py:
+This repo stops at the counts: it translates the exams, feeds them to Gemma,
+and tallies the answers. The statistical analysis of those numbers is done by
+us separately and is described in the report.
 
 ```bash
-python run_all.py                    # everything
-python run_all.py data/example.csv   # try it out on the example data
-python mcnemar_test.py               # or run a single test
+python summarize.py                    # uses data/results.csv
+python summarize.py data/example.csv   # try it on the example data
+python make_figure.py                  # bar chart of the accuracies
 ```
 
-| Script | Test | Question it answers |
-|--------|------|---------------------|
-| binomial_test.py | binomial test | is Gemma better than guessing (25%)? |
-| mcnemar_test.py | McNemar's test (paired) | same question, image vs text: does modality matter? (our main test) |
-| text_vs_graph_test.py | two-proportion z-test | pure text questions vs pure graph questions |
-| question_types_test.py | chi-square | does accuracy differ between types A/B/C? |
-| dont_know_test.py | chi-square 2x2 | does Gemma answer E ("don't know") more on images? |
-| power_check.py | power | how big must an effect be before our tests can detect it? |
-
-The outcome is simply correct/wrong, and every accuracy gets a 95% Wilson
-confidence interval.
-
-McNemar is the main test: every type B/C question with a faithful text version
-is asked twice (figure as image, figure as text), so only the modality changes.
-The test only uses the pairs where the two modalities disagree:
-
-```
-                 text right   text wrong
-image right          a            b
-image wrong          c            d
-```
-
-H0 is b = c. We use the exact (binomial) version of the test.
+summarize.py prints, in order: accuracy per modality; the pair counts for the
+questions asked both as image and as text (both right / both wrong / only
+image right / only text right); the pure-text and pure-graph groups; accuracy
+per question type in text form; and how often Gemma answered E ("don't know")
+on image vs text input. The outcome per question is simply correct/wrong.
 
 ## Files
 
 ```
 collect.py               asks Gemma, saves answers to data/results.csv
-helpers.py               small functions shared by the test scripts
-binomial_test.py         test 1: better than guessing?
-mcnemar_test.py          test 2: image vs text, paired (the main test)
-text_vs_graph_test.py    test 3: pure text vs pure graph
-question_types_test.py   test 4: question types A/B/C
-dont_know_test.py        test 5: how often Gemma answers E
-power_check.py           how big an effect can we detect?
-make_figure.py           the report figure (accuracy per group)
-run_all.py               runs all of the above
+helpers.py               small functions shared by summarize.py and make_figure.py
+summarize.py             counts and accuracies from data/results.csv
+make_figure.py           bar chart of the accuracies per group
 crop_figures.py          cuts the figures/tables out of the exam PDFs
 build_questions_csv.py   data/encoded/*.json -> data/questions.csv
 validate_encoded.py      sanity check of the encoded JSONs
@@ -146,7 +124,7 @@ data/
   encoded/               the 15 exams as JSON (the master copy)
   questions.csv          what collect.py reads (generated, don't edit by hand)
   results.csv            Gemma's answers (made by collect.py)
-  example.csv            example data: python run_all.py data/example.csv
+  example.csv            example data: python summarize.py data/example.csv
   screenshots/           figure/table crops (made by crop_figures.py)
 ML-examsets/             the exam PDFs
 ML-solutions/            the solution PDFs

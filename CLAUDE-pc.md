@@ -21,9 +21,10 @@ file; this one is the operational subset plus the rules that must not be broken.
 DTU 02445 "Statistical Evaluation of AI", group 11, June 2026. Report due 24.06 12:00.
 Research question: does Gemma 4 do worse on multiple-choice ML-exam questions when a
 figure/table is given as an **image** vs. the same information **as text**? Outcome is
-correct/wrong only (calibration was descoped). The stats (McNemar paired primary,
-binomial vs chance, two-proportion z, chi-square, power) run on the Mac via `run_all.py`
-— this PC only collects.
+correct/wrong only (calibration was descoped). Since 2026-06-11 the repo contains NO
+statistics code (the group does the stats themselves, outside the repo; private reference
+scripts in `../stats-check/` on the Mac) — the repo's `summarize.py` only prints
+counts/accuracies. This PC only collects.
 
 ## The mission, in order
 
@@ -119,6 +120,5 @@ binomial vs chance, two-proportion z, chi-square, power) run on the Mac via `run
    with a "FINAL ANSWER: X" line (investigate if many do not), row count = 532
    (+ header).
 2. `git add data/results.csv` -> commit as the user (plain message) -> `git push`.
-3. The user pulls on the Mac and runs `python run_all.py` there (it also works here —
-   scipy/statsmodels/matplotlib are in requirements.txt — but the Mac is the analysis
-   machine).
+3. The user pulls on the Mac and runs `python summarize.py` there (it also works here —
+   it only needs the standard library — but the Mac is where the analysis happens).

@@ -35,20 +35,23 @@ always fed as text. So `screenshot` vs `text_desc` differ *only* in figure-as-im
 figure-as-text, cleanly isolating the graph-reading variable. (`collect.py`'s screenshot
 prompt carries the question text alongside the cropped image; crops come from `crop_figures.py`.)
 
-Comparisons (ONE SCRIPT EACH since the 2026-06-09 split; shared code in `helpers.py`,
-`run_all.py` runs them all):
-- **vs. chance** (`binomial_test.py`): one-sided binomial test against 25% per modality.
-- **McNemar (paired, PRIMARY)** (`mcnemar_test.py`): `screenshot` vs `text_desc` on the SAME
-  question — the 127 faithful B/C items. Isolates the graph-reading penalty.
-- **Text vs. pure graph (unpaired)** (`text_vs_graph_test.py`): two-proportion z, type-A
+Comparisons (**since 2026-06-11 the statistics are done BY THE GROUP OUTSIDE the repo**:
+the repo is strictly translate-exams → feed-Gemma → counts; `summarize.py` prints each
+comparison's input numbers; private reference implementations = `../stats-check/`, NOT in
+git; theory + how to compute each test = `STATISTICS.md`):
+- **vs. chance** (numbers: summarize §1): one-sided binomial test against 25% per modality.
+- **McNemar (paired, PRIMARY)** (numbers: summarize §2): `screenshot` vs `text_desc` on the
+  SAME question — the 127 faithful B/C items. Isolates the graph-reading penalty.
+- **Text vs. pure graph (unpaired)** (numbers: summarize §3): two-proportion z, type-A
   `text` rows vs the geometric type-B `screenshot`-only rows (no text form exists).
   Difficulty is confounded — say so.
-- **Between-type (unpaired)** (`question_types_test.py`): chi-square across types A/B/C,
+- **Between-type (unpaired)** (numbers: summarize §4): chi-square across types A/B/C,
   all in text form.
-- **E-rate ("don't know")** (`dont_know_test.py`): chi-square 2×2, E-rate image vs text —
+- **E-rate ("don't know")** (numbers: summarize §5): chi-square 2×2, E-rate image vs text —
   does Gemma admit uncertainty more on figures? The taught-stats substitute for calibration.
-- **Power** (`power_check.py`): minimum detectable effects given the sample sizes (answers
-  project description step 4d "how are you deciding on the number of prompts?").
+- **Power** (inputs from summarize §2–§3): minimum detectable effects given the sample
+  sizes (answers project description step 4d "how are you deciding on the number of
+  prompts?").
 
 **DECISION (2026-06-09): calibration/confidence DESCOPED — correct/wrong only.** Made by
 the user after reading the teacher's exemplar paper (`materials/group assignment/
@@ -62,18 +65,14 @@ oral. Consequence: NO logit port needed — `collect.py` is final and collection
 
 ```
 collect.py            ← loads Gemma, answers each (question, modality) -> data/results.csv
-helpers.py            ← shared by all test scripts: load_results, subset, count_correct,
-                        percent, wilson_ci, acc_text, fmt_p, text_A_rows, graph_only_rows,
-                        mcnemar_counts
-binomial_test.py      ← test 1: vs. chance        (~20 lines)
-mcnemar_test.py       ← test 2: PRIMARY, paired   (~41 lines)
-text_vs_graph_test.py ← test 3: z-test, unpaired  (~29 lines)
-question_types_test.py← test 4: chi-square A/B/C  (~41 lines)
-dont_know_test.py     ← test 5: E-rate 2x2        (~39 lines)
-power_check.py        ← step-4d power answers     (~54 lines)
-make_figure.py        ← accuracy_by_group.png     (~46 lines)
-run_all.py            ← os.system()-runs all of the above in order; forwards the
-                        optional CSV-path argument (e.g. data/example.csv)
+helpers.py            ← shared by summarize.py + make_figure.py: load_results, subset,
+                        count_correct, percent, acc_text (no CI), text_A_rows,
+                        graph_only_rows, mcnemar_counts — NO stats functions since the
+                        2026-06-11 descope (normal_ci/fmt_p live in ../stats-check/)
+summarize.py          ← counts + accuracies, one section per planned analysis; NO
+                        tests/CIs/p-values; forwards the optional CSV-path argument
+                        (e.g. data/example.csv)
+make_figure.py        ← accuracy_by_group.png (bars only — no CI line since 2026-06-11)
 data/
   encoded/<Exam>.json ← THE SOURCE OF TRUTH: 15 exams x 27 Qs, fully transcribed
   questions.csv       ← the manifest collect.py reads (generated from encoded/)
@@ -128,7 +127,8 @@ conda activate gemma                    # NOT base (base has broken torch/torchv
 python collect.py --modality text       # type-A questions
 python collect.py --modality text_desc  # table/figure descriptions
 python collect.py --modality screenshot # uses the pre-generated data/screenshots/ crops
-python run_all.py                       # all tests + the figure
+python summarize.py                     # counts + accuracies (stats are done BY US, off-repo)
+python make_figure.py                   # accuracy bar chart
 # regenerate the crops any time:  python crop_figures.py ALL
 ```
 Gemma = `google/gemma-4-E2B-it` via Transformers (E4B until 2026-06-10 — spilled the
@@ -281,6 +281,19 @@ the finished ones are cap-invariant under greedy decoding).
   Spring2019 Q7 crops now complete). questions.csv regenerated (134/271/127, ALL OK);
   all 271 crops regenerated. The 179 pre-fix CoT rows → `data/results_preFix_archive.csv`;
   collection restarted from zero on the fixed dataset.
+- ✅ **Statistics DESCOPED OUT OF THE REPO (2026-06-11, user decision — AskUserQuestion
+  answers + the follow-up "this repo should strictly be for translating the ML examsets
+  to the correct format and then feeding them to gemma 4"):** the repo now gives numbers
+  only; the group does the statistics themselves, outside the repo. The 6 test scripts +
+  run_all.py MOVED (not deleted) to **`../stats-check/`** (outside git — private answer
+  key for verifying the hand-done stats; has its own README, a FULL helpers.py copy incl.
+  normal_ci/fmt_p, and data/example.csv so no-arg runs work). In the repo: NEW
+  `summarize.py` (counts + accuracies, 5 sections = each analysis's inputs; chosen
+  format: counts + accuracies, no CIs), helpers.py slimmed (normal_ci/fmt_p removed,
+  acc_text without CI), make_figure.py CI-line removed, scipy+statsmodels dropped from
+  requirements.txt, README "Step 2" rewritten, STATISTICS.md reframed (headers point at
+  summarize §N; "Implementation" → "Computing it yourself" with the library one-liners
+  kept as cross-checks). User chose: STATISTICS.md STAYS in the repo, updated.
 - ⏳ **Analysis gaps to address for the report** (see "Statistical caveats" below).
 
 ## Statistical caveats (for the report & oral defense)
@@ -288,15 +301,19 @@ the finished ones are cap-invariant under greedy decoding).
 - **The paired McNemar set is 114 type-C (tables) + only 13 type-B (figures).** So the
   paired result mostly isolates a *table*-reading penalty; the type-B-only McNemar is
   underpowered. The "pure graph" effect lives in the **144 screenshot-only type-B items**
-  (geometric figures) — covered by `text_vs_graph_test.py` (two-proportion z: type-A text
-  vs geometric-B screenshot), with the honest caveat that question difficulty is
-  confounded with type in an unpaired design.
+  (geometric figures) — covered by the two-proportion z (type-A text vs geometric-B
+  screenshot; numbers from summarize §3, reference impl in `../stats-check/`), with the
+  honest caveat that question difficulty is confounded with type in an unpaired design.
 - **`primary_observations` selection bias:** the between-type chi-square uses text_desc for
   B/C, so "type B" there = only the 13 text-faithful B items — not representative of type B.
   Say so in the report, or restructure the comparison.
 - **Multiple testing:** McNemar runs 3× (B, C, B+C — nested). Declare B+C the primary
   confirmatory test; per-type ones exploratory (or Bonferroni).
-- The Wilson CIs printed next to McNemar are *marginal* (ignore pairing) — fine as
+- CI method = the 02402 normal-approximation interval, computed BY THE GROUP off-repo
+  (**Wilson dropped 2026-06-11, user's call: beyond-curriculum methods are indefensible
+  at the oral**; reference impl = `../stats-check/helpers.py: normal_ci`). It is rough
+  for the 13-item type-B subgroup — flagged in STATISTICS.md §2.
+- The 95% CIs printed next to McNemar are *marginal* (ignore pairing) — fine as
   descriptives; a CI on the paired difference needs a paired method/bootstrap.
 - Public past exams may be in Gemma's training data — note contamination in the report.
 

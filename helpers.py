@@ -1,15 +1,13 @@
-"""helpers.py - small functions shared by all the test scripts.
+"""helpers.py - small functions shared by summarize.py and make_figure.py.
 
 The results file can be given on the command line, e.g.
-    python mcnemar_test.py data/example.csv
+    python summarize.py data/example.csv
 otherwise data/results.csv is used.
 """
 
 import csv
 import os
 import sys
-
-from statsmodels.stats.proportion import proportion_confint
 
 CHANCE = 0.25   # 4 real options (A-D) -> random guessing gives 25%
 
@@ -61,31 +59,11 @@ def percent(x):
     return str(round(100 * x, 1)) + "%"
 
 
-def wilson_ci(k, n):
-    """95% Wilson confidence interval for a proportion -> (low, high)."""
-    return proportion_confint(k, n, alpha=0.05, method="wilson")
-
-
 def acc_text(rows):
-    """Accuracy written out, e.g. '81.8% (9/11)  CI [52.3%, 94.9%]'."""
+    """Accuracy written out, e.g. '81.8% (9/11)'."""
     k = count_correct(rows)
     n = len(rows)
-    lo, hi = wilson_ci(k, n)
-    text = percent(k / n) + " (" + str(k) + "/" + str(n) + ")"
-    text = text + "  CI [" + percent(lo) + ", " + percent(hi) + "]"
-    return text
-
-
-def fmt_p(p):
-    """A p-value plus the conclusion at the 5% significance level."""
-    if p < 0.001:
-        text = "p < 0.001"
-    else:
-        text = "p = " + str(round(p, 3))
-    if p < 0.05:
-        return text + "  -> significant"
-    else:
-        return text + "  -> not significant"
+    return percent(k / n) + " (" + str(k) + "/" + str(n) + ")"
 
 
 def text_A_rows(rows):

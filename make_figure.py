@@ -1,11 +1,11 @@
-"""The report figure: accuracy of the four question groups, with 95% CIs."""
+"""A quick bar chart: accuracy of the four question groups."""
 
 import os
 
 import matplotlib.pyplot as plt
 
 from helpers import CHANCE, load_results, subset, text_A_rows, graph_only_rows
-from helpers import count_correct, wilson_ci
+from helpers import count_correct
 
 rows = load_results()
 graph = graph_only_rows(rows)
@@ -27,11 +27,9 @@ for i in range(4):
     if len(groups[i]) > 0:            # the example data has no pure-graph rows
         k = count_correct(groups[i])
         n = len(groups[i])
-        lo, hi = wilson_ci(k, n)
         plt.bar(i, k / n, color=colors[i], width=0.6)
-        plt.plot([i, i], [lo, hi], color="black")   # the 95% CI as a line
         bar_label = str(round(100 * k / n)) + "%\nn=" + str(n)
-        plt.text(i, hi + 0.02, bar_label, ha="center", fontsize=9)
+        plt.text(i, k / n + 0.02, bar_label, ha="center", fontsize=9)
 plt.axhline(CHANCE, linestyle="--", color="grey", label="chance (25%)")
 plt.xticks([0, 1, 2, 3], labels, fontsize=9)
 plt.ylim(0, 1.1)

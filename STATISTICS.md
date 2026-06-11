@@ -12,19 +12,25 @@ the formal machinery (same content, two altitudes). §0 explains the general log
 every test shares — read it once and the rest follows. §13 at the bottom is the whole
 analysis compressed to one page.
 
-The six analysis scripts this file documents:
+**Division of labour (decided 2026-06-11):** the repo contains NO statistics code — it
+translates the exam sets, feeds them to Gemma, and counts the answers. `summarize.py`
+prints the input numbers for each analysis below (its section numbers match the table),
+and **we compute every test ourselves**, outside the repo. Each section's "Computing it
+yourself" block gives the recipe, plus a library one-liner to cross-check against.
 
-| # | Script | Question it answers | Test | H0 | Null distribution |
-|---|--------|--------------------|------|----|-------------------|
-| 1 | `binomial_test.py` | Is Gemma better than guessing (per modality)? | Exact binomial, one-sided | accuracy = 25 % | Binomial(n, 0.25) |
-| 2 | `mcnemar_test.py` | **PRIMARY:** same question, image vs. text — does modality matter? | McNemar, exact (paired) | P(correct as image) = P(correct as text) | Binomial(n_d, ½) on discordant pairs |
-| 3 | `text_vs_graph_test.py` | Pure-text questions vs. pure-graph questions | Two-proportion z (unpaired) | p_text = p_graph | N(0,1) |
-| 4 | `question_types_test.py` | Does accuracy differ across types A/B/C (all in text form)? | Chi-square, 3×2 | all types equally accurate | χ² with df = 2 |
-| 5 | `dont_know_test.py` | Does Gemma say E ("don't know") more on images? | Chi-square, 2×2 | same E-rate both inputs | χ² with df = 1 |
-| 6 | `power_check.py` | How big must an effect be before we can see it? | Power analysis (not a test) | — | — |
+The six analyses this file documents:
 
-Plus, everywhere: **95 % Wilson confidence intervals** on every reported accuracy
-(`helpers.py: wilson_ci`), and the significance level **α = 0.05** (`fmt_p`).
+| # | Numbers from | Question it answers | Test | H0 | Null distribution |
+|---|--------------|--------------------|----|----|-------------------|
+| 1 | `summarize.py` §1 | Is Gemma better than guessing (per modality)? | Exact binomial, one-sided | accuracy = 25 % | Binomial(n, 0.25) |
+| 2 | `summarize.py` §2 | **PRIMARY:** same question, image vs. text — does modality matter? | McNemar, exact (paired) | P(correct as image) = P(correct as text) | Binomial(n_d, ½) on discordant pairs |
+| 3 | `summarize.py` §3 | Pure-text questions vs. pure-graph questions | Two-proportion z (unpaired) | p_text = p_graph | N(0,1) |
+| 4 | `summarize.py` §4 | Does accuracy differ across types A/B/C (all in text form)? | Chi-square, 3×2 | all types equally accurate | χ² with df = 2 |
+| 5 | `summarize.py` §5 | Does Gemma say E ("don't know") more on images? | Chi-square, 2×2 | same E-rate both inputs | χ² with df = 1 |
+| 6 | `summarize.py` §2–§3 | How big must an effect be before we can see it? | Power analysis (not a test) | — | — |
+
+Plus, on every reported accuracy: a **95 % confidence interval (normal approximation, the
+02402 method)** — computed by us, like the tests — and the significance level **α = 0.05**.
 
 ---
 
@@ -122,59 +128,75 @@ choice: it can only make "better than guessing" harder to claim, never easier.
 
 ---
 
-## 2. Accuracy with Wilson confidence intervals (`helpers.py`)
+## 2. Accuracy with 95 % confidence intervals (accuracies: `summarize.py`; the CI is ours)
 
 **Purpose.** Step 5b explicitly asks us to "present the stability (uncertainty/variance)
 of the performance". A point accuracy of, say, 81.8 % (9/11) means little on its own —
 with 11 questions, the truth could plausibly be anywhere from "barely above half" to
 "nearly perfect". The CI makes that explicit; we attach one to every accuracy we print.
 
-**Plain words.** The textbook interval just takes accuracy ± about two standard errors.
-That works fine in the middle of the scale with lots of data, but it misbehaves exactly
-where we may live: small groups (11 text items in the example data, 13 paired type-B
-questions) and accuracies near 0 % or 100 %. The Wilson interval is a better-engineered
-version of the same idea: it is pulled slightly toward 50 % (where uncertainty is
-largest), it is asymmetric when the data demands it, and it can never leave the 0–100 %
-range.
+**Plain words.** We use the interval taught in 02402: accuracy ± about two standard
+errors, where the **standard error** is the typical sample-to-sample wobble of an
+accuracy estimated from n items (cheat sheet, p. 1). More questions → less wobble →
+narrower interval. Nothing fancier — the job is to use the taught method and to check
+honestly where its approximation is good (our big groups) and where it is rough (the
+smallest subgroup).
 
-**Concrete demonstration** (the example from the `acc_text` docstring): 9 of 11 correct.
-- Wald: $0.818 \pm 1.96\sqrt{0.818 \cdot 0.182/11} = 0.818 \pm 0.228$ → **[59.0 %, 104.6 %]** —
-  an interval that includes accuracies above 100 %, which is nonsense.
-- Wilson: **[52.3 %, 94.9 %]** — asymmetric (29.5 points down, 13.1 up, because from 81.8 %
-  there is more room to be wrong downward than upward) and inside [0, 1].
+**Worked example** (the text group in the example data): 9 of 11 correct gives
+$0.818 \pm 1.96\sqrt{0.818 \cdot 0.182/11} = 0.818 \pm 0.228$ → [59.0 %, 104.6 %], which
+statsmodels clips to **[59.0 %, 100.0 %]** (an accuracy above 100 % is impossible; the
+overshoot is the normal approximation being stretched at n = 11 — exactly the weakness
+the assumption check below is about).
 
-**Theory.** The normal-approximation (Wald) interval that Raschka derives in §1.7
-(eq. 10–17, pp. 10–11) is $\hat p \pm z\sqrt{\hat p(1-\hat p)/n}$ with z = 1.96, where
-$\sqrt{\hat p(1-\hat p)/n}$ is the **standard error** — the typical sample-to-sample
-wobble of an accuracy estimated from n items (cheat sheet, p. 1). The **Wilson (1927)
-interval** instead inverts the score test (it asks: *which true values p would NOT be
-rejected by the data?*), which gives centre and half-width
+**Theory.** Each accuracy is a binomial proportion (§1). For moderately large n the
+central limit theorem makes $\hat p$ approximately normal around the true p with standard
+error $\sqrt{p(1-p)/n}$, which gives the normal-approximation interval
 
-$$\frac{\hat p + z^2/2n}{1 + z^2/n} \;\pm\; \frac{z}{1 + z^2/n}\sqrt{\frac{\hat p(1-\hat p)}{n} + \frac{z^2}{4n^2}}.$$
+$$\hat p \pm z\sqrt{\hat p(1-\hat p)/n}, \qquad z = 1.96 \text{ for } 95\,\%.$$
 
-For large n the extra $z^2/n$ terms vanish and Wilson ≈ Wald; for small n they supply the
-pull toward ½ and the boundary-respecting behaviour seen above.
+This is exactly the interval Raschka derives for test-set accuracy in §1.7 (eq. 10–17,
+pp. 10–11), and the proportions version of the mean ± t·SE intervals on the cheat sheet.
 
-**Assumptions.** Independent Bernoulli trials with common p (the §1 model). No normality
-assumption on the raw 0/1 data — the approximation concerns the *proportion*, and Wilson
-is precisely the variant that stays accurate at small n.
+**Assumptions — and the one place they wobble.** Independent Bernoulli trials with common
+p (the §1 model), plus enough data for the normal approximation: rule of thumb, both
+$n\hat p$ (expected successes) and $n(1-\hat p)$ (expected failures) comfortably large —
+textbook thresholds range from 5 to 15. For our main groups (n = 114–271) this holds
+easily. For the smallest subgroup — the 13 text-faithful type-B items — it does not, so
+that one CI is approximate and the report says so. How approximate? Computed exactly (sum
+the binomial pmf over the outcomes whose interval covers p): at n = 13 the nominal "95 %"
+normal interval covers the truth ~83 % of the time on average over mid-range accuracies;
+at n = 134 it is ~94 % — fine. Flagging this honestly IS the assumption check the course
+asks for, and it costs nothing: no conclusion rests on that single CI.
 
-**Where the materials use it.** The cross-validation paper by Bayle et al. (NeurIPS 2020,
-`Cross_Validation_Confidence_Intervals_For_Test_Error.pdf`, §5, p. 7) uses exactly this:
-"95 % Wilson intervals, which are known to provide more accurate coverage for binomial
-proportions than a ±2 standard error interval", citing Wilson (1927) and Brown, Cai &
-DasGupta (2001). Raschka §1.7 gives the Wald interval that Wilson improves on.
+**Better intervals exist — we deliberately don't use them.** The statistics literature
+fixes the small-n weakness with refined intervals: Wilson's score interval,
+Agresti–Coull's "add 2 successes and 2 failures, then use the normal formula", the
+Clopper–Pearson exact interval (the standard comparison is Brown, Cai & DasGupta 2001;
+the Bayle et al. CV paper in our materials follows it and uses Wilson intervals, §5
+p. 7). At n = 13 these would lift the real coverage from ~83 % to ~95 %. We stay with the
+curriculum interval anyway: this course rewards using the *taught* method and checking
+its assumptions, not importing methods we would then have to defend from the literature
+at the oral. The honest flag above does that job — and none of these alternatives changes
+any conclusion, since the affected CI is descriptive. (If one were ever wanted, each is a
+one-keyword change in the same statsmodels call, e.g. `method="wilson"`.)
 
-**Implementation.** `statsmodels.stats.proportion.proportion_confint(k, n, method="wilson")`.
+**Where the materials use it.** Raschka §1.7 (pp. 10–11) derives this exact interval for
+test-set accuracy; the cheat sheet's standard-error machinery (p. 1) is its backbone.
+(Bayle et al.'s Wilson intervals, §5 p. 7, are the literature upgrade we consciously
+skip.)
 
-**Caveat to state.** The Wilson CIs printed next to the McNemar result are *marginal*
+**Computing it yourself.** $\hat p \pm 1.96\sqrt{\hat p(1-\hat p)/n}$ from any k/n that
+`summarize.py` prints, clipped to [0, 1]. Cross-check:
+`statsmodels.stats.proportion.proportion_confint(k, n, method="normal")`.
+
+**Caveat to state.** The CIs printed next to the McNemar result are *marginal*
 (they treat the image-arm and text-arm accuracies as separate samples and ignore the
 pairing). Fine as descriptives; a CI on the paired *difference* would need a paired method
 (e.g. bootstrap over pairs — see §10).
 
 ---
 
-## 3. Test 1 — exact binomial test against chance (`binomial_test.py`)
+## 3. Test 1 — exact binomial test against chance (numbers: `summarize.py` §1)
 
 **Purpose.** Manipulation check before anything comparative: per modality (text,
 text_desc, screenshot), is Gemma doing better than random guessing? If a modality is at
@@ -214,11 +236,13 @@ the cheat sheet (p. 6). Raschka builds the same "correct predictions ~ binomial"
 §1.7 (p. 10) and uses **exact binomial p-values** in §4.4 (pp. 37–38) — there as the exact
 version of McNemar, i.e. literally the computation our test 2 reuses.
 
-**Implementation.** `scipy.stats.binomtest(k, n, 0.25, alternative="greater")`.
+**Computing it yourself.** k and n come from `summarize.py` §1; sum the Binomial(n, 0.25)
+upper tail from k (the cheat sheet's binomial formula, p. 6). Cross-check:
+`scipy.stats.binomtest(k, n, 0.25, alternative="greater")`.
 
 ---
 
-## 4. Test 2 (PRIMARY) — McNemar's exact test, paired (`mcnemar_test.py`)
+## 4. Test 2 (PRIMARY) — McNemar's exact test, paired (numbers: `summarize.py` §2)
 
 **Purpose.** The core of the project. Each type-B/C question with a faithful text version
 was asked twice: figure/table as a cropped **image** vs. the same information written as
@@ -243,7 +267,8 @@ both = 10, only-image = 10, only-text = 6, neither = 0. The 10 + 0 = 10 concorda
 drop out; the coin was flipped n_d = 16 times and came up "image" 10 times. Ten heads in
 16 fair flips is unremarkable — the exact two-sided p-value is 0.454 — so the example data
 gives no evidence that modality matters. (For contrast: 13 of 16 the same way would give
-p ≈ 0.021 — that is where significance starts, as `power_check.py` reports.)
+p ≈ 0.021 — that is where significance starts; §8's power check is exactly this
+calculation.)
 
 **Hypotheses.** H0: P(correct as image) = P(correct as text) for the paired questions.
 H1: the probabilities differ (two-sided).
@@ -273,8 +298,8 @@ variant is $(|b-c|-1)^2/(b+c)$; the correction exists because a discrete stairca
 (binomial counts) is being approximated by a smooth curve (χ²), and shaving half a step
 off the difference compensates. Raschka's rule of thumb: the χ² approximation is
 reasonable when b + c > 25, and the corrected version matches the exact test well when
-b, c > 50. Our discordant counts may be small, **which is why we run the exact version** —
-`mcnemar(table, exact=True)` — and never have to defend an approximation.
+b, c > 50. Our discordant counts may be small, **which is why we use the exact version**
+and never have to defend an approximation.
 
 **Assumptions.**
 1. **Pairs are independent of each other** — each pair is one exam question, answered in
@@ -308,7 +333,10 @@ individual patient" — replace patient with question, before/after with text/im
 generalization to ≥3 conditions is Cochran's Q (Raschka §4.6, pp. 39–40) — we only have
 two conditions, so McNemar suffices.
 
-**Implementation.** `statsmodels.stats.contingency_tables.mcnemar(table, exact=True)`.
+**Computing it yourself.** b and c come straight from `summarize.py` §2 ("only image
+right", "only text right"); the exact two-sided p is the Binomial(b+c, ½) tail formula
+above — at our n_d it is summable by hand or in a few lines. Cross-check:
+`statsmodels.stats.contingency_tables.mcnemar(table, exact=True)`.
 
 **Honest weakness.** The paired set is 114 type-C (tables) + only 13 type-B (figures), so
 the primary result is mostly a *table*-reading penalty; the B-only McNemar is underpowered.
@@ -316,7 +344,7 @@ The pure-graph effect lives in test 3 — with its own, different weakness.
 
 ---
 
-## 5. Test 3 — two-proportion z-test, unpaired (`text_vs_graph_test.py`)
+## 5. Test 3 — two-proportion z-test, unpaired (numbers: `summarize.py` §3)
 
 **Purpose.** Geometric figures (scatter plots, dendrograms, ROC curves, contours…) have no
 faithful text form, so they cannot enter the paired design. We compare type-A pure-text
@@ -372,18 +400,21 @@ needed).
 significant difference shows "Gemma is worse on these graph questions than on these text
 questions", not "the image rendering causes the gap". That causal claim is what the paired
 McNemar is for; this test provides the dramatic descriptive contrast on the question types
-where pairing is impossible. The docstring and report both state this.
+where pairing is impossible. The report states this.
 
 **Where the materials use it.** Raschka §4.2 (the test itself + its limits); project
 description step 5b (chi-square for proportions = the same test, see z² = χ²); slides
 part 1, slide 18, list chi-square for exactly this kind of categorical comparison.
 
-**Implementation.** `statsmodels.stats.proportion.proportions_ztest([k1,k2], [n1,n2])`
-(pooled, no continuity correction — hence exactly z² = uncorrected χ²).
+**Computing it yourself.** The two k/n pairs come from `summarize.py` §3; pool, form z as
+above, read the two-sided p from the standard normal (the ∞ row of the cheat sheet's
+t-table works, p. 7). Cross-check:
+`statsmodels.stats.proportion.proportions_ztest([k1,k2], [n1,n2])` (pooled, no continuity
+correction — hence exactly z² = uncorrected χ²).
 
 ---
 
-## 6. Test 4 — chi-square test of homogeneity across question types (`question_types_test.py`)
+## 6. Test 4 — chi-square test of homogeneity across question types (numbers: `summarize.py` §4)
 
 **Purpose.** With modality held fixed at *text* (type A as plain text, B/C as their text
 descriptions), does accuracy depend on question *type*? This separates "the content type
@@ -415,9 +446,9 @@ hence 2 degrees of freedom.
    one question answered once; types are mutually exclusive).
 2. **All expected counts ≥ 5** — the classical validity rule (cheat sheet p. 4). It exists
    because χ² is a smooth approximation to discrete counts, and the approximation needs
-   enough data per cell to hold. The script computes `expected.min()` and prints a warning
-   when violated. With only 13 type-B items this is the cell to watch; if it fails, report
-   the warning and interpret descriptively (or merge B into B+C).
+   enough data per cell to hold. Check the smallest expected count when you build the
+   table. With only 13 type-B items this is the cell to watch; if it dips below 5, say so
+   and interpret descriptively (or merge B into B+C).
 3. Categories fixed in advance — holds (A/B/C assigned at encoding time, before any model
    run).
 
@@ -437,12 +468,14 @@ by "question type". The exemplar paper's two-way ANOVA (§3.2, p. 8) plays this 
 omnibus role for a *continuous* outcome (number of STEM suggestions, gender × age); ours
 is the categorical-outcome counterpart.
 
-**Implementation.** `scipy.stats.chi2_contingency(table)`; df = 2 here, so no Yates
-correction is involved (scipy only applies it to 2×2 tables).
+**Computing it yourself.** Build the 3×2 table from `summarize.py` §4, expected counts
+E = row·col/total, sum (O−E)²/E, read the p-value from the χ² table at df = 2 (cheat
+sheet p. 8). Cross-check: `scipy.stats.chi2_contingency(table)` (no Yates correction at
+df = 2 — scipy only applies that to 2×2 tables).
 
 ---
 
-## 7. Test 5 — E-rate ("don't know") chi-square, 2×2 (`dont_know_test.py`)
+## 7. Test 5 — E-rate ("don't know") chi-square, 2×2 (numbers: `summarize.py` §5)
 
 **Purpose.** Every prompt offers E = "don't know". If Gemma has any awareness of when it
 cannot read a figure, E should be more frequent on image input than on text input. This is
@@ -461,19 +494,22 @@ not" — a different Bernoulli variable on the same calls.
 
 **Assumptions.** As in test 4: independent observations, expected counts ≥ 5. The
 expected-count rule matters *more* here because E may be rare (in the no-CoT pilot Gemma
-said E mostly on broken questions; possibly never after the fixes). The script:
-- prints "Gemma never answered E — nothing to test (a finding in itself)" when there are
-  zero E's overall: a model that *never* admits uncertainty on unreadable figures is a
-  reportable behavioural result, no p-value needed;
-- prints the expected-count warning otherwise. If expected counts are < 5, the standard
-  remedy to name at the oral is **Fisher's exact test** (`scipy.stats.fisher_exact`),
-  which — like the exact binomial — enumerates tables directly (conditioning on the
-  margins) instead of using the χ² approximation, and is valid at any counts.
+said E mostly on broken questions; possibly never after the fixes). Two situations to
+handle in the analysis:
+- if there are zero E's overall, there is nothing to test — and a model that *never*
+  admits uncertainty on unreadable figures is a reportable behavioural result in itself,
+  no p-value needed;
+- if expected counts are < 5, the standard remedy to name at the oral is **Fisher's
+  exact test** (`scipy.stats.fisher_exact`), which — like the exact binomial —
+  enumerates tables directly (conditioning on the margins) instead of using the χ²
+  approximation, and is valid at any counts.
 
-**Implementation detail worth knowing.** `scipy.stats.chi2_contingency` applies **Yates'
-continuity correction by default on 2×2 tables** (df = 1), so the printed χ² here is the
-corrected one — slightly conservative, appropriate at small counts. (Same
-discrete-staircase-vs-smooth-curve fix as Edwards' correction for McNemar, Raschka p. 37.)
+**Computing it yourself.** Build the 2×2 table from `summarize.py` §5; expected counts
+and (O−E)²/E as in test 4, df = 1, with **Yates' continuity correction** (shrink each
+|O−E| by ½ before squaring) — slightly conservative, appropriate at small counts; the
+same discrete-staircase-vs-smooth-curve fix as Edwards' correction for McNemar (Raschka
+p. 37). Cross-check: `scipy.stats.chi2_contingency(table)` (applies Yates by default on
+2×2 tables).
 
 **Where the materials use it.** Chi-square anchors as in test 4 (cheat sheet pp. 4–5,
 slides part 1 slide 18). The LLM-evaluation survey describes refusal-rate as an
@@ -483,7 +519,7 @@ metric with an explicit opt-out option.
 
 ---
 
-## 8. Power check — minimum detectable effects (`power_check.py`)
+## 8. Power check — minimum detectable effects (inputs: `summarize.py` §2–§3)
 
 **Purpose.** Not a hypothesis test: a *design* justification. Step 4d of the project
 description asks "How are you deciding on the number of times you will prompt the GenAI?
@@ -507,17 +543,17 @@ with 80 % the usual convention.
 
 **Part 1 — McNemar.** The exact McNemar test only uses the n_d discordant pairs (§4), so
 its sensitivity is fully described by one number: out of n_d disagreements, how many must
-favour the same modality before the exact binomial p drops below 0.05? The script scans
-k = ⌈n_d/2⌉+1 … n_d and reports the first k that rejects. On the example data: 16
+favour the same modality before the exact binomial p drops below 0.05? Scan
+k = ⌈n_d/2⌉+1 … n_d and report the first k that rejects. On the example data: 16
 disagreements → at least 13 must point the same way (13/16 gives p ≈ 0.021; 12/16 only
-p ≈ 0.077). If n_d is tiny, the script instead reports that significance is impossible —
-the honest statement that the B-only analysis is underpowered.
+p ≈ 0.077). If n_d is tiny, no k rejects at all — the honest statement that the B-only
+analysis is underpowered.
 
-**Part 2 — two-proportion z.** Using the normal-approximation power function
-(`statsmodels.stats.proportion.power_proportions_2indep`) with our actual group sizes
-(134 vs. 144), the script scans accuracy drops of 1 %, 2 %, … below the observed text
-accuracy and reports the smallest drop detectable with ≥ 80 % power. That number is the
-"minimum detectable effect" to quote in the report.
+**Part 2 — two-proportion z.** With our actual group sizes (134 vs. 144), scan accuracy
+drops of 1 %, 2 %, … below the observed text accuracy and find the smallest drop
+detectable with ≥ 80 % power (the normal-approximation power function
+`statsmodels.stats.proportion.power_proportions_2indep` does the per-drop computation).
+That number is the "minimum detectable effect" to quote in the report.
 
 **Where the materials use it.** The exemplar paper is the template (§3.2, p. 8): a pilot
 study (2 prompts × 10 iterations) → pooled SD 1.07 → **Cohen's d = 1.1** → "Power t-test:
@@ -575,8 +611,8 @@ correction. If an examiner wants a correction anyway: Bonferroni α/m (Raschka �
 pp. 38–41, including Perneger's caveat that Bonferroni buys Type-I control at the cost of
 Type-II errors).
 
-**p-values AND intervals.** Every accuracy is reported with its Wilson CI, every test
-with its p-value (formatted by `fmt_p`: "p < 0.001" or rounded to 3 decimals, plus the
+**p-values AND intervals.** Every accuracy is reported with its 95 % CI, every test
+with its p-value (report style: "p < 0.001", otherwise rounded to 3 decimals, plus the
 α = 0.05 verdict). The CI answers "how big and how uncertain", the p-value answers "is it
 distinguishable from H0" — step 5b asks for both.
 
@@ -623,9 +659,8 @@ Likely oral questions ("you read about X — why isn't it in your analysis?"):
   directly relevant to the *individual* assignment instead, whose Task 2 is designing a CV
   scheme for repeated-measures data.)
 - **Bootstrap confidence intervals** (Raschka §2, pp. 15–21). A legitimate alternative
-  for uncertainty on accuracies; we use Wilson because it is the standard closed-form
-  interval for a single proportion. The one place bootstrap would add something we don't
-  have: a CI on the *paired* accuracy difference (resample the 127 pairs) — noted as an
+  for uncertainty on accuracies; we use the closed-form 02402 interval instead. The one
+  place bootstrap would add something we don't have: a CI on the *paired* accuracy difference (resample the 127 pairs) — noted as an
   extension, not required for the conclusions.
 - **Calibration metrics — ECE, Brier, reliability diagrams, logistic regression
   correct ~ confidence.** Descoped 2026-06-09: they require reading token probabilities,
@@ -648,7 +683,7 @@ Likely oral questions ("you read about X — why isn't it in your analysis?"):
 | `stats_cheat_sheet.pdf` | The 02402 backbone: t-tests incl. the paired/unpaired distinction that motivates McNemar-vs-z (pp. 2–3), chi-square GoF + independence with expected counts and df (pp. 3–5), Type I/II errors (p. 5), the binomial distribution (p. 6), t and χ² tables (pp. 7–8). |
 | `other/02445_2026_part1.pdf` (course slides) | The course's P:/A: (purpose/assumptions) presentation style we mirror here; Pearson vs. Spearman (slides 6–17); the test refresher incl. "chi-square: is performance independent of the dataset used" (slide 18); the assumptions-not-met ladder (slide 19). |
 | `raschka_StatEva_modelComparison.pdf` | The ML-evaluation theory source: accuracy as binomial + normal-approx CI (§1.7 pp. 10–11), the 4-step testing recipe and difference-of-proportions z-test with its limits (§4.2 pp. 34–35), McNemar χ², continuity correction, exact binomial form (§4.3–4.4 pp. 35–38), multiple testing/Bonferroni/omnibus-then-post-hoc (§4.5 pp. 38–41), Cochran's Q (§4.6), Dietterich's test comparison (p. 43), effect size vs. p-value (§4.13 p. 45). |
-| `Cross_Validation_Confidence_Intervals_For_Test_Error.pdf` (Bayle et al., NeurIPS 2020) | Uses 95 % **Wilson intervals** for binomial proportions, citing Wilson 1927 and Brown et al. 2001 (§5 p. 7) — our CI choice, used for the same reason. Shows what valid inference takes when estimates ARE dependent (CV) — the machinery we avoid needing by not training. Footnote 6 (p. 7) connects to the Dietterich/McNemar comparison. |
+| `Cross_Validation_Confidence_Intervals_For_Test_Error.pdf` (Bayle et al., NeurIPS 2020) | Uses 95 % **Wilson intervals** for binomial proportions (§5 p. 7) — the literature upgrade of our 02402 normal-approximation interval; noted in §2, deliberately not adopted (curriculum fit). Shows what valid inference takes when estimates ARE dependent (CV) — the machinery we avoid needing by not training. Footnote 6 (p. 7) connects to the Dietterich/McNemar comparison. |
 | `Cross-ValidationWhatDoesItEstimateandHowWellDoesItDoIt .pdf` (Bates, Hastie & Tibshirani, JASA 2024) | Object lesson in assumption-checking: naive CV CIs undercover because fold errors are correlated (§1.1, §4.1) — i.e., what happens when independence silently fails. Also clarifies estimands (Err vs Err_XY): our deterministic-model framing in §1 is the corresponding "what exactly are we estimating" exercise. |
 | `group assignment/LLM_evalaution_survey.pdf` (Chang et al.) | Metric landscape; documents accuracy/error-rate and refusal-rate ("proportion of cases where LLMs refuse to answer", p. 22) as standard LLM metrics — external precedent for our accuracy + E-rate choices. No formal tests — which is partly why a statistics-first evaluation is a contribution. |
 | `group assignment/socio_technical_evalaution_AI.pdf` | Framing only (capability evaluations as one layer of a larger safety picture); no statistical methods used by us. |
@@ -664,7 +699,8 @@ Likely oral questions ("you read about X — why isn't it in your analysis?"):
    modality — descriptive, not causal.
 3. "Type B" in the between-type chi-square = the 13 text-faithful B items only
    (selection bias).
-4. Wilson CIs beside the McNemar output are marginal (ignore pairing).
+4. CIs beside the McNemar output are marginal (ignore pairing), and the normal
+   approximation behind every CI is rough for the 13-item type-B subgroup (§2).
 5. Public past exams may be in Gemma's training data (contamination; §9).
 6. Within-exam topic clustering → independence approximate for the unpaired tests (§9).
 
@@ -676,42 +712,45 @@ Likely oral questions ("you read about X — why isn't it in your analysis?"):
 532 calls: 134 `text` (type A) + 271 `screenshot` + 127 `text_desc`; the 127 questions
 with both image and text forms (114 tables, 13 figures) are the paired set; 134 pure-text
 vs. 144 screenshot-only geometric figures are the unpaired groups. α = 0.05 everywhere;
-every accuracy gets a 95 % Wilson CI; **primary confirmatory result = McNemar on B+C**,
-all other tests are supporting/exploratory.
+every accuracy gets a 95 % CI (normal approximation); **primary confirmatory result =
+McNemar on B+C**, all other tests are supporting/exploratory. The repo's `summarize.py`
+prints the input numbers for every block below; the computations are ours, done outside
+the repo.
 
 **The tests, one block each:**
 
-1. **Better than guessing?** — exact binomial (`binomial_test.py`).
+1. **Better than guessing?** — exact binomial (numbers: summarize §1).
    H0: accuracy = 25 % (guessing over A–D); one-sided. Correct-count ~ Binomial(n, 0.25)
    under H0; p = exact upper tail. Exact at any n; 25 % is conservative because of E.
-   Significant ⇒ the modality is above chance. `binomtest(k, n, 0.25, alternative="greater")`.
+   Significant ⇒ the modality is above chance.
+   Check: `binomtest(k, n, 0.25, alternative="greater")`.
 
 2. **Does modality matter on the SAME question?** — exact McNemar, **PRIMARY**
-   (`mcnemar_test.py`). Pairs sorted into both-right / only-image / only-text /
+   (numbers: summarize §2). Pairs sorted into both-right / only-image / only-text /
    both-wrong; agreements carry no information; under H0 the n_d disagreements split
    50/50 like fair coin flips ⇒ b ~ Binomial(n_d, ½), exact two-sided p. Pairing makes
    each question its own control → difficulty cannot confound. Exact version because n_d
    may be < 25. Significant ⇒ the rendition (image vs. text) itself changes correctness.
-   `mcnemar(table, exact=True)`.
+   Check: `mcnemar(table, exact=True)`.
 
-3. **Pure text vs. pure graph questions** — two-proportion z (`text_vs_graph_test.py`).
+3. **Pure text vs. pure graph questions** — two-proportion z (numbers: summarize §3).
    H0: equal accuracy; z = gap / pooled standard error ~ N(0,1); z² = (uncorrected) χ².
    Needs ≥ ~5–10 expected successes/failures per group (n = 134/144: fine). Different
    questions in the two groups ⇒ difficulty confounded ⇒ descriptive, not causal.
-   `proportions_ztest([k1,k2],[n1,n2])`.
+   Check: `proportions_ztest([k1,k2],[n1,n2])`.
 
-4. **Accuracy across types A/B/C (all text)** — chi-square 3×2 (`question_types_test.py`).
+4. **Accuracy across types A/B/C (all text)** — chi-square 3×2 (numbers: summarize §4).
    H0: one common accuracy; χ² = Σ(O−E)²/E, E = row·col/total, df = 2. Omnibus only
-   (says *that* types differ, not which); valid if all expected counts ≥ 5 — script
-   warns if not (watch the 13-item type-B row). `chi2_contingency(table)`.
+   (says *that* types differ, not which); valid if all expected counts ≥ 5 — check this
+   (watch the 13-item type-B row). Check: `chi2_contingency(table)`.
 
 5. **"Don't know" more often on images?** — chi-square 2×2 on the E-rate
-   (`dont_know_test.py`). H0: same E-rate for image and text input; df = 1,
-   Yates-corrected by scipy default. If E is too rare (expected < 5): Fisher's exact is
+   (numbers: summarize §5). H0: same E-rate for image and text input; df = 1, with
+   Yates' continuity correction. If E is too rare (expected < 5): Fisher's exact is
    the named fallback; zero E's overall = a reportable finding by itself. Our
    within-the-curriculum substitute for calibration.
 
-6. **What could we even detect?** — power check, not a test (`power_check.py`).
+6. **What could we even detect?** — power check, not a test (inputs: summarize §2–§3).
    McNemar: out of n_d disagreements, the smallest k pointing one way with p < 0.05
    (e.g. 13 of 16). z-test: smallest accuracy drop detectable with 80 % power at our
    group sizes. Answers project-description step 4d with the sample fixed by reality
@@ -725,7 +764,8 @@ all other tests are supporting/exploratory.
 - **Power** — chance of detecting a real effect of a given size; we use the 80 %
   convention; Type I error = false alarm (α), Type II = miss (β), power = 1 − β.
 - **95 % CI** — range of plausible true values; the recipe captures the truth in 95 % of
-  repeated experiments. Wilson = the version that behaves at small n and near 0 %/100 %.
+  repeated experiments. Ours is the 02402 normal-approximation interval — rough below
+  ~15 items per group, flagged where it matters (§2).
 - **Exact test** — p-value computed by enumerating outcomes (binomial/Fisher), no
   large-sample approximation to defend.
 
@@ -735,5 +775,5 @@ all other tests are supporting/exploratory.
 2. The paired McNemar is the only comparison where question difficulty cannot confound,
    because every question is its own control and only disagreements count — that is why
    it is the primary test.
-3. Significance is not size: the p-value says a difference is real, the Wilson CI says
+3. Significance is not size: the p-value says a difference is real, the 95 % CI says
    how big it plausibly is — the report always gives both.
