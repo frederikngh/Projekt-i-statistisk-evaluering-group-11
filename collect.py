@@ -77,14 +77,17 @@ def query_gemma(model, prompt, image_path):
     content.append({"type": "text", "text": prompt})
     messages = [{"role": "user", "content": content}]
 
-    # 4096 new tokens leaves room for the step-by-step reasoning (dense
-    # calculation questions hit a 2048 cap mid-arithmetic; the cap only
-    # matters when it is hit, so finished replies are unaffected). Greedy
-    # decoding keeps the answers reproducible. The params must go through
-    # generate_kwargs: passed loose, the pipeline hands them to the
-    # processor, which ignores them (do_sample would silently not apply).
+    # 8192 new tokens leaves room for the step-by-step reasoning (dense
+    # calculation questions hit a 2048 and later a 4096 cap mid-arithmetic;
+    # the cap only matters when it is hit, so finished replies are
+    # unaffected). Two questions never terminate at any tested budget
+    # (one repeats the same line forever under greedy decoding) and are
+    # scored E. Greedy decoding keeps the answers reproducible. The
+    # params must go through generate_kwargs: passed loose, the pipeline
+    # hands them to the processor, which ignores them (do_sample would
+    # silently not apply).
     out = model(text=messages,
-                generate_kwargs={"max_new_tokens": 4096, "do_sample": False})
+                generate_kwargs={"max_new_tokens": 8192, "do_sample": False})
     reply = out[0]["generated_text"][-1]["content"]
     raw = reply.strip()
     return extract_letter(raw), raw

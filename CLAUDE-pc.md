@@ -42,9 +42,10 @@ counts/accuracies. This PC only collects.
    already in `data/results.csv` are skipped, so Ctrl+C + rerun is fine.
    Flags if needed: `--exam Fall2024`, `--modality text|screenshot|text_desc`, `--dry-run`.
    With the chain-of-thought protocol (2026-06-10) expect ~40-90 s per typical
-   question and up to ~3 min for dense-arithmetic ones (~25 tok/s measured on E2B,
-   max_new_tokens=4096), i.e. roughly 7-10 hours for all 532 — close LM Studio
-   and other VRAM users first or it gets much slower.
+   question and up to ~6 min for dense-arithmetic ones (~25 tok/s measured on E2B,
+   max_new_tokens=8192), i.e. roughly 7-10 hours for all 532 — close LM Studio
+   and other VRAM users first or it gets much slower. DONE 2026-06-11: all 532
+   rows collected and pushed.
 5. Sanity-check `data/results.csv` (see below), then commit it as the user with a plain
    message like "Add Gemma results from the full run" and push.
 
@@ -74,13 +75,18 @@ counts/accuracies. This PC only collects.
   further edit near the prompts must be proven harmless:
   `python collect.py --dry-run > after.txt` and diff against a pre-edit dump.
 - Greedy decoding stays — reproducibility. Generation params MUST go through
-  `generate_kwargs={"max_new_tokens": 4096, "do_sample": False}`: passed loose, the
+  `generate_kwargs={"max_new_tokens": 8192, "do_sample": False}`: passed loose, the
   pipeline routes them to the processor which IGNORES them (found 2026-06-10 — the old
-  short-answer run probably sampled instead of being greedy). The cap was 2048 for the
-  first ~210 rows; 69 dense-arithmetic replies hit it mid-calculation (the FINAL ANSWER
-  canary fired: 41 fake E rows + 24 unreliable tail-parses), so it was raised to 4096
-  and the 69 truncated rows purged and re-collected. Finished replies are unaffected by
-  a cap raise (greedy: the cap only binds when hit), so the kept rows stay valid.
+  short-answer run probably sampled instead of being greedy). Cap history (each raise:
+  truncated rows purged + re-collected; finished replies are unaffected by a cap raise
+  since under greedy the cap only binds when hit): 2048 → 4096 on 2026-06-10 (69 rows),
+  4096 → 8192 on 2026-06-11 after the full run (20 rows, 16 of them screenshots —
+  truncation-E rows would have biased the E-rate test toward the hypothesis). Two rows
+  NEVER terminate (Fall2018 Q5 screenshot: greedy repetition loop; Spring2020 Q13 text):
+  16384 was tested 2026-06-11 and ABORTED — the deeper KV cache spills the 16 GB VRAM
+  and throughput collapses to ~4 tok/s. They stay scored E with their truncated
+  transcripts (4096-budget prefixes — greedy prefixes are identical across caps).
+  Do NOT raise the cap above 8192 on this 16 GB card.
 - If you touch ANY project `.py`, match the deliberate 2nd-semester style: NO list
   comprehensions, no type hints, no pathlib/regex/Counter/defaultdict, plain loops +
   `append`, lists not tuples, string dict keys (`exam + " " + qid`), no chained calls
@@ -118,7 +124,10 @@ counts/accuracies. This PC only collects.
 
 1. Spot-check: every row has a `gemma_answer`, (nearly) every `raw_response` ends
    with a "FINAL ANSWER: X" line (investigate if many do not), row count = 532
-   (+ header).
+   (+ header). DONE 2026-06-11 — exactly 3 known exceptions, all verified by hand:
+   Fall2018 Q5 screenshot + Spring2020 Q13 text (the two non-terminating E rows, see
+   cap history above) and Spring2023 Q10 screenshot (Gemma answered with NO reasoning,
+   literally "FINAL ANSWER: A" plus a leaked `<eos>` — parsed fine).
 2. `git add data/results.csv` -> commit as the user (plain message) -> `git push`.
 3. The user pulls on the Mac and runs `python summarize.py` there (it also works here —
    it only needs the standard library — but the Mac is where the analysis happens).

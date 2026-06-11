@@ -136,9 +136,13 @@ collection PC's 16 GB VRAM under the CoT token budget; E2B for ALL calls per the
 fallback), `device` auto-picked cuda/mps/cpu. Gated model: accept the licence + run
 `hf auth login` once. Since 2026-06-10 collect.py uses a chain-of-thought prompt
 (concise reasoning + closing "FINAL ANSWER: X" line, parsed from the END of the reply;
-`generate_kwargs={"max_new_tokens": 4096, "do_sample": False}` — 4096 because 69 dense
-math replies hit a 2048 cap mid-arithmetic; those rows were purged and re-collected,
-the finished ones are cap-invariant under greedy decoding).
+`generate_kwargs={"max_new_tokens": 8192, "do_sample": False}` — the cap went 2048 →
+4096 → 8192 because dense math replies kept hitting it mid-arithmetic (69, then 20
+truncated rows purged and re-collected each time); finished replies are cap-invariant
+under greedy decoding. Two questions never terminate at ANY budget (Fall2018 Q5
+screenshot degenerates into a repetition loop; Spring2020 Q13 text rambles past 16k
+tokens — tested 2026-06-11, aborted after 1.5 h of VRAM-spilled generation) and are
+scored E with their truncated transcripts kept as the audit trail).
 
 ## Current status & next steps
 
@@ -294,6 +298,20 @@ the finished ones are cap-invariant under greedy decoding).
   requirements.txt, README "Step 2" rewritten, STATISTICS.md reframed (headers point at
   summarize §N; "Implementation" → "Computing it yourself" with the library one-liners
   kept as cross-checks). User chose: STATISTICS.md STAYS in the repo, updated.
+- ✅ **COLLECTION COMPLETE (2026-06-11): all 532 rows in `data/results.csv`, pushed.**
+  Run on the Windows PC, E2B, CoT protocol, ~1 row/min. Post-run QA: 20 rows had hit
+  the 4096 cap mid-reasoning and were scored E by the fallback (16 of them screenshot
+  rows — would have biased the E-rate test TOWARD the hypothesis); cap raised to 8192
+  (dry-run prompt dump proven byte-identical), the 20 purged and re-collected. 18/20
+  then finished cleanly (5 became correct, 3 genuine FINAL-ANSWER-E). The last 2
+  (Fall2018 Q5 screenshot = greedy repetition loop, Spring2020 Q13 text) never
+  terminate even at 16384 (tested, aborted: VRAM spill made it ~4 tok/s) — kept as E
+  with truncated transcripts (their 4096-budget prefixes; greedy makes prefixes
+  identical across caps). Known anomaly: Spring2023 Q10 screenshot answered with NO
+  reasoning, literally "FINAL ANSWER: A" + a leaked `<eos>`. Headline numbers:
+  overall 284/532 = 53.4%; pure text 73.1% (98/134), pure-geometric screenshot 36.1%
+  (52/144), paired screenshot 42.5% (54/127) vs paired text_desc 63.0% (80/127) —
+  a ~20.5-point paired penalty; E-counts 3/3/7/2 per group.
 - ⏳ **Analysis gaps to address for the report** (see "Statistical caveats" below).
 
 ## Statistical caveats (for the report & oral defense)
