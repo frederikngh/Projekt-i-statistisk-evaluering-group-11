@@ -11,6 +11,11 @@ import sys
 
 CHANCE = 0.25   # 4 real options (A-D) -> random guessing gives 25%
 
+# The newest exam (December 2025) is kept OUT of the main analyses and is only
+# used for the training-data contamination check: it is the one exam we know
+# Gemma cannot have seen during training.
+CLEAN_EXAM = "Fall2025"
+
 
 def load_results():
     """Read the results CSV and add r["correct"] (True/False) to every row."""
@@ -34,6 +39,24 @@ def load_results():
         else:
             r["correct"] = False
     return rows
+
+
+def main_rows(rows):
+    """The rows from the 15 original exams (the main dataset)."""
+    out = []
+    for r in rows:
+        if r["exam_year"] != CLEAN_EXAM:
+            out.append(r)
+    return out
+
+
+def clean_rows(rows):
+    """The rows from the held-out clean exam (Fall 2025)."""
+    out = []
+    for r in rows:
+        if r["exam_year"] == CLEAN_EXAM:
+            out.append(r)
+    return out
 
 
 def subset(rows, column, value):

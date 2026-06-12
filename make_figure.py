@@ -5,9 +5,9 @@ import os
 import matplotlib.pyplot as plt
 
 from helpers import CHANCE, load_results, subset, text_A_rows, graph_only_rows
-from helpers import count_correct
+from helpers import count_correct, main_rows
 
-rows = load_results()
+rows = main_rows(load_results())   # the 15 original exams only
 graph = graph_only_rows(rows)
 
 # the image answers that are NOT pure-graph (i.e. the paired B/C ones)

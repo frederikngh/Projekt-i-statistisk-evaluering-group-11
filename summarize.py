@@ -12,6 +12,7 @@ Usage:
 
 from helpers import load_results, subset, count_correct, percent, acc_text
 from helpers import text_A_rows, graph_only_rows, mcnemar_counts
+from helpers import main_rows, clean_rows
 
 
 def print_pairs(rows, types, label):
@@ -30,7 +31,9 @@ def print_pairs(rows, types, label):
           + ", correct as text: " + str(text_right) + "/" + str(n))
 
 
-rows = load_results()
+all_rows = load_results()
+rows = main_rows(all_rows)     # the 15 original exams - sections 1-5
+clean = clean_rows(all_rows)   # the held-out Fall 2025 exam - section 6
 
 print()
 print("=== 1. ACCURACY PER MODALITY ===")
@@ -42,8 +45,6 @@ for modality in modalities:
 
 print()
 print("=== 2. PAIRED QUESTIONS (same question as image AND as text) ===")
-print_pairs(rows, ["B"], "Type B (figures)")
-print_pairs(rows, ["C"], "Type C (tables)")
 print_pairs(rows, ["B", "C"], "Type B+C combined")
 
 print()
@@ -81,3 +82,19 @@ if len(img) > 0:
     print("  image input: " + str(e_img) + "/" + str(len(img)) + " answers were E (" + percent(e_img / len(img)) + ")")
 if len(txt) > 0:
     print("  text input:  " + str(e_txt) + "/" + str(len(txt)) + " answers were E (" + percent(e_txt / len(txt)) + ")")
+
+print()
+print("=== 6. CLEAN EXAM (FALL 2025) vs THE 15 OLD EXAMS ===")
+print("  (the old exams may be in Gemma's training data; Fall 2025 is not)")
+if len(clean) == 0:
+    print("  no Fall 2025 answers in the results file yet")
+else:
+    print("  old exams: " + acc_text(rows))
+    print("  Fall 2025: " + acc_text(clean))
+    print("  per modality:")
+    for modality in modalities:
+        old_sub = subset(rows, "modality", modality)
+        new_sub = subset(clean, "modality", modality)
+        if len(new_sub) > 0:
+            print("    " + modality + ": old " + acc_text(old_sub)
+                  + ", Fall 2025 " + acc_text(new_sub))

@@ -49,6 +49,22 @@ counts/accuracies. This PC only collects.
 5. Sanity-check `data/results.csv` (see below), then commit it as the user with a plain
    message like "Add Gemma results from the full run" and push.
 
+## Mission 2 (2026-06-12): the Fall 2025 contamination-probe rows
+
+The newest exam (Fall2025) is now encoded as the 16th exam, HELD OUT of the main
+analyses and used only to check training-data contamination (it postdates Gemma's
+training data; see STATISTICS.md §8). `questions.csv` has 566 rows now; the 532
+already-collected rows are untouched.
+
+1. `git pull` (brings Fall2025 in data/encoded/, the rebuilt questions.csv, 20 new
+   crops in data/screenshots/).
+2. `python collect.py` — resume logic skips the 532 done rows and collects exactly
+   the **34 Fall2025 rows** (7 text + 20 screenshot + 7 text_desc), ~40-90 s each,
+   under an hour total. Same model (E2B), same prompts, same protocol — do NOT
+   change anything; comparability with the 532 old rows is the whole point.
+3. Spot-check the 34 new rows (FINAL ANSWER line present), then commit
+   `data/results.csv` as the user (plain message) and push.
+
 ## Known risks and the agreed responses
 
 - **E4B was too slow — the agreed fallback IS NOW IN EFFECT (2026-06-10):** E4B bf16
@@ -98,12 +114,13 @@ counts/accuracies. This PC only collects.
 
 ## Repo facts
 
-- `data/questions.csv` = the manifest collect.py reads: **532 rows = 134 `text` +
-  271 `screenshot` + 127 `text_desc`** (15 exams x 27 questions, types A/B/C;
-  counts changed in corrections batch 4 — Spring2023 Q25 became screenshot-only).
+- `data/questions.csv` = the manifest collect.py reads: **566 rows** since 2026-06-12 =
+  the main set (532 = 134 `text` + 271 `screenshot` + 127 `text_desc`; 15 exams x 27
+  questions, types A/B/C; counts changed in corrections batch 4 — Spring2023 Q25 became
+  screenshot-only) + the held-out Fall2025 contamination probe (34 = 7/20/7, Mission 2).
   Generated from `data/encoded/*.json` (the source of truth) — both are committed,
   so nothing needs regenerating on this PC.
-- All 271 figure crops are committed in `data/screenshots/`; `questions.csv` uses
+- All 291 figure crops are committed in `data/screenshots/`; `questions.csv` uses
   relative paths, so **run everything from the repo root**.
 - `data/results.csv` columns include `exam_year`, `question_id`, `modality`,
   `gemma_answer`, `correct_answer`, `raw_response`. It is NOT in .gitignore — it is

@@ -2447,6 +2447,321 @@ A. p(x) = (1/10) N(x | [0.2, 8.2], [[1.4, -0.4], [-0.4, 2.0]]) + (4/5) N(x | [-9
 B. p(x) = (4/5) N(x | [0.2, 8.2], [[1.0, 0.4], [0.4, 2.5]]) + (1/10) N(x | [-9.3, 9.3], [[2.4, 1.0], [1.0, 1.4]]) + (1/10) N(x | [-13.3, 11.8], [[1.4, -0.4], [-0.4, 2.0]])
 C. p(x) = (1/10) N(x | [0.2, 8.2], [[2.4, 1.0], [1.0, 1.4]]) + (4/5) N(x | [-9.3, 9.3], [[1.0, 0.4], [0.4, 2.5]]) + (1/10) N(x | [-13.3, 11.8], [[1.4, -0.4], [-0.4, 2.0]])
 D. p(x) = (1/10) N(x | [0.2, 8.2], [[1.0, 0.4], [0.4, 2.5]]) + (1/10) N(x | [-9.3, 9.3], [[1.4, -0.4], [-0.4, 2.0]]) + (4/5) N(x | [-13.3, 11.8], [[2.4, 1.0], [1.0, 1.4]])",,data/screenshots/Fall2024_Q27.png,C
+Fall2025,Q1,B,Histograms vs scatter plot / attribute matching,screenshot,"We standardize the attributes of the Fish market dataset. We then consider the histograms of the four attributes in Figure 2. Match the histograms to the attributes by using the information regarding the distributions of the points from Figure 1. Which one of the following statements is correct?
+
+A. Histogram 1: x4, Histogram 2: x1, Histogram 3: x2, Histogram 4: x3.
+B. Histogram 1: x3, Histogram 2: x4, Histogram 3: x1, Histogram 4: x2.
+C. Histogram 1: x4, Histogram 2: x2, Histogram 3: x1, Histogram 4: x3.
+D. Histogram 1: x2, Histogram 2: x4, Histogram 3: x1, Histogram 4: x3.",,data/screenshots/Fall2025_Q1.png,D
+Fall2025,Q2,B,k-means clustering / one-step centroid update,screenshot,"Consider a small dataset comprised of N = 7 one-dimensional observations shown as the filled circles in Figure 3.
+Suppose a k-means algorithm is applied to the dataset with K = 2 and using Euclidean distances. We will assume the location of the centroids are initialized to the values indicated by the crosses in Figure 3. After initialization, the k-means algorithm is evaluated for one step, comprised of assigning observations to centroids and updating the location of the centroids. After the first step, what will be the new location of the centroids?
+
+A. mu1 = 29/5, and mu2 = 13/2.
+B. mu1 = 5/2, and mu2 = 37/5.
+C. mu1 = 3, and mu2 = 33/4.
+D. mu1 = 15/4, and mu2 = 9.",,data/screenshots/Fall2025_Q2.png,B
+Fall2025,Q2,B,k-means clustering / one-step centroid update,text_desc,"Consider a small dataset comprised of N = 7 one-dimensional observations shown as the filled circles in Figure 3.
+Suppose a k-means algorithm is applied to the dataset with K = 2 and using Euclidean distances. We will assume the location of the centroids are initialized to the values indicated by the crosses in Figure 3. After initialization, the k-means algorithm is evaluated for one step, comprised of assigning observations to centroids and updating the location of the centroids. After the first step, what will be the new location of the centroids?
+
+A. mu1 = 29/5, and mu2 = 13/2.
+B. mu1 = 5/2, and mu2 = 37/5.
+C. mu1 = 3, and mu2 = 33/4.
+D. mu1 = 15/4, and mu2 = 9.","Figure 3: A small 1-dimensional dataset and initial values of centroids.
+Observations (filled circles): x = 2, 3, 4, 6, 8, 9, 10.
+Initial centroid locations (crosses): x = 1 and x = 6.",,B
+Fall2025,Q3,C,kNN / leave-one-out cross-validation,screenshot,"Consider the distances in Table 2 based on 10 observations from the Fish market dataset. The class labels C1, C2 (see table caption for details) will be predicted using a k-nearest neighbour classifier based on the distances given in Table 2 (ties are broken in the usual manner by considering the nearest observation from the tied classes). Suppose we use leave-one-out cross validation (i.e., the observation that is being predicted is left out) and a 3-nearest neighbour classifier (i.e., k = 3). What is the accuracy computed for all N = 10 observations?
+
+A. accuracy = 1
+B. accuracy = 1/5
+C. accuracy = 0
+D. accuracy = 3/10",,data/screenshots/Fall2025_Q3.png,A
+Fall2025,Q3,C,kNN / leave-one-out cross-validation,text_desc,"Consider the distances in Table 2 based on 10 observations from the Fish market dataset. The class labels C1, C2 (see table caption for details) will be predicted using a k-nearest neighbour classifier based on the distances given in Table 2 (ties are broken in the usual manner by considering the nearest observation from the tied classes). Suppose we use leave-one-out cross validation (i.e., the observation that is being predicted is left out) and a 3-nearest neighbour classifier (i.e., k = 3). What is the accuracy computed for all N = 10 observations?
+
+A. accuracy = 1
+B. accuracy = 1/5
+C. accuracy = 0
+D. accuracy = 3/10","Table 2: The pairwise Euclidean distances, d(o_i, o_j) = ||x_i - x_j||_2 = sqrt(sum_{k=1}^{M} (x_ik - x_jk)^2), between 10 observations from the Fish market dataset (recall that M = 4). Each observation o_i corresponds to a row of the data matrix X corresponding to the attributes in Table 1. The colors indicate classes such that the black observations {o1, o2, o3, o4, o5} belong to class C1 (corresponding to Small fish), and the red observations {o6, o7, o8, o9, o10} belong to class C2 (corresponding to Big fish).
+
+          o1     o2     o3     o4     o5     o6     o7     o8     o9    o10
+ o1      0.0    1.0    0.3    0.8    3.4    6.7    7.8    6.2    5.4    8.8
+ o2      1.0    0.0    0.7    1.7    4.2    5.9    7.1    5.4    4.6    8.0
+ o3      0.3    0.7    0.0    1.1    3.7    6.4    7.5    5.9    5.1    8.6
+ o4      0.8    1.7    1.1    0.0    2.6    7.5    8.5    7.0    6.2    9.6
+ o5      3.4    4.2    3.7    2.6    0.0    9.9   10.9    9.4    8.7   11.9
+ o6      6.7    5.9    6.4    7.5    9.9    0.0    2.4    1.9    1.6    3.0
+ o7      7.8    7.1    7.5    8.5   10.9    2.4    0.0    1.7    3.5    1.3
+ o8      6.2    5.4    5.9    7.0    9.4    1.9    1.7    0.0    2.2    2.7
+ o9      5.4    4.6    5.1    6.2    8.7    1.6    3.5    2.2    0.0    4.3
+o10      8.8    8.0    8.6    9.6   11.9    3.0    1.3    2.7    4.3    0.0",,A
+Fall2025,Q4,A,Neural networks / statements,text,"Which one of the following statements is correct?
+
+A. In a regression problem, an ANN with linear activation functions (h(x) = x) and many hidden units results in a complex model that tends to overfit if output depends on the input in a non-linear manner.
+B. Randomly initializing two ANNs with identical activation functions and number of hidden units, and training them with the same data, will always converge to the same model.
+C. Regularizing an artificial neural network regression model by penalizing the weights using the squared Euclidean norm and a positive value lambda decreases bias and increases variance.
+D. We train a neural network by computing the gradient of the cost E(w) using the chain rule and updating the parameters by moving in the opposite direction with a small step.",,,D
+Fall2025,Q5,B,Hierarchical clustering / dendrograms (minimum linkage),screenshot,"A hierarchical clustering is applied to the 10 observations in Table 2 using minimum linkage. Which one of the dendrograms shown in Figure 4 corresponds to the distances given in Table 2?
+
+A. Dendrogram 1
+B. Dendrogram 2
+C. Dendrogram 3
+D. Dendrogram 4",,data/screenshots/Fall2025_Q5.png,C
+Fall2025,Q6,B,PCA / projections onto principal directions,screenshot,"Suppose that we perform PCA on a two dimensional dataset presented in Figure 5 where two classes can be distinguished. In Figure 6 the projections of the dataset onto four different directions are presented, one per panel. Two of these plots correspond to the projection on the first and the second principal component.
+Which one of the options below is correct?
+
+A. First principal direction corresponds to Plot 1, Second principal direction corresponds to Plot 4
+B. First principal direction corresponds to Plot 3, Second principal direction corresponds to Plot 4
+C. First principal direction corresponds to Plot 1, Second principal direction corresponds to Plot 3
+D. First principal direction corresponds to Plot 4, Second principal direction corresponds to Plot 2",,data/screenshots/Fall2025_Q6.png,B
+Fall2025,Q7,A,PCA / projection computation,text,"Suppose that we perform PCA on a four dimensional dataset with mean mu = [3 2 4 -2]^T, and consider the projection matrix
+V = [[0.9, -0.3, 0.3, 0.1], [0.1, -0.3, -0.3, -0.9], [0.3, 0.1, -0.9, 0.3], [0.3, 0.9, 0.1, -0.3]]
+computed by SVD. We are given a point x = [-3 -2 -1 3]^T and project it onto the principal components 2 and 4.
+Which one of the following projections is correct?
+
+A. [b2, b4]^T = [7 0]^T
+B. [b2, b4]^T = [-2 -7]^T
+C. [b2, b4]^T = [-2 -4]^T
+D. [b2, b4]^T = [4 0]^T",,,A
+Fall2025,Q8,A,"ML statements (kNN, decision trees, SVD, GMM)",text,"Which one of the following statements is correct?
+
+A. In a k-Nearest Neighbor classifier, the resulting decision boundaries do not change if we keep the number of neighbors K fixed but change the distance measure between the points.
+B. Decision trees are strictly limited to binary classification tasks.
+C. For every dataset it holds for the eigenvectors computed by SVD that the angle between every pair of distinct eigenvectors is 90 degrees and the Euclidean norm of every individual eigenvector is equal to one.
+D. The number of components K used in the GMM can be determined by selecting the number of components that provides the best log-likelihood of the training data used for training the density model.",,,C
+Fall2025,Q9,C,p-distances / KNN classification,screenshot,"Consider the data in Figure 7 where shapes indicates classes. We consider the p-distances d2, d_inf, d1 and the KNN classifier with K = 3 to predict the label of the test point o_test = [0 0]^T.
+Which one of the following statements is correct?
+
+A. d2 predicts C1, d_inf predicts C1, d1 predicts C1.
+B. d2 predicts C1, d_inf predicts C1, d1 predicts C2.
+C. d2 predicts C2, d_inf predicts C1, d1 predicts C2.
+D. d2 predicts C1, d_inf predicts C2, d1 predicts C2.",,data/screenshots/Fall2025_Q9.png,B
+Fall2025,Q9,C,p-distances / KNN classification,text_desc,"Consider the data in Figure 7 where shapes indicates classes. We consider the p-distances d2, d_inf, d1 and the KNN classifier with K = 3 to predict the label of the test point o_test = [0 0]^T.
+Which one of the following statements is correct?
+
+A. d2 predicts C1, d_inf predicts C1, d1 predicts C1.
+B. d2 predicts C1, d_inf predicts C1, d1 predicts C2.
+C. d2 predicts C2, d_inf predicts C1, d1 predicts C2.
+D. d2 predicts C1, d_inf predicts C2, d1 predicts C2.","Figure 7: The synthetic dataset, where the shapes indicate the classes such that the observations {o1, o2, o3} belong to class C1, and the observations {o4, o5, o6} belong to class C2.
+
+        x1   x2   y
+o1       3   -2   1
+o2      -1    0   1
+o3       0    6   1
+o4       4    0   2
+o5      -5   -2   2
+o6      -1   -2   2",,B
+Fall2025,Q10,B,McNemar's test / model comparison,screenshot,"Consider a binary classification problem on which two classifiers, Model A and Model B, have been trained to predict if an observation, x, belongs to Class 1 or Class 2. We wish to compare the two models using McNemar's test to determine if there is a significant difference between them, and our null hypothesis is that the classifiers perform similarly.
+After performing McNemar's test, we obtain:
+theta_hat = 0.4, [theta_L, theta_U] = [-0.02, 0.75], p-value = 0.22.
+In Figure 8, the probabilities p(y = 2 | x_i) for the two models for 10 test points x1, ..., x10 are shown, along with a table providing four options for the true labels of the test points. Only one of the provided labeling options in Figure 8 agrees with the result of the McNemar's test reported above.
+Determine which one of the labeling options provided in Figure 8 gives the reported result.
+
+Hint: Generic information about McNemar's test for comparing the accuracy difference theta = theta_A - theta_B of two classifiers.
+p(theta | n) = (1/2) Beta((theta + 1)/2 | a = f, b = g)
+where f = ((E_theta + 1)/2)(Q - 1), g = ((1 - E_theta)/2)(Q - 1) and E_theta = (n12 - n21)/n.
+Q = (n^2 (n + 1)(E_theta + 1)(1 - E_theta)) / (n(n12 + n21) - (n12 - n21)^2)
+theta_L = 2 cdf^-1_Beta(alpha/2 | a = f, b = g) - 1
+theta_U = 2 cdf^-1_Beta(1 - alpha/2 | a = f, b = g) - 1
+n is a 2 x 2 matrix with n11 and n22 being the number of times model A and model B are simultaneously correct and wrong, respectively. n12 is the number of times model A is correct but model B wrong and vice-versa for n21.
+
+A. Option 1
+B. Option 2
+C. Option 3
+D. Option 4",,data/screenshots/Fall2025_Q10.png,D
+Fall2025,Q11,C,Two-level cross-validation / generalization error,screenshot,"We consider a subset of N = 180 points from the Fish market dataset and two different classifiers (Model A and Model B). We apply two-level cross-validation to estimate the generalization error, with 2 outer folds and 3 inner folds. In Table 3 the information for each outer fold, model, and inner fold is given, together with the performance of each model on the test partition of the outer fold.
+Which one of the following options is a correct estimate of the generalization error?
+
+A. E_hat^gen = 0.3
+B. E_hat^gen = 0.15
+C. E_hat^gen = 0.05
+D. E_hat^gen = 0.75",,data/screenshots/Fall2025_Q11.png,A
+Fall2025,Q11,C,Two-level cross-validation / generalization error,text_desc,"We consider a subset of N = 180 points from the Fish market dataset and two different classifiers (Model A and Model B). We apply two-level cross-validation to estimate the generalization error, with 2 outer folds and 3 inner folds. In Table 3 the information for each outer fold, model, and inner fold is given, together with the performance of each model on the test partition of the outer fold.
+Which one of the following options is a correct estimate of the generalization error?
+
+A. E_hat^gen = 0.3
+B. E_hat^gen = 0.15
+C. E_hat^gen = 0.05
+D. E_hat^gen = 0.75","Table 3: For each outer fold, we are given the number of misclassified points for each model for each inner fold on the associated validation set, together with the number of misclassified points on the associated test partition of the outer fold.
+
+Outer fold i = 1:
+  Inner folds   j = 1   j = 2   j = 3   Test
+  Model 1         19      23      19       6
+  Model 2          1      15      30      51
+
+Outer fold i = 2:
+  Inner folds   j = 1   j = 2   j = 3   Test
+  Model 1          8       5       7       3
+  Model 2         14       3      24      84",,A
+Fall2025,Q12,A,Regularization / statements,text,"Which one of the following statements is correct?
+
+A. For any model (e.g., linear regression, logistic regression, ANN, etc.) and any regularized cost with a fixed lambda, there is always a closed form solution for w, obtained by differentiating the objective function and setting the derivative to zero.
+B. The aim of regularization is to reduce the variance of a model by introducing some bias.
+C. A very small error on the training data is in itself evidence of overfitting.
+D. In regularized linear regression, as the regularization parameter lambda increases, the norm of the learned weights tends to increase.",,,B
+Fall2025,Q13,B,Decision tree / splitting rules,screenshot,"We consider the Fish market dataset projected onto the first two principal directions. Suppose we train a decision tree to predict which of the two classes an observation belongs to. Since the attributes are continuous, we will consider binary splits of the form b_i >= z for different values of i and z, where b1 and b2 refer to the coordinates of the observations when projected onto principal directions. Suppose the trained decision tree has the form shown in Figure 9, and that according to the tree the predicted label assignment for a subset of the observations is as given in Figure 10, what is then the correct rule assignment to the nodes in the decision tree?
+
+A. B: b2 >= 0.42, C: b2 >= -1.18, D: b1 >= 0.19, E: b1 >= -0.13
+B. B: b1 >= -0.13, C: b1 >= 0.19, D: b2 >= 0.42, E: b2 >= -1.18
+C. B: b1 >= -0.13, C: b2 >= -1.18, D: b1 >= 0.19, E: b2 >= 0.42
+D. B: b2 >= -1.18, C: b1 >= 0.19, D: b2 >= 0.42, E: b1 >= -0.13",,data/screenshots/Fall2025_Q13.png,C
+Fall2025,Q14,C,KDE / leave-one-out density estimate,screenshot,"Figure 11 shows a kernel density estimator (KDE) on 6 observations using the standard formulation of the KDE, i.e.,
+p(x) = (1/N) sum_{j=1}^{N} N(x | x_j, sigma^2 I_2).
+Table 4 shows the evaluation of each individual component/kernel at each of the 6 observations. Compute the leave-one-out (LOO) estimate of p(x1).
+
+A. p(x1) = 0.14
+B. p(x1) = 0.023
+C. p(x1) = 0.054
+D. p(x1) = 0.028",,data/screenshots/Fall2025_Q14.png,D
+Fall2025,Q14,C,KDE / leave-one-out density estimate,text_desc,"Figure 11 shows a kernel density estimator (KDE) on 6 observations using the standard formulation of the KDE, i.e.,
+p(x) = (1/N) sum_{j=1}^{N} N(x | x_j, sigma^2 I_2).
+Table 4 shows the evaluation of each individual component/kernel at each of the 6 observations. Compute the leave-one-out (LOO) estimate of p(x1).
+
+A. p(x1) = 0.14
+B. p(x1) = 0.023
+C. p(x1) = 0.054
+D. p(x1) = 0.028","Table 4: Evaluation of each individual component/kernel at each observation. We consider the Gaussian N(x | mu, sigma^2 I_2) as the kernel.
+
+Obs.   j = 1   j = 2   j = 3   j = 4   j = 5   j = 6
+x1      0.13    0.00    0.06    0.08    0.00    0.00
+x2      0.00    0.13    0.00    0.00    0.00    0.01
+x3      0.06    0.00    0.13    0.06    0.00    0.00
+x4      0.08    0.00    0.06    0.13    0.00    0.00
+x5      0.00    0.00    0.00    0.00    0.13    0.00
+x6      0.00    0.01    0.00    0.00    0.00    0.13",,D
+Fall2025,Q15,B,GMM / EM algorithm E-step,screenshot,"We wish to apply the EM algorithm to fit a 1D GMM mixture model to the single feature x from a given dataset. At the first step of the EM algorithm, the K = 3 mixture components have densities as indicated by each of the curves in Figure 12 (i.e., each curve is a normalized, Gaussian density N(x | mu_k, sigma_k)). In the figure, we have indicated the x-value of a single observation x as a black cross. Suppose we wish to apply the EM algorithm to this mixture model beginning with the E-step. We assume the weights of the components are w = [0.3 0.6 0.1] and the mean/variances of the components are those indicated in the figure.
+According to the EM algorithm, what is the probability the observation x is assigned to mixture component 1?
+
+A. p(z = 1 | x) = 0.4
+B. p(z = 1 | x) = 0.06
+C. p(z = 1 | x) = 0.58
+D. p(z = 1 | x) = 0.2",,data/screenshots/Fall2025_Q15.png,A
+Fall2025,Q16,A,Cross-validation / statements,text,"Which one of the following statements is correct?
+
+A. K-fold cross-validation requires fitting K models in total to determine the best among several complexity levels of the model.
+B. The two-layer cross-validation procedure can be used only for estimating generalization performance and cannot provide a trained model that can be used in practice, e.g., as an ensemble.
+C. Consider a model class with several complexity levels. The test error obtained by cross-validation and used to select the model complexity is a biased estimate of the generalization error.
+D. For a given dataset, leave-one-out cross-validation typically provides a worse estimate of the generalization error than K-fold cross-validation or hold-out cross-validation.",,,C
+Fall2025,Q17,B,ANN / output function matching,screenshot,"Consider an artificial neural network (ANN) trained on the Fish market dataset described in Table 1 to predict the continuous attribute x3 from the two attributes x1 and x2. Suppose the neural network takes the form:
+f(x, w) = h^(2)( w0^(2) + sum_{j=1}^{2} wj^(2) h^(1)([1 x1 x2] wj^(1)) ).
+where the activation functions are selected as h^(1)(x) = max(x, 0) (the rectified linear activation function) and h^(2)(x) = x (the linear activation function) and the weights are given as:
+w1^(1) = [0, -2, -3]^T, w2^(1) = [1, 0, 0]^T, w^(2) = [-1, 1]^T, w0^(2) = 2.
+Which one of the functions in Figure 13 will then correspond to the function f?
+
+A. ANN output 1
+B. ANN output 2
+C. ANN output 3
+D. ANN output 4",,data/screenshots/Fall2025_Q17.png,A
+Fall2025,Q18,B,GMM / sample sets matching,screenshot,"Let N(x | mu, Sigma) denote the multivariate normal distribution with mean mu and covariance matrix Sigma. In Figure 14 we are given four different sets of samples generated from four different Gaussian Mixture Models (GMM) with three components each. Each observation is colored according to the component from which it was generated. Consider the GMM:
+p(x) = (3/7) N(x | [9.5, -9.9]^T, [[7.5, 0.1], [0.1, 5.2]]) + (3/7) N(x | [7.3, 9.7]^T, [[5.0, 5.8], [5.8, 12.9]]) + (1/7) N(x | [-9.1, 9.1]^T, [[2.0, 1.8], [1.8, 15.5]]).
+Which sample set corresponds to this model?
+
+A. Option 1
+B. Option 2
+C. Option 3
+D. Option 4",,data/screenshots/Fall2025_Q18.png,A
+Fall2025,Q19,A,Ensemble methods / statements,text,"Which one of the following statements about ensemble methods is correct?
+
+A. In AdaBoost the more errors a classifier makes in a given round of boosting the less the weights will be increased for the correctly classified points.
+B. In bagging and boosting observations are sampled with replacement, but in bagging misclassified observations are given a higher probability of being sampled in the next round.
+C. In an ensemble method, combining weak classifiers cannot substantially improve performance if the classifiers are independent.
+D. In AdaBoost with a regularized logistic regression classifier as the weak learner in each round of boosting, increasing the number of iterations increases the chance of overfitting.",,,D
+Fall2025,Q20,B,Naive Bayes / classification with priors,screenshot,"Consider the task of classifying the label y from two continuous attributes, namely x1 and x2 using a Naive Bayes classifier. We use a normal distribution to model the class conditional distribution of a point x = [x1, x2]^T and we denote p(x | mu_{y=k}, Sigma_{y=k}) with p(x | y = k). We consider the point x = [1 -1]^T and we have that p(x | y = 1) = 0.02 and p(x | y = 2) = 0.02. The specific distributions are illustrated in Figure 15. Additionally, it is noted that p(y = 1) = 0.2 and p(y = 2) = 0.8, and a point is classified in class k if p(y = k | x) >= 0.5.
+Which one of the following statements is correct under the Naive Bayes classifier?
+
+A. The point is classified as Class 1.
+B. The point is classified as Class 2.
+C. It holds that p(y = 1 | x) = p(y = 2 | x) = 0.5.
+D. It holds that p(y = 1 | x) = (0.02 * 0.2) / (0.02 * 0.2 + 0.02 * 0.8).",,data/screenshots/Fall2025_Q20.png,B
+Fall2025,Q21,C,Confusion matrices / precision and recall,screenshot,"Table 5 shows the confusion matrices related to a Logistic Regression model (LR) and a Decision Tree classifier (DT) trained on a particular instance of the Fish market dataset to predict Fish type. The number of observations is N = 617. We define y = 1 to indicate a positive outcome and y = 2 to be a negative outcome.
+Which one of the following statements is correct?
+
+A. Model A has higher recall than Model B.
+B. Predicting everything as Class 2 gives worse accuracy than Model A.
+C. Model A has lower error rate than Model B.
+D. Model B has higher precision than Model A.",,data/screenshots/Fall2025_Q21.png,D
+Fall2025,Q21,C,Confusion matrices / precision and recall,text_desc,"Table 5 shows the confusion matrices related to a Logistic Regression model (LR) and a Decision Tree classifier (DT) trained on a particular instance of the Fish market dataset to predict Fish type. The number of observations is N = 617. We define y = 1 to indicate a positive outcome and y = 2 to be a negative outcome.
+Which one of the following statements is correct?
+
+A. Model A has higher recall than Model B.
+B. Predicting everything as Class 2 gives worse accuracy than Model A.
+C. Model A has lower error rate than Model B.
+D. Model B has higher precision than Model A.","Table 5: Confusion matrices.
+
+Model A: Logistic Regression (LR), rows = Actual, columns = Predicted:
+                  Predicted Class 1   Predicted Class 2
+Actual Class 1           57                  83
+Actual Class 2          296                 181
+
+Model B: Decision Tree (DT), rows = Actual, columns = Predicted:
+                  Predicted Class 1   Predicted Class 2
+Actual Class 1           80                  60
+Actual Class 2          250                 227",,D
+Fall2025,Q22,C,Bayes classifier / binary attributes,screenshot,"We consider the dataset in Table 6 with the binary attributes x_j for j = 1, ..., 4. We construct a Bayes classifier relying on the attributes x1 and x3.
+Which probability of the following is correct?
+
+A. p(y = 1 | x1 = 1, x3 = 1) approx 0.04
+B. p(y = 1 | x1 = 1, x3 = 1) approx 0.33
+C. p(y = 1 | x1 = 1, x3 = 1) approx 0.5
+D. p(y = 1 | x1 = 1, x3 = 1) approx 0.97",,data/screenshots/Fall2025_Q22.png,B
+Fall2025,Q22,C,Bayes classifier / binary attributes,text_desc,"We consider the dataset in Table 6 with the binary attributes x_j for j = 1, ..., 4. We construct a Bayes classifier relying on the attributes x1 and x3.
+Which probability of the following is correct?
+
+A. p(y = 1 | x1 = 1, x3 = 1) approx 0.04
+B. p(y = 1 | x1 = 1, x3 = 1) approx 0.33
+C. p(y = 1 | x1 = 1, x3 = 1) approx 0.5
+D. p(y = 1 | x1 = 1, x3 = 1) approx 0.97","Table 6: The observations o_i together with the binary attributes x_j and the associated label information y.
+
+        x1  x2  x3  x4   y
+o1       1   0   0   1   1
+o2       1   1   0   1   1
+o3       0   0   0   0   1
+o4       1   0   1   0   1
+o5       1   0   1   1   2
+o6       1   0   1   0   2
+o7       1   1   0   1   2
+o8       0   0   1   1   2",,B
+Fall2025,Q23,B,AdaBoost / weak classifier identification,screenshot,"We consider the dataset in Figure 16 and the weights in Table 7 after two iterations of the AdaBoost algorithm. The predictions for a test point x_test for the two weak classifiers are f1(x_test) = 2 and f2(x_test) = 1. The final prediction using these two weak classifiers is f*(x_test) = 2.
+Which one of the options in Figure 16 corresponds to the classifier f2?
+Hint: Consider the weighted error rates of f1 and f2 and the AdaBoost prediction rule defined as f*(x) = argmax_{y=1,2} sum_{t=1}^{T} alpha_t delta_{f_t(x), y}.
+
+A. Option 1
+B. Option 2
+C. Option 3
+D. Option 4",,data/screenshots/Fall2025_Q23.png,A
+Fall2025,Q24,A,Regularized linear regression / prediction with standardization,text,"A regularized least squares linear regression model is trained using the regularization term ||w||_2^2 with parameter lambda = 3. We learn the parameters of the model based on the standardized training data X_tilde, where the mean and standard deviation of the training data are given by mu = [4 -4]^T and sigma = [4 4]^T, respectively. The learned parameters are w* = [6 2]^T and w0* = 9.
+What is the output of the trained linear regression model for a new test point x_test = [-1 -7]^T?
+
+A. y_hat = 120
+B. y_hat = -11
+C. y_hat = 0
+D. y_hat = 109",,,C
+Fall2025,Q25,B,Multivariate normal / covariance matrix from scatter plots,screenshot,"Consider a multivariate normal distribution with covariance matrix Sigma and mean mu and suppose we generate 1000 random samples from it:
+x = [x1 x2 x3 x4]^T ~ N(mu, Sigma)
+Plots of each pair of coordinates of the draws x is shown in Figure 17.
+Which one of the following is the most plausible covariance matrix?
+
+A. Sigma = [[1.0, -0.65, 0.65, 0.65], [-0.65, 1.0, -0.65, 0.0], [0.65, -0.65, 1.0, 0.0], [0.65, 0.0, 0.0, 1.0]]
+B. Sigma = [[1.0, -0.65, 0.0, -0.65], [-0.65, 1.0, 0.65, 0.65], [0.0, 0.65, 1.0, 0.0], [-0.65, 0.65, 0.0, 1.0]]
+C. Sigma = [[1.0, 0.0, 0.65, 0.0], [0.0, 1.0, -0.65, -0.65], [0.65, -0.65, 1.0, 0.65], [0.0, -0.65, 0.65, 1.0]]
+D. Sigma = [[1.0, -0.65, -0.65, 0.0], [-0.65, 1.0, 0.65, 0.65], [-0.65, 0.65, 1.0, 0.0], [0.0, 0.65, 0.0, 1.0]]",,data/screenshots/Fall2025_Q25.png,D
+Fall2025,Q26,B,Logistic regression / nonlinear feature transformations,screenshot,"Figure 18 shows the output of four different regularized logistic regression models. We use the binary cross entropy loss to measure the discrepancy between predictions and target values. All the weights, including the bias/intercept term, are equal to 1. The models predict the output based on nonlinear transformations of x1 and x2, while we apply the standard prediction rule p(y = 2 | x) = sigma(w^T x_tilde) where sigma(z) = 1/(1 + exp(-z)) is the logistic sigmoid function. The models are given by:
+M_A: x_tilde = [x2^2, 1]^T
+M_B: x_tilde = [cos(x1 + x2), sin(x1 + x2), 1]^T
+M_C: x_tilde = [x1 + x2^3, cos(x1 + x2), x2, 1]^T
+M_D: x_tilde = [x2^3, 1]^T
+Determine which of the following options is correct.
+
+A. M_A corresponds to Output 3, M_B corresponds to Output 2, M_C corresponds to Output 4, M_D corresponds to Output 1
+B. M_A corresponds to Output 3, M_B corresponds to Output 2, M_C corresponds to Output 1, M_D corresponds to Output 4
+C. M_A corresponds to Output 2, M_B corresponds to Output 1, M_C corresponds to Output 3, M_D corresponds to Output 4
+D. M_A corresponds to Output 4, M_B corresponds to Output 3, M_C corresponds to Output 1, M_D corresponds to Output 2",,data/screenshots/Fall2025_Q26.png,C
+Fall2025,Q27,B,ROC / AUC from interval counts,screenshot,"We consider the attribute x3 (corresponds to ""Height"") of the Fish market dataset. We want to evaluate how well this attribute predicts the class Small fish vs. Big fish based on the data given in Table 8, where the attribute x3 is partitioned into 3 intervals. For this purpose, we will evaluate the area under the curve (AUC) of the receiver operator characteristic (ROC) created using the attribute x3 as follows. Given a threshold theta_hat, if the x3 > theta_hat then we classify the point to the positive class Big fish (y = 2), otherwise the point is classified to the negative class Small fish (y = 1).
+Which one of the ROC curves in Figure 19 corresponds to using x3 to discriminate between Small fish (y = 1) and Big fish (y = 2)?
+Hint: An exact computation of the fractions is unnecessary; only their relative positions in the plot are required.
+
+A. The ROC curve having an AUC of 0.83.
+B. The ROC curve having an AUC of 0.69.
+C. The ROC curve having an AUC of 0.58.
+D. The ROC curve having an AUC of 0.93.",,data/screenshots/Fall2025_Q27.png,B
 Spring2017,Q1,A,Attribute types (continuous/discrete/nominal/ordinal/ratio),text,"We will consider the data of Motor Trend Car Road Tests based on 32 automobiles (observations) taken from the Cars dataset. The original data contains eleven attributes, however, we presently consider only five of these attributes given in Table 1 as well as the output attribute y given by how many miles the car drives pr. gallon of fuel. The five input attributes are: x1 = Number of cylinders (cyl), x2 = Horsepower (hp), x3 = Weight (wt), x4 = Transmission (am; 0=automatic, 1=manual), x5 = Number of forward gears (gear), and the output y = Miles pr. gallon (mpg). Considering the attributes described in Table 1 which one of the following statements is correct?
 
 A. The attribute x5 is continuous.

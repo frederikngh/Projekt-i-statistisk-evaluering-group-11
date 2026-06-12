@@ -41,12 +41,28 @@ EXTRA_REFS = {
     ("Spring2019", "Q7"): [("Figure", 4)],    # dendrogram 1 with the cutoff line
 }
 
+# Figure floats whose body contains a typeset TEXT table: region_figure unions
+# only drawings/images, so the text rows (and their hairline rules, height < 1)
+# are invisible to it and get sliced off. Crop these with region_table's
+# walk-up-from-the-caption instead.
+REGION_AS_TABLE = {
+    ("Fall2025", "Figure", 8),   # the four labeling options above the bar chart
+}
+
+# Tables whose header row text block vertically OVERLAPS the first data row's
+# block: the walk-up only takes blocks strictly above the current region, and
+# the table rules are hairlines (width/height = 0) the drawing filter ignores,
+# so the header gets sliced off. Extend the region upward by N pt instead.
+EXTRA_TOP = {
+    ("Fall2025", "Table", 8): 25,   # the "x3 in I1/I2/I3" header row + top rule
+}
+
 
 def col(x0):
     return 0 if x0 < COLMID else 1
 
 
-def crop_exam_captions(doc):
+def crop_exam_captions(doc, exam):
     """Return {(kind,num): PIL.Image} for every caption in the exam PDF."""
     anchors = []
     for pno in range(len(doc)):
@@ -145,7 +161,11 @@ def crop_exam_captions(doc):
             seen.add((kind, num))
             c = col(b[0])
             crect = caption_paragraph(pno, fitz.Rect(b[0], b[1], b[2], b[3]), c)
-            reg = region_figure(pno, crect, c) if kind == "Figure" else region_table(pno, crect, c)
+            as_figure = kind == "Figure" and (exam, kind, num) not in REGION_AS_TABLE
+            reg = region_figure(pno, crect, c) if as_figure else region_table(pno, crect, c)
+            pad = EXTRA_TOP.get((exam, kind, num), 0)
+            if pad:
+                reg = fitz.Rect(reg.x0, max(reg.y0 - pad, 0), reg.x1, reg.y1)
             pix = doc[pno].get_pixmap(clip=reg, matrix=fitz.Matrix(ZOOM, ZOOM))
             crops[(kind, num)] = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
 
@@ -162,7 +182,11 @@ def crop_exam_captions(doc):
                 seen.add((kind, num))
                 c = col(line["bbox"][0])
                 crect = caption_paragraph(pno, fitz.Rect(line["bbox"]), c)
-                reg = region_figure(pno, crect, c) if kind == "Figure" else region_table(pno, crect, c)
+                as_figure = kind == "Figure" and (exam, kind, num) not in REGION_AS_TABLE
+                reg = region_figure(pno, crect, c) if as_figure else region_table(pno, crect, c)
+                pad = EXTRA_TOP.get((exam, kind, num), 0)
+                if pad:
+                    reg = fitz.Rect(reg.x0, max(reg.y0 - pad, 0), reg.x1, reg.y1)
                 pix = doc[pno].get_pixmap(clip=reg, matrix=fitz.Matrix(ZOOM, ZOOM))
                 crops[(kind, num)] = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
     return crops
@@ -191,7 +215,7 @@ def refs_in_order(text):
 def process(exam):
     data = json.load(open(f"data/encoded/{exam}.json", encoding="utf-8"))
     doc = fitz.open(f"{EXAMS}/{exam}.pdf")
-    crops = crop_exam_captions(doc)
+    crops = crop_exam_captions(doc, exam)
     made, warns = 0, []
     for q in data["questions"]:
         if not q.get("needs_screenshot"):

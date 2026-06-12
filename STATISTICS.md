@@ -9,7 +9,7 @@ parent folder; page numbers are the printed page numbers).
 
 **How to read this file:** each section explains the idea in plain words first, then gives
 the formal machinery (same content, two altitudes). §0 explains the general logic that
-every test shares — read it once and the rest follows. §13 at the bottom is the whole
+every test shares — read it once and the rest follows. §14 at the bottom is the whole
 analysis compressed to one page.
 
 **Division of labour (decided 2026-06-11):** the repo contains NO statistics code — it
@@ -18,7 +18,7 @@ prints the input numbers for each analysis below (its section numbers match the 
 and **we compute every test ourselves**, outside the repo. Each section's "Computing it
 yourself" block gives the recipe, plus a library one-liner to cross-check against.
 
-The six analyses this file documents:
+The seven analyses this file documents:
 
 | # | Numbers from | Question it answers | Test | H0 | Null distribution |
 |---|--------------|--------------------|----|----|-------------------|
@@ -27,7 +27,8 @@ The six analyses this file documents:
 | 3 | `summarize.py` §3 | Pure-text questions vs. pure-graph questions | Two-proportion z (unpaired) | p_text = p_graph | N(0,1) |
 | 4 | `summarize.py` §4 | Does accuracy differ across types A/B/C (all in text form)? | Chi-square, 3×2 | all types equally accurate | χ² with df = 2 |
 | 5 | `summarize.py` §5 | Does Gemma say E ("don't know") more on images? | Chi-square, 2×2 | same E-rate both inputs | χ² with df = 1 |
-| 6 | `summarize.py` §2–§3 | How big must an effect be before we can see it? | Power analysis (not a test) | — | — |
+| 6 | `summarize.py` §6 | Contamination check: old exams vs. the held-out Fall 2025 exam | Two-proportion z, one-sided (unpaired) | p_old = p_clean | N(0,1) |
+| 7 | `summarize.py` §2–§3 | How big must an effect be before we can see it? | Power analysis (not a test) | — | — |
 
 Plus, on every reported accuracy: a **95 % confidence interval (normal approximation, the
 02402 method)** — computed by us, like the tests — and the significance level **α = 0.05**.
@@ -42,7 +43,7 @@ hundred. Any number we compute from a sample wobbles: a different set of 15 exam
 give a slightly different accuracy. Statistics is the toolbox for saying how much wobble
 there is, and for deciding when a difference is too big to be explained by wobble alone.
 
-**The hypothesis-testing recipe.** All five tests follow the same four steps (Raschka
+**The hypothesis-testing recipe.** All six tests follow the same four steps (Raschka
 lists them on p. 34):
 
 1. **State the null hypothesis H0** — the boring explanation: "Gemma is just guessing",
@@ -70,7 +71,7 @@ data under an assumption, not about the hypothesis.
 - **Type II error** — H0 is false but we fail to reject it (a miss). Probability = β.
 - **Power = 1 − β** — the probability of catching a real effect of a given size. A smoke
   detector analogy: α is how often it shrieks at burnt toast, power is how reliably it
-  goes off at an actual fire of a given size. §8 quantifies our detectors.
+  goes off at an actual fire of a given size. §9 quantifies our detectors.
 
 **Confidence intervals.** A 95 % CI is the companion to the point estimate: the range of
 true values that are *plausible* given the data. "95 %" describes the recipe, not one
@@ -118,7 +119,7 @@ Two things about *our* setup are worth saying precisely at the oral:
   previous prompts", LLM_bias_1_revision.pdf, App. C.1, p. 17) and what the project
   description's step 3 worries about for online tools (which learn from your prompts — a
   local model removes that problem entirely). Residual caveat: questions from the same
-  exam share topics, so within-exam correlation can't be fully excluded; see §9.
+  exam share topics, so within-exam correlation can't be fully excluded; see §10.
 
 **Why chance = 25 %.** Every question has exactly four scoreable options A–D (E is never
 the keyed answer), so blind uniform guessing among A–D succeeds with probability ¼. If
@@ -192,7 +193,7 @@ skip.)
 **Caveat to state.** The CIs printed next to the McNemar result are *marginal*
 (they treat the image-arm and text-arm accuracies as separate samples and ignore the
 pairing). Fine as descriptives; a CI on the paired *difference* would need a paired method
-(e.g. bootstrap over pairs — see §10).
+(e.g. bootstrap over pairs — see §11).
 
 ---
 
@@ -211,7 +212,7 @@ approximations are involved; we literally enumerate the lucky outcomes, which is
 test is called *exact* and is trustworthy at any sample size.
 
 **Hypotheses.** H0: p = 0.25. H1: p > 0.25, **one-sided** — decided a priori because
-"above chance" is the only direction that changes our interpretation (see §9 on
+"above chance" is the only direction that changes our interpretation (see §10 on
 sidedness).
 
 **Theory.** Under H0 the correct-count is exactly Binomial(n, 0.25) — see §1; the p-value
@@ -227,7 +228,7 @@ all; it only matters under H1, where it affects power, not validity.
 **Assumptions.**
 1. Binary outcome per trial — holds by construction (answer matches key or not).
 2. Fixed number of trials n — holds (the question set is fixed before collection).
-3. Independent trials — argued in §1; the within-exam clustering caveat applies (§9).
+3. Independent trials — argued in §1; the within-exam clustering caveat applies (§10).
 4. Same null success probability 0.25 each trial — holds under H0 by the guessing argument
    above (and 25 % is conservative given the E option, §1).
 
@@ -267,7 +268,7 @@ both = 10, only-image = 10, only-text = 6, neither = 0. The 10 + 0 = 10 concorda
 drop out; the coin was flipped n_d = 16 times and came up "image" 10 times. Ten heads in
 16 fair flips is unremarkable — the exact two-sided p-value is 0.454 — so the example data
 gives no evidence that modality matters. (For contrast: 13 of 16 the same way would give
-p ≈ 0.021 — that is where significance starts; §8's power check is exactly this
+p ≈ 0.021 — that is where significance starts; §9's power check is exactly this
 calculation.)
 
 **Hypotheses.** H0: P(correct as image) = P(correct as text) for the paired questions.
@@ -301,6 +302,24 @@ reasonable when b + c > 25, and the corrected version matches the exact test wel
 b, c > 50. Our discordant counts may be small, **which is why we use the exact version**
 and never have to defend an approximation.
 
+**Condensed for the report (the ≤10 pp version — adapt freely).** Each of the 127 paired
+questions is answered twice — the figure/table as a cropped image vs. the same data
+written as text — with the stem and options identical, so the two arms differ only in
+modality. Tabulating each pair gives counts a (both correct), b (only image correct),
+c (only text correct) and d (neither). The concordant pairs a and d reflect only how
+easy or hard the question is and cancel out; all evidence about modality sits in the
+n_d = b + c discordant pairs. Under H0 — modality does not change the probability of a
+correct answer — the two arms of a pair have the same success probability, so a
+disagreement is equally likely to fall either way: b ~ Binomial(n_d, ½). The exact
+two-sided p-value is the fair-coin tail probability 2·P(X ≥ max(b, c)) for
+X ~ Binomial(n_d, ½). Because the test conditions on disagreements *within the same
+question*, per-question difficulty cannot confound the result — which is why this paired
+test is the primary analysis. (The textbook χ² form (b−c)²/(b+c) ~ χ²₁ is the normal
+approximation to this binomial, optionally with the continuity correction
+(|b−c|−1)²/(b+c); we report the exact version, so no approximation has to be defended.)
+On the real data (NUMBERS.md §2): b = 9, c = 35, n_d = 44 → p ≈ 1.1 × 10⁻⁴ — text wins
+35 of the 44 disagreements.
+
 **Assumptions.**
 1. **Pairs are independent of each other** — each pair is one exam question, answered in
    two stateless calls (§1). One question's outcome cannot influence another's.
@@ -314,13 +333,29 @@ and never have to defend an approximation.
 4. No order/carry-over effects — holds because the arms are separate calls with no shared
    state (a human answering twice would have a memory confound; the model does not).
 
-**Multiple testing.** We run McNemar three times (B only, C only, B+C — nested subsets).
-Three chances at α = 0.05 means a higher family-wise chance of at least one false alarm
-(for three independent tests it would be 1 − 0.95³ ≈ 14 %). Our handling: **B+C is
-declared the primary confirmatory test up front; the per-type runs are exploratory.** This
-pre-declaration is the clean alternative to a Bonferroni correction (α/m) and follows
-Raschka §4.5 (pp. 38–39): either control the family-wise error or clearly separate
-confirmatory from exploratory analyses.
+**Multiple testing.** We run McNemar **once** — on B+C, the pre-declared primary
+confirmatory test — so the McNemar family is a single test and needs no correction.
+This follows Raschka §4.5 (pp. 38–39): either control the family-wise error or keep the
+confirmatory family small and clearly separated from exploration; ours is the smallest
+possible family.
+
+**Why no per-type tests (decided 2026-06-12).** The obvious follow-ups — McNemar on the
+13 type-B pairs alone and on the 114 type-C pairs alone — are deliberately not run:
+
+- **B only:** n_d = 6 discordant pairs, all six favouring text. At n_d = 6 the exact
+  test rejects *only* on a unanimous 6–0 split (p = 2·0.5⁶ ≈ 0.031), so any formal
+  result would hang on a single pair (one flip → 5–1, p ≈ 0.22).
+- **C only:** 114 of the 127 pairs are type C, so this is barely a subgroup — it would
+  re-test the primary data minus 13 pairs and all but echo the B+C verdict.
+
+Instead the subgroups are reported **descriptively**, which carries the real message:
+the paired penalty is driven by the tables (C: 29 only-text vs. 9 only-image among 38
+discordant), while the six discordant figure-pairs all point the same way. To be
+transparent: this choice was made *after* seeing the data, and reference computations
+show both subgroup tests would have rejected in the same direction as the primary
+result (C: p ≈ 0.002; B: the unanimous split, p ≈ 0.031) — so the simplification hides
+no contradiction; we simply claim the subgroup patterns as descriptions, not as test
+results.
 
 **Where the materials use it.** Raschka devotes §4.3–4.4 (pp. 35–38) to McNemar for
 comparing two classifiers on the same items, and reports Dietterich's (1998) simulation
@@ -339,7 +374,8 @@ above — at our n_d it is summable by hand or in a few lines. Cross-check:
 `statsmodels.stats.contingency_tables.mcnemar(table, exact=True)`.
 
 **Honest weakness.** The paired set is 114 type-C (tables) + only 13 type-B (figures), so
-the primary result is mostly a *table*-reading penalty; the B-only McNemar is underpowered.
+the primary result is mostly a *table*-reading penalty; the per-type subgroups are
+reported descriptively, not tested (see "Why no per-type tests" above).
 The pure-graph effect lives in test 3 — with its own, different weakness.
 
 ---
@@ -479,7 +515,7 @@ df = 2 — scipy only applies that to 2×2 tables).
 
 **Purpose.** Every prompt offers E = "don't know". If Gemma has any awareness of when it
 cannot read a figure, E should be more frequent on image input than on text input. This is
-our taught-statistics substitute for confidence calibration (which we descoped — §10): it
+our taught-statistics substitute for confidence calibration (which we descoped — §11): it
 measures *expressed* uncertainty behaviourally instead of reading internal probabilities.
 
 **Plain words.** Same machinery as test 4, smaller table: rows = input kind (image vs.
@@ -519,7 +555,60 @@ metric with an explicit opt-out option.
 
 ---
 
-## 8. Power check — minimum detectable effects (inputs: `summarize.py` §2–§3)
+## 8. Test 6 — training-data contamination check (numbers: `summarize.py` §6)
+
+**Purpose.** All 15 main exams are public PDFs that may sit in Gemma's training data; if
+the model has *memorised* questions or answer keys, every accuracy in this study is
+inflated and "reading the figure" partly means "recalling the PDF". To probe this we hold
+the newest exam — **Fall 2025**, written after the model's training data was collected —
+completely OUT of the main analyses and use it only here (decided 2026-06-12). It is the
+one exam Gemma cannot have seen.
+
+**Plain words.** If memorisation props up the old-exam scores, the model should do
+noticeably *worse* on the one exam it has never seen. If the clean exam scores about the
+same as the old ones, memorisation cannot be doing much of the work.
+
+**Hypotheses.** H0: P(correct, old exams) = P(correct, clean exam). H1 (one-sided):
+P(correct, old exams) > P(correct, clean exam) — the direction contamination predicts,
+fixed a priori; a clean exam scoring *higher* than the old ones has no contamination
+story and would simply not reject.
+
+**Theory.** Identical machinery to test 3 (§5): a two-proportion z-test on
+old-exam rows (all 532) vs. Fall 2025 rows (34), pooled standard error, one-sided
+upper-tail p. Nothing new to derive.
+
+**Assumptions.** Independence as everywhere (§1, §10 — stateless calls, frozen weights);
+normal approximation needs the usual ≥ 5–10 expected successes/failures per group, which
+holds even for the small group (34 rows at mid-range accuracy).
+
+**Caveats — what this check can and cannot say (be precise at the oral):**
+1. **One clean exam ⇒ exam difficulty is confounded.** Accuracy across the 15 old exams
+   already ranges 36.1 % – 69.2 % (between-exam SD ≈ 10 points), so only a clean-exam
+   shortfall clearly larger than ordinary exam-to-exam variation is evidence of
+   contamination. With 34 clean rows, only large gaps are detectable at all (§9's
+   machinery applies).
+2. **Modality mix differs slightly between the groups**, and modality drives accuracy —
+   the per-modality accuracies that `summarize.py` §6 prints are the cleaner comparison;
+   the report should lean on those descriptively next to the overall test.
+3. **Supporting descriptive evidence, free of charge:** if web exposure drove accuracy,
+   older exams (online longest, crawled most) should score *higher* — instead the two
+   oldest exams are the two lowest scorers (Fall 2017: 36.1 %, Spring 2017: 44.4 %), with
+   no downward trend toward recent years.
+4. **A null result does not prove the absence of contamination** — it bounds how large an
+   inflation could plausibly be. Phrase conclusions that way.
+5. The claim "Fall 2025 is not in the training data" rests on dates: the exam was held in
+   December 2025 and published after; the report must cite the model's documented
+   training-data cutoff next to that.
+6. Fall 2025 is formally the 02452 exam (the course's new number after renumbering) —
+   same format, same curriculum, same 27-question template; say so in one line.
+
+**Computing it yourself.** k/n for both groups from `summarize.py` §6, then the test-3
+formula (§5). Cross-check: `proportions_ztest([k_old, k_clean], [n_old, n_clean],
+alternative="larger")`; reference implementation in `../stats-check/contamination_test.py`.
+
+---
+
+## 9. Power check — minimum detectable effects (inputs: `summarize.py` §2–§3)
 
 **Purpose.** Not a hypothesis test: a *design* justification. Step 4d of the project
 description asks "How are you deciding on the number of times you will prompt the GenAI?
@@ -546,8 +635,8 @@ its sensitivity is fully described by one number: out of n_d disagreements, how 
 favour the same modality before the exact binomial p drops below 0.05? Scan
 k = ⌈n_d/2⌉+1 … n_d and report the first k that rejects. On the example data: 16
 disagreements → at least 13 must point the same way (13/16 gives p ≈ 0.021; 12/16 only
-p ≈ 0.077). If n_d is tiny, no k rejects at all — the honest statement that the B-only
-analysis is underpowered.
+p ≈ 0.077). If n_d ≤ 5, no k rejects at all; at n_d = 6 only a unanimous split does —
+the floor-level power behind the B half of §4's "Why no per-type tests".
 
 **Part 2 — two-proportion z.** With our actual group sizes (134 vs. 144), scan accuracy
 drops of 1 %, 2 %, … below the observed text accuracy and find the smallest drop
@@ -567,7 +656,7 @@ significance. The Bayle et al. paper evaluates competing tests *by* their power 
 
 ---
 
-## 9. Cross-cutting assumptions and choices (the oral lives here)
+## 10. Cross-cutting assumptions and choices (the oral lives here)
 
 **Independence — the one assumption every test shares.** Our three structural arguments:
 (1) stateless, history-free model calls (the local-model version of the exemplar's
@@ -605,9 +694,9 @@ exactly this halving/doubling of tail probability.)
 ticket for a false alarm; run enough tests and "something" will be significant by chance
 (three independent tests already push the family-wise false-alarm rate toward
 1 − 0.95³ ≈ 14 %). Our handling: one pre-declared primary confirmatory result — **McNemar
-on B+C**. Everything else (per-type McNemars, the unpaired z, the type chi-square, the
-E-rate) is supporting/exploratory and is reported with that label rather than with a
-correction. If an examiner wants a correction anyway: Bonferroni α/m (Raschka §4.5,
+on B+C**. Everything else (the unpaired z, the type chi-square, the E-rate, the
+contamination check) is supporting/exploratory and is reported with that label rather
+than with a correction. If an examiner wants a correction anyway: Bonferroni α/m (Raschka §4.5,
 pp. 38–41, including Perneger's caveat that Bonferroni buys Type-I control at the cost of
 Type-II errors).
 
@@ -630,7 +719,7 @@ configuration drift.
 
 ---
 
-## 10. Methods in the materials we deliberately do NOT use — and why
+## 11. Methods in the materials we deliberately do NOT use — and why
 
 Likely oral questions ("you read about X — why isn't it in your analysis?"):
 
@@ -639,7 +728,7 @@ Likely oral questions ("you read about X — why isn't it in your analysis?"):
   We have a binary outcome vs. categorical factors — nothing to correlate. (If we had kept
   model confidence, correct-vs-confidence would have been its use case; descoped.)
 - **t-tests / ANOVA** (cheat sheet pp. 2–3; slides slide 18; exemplar §3.2). Right tool
-  for continuous/count outcomes; wrong distribution family for 0/1 — see §9. The
+  for continuous/count outcomes; wrong distribution family for 0/1 — see §10. The
   exemplar's ANOVA is our role model for *rigor* (model equation written out, residual
   QQ-plots, Box-Cox for non-normal counts, independence by design), not for the specific
   test.
@@ -674,12 +763,12 @@ Likely oral questions ("you read about X — why isn't it in your analysis?"):
 
 ---
 
-## 11. Map of the materials
+## 12. Map of the materials
 
 | Material | What it contributes to our stats |
 |----------|----------------------------------|
 | `group assignment/02445_Project_June2026.pdf` | The grading contract: step 5b (justify test, state assumptions, check them; "present stability/uncertainty"), step 4d (sample-size estimation → our power check), step 3 (prompt independence). Lists t-test / chi-square / ANOVA as the expected level of tooling. |
-| `group assignment/LLM_bias_1_revision.pdf` (exemplar, Due et al. FAccT '24) | The rigor template: model written out (two-way ANOVA, §3.2 p. 8), assumptions checked (QQ-plots, Box-Cox), independence by fresh chat per prompt (App. C.1), pilot → Cohen's d → power-based n = 80/group, results table w/ F and p (Table 2, p. 10). Our binary-outcome translation of each element: §1, §8, and the per-test assumption blocks above. |
+| `group assignment/LLM_bias_1_revision.pdf` (exemplar, Due et al. FAccT '24) | The rigor template: model written out (two-way ANOVA, §3.2 p. 8), assumptions checked (QQ-plots, Box-Cox), independence by fresh chat per prompt (App. C.1), pilot → Cohen's d → power-based n = 80/group, results table w/ F and p (Table 2, p. 10). Our binary-outcome translation of each element: §1, §9, and the per-test assumption blocks above. |
 | `stats_cheat_sheet.pdf` | The 02402 backbone: t-tests incl. the paired/unpaired distinction that motivates McNemar-vs-z (pp. 2–3), chi-square GoF + independence with expected counts and df (pp. 3–5), Type I/II errors (p. 5), the binomial distribution (p. 6), t and χ² tables (pp. 7–8). |
 | `other/02445_2026_part1.pdf` (course slides) | The course's P:/A: (purpose/assumptions) presentation style we mirror here; Pearson vs. Spearman (slides 6–17); the test refresher incl. "chi-square: is performance independent of the dataset used" (slide 18); the assumptions-not-met ladder (slide 19). |
 | `raschka_StatEva_modelComparison.pdf` | The ML-evaluation theory source: accuracy as binomial + normal-approx CI (§1.7 pp. 10–11), the 4-step testing recipe and difference-of-proportions z-test with its limits (§4.2 pp. 34–35), McNemar χ², continuity correction, exact binomial form (§4.3–4.4 pp. 35–38), multiple testing/Bonferroni/omnibus-then-post-hoc (§4.5 pp. 38–41), Cochran's Q (§4.6), Dietterich's test comparison (p. 43), effect size vs. p-value (§4.13 p. 45). |
@@ -691,27 +780,30 @@ Likely oral questions ("you read about X — why isn't it in your analysis?"):
 
 ---
 
-## 12. Known limitations to state in the report (kept in sync with CLAUDE.md)
+## 13. Known limitations to state in the report (kept in sync with CLAUDE.md)
 
 1. Paired set is 114 tables vs. 13 figures → the primary McNemar mostly measures a
-   *table*-reading penalty; B-only is underpowered (power check quantifies it).
+   *table*-reading penalty; the per-type subgroups are reported descriptively, not
+   tested (§4 "Why no per-type tests"; the power check quantifies the B side).
 2. The unpaired text-vs-graph comparison confounds question difficulty/topic with
    modality — descriptive, not causal.
 3. "Type B" in the between-type chi-square = the 13 text-faithful B items only
    (selection bias).
 4. CIs beside the McNemar output are marginal (ignore pairing), and the normal
    approximation behind every CI is rough for the 13-item type-B subgroup (§2).
-5. Public past exams may be in Gemma's training data (contamination; §9).
-6. Within-exam topic clustering → independence approximate for the unpaired tests (§9).
+5. Public past exams may be in Gemma's training data — addressed by the held-out
+   Fall 2025 probe, test 6 (§8); the residual caveats live there.
+6. Within-exam topic clustering → independence approximate for the unpaired tests (§10).
 
 ---
 
-## 13. Quick overview — the whole analysis on one page
+## 14. Quick overview — the whole analysis on one page
 
 **Setup.** One row per (question, modality); correct = Gemma's letter matches the key.
 532 calls: 134 `text` (type A) + 271 `screenshot` + 127 `text_desc`; the 127 questions
 with both image and text forms (114 tables, 13 figures) are the paired set; 134 pure-text
-vs. 144 screenshot-only geometric figures are the unpaired groups. α = 0.05 everywhere;
+vs. 144 screenshot-only geometric figures are the unpaired groups. The held-out Fall 2025
+exam (34 extra rows) sits OUTSIDE all of this and feeds only test 6. α = 0.05 everywhere;
 every accuracy gets a 95 % CI (normal approximation); **primary confirmatory result =
 McNemar on B+C**, all other tests are supporting/exploratory. The repo's `summarize.py`
 prints the input numbers for every block below; the computations are ours, done outside
@@ -731,7 +823,8 @@ the repo.
    50/50 like fair coin flips ⇒ b ~ Binomial(n_d, ½), exact two-sided p. Pairing makes
    each question its own control → difficulty cannot confound. Exact version because n_d
    may be < 25. Significant ⇒ the rendition (image vs. text) itself changes correctness.
-   Check: `mcnemar(table, exact=True)`.
+   Run once, on B+C — the single confirmatory test; the per-type subgroups are
+   descriptive only (§4 "Why no per-type tests"). Check: `mcnemar(table, exact=True)`.
 
 3. **Pure text vs. pure graph questions** — two-proportion z (numbers: summarize §3).
    H0: equal accuracy; z = gap / pooled standard error ~ N(0,1); z² = (uncorrected) χ².
@@ -750,7 +843,14 @@ the repo.
    the named fallback; zero E's overall = a reportable finding by itself. Our
    within-the-curriculum substitute for calibration.
 
-6. **What could we even detect?** — power check, not a test (inputs: summarize §2–§3).
+6. **Is Gemma just remembering the exams?** — contamination check, two-proportion z,
+   one-sided (numbers: summarize §6). The 15 old exams (possibly in training data) vs.
+   the held-out Fall 2025 exam (post-cutoff, cannot be). H1: old > clean — the direction
+   memorisation predicts. One clean exam ⇒ difficulty confounded (old exams range
+   36–69 % by themselves), so a null bounds the inflation rather than proving zero.
+   Check: `proportions_ztest(..., alternative="larger")`.
+
+7. **What could we even detect?** — power check, not a test (inputs: summarize §2–§3).
    McNemar: out of n_d disagreements, the smallest k pointing one way with p < 0.05
    (e.g. 13 of 16). z-test: smallest accuracy drop detectable with 80 % power at our
    group sizes. Answers project-description step 4d with the sample fixed by reality

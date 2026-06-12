@@ -52,7 +52,7 @@ python summarize.py             # counts and accuracies from the answers
 
 ## The data
 
-The 15 exams (27 questions each) are transcribed in data/encoded/, one JSON
+The 16 exams (27 questions each) are transcribed in data/encoded/, one JSON
 file per exam. build_questions_csv.py turns them into data/questions.csv with
 one row per (question, modality). The figure/table crops in data/screenshots/
 are cut out of the exam PDFs by crop_figures.py.
@@ -121,7 +121,7 @@ build_questions_csv.py   data/encoded/*.json -> data/questions.csv
 validate_encoded.py      sanity check of the encoded JSONs
 apply_corrections.py     fixes we made after double-checking the encodings
 data/
-  encoded/               the 15 exams as JSON (the master copy)
+  encoded/               the 16 exams as JSON (the master copy)
   questions.csv          what collect.py reads (generated, don't edit by hand)
   results.csv            Gemma's answers (made by collect.py)
   example.csv            example data: python summarize.py data/example.csv
