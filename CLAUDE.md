@@ -339,9 +339,13 @@ scored E with their truncated transcripts kept as the audit trail).
   Q27's Table 8 — header row overlaps the data block and its rules are hairlines).
   Analysis side: `helpers.py: main_rows/clean_rows` split (BOTH helpers copies);
   summarize §1–5 and make_figure now use the MAIN set only, new **summarize §6** prints
-  clean-vs-old numbers; `../stats-check/contamination_test.py` = reference impl
-  (one-sided z, old > clean); STATISTICS.md gained **§8 Test 6** (sections 8–13
-  renumbered to 9–14); NUMBERS.md §6. All verified on real + example data.
+  the contamination numbers; `../stats-check/contamination_test.py` = reference impl
+  (one-sided z); STATISTICS.md gained **§8 Test 6** (sections 8–13 renumbered to 9–14);
+  NUMBERS.md §6. All verified on real + example data. **SAME DAY: user supplied Gemma
+  4's training cutoff = JANUARY 2025 → Spring2025 (held May 2025) is also clean; §6
+  regrouped to pre-cutoff (14 exams) vs post-cutoff (Spring2025 + Fall2025, 68 rows;
+  `pre_cutoff_rows/post_cutoff_rows` in both helpers copies). Interim reference result
+  with Spring2025 alone: z = −1.01, one-sided p = 0.84 — no contamination signal.**
 - ⏳ **Fall2025 collection on the PC: 34 calls** (7 text + 20 screenshot + 7 text_desc).
   Pull, `python collect.py` — resume logic skips the 532 done rows. Then summarize §6
   has its numbers. See CLAUDE-pc.md "Mission 2".
@@ -374,11 +378,14 @@ scored E with their truncated transcripts kept as the audit trail).
 - The 95% CIs printed next to McNemar are *marginal* (ignore pairing) — fine as
   descriptives; a CI on the paired difference needs a paired method/bootstrap.
 - Public past exams may be in Gemma's training data — ADDRESSED since 2026-06-12 by the
-  held-out **Fall 2025 contamination probe** (test 6: summarize §6, STATISTICS.md §8,
-  reference impl `../stats-check/contamination_test.py`). Fall2025 rows stay OUT of
-  analyses 1–5 (`helpers.py: main_rows/clean_rows` does the split). Caveats live in
-  STATISTICS.md §8: one clean exam ⇒ difficulty confound (old exams range 36–69% by
-  themselves), null ≠ proof of no contamination, cite Gemma 4's cutoff date in the report.
+  **contamination check** (test 6: summarize §6, STATISTICS.md §8, reference impl
+  `../stats-check/contamination_test.py`). **Gemma 4's cutoff = JANUARY 2025 (model
+  card, user-supplied)** → groups are the 14 pre-cutoff exams (263/498 = 52.8%) vs the
+  two post-cutoff 2025 exams (`helpers.py: pre_cutoff_rows/post_cutoff_rows`). Spring2025
+  STAYS in main analyses 1–5 (set fixed before the cutoff lookup) and only regroups
+  here; Fall2025 stays out of 1–5 entirely (`main_rows/clean_rows`). Already visible:
+  Spring2025 61.8% > 52.8% — the anti-contamination direction. Caveats in STATISTICS.md
+  §8: two clean exams ⇒ difficulty confound remains, null ≠ proof, cite the model card.
 
 ## Key facts / pitfalls
 

@@ -77,23 +77,29 @@ thumb - flag this in the assumption check.
 | question given as an image | 10         | 261          | 271   |
 | question given as text     | 5          | 256          | 261   |
 
-## 6. Contamination check: the 15 old exams vs. the held-out Fall 2025 exam
+## 6. Contamination check: exams before vs. after Gemma's training cutoff (Jan 2025)
 
-Two-proportion z-test, ONE-SIDED (contamination predicts old > clean). The 15 old
-exams are public PDFs that may be in Gemma's training data; Fall 2025 postdates the
-model's training data, so it is the one exam Gemma cannot have seen.
+Two-proportion z-test, ONE-SIDED (contamination predicts pre-cutoff > post-cutoff).
+Gemma 4's model card states a January 2025 training-data cutoff, so the 14 exams from
+2017-2024 may be in the training data, while the Spring 2025 (held May 2025) and
+Fall 2025 (held December 2025) exams did not exist yet and cannot be.
 
 | group                                  | correct | n   | accuracy |
 |----------------------------------------|---------|-----|----------|
-| 15 old exams (all 532 rows)            | 284     | 532 | 53.4%    |
-| Fall 2025 (held out)                   | PENDING | 34  | PENDING  |
+| 14 pre-cutoff exams (2017-2024)        | 263     | 498 | 52.8%    |
+| Spring 2025 (clean, already collected) | 21      | 34  | 61.8%    |
+| Fall 2025 (clean, held out)            | PENDING | 34  | PENDING  |
+| post-cutoff combined                   | 21 + ?  | 68  | PENDING  |
 
-The Fall 2025 rows are collected separately (on the PC, same model + protocol) and
-do NOT enter any of the analyses above - sections 1-5 stay defined on the 15 old
-exams only.
+Notes:
+- Sections 1-5 stay defined on the 15-exam main set (INCLUDING Spring 2025 - that
+  set was fixed before the cutoff date was looked up); only this check regroups.
+  The Fall 2025 rows never enter sections 1-5 at all.
+- The clean half already collected points against contamination: Spring 2025 is
+  ABOVE the pre-cutoff average (61.8% vs 52.8%).
 
-Descriptive context (accuracy per old exam - relevant because one clean exam means
-exam difficulty is confounded; the old exams vary this much on their own):
+Descriptive context (accuracy per exam - relevant because two clean exams cannot
+control exam difficulty; the pre-cutoff exams vary this much on their own):
 
 | exam       | accuracy | exam     | accuracy |
 |------------|----------|----------|----------|
@@ -104,7 +110,7 @@ exam difficulty is confounded; the old exams vary this much on their own):
 | Spring2021 | 61.3%    | Fall2021 | 63.2%    |
 | Spring2023 | 51.5%    | Fall2023 | 54.3%    |
 | Spring2024 | 54.5%    | Fall2024 | 40.0%    |
-| Spring2025 | 61.8%    |          |          |
+| Spring2025 | 61.8% (post-cutoff) |  |       |
 
 Note: the two OLDEST exams (longest on the web) score LOWEST - the opposite of what
 training-data exposure would predict. Useful descriptive argument in the report.

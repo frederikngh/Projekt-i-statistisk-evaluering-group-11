@@ -27,7 +27,7 @@ The seven analyses this file documents:
 | 3 | `summarize.py` §3 | Pure-text questions vs. pure-graph questions | Two-proportion z (unpaired) | p_text = p_graph | N(0,1) |
 | 4 | `summarize.py` §4 | Does accuracy differ across types A/B/C (all in text form)? | Chi-square, 3×2 | all types equally accurate | χ² with df = 2 |
 | 5 | `summarize.py` §5 | Does Gemma say E ("don't know") more on images? | Chi-square, 2×2 | same E-rate both inputs | χ² with df = 1 |
-| 6 | `summarize.py` §6 | Contamination check: old exams vs. the held-out Fall 2025 exam | Two-proportion z, one-sided (unpaired) | p_old = p_clean | N(0,1) |
+| 6 | `summarize.py` §6 | Contamination check: exams before vs. after Gemma's Jan 2025 cutoff | Two-proportion z, one-sided (unpaired) | p_pre = p_post | N(0,1) |
 | 7 | `summarize.py` §2–§3 | How big must an effect be before we can see it? | Power analysis (not a test) | — | — |
 
 Plus, on every reported accuracy: a **95 % confidence interval (normal approximation, the
@@ -557,53 +557,63 @@ metric with an explicit opt-out option.
 
 ## 8. Test 6 — training-data contamination check (numbers: `summarize.py` §6)
 
-**Purpose.** All 15 main exams are public PDFs that may sit in Gemma's training data; if
-the model has *memorised* questions or answer keys, every accuracy in this study is
-inflated and "reading the figure" partly means "recalling the PDF". To probe this we hold
-the newest exam — **Fall 2025**, written after the model's training data was collected —
-completely OUT of the main analyses and use it only here (decided 2026-06-12). It is the
-one exam Gemma cannot have seen.
+**Purpose.** The exams are public PDFs that may sit in Gemma's training data; if the
+model has *memorised* questions or answer keys, every accuracy in this study is inflated
+and "reading the figure" partly means "recalling the PDF". Gemma 4's model card states a
+training-data cutoff of **January 2025**, which splits our exams cleanly: the 14 exams
+from 2017–2024 may be in the training data, while the two 2025 exams — **Spring 2025**
+(held May 2025) and **Fall 2025** (held December 2025) — did not yet exist at the cutoff
+and therefore cannot be. The check compares pre-cutoff vs. post-cutoff accuracy
+(decided 2026-06-12; regrouped to two clean exams the same day when the cutoff date was
+established). Fall 2025 is additionally held out of the main analyses entirely;
+Spring 2025 **stays in them** — the main 15-exam set was fixed before the cutoff was
+looked up, and we do not redefine the primary sample after the fact — it only changes
+group for this one check.
 
 **Plain words.** If memorisation props up the old-exam scores, the model should do
-noticeably *worse* on the one exam it has never seen. If the clean exam scores about the
+noticeably *worse* on the exams it cannot have seen. If the clean exams score about the
 same as the old ones, memorisation cannot be doing much of the work.
 
-**Hypotheses.** H0: P(correct, old exams) = P(correct, clean exam). H1 (one-sided):
-P(correct, old exams) > P(correct, clean exam) — the direction contamination predicts,
-fixed a priori; a clean exam scoring *higher* than the old ones has no contamination
+**Hypotheses.** H0: P(correct, pre-cutoff) = P(correct, post-cutoff). H1 (one-sided):
+P(correct, pre-cutoff) > P(correct, post-cutoff) — the direction contamination predicts,
+fixed a priori; clean exams scoring *higher* than the old ones has no contamination
 story and would simply not reject.
 
-**Theory.** Identical machinery to test 3 (§5): a two-proportion z-test on
-old-exam rows (all 532) vs. Fall 2025 rows (34), pooled standard error, one-sided
+**Theory.** Identical machinery to test 3 (§5): a two-proportion z-test on the
+pre-cutoff rows (498, the 14 exams 2017–2024) vs. the post-cutoff rows (68 = Spring
+2025's 34, already collected, + Fall 2025's 34), pooled standard error, one-sided
 upper-tail p. Nothing new to derive.
 
 **Assumptions.** Independence as everywhere (§1, §10 — stateless calls, frozen weights);
 normal approximation needs the usual ≥ 5–10 expected successes/failures per group, which
-holds even for the small group (34 rows at mid-range accuracy).
+holds even for the small group (68 rows at mid-range accuracy).
 
 **Caveats — what this check can and cannot say (be precise at the oral):**
-1. **One clean exam ⇒ exam difficulty is confounded.** Accuracy across the 15 old exams
-   already ranges 36.1 % – 69.2 % (between-exam SD ≈ 10 points), so only a clean-exam
-   shortfall clearly larger than ordinary exam-to-exam variation is evidence of
-   contamination. With 34 clean rows, only large gaps are detectable at all (§9's
-   machinery applies).
+1. **Only two clean exams ⇒ exam difficulty is confounded.** Accuracy across the 14
+   pre-cutoff exams already ranges 36.1 % – 69.2 % (between-exam SD ≈ 10 points), so
+   only a post-cutoff shortfall clearly larger than ordinary exam-to-exam variation is
+   evidence of contamination. With 68 clean rows, only large gaps are detectable at all
+   (§9's machinery applies).
 2. **Modality mix differs slightly between the groups**, and modality drives accuracy —
    the per-modality accuracies that `summarize.py` §6 prints are the cleaner comparison;
    the report should lean on those descriptively next to the overall test.
 3. **Supporting descriptive evidence, free of charge:** if web exposure drove accuracy,
    older exams (online longest, crawled most) should score *higher* — instead the two
    oldest exams are the two lowest scorers (Fall 2017: 36.1 %, Spring 2017: 44.4 %), with
-   no downward trend toward recent years.
+   no downward trend toward recent years. The clean half already collected points the
+   same way: Spring 2025 scores 61.8 % vs. the pre-cutoff average of 52.8 % — the
+   "wrong" direction for contamination.
 4. **A null result does not prove the absence of contamination** — it bounds how large an
    inflation could plausibly be. Phrase conclusions that way.
-5. The claim "Fall 2025 is not in the training data" rests on dates: the exam was held in
-   December 2025 and published after; the report must cite the model's documented
-   training-data cutoff next to that.
+5. The cutoff claim to cite: Gemma 4's model card states a **January 2025**
+   training-data cutoff; both 2025 exams were *held* after that date (May and December
+   2025), so they cannot appear in the training data regardless of when their PDFs went
+   online. Put the model-card citation next to the exam dates in the report.
 6. Fall 2025 is formally the 02452 exam (the course's new number after renumbering) —
    same format, same curriculum, same 27-question template; say so in one line.
 
 **Computing it yourself.** k/n for both groups from `summarize.py` §6, then the test-3
-formula (§5). Cross-check: `proportions_ztest([k_old, k_clean], [n_old, n_clean],
+formula (§5). Cross-check: `proportions_ztest([k_pre, k_post], [n_pre, n_post],
 alternative="larger")`; reference implementation in `../stats-check/contamination_test.py`.
 
 ---
@@ -803,7 +813,8 @@ Likely oral questions ("you read about X — why isn't it in your analysis?"):
 532 calls: 134 `text` (type A) + 271 `screenshot` + 127 `text_desc`; the 127 questions
 with both image and text forms (114 tables, 13 figures) are the paired set; 134 pure-text
 vs. 144 screenshot-only geometric figures are the unpaired groups. The held-out Fall 2025
-exam (34 extra rows) sits OUTSIDE all of this and feeds only test 6. α = 0.05 everywhere;
+exam (34 extra rows) sits OUTSIDE all of this and feeds only test 6, where Spring 2025
+(post-cutoff like Fall 2025) also moves to the clean side. α = 0.05 everywhere;
 every accuracy gets a 95 % CI (normal approximation); **primary confirmatory result =
 McNemar on B+C**, all other tests are supporting/exploratory. The repo's `summarize.py`
 prints the input numbers for every block below; the computations are ours, done outside
@@ -844,10 +855,11 @@ the repo.
    within-the-curriculum substitute for calibration.
 
 6. **Is Gemma just remembering the exams?** — contamination check, two-proportion z,
-   one-sided (numbers: summarize §6). The 15 old exams (possibly in training data) vs.
-   the held-out Fall 2025 exam (post-cutoff, cannot be). H1: old > clean — the direction
-   memorisation predicts. One clean exam ⇒ difficulty confounded (old exams range
-   36–69 % by themselves), so a null bounds the inflation rather than proving zero.
+   one-sided (numbers: summarize §6). The 14 exams from before Gemma's January 2025
+   training cutoff (possibly in training data) vs. the two 2025 exams (cannot be).
+   H1: pre > post — the direction memorisation predicts. Two clean exams ⇒ difficulty
+   still confounded (pre-cutoff exams range 36–69 % by themselves), so a null bounds
+   the inflation rather than proving zero.
    Check: `proportions_ztest(..., alternative="larger")`.
 
 7. **What could we even detect?** — power check, not a test (inputs: summarize §2–§3).

@@ -12,9 +12,14 @@ import sys
 CHANCE = 0.25   # 4 real options (A-D) -> random guessing gives 25%
 
 # The newest exam (December 2025) is kept OUT of the main analyses and is only
-# used for the training-data contamination check: it is the one exam we know
-# Gemma cannot have seen during training.
+# used for the training-data contamination check.
 CLEAN_EXAM = "Fall2025"
+
+# Gemma's training data ends January 2025 (model card), so the two exams
+# written AFTER that date cannot be in it. Spring2025 stays in the main
+# analyses (that set was fixed before we looked the cutoff up) and only
+# changes group for the contamination check.
+POST_CUTOFF_EXAMS = ["Spring2025", "Fall2025"]
 
 
 def load_results():
@@ -55,6 +60,24 @@ def clean_rows(rows):
     out = []
     for r in rows:
         if r["exam_year"] == CLEAN_EXAM:
+            out.append(r)
+    return out
+
+
+def pre_cutoff_rows(rows):
+    """Rows from the 14 exams Gemma may have seen in training (before Jan 2025)."""
+    out = []
+    for r in rows:
+        if r["exam_year"] not in POST_CUTOFF_EXAMS:
+            out.append(r)
+    return out
+
+
+def post_cutoff_rows(rows):
+    """Rows from the two exams written after Gemma's training cutoff."""
+    out = []
+    for r in rows:
+        if r["exam_year"] in POST_CUTOFF_EXAMS:
             out.append(r)
     return out
 

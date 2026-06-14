@@ -12,7 +12,7 @@ Usage:
 
 from helpers import load_results, subset, count_correct, percent, acc_text
 from helpers import text_A_rows, graph_only_rows, mcnemar_counts
-from helpers import main_rows, clean_rows
+from helpers import main_rows, pre_cutoff_rows, post_cutoff_rows, POST_CUTOFF_EXAMS
 
 
 def print_pairs(rows, types, label):
@@ -32,8 +32,9 @@ def print_pairs(rows, types, label):
 
 
 all_rows = load_results()
-rows = main_rows(all_rows)     # the 15 original exams - sections 1-5
-clean = clean_rows(all_rows)   # the held-out Fall 2025 exam - section 6
+rows = main_rows(all_rows)            # the 15 original exams - sections 1-5
+old = pre_cutoff_rows(all_rows)       # 14 exams before Gemma's cutoff - section 6
+clean = post_cutoff_rows(all_rows)    # Spring + Fall 2025 (after the cutoff) - section 6
 
 print()
 print("=== 1. ACCURACY PER MODALITY ===")
@@ -84,17 +85,21 @@ if len(txt) > 0:
     print("  text input:  " + str(e_txt) + "/" + str(len(txt)) + " answers were E (" + percent(e_txt / len(txt)) + ")")
 
 print()
-print("=== 6. CLEAN EXAM (FALL 2025) vs THE 15 OLD EXAMS ===")
-print("  (the old exams may be in Gemma's training data; Fall 2025 is not)")
+print("=== 6. EXAMS BEFORE vs AFTER GEMMA'S TRAINING CUTOFF (JAN 2025) ===")
+print("  (pre-cutoff exams may be in the training data; the 2025 exams cannot be)")
 if len(clean) == 0:
-    print("  no Fall 2025 answers in the results file yet")
+    print("  no post-cutoff answers in the results file yet")
 else:
-    print("  old exams: " + acc_text(rows))
-    print("  Fall 2025: " + acc_text(clean))
+    print("  14 pre-cutoff exams:  " + acc_text(old))
+    for exam in POST_CUTOFF_EXAMS:
+        sub = subset(clean, "exam_year", exam)
+        if len(sub) > 0:
+            print("  " + exam + " (clean):  " + acc_text(sub))
+    print("  post-cutoff combined: " + acc_text(clean))
     print("  per modality:")
     for modality in modalities:
-        old_sub = subset(rows, "modality", modality)
+        old_sub = subset(old, "modality", modality)
         new_sub = subset(clean, "modality", modality)
         if len(new_sub) > 0:
-            print("    " + modality + ": old " + acc_text(old_sub)
-                  + ", Fall 2025 " + acc_text(new_sub))
+            print("    " + modality + ": pre-cutoff " + acc_text(old_sub)
+                  + ", post-cutoff " + acc_text(new_sub))
