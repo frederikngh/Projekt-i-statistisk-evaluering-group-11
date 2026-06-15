@@ -344,11 +344,20 @@ scored E with their truncated transcripts kept as the audit trail).
   NUMBERS.md §6. All verified on real + example data. **SAME DAY: user supplied Gemma
   4's training cutoff = JANUARY 2025 → Spring2025 (held May 2025) is also clean; §6
   regrouped to pre-cutoff (14 exams) vs post-cutoff (Spring2025 + Fall2025, 68 rows;
-  `pre_cutoff_rows/post_cutoff_rows` in both helpers copies). Interim reference result
-  with Spring2025 alone: z = −1.01, one-sided p = 0.84 — no contamination signal.**
-- ⏳ **Fall2025 collection on the PC: 34 calls** (7 text + 20 screenshot + 7 text_desc).
-  Pull, `python collect.py` — resume logic skips the 532 done rows. Then summarize §6
-  has its numbers. See CLAUDE-pc.md "Mission 2".
+  `pre_cutoff_rows/post_cutoff_rows` in both helpers copies).**
+- ✅ **CONTAMINATION CHECK COMPLETE (2026-06-14): all 34 Fall2025 rows in results.csv
+  (566 total), test 6 has its final numbers.** Pre-cutoff 263/498 = 52.8% vs post-cutoff
+  46/68 = 67.6% (Spring2025 21/34 = 61.8%, Fall2025 25/34 = 73.5%). Reference z = −2.31,
+  one-sided p = 0.99 → NOT significant, and the estimate runs the OPPOSITE way: clean
+  exams scored HIGHER. So no contamination signal — Gemma did better on exams it cannot
+  have seen. The lift appears in every modality (text 72.0→87.5%, text_desc 63.3→71.4%,
+  screenshot 38.3→57.9%) → reads as a difficulty difference (2025 exams easier), which
+  runs against contamination, so "no contamination" is the conservative read. NOTE: a
+  two-sided test would be p = 0.02, but the pre-registered direction was one-sided
+  pre > post → report p = 0.99 / not significant; do NOT pivot to "clean significantly
+  better". Also: contamination hits both McNemar arms equally → primary result robust to
+  it by construction; this check defends the absolute levels + unpaired comparisons.
+  NUMBERS.md §6 + this file updated with the final numbers.
 - ⏳ **Analysis gaps to address for the report** (see "Statistical caveats" below).
 
 ## Statistical caveats (for the report & oral defense)

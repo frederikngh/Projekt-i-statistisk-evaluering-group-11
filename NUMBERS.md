@@ -87,16 +87,28 @@ Fall 2025 (held December 2025) exams did not exist yet and cannot be.
 | group                                  | correct | n   | accuracy |
 |----------------------------------------|---------|-----|----------|
 | 14 pre-cutoff exams (2017-2024)        | 263     | 498 | 52.8%    |
-| Spring 2025 (clean, already collected) | 21      | 34  | 61.8%    |
-| Fall 2025 (clean, held out)            | PENDING | 34  | PENDING  |
-| post-cutoff combined                   | 21 + ?  | 68  | PENDING  |
+| Spring 2025 (clean)                    | 21      | 34  | 61.8%    |
+| Fall 2025 (clean, held out)            | 25      | 34  | 73.5%    |
+| post-cutoff combined                   | 46      | 68  | 67.6%    |
+
+Result (reference impl ../stats-check/contamination_test.py): pooled two-proportion
+z = -2.31, one-sided p = 0.99 -> NOT significant. The estimate runs the OPPOSITE way
+to contamination: the post-cutoff (clean) exams scored HIGHER, 67.6% vs 52.8%. So
+there is no contamination signal - if anything the model did better on exams it
+cannot have seen. (A two-sided test would give p = 0.02, but the pre-registered
+hypothesis was one-sided pre > post, so we report p = 0.99 / not significant and note
+the estimate's direction. Do NOT claim "clean exams are significantly better" - that
+was not the hypothesis.)
 
 Notes:
 - Sections 1-5 stay defined on the 15-exam main set (INCLUDING Spring 2025 - that
   set was fixed before the cutoff date was looked up); only this check regroups.
   The Fall 2025 rows never enter sections 1-5 at all.
-- The clean half already collected points against contamination: Spring 2025 is
-  ABOVE the pre-cutoff average (61.8% vs 52.8%).
+- The clean exams point against contamination: BOTH are above the pre-cutoff average
+  (Spring 2025 61.8%, Fall 2025 73.5%, vs 52.8%). The lift shows in every modality
+  (text 72.0->87.5%, text_desc 63.3->71.4%, screenshot 38.3->57.9%), which looks
+  like the 2025 exams were simply easier for the model - a difficulty difference,
+  not memorisation, and it runs OPPOSITE to the contamination prediction.
 
 Descriptive context (accuracy per exam - relevant because two clean exams cannot
 control exam difficulty; the pre-cutoff exams vary this much on their own):

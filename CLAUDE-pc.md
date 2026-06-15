@@ -49,21 +49,20 @@ counts/accuracies. This PC only collects.
 5. Sanity-check `data/results.csv` (see below), then commit it as the user with a plain
    message like "Add Gemma results from the full run" and push.
 
-## Mission 2 (2026-06-12): the Fall 2025 contamination-probe rows
+## Mission 2 (2026-06-12): the Fall 2025 contamination-probe rows — DONE 2026-06-14
 
-The newest exam (Fall2025) is now encoded as the 16th exam, HELD OUT of the main
-analyses and used only to check training-data contamination (it postdates Gemma's
-training data; see STATISTICS.md §8). `questions.csv` has 566 rows now; the 532
-already-collected rows are untouched.
+COMPLETE: all 34 Fall2025 rows are collected and in `data/results.csv` (566 rows
+total). The contamination check (test 6, STATISTICS.md §8) now has its final numbers:
+pre-cutoff 52.8% vs post-cutoff 67.6%, z = -2.31, one-sided p = 0.99 (not significant;
+clean exams scored higher = no contamination signal). Nothing left to run on the PC.
 
+How it was done (for reference if the run ever needs repeating):
 1. `git pull` (brings Fall2025 in data/encoded/, the rebuilt questions.csv, 20 new
    crops in data/screenshots/).
 2. `python collect.py` — resume logic skips the 532 done rows and collects exactly
-   the **34 Fall2025 rows** (7 text + 20 screenshot + 7 text_desc), ~40-90 s each,
-   under an hour total. Same model (E2B), same prompts, same protocol — do NOT
-   change anything; comparability with the 532 old rows is the whole point.
-3. Spot-check the 34 new rows (FINAL ANSWER line present), then commit
-   `data/results.csv` as the user (plain message) and push.
+   the **34 Fall2025 rows** (7 text + 20 screenshot + 7 text_desc). Same model (E2B),
+   same prompts, same protocol — comparability with the 532 old rows is the point.
+3. Spot-check the 34 new rows (FINAL ANSWER line present), commit + push.
 
 ## Known risks and the agreed responses
 

@@ -581,8 +581,17 @@ story and would simply not reject.
 
 **Theory.** Identical machinery to test 3 (§5): a two-proportion z-test on the
 pre-cutoff rows (498, the 14 exams 2017–2024) vs. the post-cutoff rows (68 = Spring
-2025's 34, already collected, + Fall 2025's 34), pooled standard error, one-sided
-upper-tail p. Nothing new to derive.
+2025's 34 + Fall 2025's 34), pooled standard error, one-sided upper-tail p. Nothing
+new to derive.
+
+**Result (collected 2026-06-14).** Pre-cutoff 263/498 = 52.8 %, post-cutoff 46/68 =
+67.6 % (Spring 2025 61.8 %, Fall 2025 73.5 %). z = −2.31, one-sided p = 0.99 → fail to
+reject H0. The point estimate runs *opposite* to contamination — the clean exams scored
+**higher** — so there is no contamination signal: Gemma did not do better on the exams
+it could have seen, it did worse. (A two-sided test would give p ≈ 0.02, but the
+pre-registered hypothesis is one-sided pre > post, so we report p = 0.99 / not
+significant and note the estimate's direction; we do **not** restate it as "clean exams
+are significantly better", which was not the hypothesis.)
 
 **Assumptions.** Independence as everywhere (§1, §10 — stateless calls, frozen weights);
 normal approximation needs the usual ≥ 5–10 expected successes/failures per group, which
@@ -600,9 +609,11 @@ holds even for the small group (68 rows at mid-range accuracy).
 3. **Supporting descriptive evidence, free of charge:** if web exposure drove accuracy,
    older exams (online longest, crawled most) should score *higher* — instead the two
    oldest exams are the two lowest scorers (Fall 2017: 36.1 %, Spring 2017: 44.4 %), with
-   no downward trend toward recent years. The clean half already collected points the
-   same way: Spring 2025 scores 61.8 % vs. the pre-cutoff average of 52.8 % — the
-   "wrong" direction for contamination.
+   no downward trend toward recent years. Both clean exams point the same way: Spring
+   2025 (61.8 %) and Fall 2025 (73.5 %) are *above* the pre-cutoff average of 52.8 %, and
+   the lift shows in every modality (text 72.0→87.5 %, text_desc 63.3→71.4 %, screenshot
+   38.3→57.9 %) — a general difficulty difference, not a modality-specific or
+   memorisation effect, and the "wrong" direction for contamination.
 4. **A null result does not prove the absence of contamination** — it bounds how large an
    inflation could plausibly be. Phrase conclusions that way.
 5. The cutoff claim to cite: Gemma 4's model card states a **January 2025**
