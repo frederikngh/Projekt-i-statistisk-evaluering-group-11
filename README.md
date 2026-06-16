@@ -128,4 +128,6 @@ data/
   screenshots/           figure/table crops (made by crop_figures.py)
 ML-examsets/             the exam PDFs
 ML-solutions/            the solution PDFs
+docs/                    project notes (encoding/checking/corrections, PC setup, CLAUDE.md)
+analysis/                stats notebook, the .pptx check-in, build_deck.py
 ```
