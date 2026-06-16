@@ -20,3 +20,6 @@ figures/
 # Gemma model cache
 *.safetensors
 *.bin
+
+# Course materials (copyrighted slides/papers, kept local - not redistributed)
+materials/
