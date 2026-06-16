@@ -1,6 +1,8 @@
 # 02445 Project — Evaluating Gemma on 02450 ML exam MCQs (text vs. graph)
 
 Context for future Claude sessions working in this repo. Read this first.
+
+**Where things are now (2026-06-16):** data collection and the contamination check are DONE (`data/results.csv` complete, 566 rows); the project is in the **report-writing** phase. The written report is a **SEPARATE repo** -- `../statistical-evaluation-project/` (github.com/MischievousDegenerate/statistical-evaluation-project, LaTeX `template.tex`, Overleaf-synced). This repo was reorganised 2026-06-16: process specs + the Windows-PC checklist moved to `docs/`, the stats notebook/slides to `analysis/`, and `materials/` (course PDFs) is now gitignored & local-only. See the layout and the 2026-06-16 status entry below.
 **On the user's Windows PC (the collection machine): also read `CLAUDE-pc.md`** — the
 operational checklist for that machine (setup order, OOM/thinking-mode responses,
 commit rules).
@@ -90,6 +92,12 @@ ENCODING_SPEC.md / CHECKER_SPEC.md ← how the JSONs were produced & verified
 STATISTICS.md         ← per-test reference (theory, assumptions, materials anchors) for
                         the report's methods section + the oral; cites materials/ pages
 simple_gemma.py       ← minimal "does Gemma load and answer" smoke test
+NUMBERS.md            ← the test input numbers behind the final results
+docs/                 ← process docs: ENCODING_SPEC, CHECKER_SPEC, SCREENSHOTS,
+                        CORRECTIONS_BATCH4, CLAUDE-pc.md (moved here 2026-06-16)
+analysis/             ← statcalculations.ipynb (the group hand-does the stats here),
+                        statistical_tests.pptx check-in deck, build_deck.py
+materials/            ← course slides/papers + assignment files; GITIGNORED, local-only
 ```
 
 ## The dataset (data/encoded/)
@@ -358,6 +366,7 @@ scored E with their truncated transcripts kept as the audit trail).
   better". Also: contamination hits both McNemar arms equally → primary result robust to
   it by construction; this check defends the absolute levels + unpaired comparisons.
   NUMBERS.md §6 + this file updated with the final numbers.
+- ✅ **Repo reorganised + report figure added (2026-06-16).** Root decluttered (process docs -> `docs/`, stats notebook/slides -> `analysis/`); `materials/` moved into the repo but GITIGNORED (local course PDFs, deduped 82->55 MB). The written REPORT moved to its OWN repo **`../statistical-evaluation-project/`** (Overleaf-synced): LaTeX build bugs fixed (stray latex end-tag, natbib/biblatex clash, duplicate figure labels), and make_figure.py's accuracy_by_group.png (now labelled Type A/B/C) inserted at the top of Results. **CLAUDE.md moved BACK to the repo root** -- it does not auto-load from `docs/`. Report-side open fixes (Bonferroni 4-vs-5, post-hoc power framing, course numbers, Wilson CIs, missing who-did-what + GitHub link) live in the Mac's Claude memory, not here.
 - ⏳ **Analysis gaps to address for the report** (see "Statistical caveats" below).
 
 ## Statistical caveats (for the report & oral defense)
