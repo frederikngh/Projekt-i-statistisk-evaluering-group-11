@@ -18,8 +18,8 @@ for r in screenshot_rows:
         paired_image.append(r)
 
 groups = [text_A_rows(rows), subset(rows, "modality", "text_desc"), paired_image, graph]
-labels = ["pure text\n(type A)", "table/figure\nas TEXT",
-          "table/figure\nas IMAGE", "pure graph\n(image only)"]
+labels = ["pure text\n(Type A)", "table/figure\nas TEXT\n(Type C)",
+          "table/figure\nas IMAGE\n(Type C)", "pure graph\n(Type B)"]
 colors = ["steelblue", "mediumseagreen", "darkorange", "indianred"]
 
 plt.figure(figsize=(7, 4.5))
